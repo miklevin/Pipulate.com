@@ -31,6 +31,6 @@ modules = ["core.py"]
 
 doc_url = "https://miklevin.github.io/pipulate/"
 
-git_url = "https://github.com/miklevin/pipulate/tree/master/"
+git_url = "https://github.com/miklevin/pipulate/tree/main/"
 
 def custom_doc_links(name): return None

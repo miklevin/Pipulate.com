@@ -2,7 +2,293 @@
 
 __all__ = ['sheet', 'pull', 'push', 'poke', 'pipulate', 'populate', 'shift_range', 'check_worksheet', 'cl_to_list',
            'cl_df_fits', 'a1', 'google_service', 'api_date', 'human_date', 'email', 'Unbuffered', 'gspread_sheet',
-           'column_uniqueness', 'gui', 'link', 'key', 'credentials', 'gspread_authorized', 'stdout']
+           'column_uniqueness', 'gui', 'link', 'key', 'credentials', 'gspread_authorized', 'stdout', 'sheet', 'pull',
+           'push', 'poke', 'pipulate', 'populate', 'shift_range', 'check_worksheet', 'cl_to_list', 'cl_df_fits', 'a1',
+           'google_service', 'api_date', 'human_date', 'email', 'Unbuffered', 'gspread_sheet', 'column_uniqueness',
+           'gui', 'link', 'key', 'credentials', 'gspread_authorized', 'stdout']
+
+# Cell
+
+import ohawf
+import gspread
+import pandas as pd
+from sys import exit
+from sys import stdout
+from inspect import getsource
+from apiclient.discovery import build
+
+
+gspread_sheet = None
+column_uniqueness = False
+gui = "https://docs.google.com/spreadsheets/d/"
+link = lambda key: f"{gui}{key}/edit#gid=0"
+key = lambda key: sheet(key)
+
+
+def sheet(key):
+    global gspread_authorized
+    global gspread_sheet
+
+    continue_executing = False
+    if key[:4].lower() == "http":
+        gspread_sheet = gspread_authorized.open_by_url(key)
+    else:
+        gspread_sheet = gspread_authorized.open_by_key(key)
+    try:
+        sheet1 = gspread_sheet.worksheets()[0].title
+        continue_executing = True
+    except:
+        continue_executing = False
+    if key[:4].lower() == "http":
+        print(key)
+    else:
+        print(link(key))
+    if not continue_executing:
+        print("Cannot access document. Check URL/key and permissions.")
+        exit(1)
+    print("<<< CONNECTED TO SHEET! >>>")
+    print(
+        f'Try: cl, df = pipulate.pull("{sheet1}", "A1:C3") # or for help type: pipulate.help()'
+    )
+
+
+def pull(tab, rows, cols=None, columns=None, start=None, end=None):
+    return pipulate(tab, rows, cols=cols, columns=columns, start=start, end=end)
+
+
+def push(tab, cl, df, formulas=False):
+    return populate(tab, cl, df, formulas=formulas)
+
+
+def poke(tab, columns, row=1, start=1):
+    cl, df = pull(tab, (row, row), (start, len(columns)))
+    df.loc[:, :] = columns
+    return push(tab, cl, df)
+
+
+def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
+    original_range, original_row1 = None, None
+
+    worksheet_ = check_worksheet(tab)
+
+    if gspread_sheet is None:
+        print('Make sure you pipulate.sheet("key or url") first.')
+        exit(1)
+
+    if cols:
+        row1, row2 = rows
+        if type(columns) == bool:
+            original_row1 = row1
+            row1 = row1 + 1
+        col1, col2 = cols
+        if not (type(col1) == int or type(col2) == int):
+            col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
+        cl = worksheet_.range(row1, col1, row2, col2)
+        list_of_lists = cl_to_list(cl)
+        if not columns:
+            cell_list = worksheet_.range(row1, col1, row1, col2)
+            columns = [a1(x.col) for x in cell_list]
+    elif ":" in rows:
+        if not rows.split(":")[1][-1].isdigit():  # Figure out end of column
+            aletter = rows.split(":")[1]
+            col_length = len(worksheet_.col_values(a1(aletter, reverse=True)))
+            rows = f"{rows}{col_length}"
+        if type(columns) == bool:
+            original_range = rows
+            rows = shift_range(rows)
+        cl = worksheet_.range(rows)
+        list_of_lists = cl_to_list(cl)
+        if not columns:
+            columns = [a1(i + 1) for i, x in enumerate(list_of_lists[0])]
+    else:
+        print("Check your rows or range definition.")
+        exit(1)
+
+    if type(columns) == bool and columns == True:
+        if cols:
+            cl_cols = worksheet_.range(original_row1, col1, row2, col2)
+        else:
+            cl_cols = worksheet_.range(original_range)
+        columns = cl_to_list(cl_cols)[0]
+    if column_uniqueness:
+        if not all(columns):
+            print(columns)
+            print(
+                "All columns must have labels when using columns=True or columns=list."
+            )
+            exit(1)
+        if len(set(columns)) < len(columns):
+            print(columns)
+            print(
+                "All columns must have labels when using columns=True or columns=list."
+            )
+            exit(1)
+
+    df = pd.DataFrame(list_of_lists, columns=columns)
+
+    print(
+        f"<<< SUCCESSFUL! >>> Manipulate DataFrame but keep its ({df.shape[0]} x {df.shape[1]}) shape."
+    )
+    print(
+        f'To push updated DataFrame to GSheet: pipulate.push("{worksheet_.title}", cl, df)'
+    )
+    return cl, df
+
+
+def populate(tab, cl, df, formulas=False):
+    """Push df back to spreadsheet."""
+
+    worksheet_ = check_worksheet(tab)
+
+    if cl_df_fits(cl, df):
+        lol = df.values.tolist()
+        flat = [y for x in lol for y in x]
+        flat[:] = ["N/A" if pd.isnull(x) else x for x in flat]
+        for i, cell in enumerate(cl):
+            cell.value = flat[i]
+        if formulas:
+            worksheet_.update_cells(cl, value_input_option="USER_ENTERED")
+        else:
+            worksheet_.update_cells(cl)
+    else:
+        exit(1)
+    print('pipulate.push("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
+
+
+def shift_range(sheet_range):
+    range_tuple = sheet_range.split(":")
+    upper_left = range_tuple[0]
+    for i, x in enumerate(upper_left):
+        if x.isnumeric():
+            break
+    row_one = int(upper_left[len(upper_left) - 1 :])
+    col_one = upper_left[: len(upper_left) - 1]
+    row_two = row_one + 1
+    return "".join([col_one, str(row_two), ":", range_tuple[1]])
+
+
+def check_worksheet(worksheet):
+    global gspread_sheet
+    if type(worksheet) == gspread.models.Worksheet:
+        tab = worksheet
+    elif type(worksheet) == str:
+        if "gspread_sheet" in globals():
+            if worksheet in [x.title for x in gspread_sheet.worksheets()]:
+                tab = gspread_sheet.worksheet(worksheet)
+            else:
+                print("Worksheet not found")
+                exit(1)
+        else:
+            print("pipulate.sheet([your gsheets key here]) must be set")
+            exit(1)
+    elif type(worksheet) == int:
+        if "gspread_sheet" in globals():
+            if worksheet <= len(gspread_sheet.worksheets()):
+                tab = gspread_sheet.worksheets()[worksheet]
+            else:
+                print("Worksheet ID too high. Try 0 for sheet 1.")
+                exit(1)
+        else:
+            print("pipulate.sheet([your gsheets key here]) must be set")
+            exit(1)
+    else:
+        print(
+            "Worksheet must be exact tab-name as string, gspread Worksheet object or tab-index."
+        )
+        exit(1)
+    return tab
+
+
+def cl_to_list(cl):
+    new_table = []
+    for i, cell in enumerate(cl):
+        if i == 0:
+            row_num = 1
+            memory = cell.row
+            row = [cell.value]
+        if cell.row == memory and i > 0:
+            row.append(cell.value)
+        else:
+            row_num += 1
+            memory = cell.row
+            row = [cell.value]
+            new_table.append(row)
+    return new_table
+
+
+def cl_df_fits(cl, df):
+    """Check if GSpread cell list same shape as Pandas dataframe."""
+    list_of_lists = cl_to_list(cl)
+    height = len(list_of_lists)
+    width = len(list_of_lists[0])
+    size_tuple = (height, width)
+    if size_tuple == df.shape:
+        return True
+    print("GOOGLE SHEET NOT UPDATED.")
+    print(f"cl {size_tuple} and df {df.shape} different sizes.")
+    return False
+
+
+def a1(pos, reverse=False):
+    """Return the column letter for numeric column index."""
+    if reverse:
+        return gspread.utils.a1_to_rowcol(f"{pos[1]}1")
+    if str(pos).isdigit():
+        return gspread.utils.rowcol_to_a1(1, pos)[:-1]
+    else:
+        return "Must be integer"
+
+
+def google_service(api, version):
+    return build(api, version, credentials=credentials)
+
+
+def api_date(a_datetime, time=False):
+    """Return datetime string in Google API friendly format."""
+
+    if time:
+        return "{0:%Y-%m-%d %H:%M:%S}".format(a_datetime)
+    else:
+        return "{0:%Y-%m-%d}".format(a_datetime)
+
+
+def human_date(a_datetime, time=False):
+    """Return datetime object as American-friendly string."""
+
+    if time:
+        return "{0:%m/%d/%Y %H:%M:%S}".format(a_datetime)
+    else:
+        return "{0:%m/%d/%Y}".format(a_datetime)
+
+
+def email():
+    """Return email given provided Google OAuth account."""
+    service = build("oauth2", "v2", credentials=credentials)
+    user_document = service.userinfo().get().execute()
+    return user_document["email"]
+
+
+class Unbuffered(object):
+    """Provides more real-time streaming in Jupyter Notebook"""
+
+    def __init__(self, stream):
+        self.stream = stream
+
+    def write(self, data):
+        self.stream.write(data)
+        self.stream.flush()
+
+    def __getattr__(self, attr):
+        return getattr(self.stream, attr)
+
+
+credentials = ohawf.get()
+gspread_authorized = gspread.authorize(credentials)
+
+print('Get started with: pipulate.sheet("Insert your GSheet key or URL")')
+print('For examples, visit https://github.com/miklevin/pipulate')
+
+stdout = Unbuffered(stdout)
 
 # Cell
 
