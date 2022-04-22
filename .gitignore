@@ -4,6 +4,7 @@
 *.db
 *.dir
 *.ini
+*.ipynb
 *.log
 *.pkl
 *.pickle
@@ -18,3 +19,6 @@
 /csvs/*
 __pycache__/
 MANIFEST
+CONTRIBUTING.md
+Makefile
+pipulate.egg-info/
