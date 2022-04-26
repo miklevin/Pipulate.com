@@ -5,7 +5,6 @@ description: Pipulate Turns Google Sheets Into Data Dashboards
 
 ## Beginning of Journal
 
-
 --------------------------------------------------------------------------------
 ## Fri Apr 22, 2022
 
