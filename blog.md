@@ -4,7 +4,7 @@ title: "Pipulate Blog"
 slug: blog
 ---
 
-[Single Page Pipulate Blog](/journal/)
+## [Pipulate Blog as One Page](/journal/)
 
 
 
