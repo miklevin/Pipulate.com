@@ -1,10 +1,7 @@
 ---
-description: Change Me
+description: Pipulate
 ---
 
-# Change Me
-## Coming soon!
+# Pipulate
 
-[Sliced & Diced Journal](/blog/)
-
-[Single-Page Journal](/journal/)
+[Pipulate Blog](/blog/)
