@@ -12,16 +12,4 @@ description: Pipulate Turns Google Sheets Into Data Dashboards
 Needs a lot of updating.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+--------------------------------------------------------------------------------

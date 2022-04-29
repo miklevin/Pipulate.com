@@ -8,3 +8,4 @@ slug: blog
 
 
 
+- [Pipulate Is A Wonderful Name](/blog/pipulate-wonderful-name/)
