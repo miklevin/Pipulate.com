@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What's A Meta For  Blog"
+title: "Pipulate Blog"
 slug: blog
 ---
 
