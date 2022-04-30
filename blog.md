@@ -6,7 +6,7 @@ slug: blog
 permalink: /blog/
 ---
 
-### [Mike Levin Home](/) [Pipulate Blog as One Page](/journal/)
+### [Mike Levin Home](/) | [Pipulate Blog as One Page](/journal/)
 
 
 
