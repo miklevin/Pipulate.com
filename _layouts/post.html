@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="post-nav">
-  <div>
+  <div class="post-nav-prev">
     {% if page.previous.url %}
     &larr;&nbsp;<a href="{{page.previous.url}}">{{page.previous.title}}</a>
     {% endif %}
@@ -22,7 +22,7 @@ layout: default
 {{content}}
 
 <div class="post-nav">
-  <div>
+  <div class="post-nav-prev">
     {% if page.previous.url %}
     &larr;&nbsp;<a href="{{page.previous.url}}">{{page.previous.title}}</a>
     {% endif %}
