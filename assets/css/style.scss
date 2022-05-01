@@ -9,16 +9,15 @@
     flex-wrap: wrap;
 }
 
-.post-nav p {
-    flex: 1 1 0;
-    width: 45%;
+.post-nav-prev {
+    text-align: left;
+    padding-top: 1em;
+    padding-bottom: .5em;
 }
 
-.post-nav p:first-child {
-    padding-right: 0.5em;
-}
-
-.post-nav p:last-child {
-    padding-left: 0.5em;
+.post-nav-prev {
     text-align: right;
+    padding-top: .5em;
+    padding-bottom: 2em;
 }
+
