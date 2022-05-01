@@ -7,6 +7,19 @@ layout: default
 
 <p class="view">by {{ page.author | default: site.author }}</p>
 
+<div class="post-nav">
+  <div>
+    {% if page.previous.url %}
+    <a href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+    {% endif %}
+  </div>
+  <div class="post-nav-next">
+    {% if page.next.url %}
+    <a href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+    {% endif %}
+  </div>
+</div>
+
 {{content}}
 
 <div class="post-nav">
