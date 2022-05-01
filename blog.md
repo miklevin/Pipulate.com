@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 author: Mike Levin
 title: "Pipulate Blog"
 slug: blog
