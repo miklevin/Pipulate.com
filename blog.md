@@ -6,7 +6,7 @@ slug: blog
 permalink: /blog/
 ---
 
-[Pipulate Blog as 1 page]
+[Pipulate Blog as 1 page](/journal/)
 
 
 
