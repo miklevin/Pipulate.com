@@ -1,17 +1,18 @@
 ---
 layout: default
 ---
-
-<div class="post-nav">
-  <div class="post-nav-prev">
-    {% if page.previous.url %}
-    &larr;&nbsp;<a href="{{page.previous.url}}">{{page.previous.title}}</a>
-    {% endif %}
-  </div>
-  <div class="post-nav-next">
-    {% if page.next.url %}
-    <a href="{{page.next.url}}">{{page.next.title}}</a>&nbsp;&rarr;
-    {% endif %}
+<div class="spacer">
+  <div class="post-nav">
+    <div class="post-nav-prev">
+      {% if page.previous.url %}
+      &larr;&nbsp;<a href="{{page.previous.url}}">{{page.previous.title}}</a>
+      {% endif %}
+    </div>
+    <div class="post-nav-next">
+      {% if page.next.url %}
+      <a href="{{page.next.url}}">{{page.next.title}}</a>&nbsp;&rarr;
+      {% endif %}
+    </div>
   </div>
 </div>
 
@@ -21,15 +22,17 @@ layout: default
 
 {{content}}
 
-<div class="post-nav">
-  <div class="post-nav-prev">
-    {% if page.previous.url %}
-    &larr;&nbsp;<a href="{{page.previous.url}}">{{page.previous.title}}</a>
-    {% endif %}
-  </div>
-  <div class="post-nav-next">
-    {% if page.next.url %}
-    <a href="{{page.next.url}}">{{page.next.title}}</a>&nbsp;&rarr;
-    {% endif %}
+<div class="spacer">
+  <div class="post-nav">
+    <div class="post-nav-prev">
+      {% if page.previous.url %}
+      &larr;&nbsp;<a href="{{page.previous.url}}">{{page.previous.title}}</a>
+      {% endif %}
+    </div>
+    <div class="post-nav-next">
+      {% if page.next.url %}
+      <a href="{{page.next.url}}">{{page.next.title}}</a>&nbsp;&rarr;
+      {% endif %}
+    </div>
   </div>
 </div>

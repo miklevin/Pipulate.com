@@ -3,6 +3,11 @@
 
 @import 'jekyll-theme-hacker';
 
+.spacer {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
 .post-nav {
     display: flex;
     justify-content: space-between;
@@ -11,24 +16,9 @@
 
 .post-nav-prev {
     text-align: left;
-    padding-top: 1.5em;
 }
 
 .post-nav-next {
     text-align: right;
-    padding-bottom: 1.5em;
 }
 
-.post-nav p {
-    flex: 1 1 0;
-    width: 45%;
-}
-
-.post-nav p:first-child {
-    padding-right: 0.5em;
-}
-
-.post-nav p:last-child {
-    padding-left: 0.5em;
-    text-align: right;
-}
