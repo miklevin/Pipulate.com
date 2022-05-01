@@ -6,6 +6,8 @@ slug: blog
 permalink: /blog/
 ---
 
+[Pipulate Blog as 1 page]
+
 
 
 - [Pipulate Is A Wonderful Name](/blog/pipulate-is-a-wonderful-name/)
