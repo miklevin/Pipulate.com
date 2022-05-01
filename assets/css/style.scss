@@ -7,12 +7,12 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    line-height: 3;
 }
 
 .post-nav p {
     flex: 1 1 0;
     width: 45%;
+    line-height: 3;
 }
 
 .post-nav p:first-child {
