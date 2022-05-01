@@ -2,11 +2,6 @@
 layout: default
 ---
 
-<small>{{ page.date | date: "%-d %B %Y" }}</small>
-<h1>{{ page.title }}</h1>
-
-<p class="view">by {{ page.author | default: site.author }}</p>
-
 <div class="post-nav">
   <div>
     {% if page.previous.url %}
@@ -19,6 +14,10 @@ layout: default
     {% endif %}
   </div>
 </div>
+
+<h1>{{ page.title }}</h1>
+<p class="view">by {{ page.author | default: site.author }}</p>
+<small>{{ page.date | date: "%-d %B %Y" }}</small>
 
 {{content}}
 
