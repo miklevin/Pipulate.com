@@ -1,12 +1,12 @@
 ---
 layout: default
 author: Mike Levin
-title: "Pipulate Blog"
+title: "Pipulate.com Blog"
 slug: blog
 permalink: /blog/
 ---
 
-[Pipulate Blog as 1 page](/journal/)
+[Pipulate.com Blog as 1 page](/journal/)
 
 
 
