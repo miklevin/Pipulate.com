@@ -1,0 +1,9 @@
+plugins:
+  - jekyll-feed
+theme: jekyll-theme-hacker
+author: Mike Levin
+permalink: /:slug/
+gaid: G-45KYH6XTTX
+title: Pipulate | Pipulate.com
+description: Welcome to Pipulate | Pipulate.com
+apex: Pipulate.com
