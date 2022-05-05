@@ -1,6 +1,4 @@
 ---
 description: Pipulate
 ---
-
-# Pipulate
-
+# Welcome to {{ site.title }}
