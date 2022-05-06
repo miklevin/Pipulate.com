@@ -1,4 +1,4 @@
 ---
 description: Pipulate
 ---
-# Welcome to {{ site.tagline }}
+# {{ site.tagline }}
