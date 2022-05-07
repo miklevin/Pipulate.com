@@ -7,4 +7,4 @@ permalink: /blog/
 ---
 
 
-- [Pipulate Is A Wonderful Name](/blog/pipulate-is-a-wonderful-name/)
+- [Pipulate Is A Wonderful Name](/blog/pipulate-is-a-wonderful-name/) 2022-04-22
