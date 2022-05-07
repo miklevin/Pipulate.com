@@ -1,11 +1,11 @@
 ---
 layout: default
 author: Mike Levin
-title: "Pipulate.com Blog"
+title: "blog_title"
 slug: blog
 permalink: /blog/
 ---
-# { site.title } Blog
+# Pipulate.com Blog
 
 
 
