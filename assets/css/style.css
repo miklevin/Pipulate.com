@@ -14,7 +14,7 @@
     font-family: 'Goldman';
     font-size: 1.3rem;
 }
- body > header {
+ header {
     background-color: #151958;
 }
  header > nav {
