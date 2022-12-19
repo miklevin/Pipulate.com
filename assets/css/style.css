@@ -14,12 +14,6 @@
     font-family: 'Goldman';
     font-size: 1.3rem;
 }
- header {
-    background-image: url("/assets/images/blue-balloons.png");
-    background-position: center;
-    background-position-y: center;
-    background-size: 100% auto;
-}
  header > nav {
     font-size: 1.25rem;
     font-weight: bold;
