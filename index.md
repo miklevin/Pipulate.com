@@ -3,7 +3,7 @@ title: Pipulate
 description: Free & Open Source SEO Software
 ---
 
-# Pipulte is FOSS SEO Software
+# FOSS SEO Software
 
 ## What is FOSS?
 
