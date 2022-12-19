@@ -1,6 +1,6 @@
 ---
-description: Pipulate
+title: Pipulate
+description: Free and Open Source SEO Software
 ---
-# {{ site.welcome }}
 
-<img src="/assets/images/pipulate.png" alt="Pipulate Free &amp; Open Source SEO Software" title="Pipulate Free &amp; Open Source SEO Software" width="650px" height="650px" /> 
+Hello World
