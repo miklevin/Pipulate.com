@@ -1,0 +1,7 @@
+<nav>
+<a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">~/</a>
+<a {% if page.group == 'linux' or page.category == 'linux' %}class="current" {% endif %}href="/linux/">Linux</a>
+<a {% if page.group == 'python' or page.category == 'python' %}class="current" {% endif %}href="/python/">Python</a>
+<a {% if page.group == 'vim' or page.category == 'vim' %}class="current" {% endif %}href="/vim/">vim</a>
+<a {% if page.group == 'git' or page.category == 'git' %}class="current" {% endif %}href="/git/">git</a>
+</nav>

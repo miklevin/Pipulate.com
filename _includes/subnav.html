@@ -1,0 +1,31 @@
+<header>
+  <nav class="center small">
+  {% case page.group %}
+    {% when "linux" %}
+      <a {% if page.name == "levinux.md" %}class="current" {% endif %}href="/levinux/">Levinux</a>
+      <a {% if page.name == "lxd.md" %}class="current" {% endif %}href="/lxd/">LXD</a>
+      <a {% if page.name == "wsl.md" %}class="current" {% endif %}href="/wsl/">WSL</a>
+      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">Mac</a>
+    {% when "python" %}
+      <a {% if page.name == "jupyter.md" %}class="current" {% endif %}href="/jupyter/">Jupyter</a>
+      <a {% if page.name == "bar" %}class="current" {% endif %}href="#">Pandas</a>
+      <a {% if page.name == "path.md" %}class="current" {% endif %}href="/path/">Path</a>
+      <a {% if page.name == "gsheet.md" %}class="current" {% endif %}href="/gsheet/">GSheet</a>
+      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">nbdev</a>
+    {% when "vim" %}
+      <a {% if page.name == "foo" %}class="current" {% endif %}href="#">Tutor</a>
+      <a {% if page.name == "egg" %}class="current" {% endif %}href="#">RegEx</a>
+      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">.vimrc</a>
+      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">.?vi.?</a>
+    {% when "git" %}
+      <a {% if page.name == "bar" %}class="current" {% endif %}href="#">Undo</a>
+      <a {% if page.name == "foo" %}class="current" {% endif %}href="#">Github</a>
+      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">.ssh</a>
+    {% else %}
+      <a {% if page.name == "about.md" %}class="current" {% endif %}href="/about/">About</a>
+      <a {% if page.name == "seo.md" %}class="current" {% endif %}href="/seo/">SEO</a>
+      <a {% if page.name == "tech.md" %}class="current" {% endif %}href="/tech/">Tech</a>
+      <a {% if page.name == 'blog.md' or page.path contains '_posts' page.url contains '/blog/'%}class="current" {% endif %}href="/blog/">Blog</a>
+  {% endcase %}
+  </nav>
+</header>

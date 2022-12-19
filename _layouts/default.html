@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
+<title>{% if page.type == "post" %}{{ post.title }}{% else %}{{ page.title }}{% endif %} | {{ site.title }}</title>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/assets/css/style.css" />
+<link rel="stylesheet" href="/assets/css/syntax.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Goldman">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaid }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ site.gaid }}');
+</script>
+</head>
+<body>
+<header>
+{% include mainnav.html %}
+<h1>Mike Levin &#151; <nobr>BFF <a href="/seo/">SEO</a></nobr></h1>
+
+<p>Future-proof your technology-skills with Linux, Python, vim &amp; git &#151;
+and me as I share with you the most timeless and accessible tools in tech.
+<i><a href="/blog/">Blog</a></i></p>
+
+</header>
+<main>
+{{ content }}
+</main>
+<footer>
+{% include footernav.html %}
+</footer>
+</body>
+</html>

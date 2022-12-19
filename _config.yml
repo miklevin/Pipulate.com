@@ -1,0 +1,16 @@
+title: Pipulate Free and Open Source SEO Software
+author: Mike Levin
+apex: MikeLev.in
+permalink: /:slug/
+gaid: G-45KYH6XTTX
+
+# Conversion
+markdown:    kramdown
+highlighter: rouge
+
+# Markdown Processors
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+

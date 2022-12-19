@@ -1,0 +1,35 @@
+---
+layout: default
+group: blog
+---
+
+<h1>{{ page.title }}</h1>
+<h3>by {{ page.author | default: site.author }}</h3>
+{{ page.date | date: "%A, %B %d, %Y" }}
+
+{{content}}
+
+{% for category in page.categories %}
+<div class="spacer">
+  <div class="post-nav">
+    <div class="post-nav-prev">
+    {% assign posts = site.categories[category] | sort:"weight" %}
+    {% for post in posts %}
+      {% if post.url == page.url %}
+        {% assign last_inx = forloop.index0 | minus:1 %}
+        {% if forloop.last == false %}
+          {% assign next_inx = forloop.index0 | plus:1 %}
+          <span class="arrow">&larr;&nbsp;</span><a href="{{ BASE_PATH }}{{ posts[next_inx].url }}">{{ posts[next_inx].title }}</a>
+        {% endif %}
+        </div>
+        <div class="post-nav-next">
+        {% if forloop.first == false %}
+          <a href="{{ BASE_PATH }}{{ posts[last_inx].url }}">{{ posts[last_inx].title }}</a><span class="arrow">&nbsp;&rarr;</span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+<h4>Category: <a href="/{{ category | slugify }}/">{{ category }}</a></h4>
+{% endfor %}
