@@ -23,7 +23,7 @@
     line-height: 2;
     padding: 1rem 0 0 0;
 }
-footer {
+ body > footer {
     font-size: 1.7rem;
     font-family: 'Goldman';
 }
