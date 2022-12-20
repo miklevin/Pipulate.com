@@ -5,5 +5,5 @@ permalink: /software/
 group: software
 ---
 
-# FOSS SEO Awesome List
+# FOSS SEO Software in Pipulate
 
