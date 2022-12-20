@@ -24,3 +24,14 @@ Jupyter Notebooks and headless Linux servers.
 ### Chase The White Rabbit
 
 If you're ready to go down the rabbit hole, then <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me!</a>.
+
+                                                                       _. 
+                                                                /)    /  \     
+      ____ _                      __  __      _          /)\_ _//    /    |    
+     / ___| |__   __ _ ___  ___  |  \/  | ___| |     ___(/_ 0 0      |    |    
+    | |   | '_ \ / _` / __|/ _ \ | |\/| |/ _ \ |   *(     =(_T_)=    |    |    
+    | |___| | | | (_| \__ \  __/ | |  | |  __/_|     \  )   \"\      \    /   
+     \____|_| |_|\__,_|___/\___| |_|  |_|\___(_)      |__>-\_>_>      \__/
+
+
+
