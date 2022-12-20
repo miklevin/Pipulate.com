@@ -1,7 +1,7 @@
 ---
 title: FOSS SEO Awesome List
 description: Free and Open Source SEO Awesome List
-permalink: /awesome/
+permalink: /software/
 group: awesome
 ---
 
