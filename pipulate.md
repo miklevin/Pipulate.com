@@ -11,7 +11,8 @@ group: home
 
 But don't fear! You can run a full Linux server on your Windows desktop like
 never before. Microsoft has made it easy with their Windows Subsystem for
-Linux. If you've ever felt imposter syndrome, fix it here and now.
+Linux. If you've ever felt imposter syndrome, fix it here and now. Become a
+Python SEO capable of going the distance.
 
 ### Don't Get Stuck in "Lost Mode"
 
