@@ -29,6 +29,8 @@ This site solves this classic problem by closing the gap between desktop
 Jupyter Notebooks and headless Linux servers. Do it on your Windows desktop
 just like you would on a real server, so moving it over is easy.
 
+Learn vim and you'll never go hungry again!
+
 ### Chase The Rabbit
 
                                                                  _. 
