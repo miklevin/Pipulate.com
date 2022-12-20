@@ -2,6 +2,7 @@
 title: SEO
 description: Search Engine Optmization
 permalink: /seo/
+group: seo
 ---
 
 # Search Engine Optimization

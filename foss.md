@@ -2,6 +2,7 @@
 title: FOSS
 description: Free & Open Source SEO Software
 permalink: /foss/
+group: foss
 ---
 
 # FOSS SEO Software
