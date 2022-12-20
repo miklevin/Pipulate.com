@@ -5,5 +5,5 @@ permalink: /awesome/
 group: awesome
 ---
 
-# Free and Open Source SEO Awesome List
+# FOSS SEO Awesome List
 
