@@ -11,17 +11,23 @@ group: home
 
 But don't fear! You can run a full Linux server on your Windows desktop like
 never before. Microsoft has made it easy with their Windows Subsystem for
-Linux.  If you've ever felt imposter syndrome, here and now is how you fix it.
+Linux. If you've ever felt imposter syndrome, fix it here and now.
 
-### Do Use Jupyter But Don't Get Stuck in "Lost Mode"
+### Don't Get Stuck in "Lost Mode"
 
-The ultimate tool for SEO is Python, and the ultimate way to run Python is in
-Jupyter for experimental work and on Linux for 24x7 repetitive scheduling. Most
-Jupyter data jockeys get stuck in "Lost" mode where you have to sit there and
-hit the button, thereby losing many advantages of automation.
+The ultimate tool for SEO is Python, and the easiest way to get started with
+Python is Jupyter. The problem becomes going from Jupyter to 24x7 automation.
+You too easily get locked into ***"Lost Mode"*** where you have to sit there
+and press a button. 
+
+The main purpose of Pipulate is to get you over the ***Lost*** mode hurdle.
+25x7 Linux daemons are a text-file away if you only know how to:
+
+    sudo vim /etc/systemd/system/awesome.service
 
 This site solves this classic problem by closing the gap between desktop
-Jupyter Notebooks and headless Linux servers.
+Jupyter Notebooks and headless Linux servers. Do it on your Windows desktop
+just like you would on a real server, so moving it over is easy.
 
 ### Chase The Rabbit
 
