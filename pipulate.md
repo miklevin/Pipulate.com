@@ -9,9 +9,17 @@ group: home
 
 ## Pipulate Is a Full Linux Server
 
-Whenever I have a suite of secret weapon SEO tools, I call it Pipulate. Most
-recently, Microsoft has enabled us to conjure complete SEO Linux development
-servers into existence on our Windows desktops, so that's what Pipulate is.
+But don't fear! You can run a full Linux server on your Windows desktop like
+never before. Microsoft has made it easy with their Windows Subsystem for
+Linux.  If you've ever felt imposter syndrome, here and now is how you fix it.
+
+The ultimate tool for SEO is Python, and the ultimate way to run Python is in
+Jupyter for experimental work and on Linux for 24x7 repetitive scheduling. Most
+Jupyter data jockeys get stuck in "Lost" mode where you have to sit there and
+hit the button, thereby losing many advantages of automation.
+
+This site solves this classic problem by closing the gap between desktop
+Jupyter Notebooks and headless Linux servers.
 
 ### Chase The White Rabbit
 
