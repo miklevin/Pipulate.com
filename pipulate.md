@@ -13,6 +13,8 @@ But don't fear! You can run a full Linux server on your Windows desktop like
 never before. Microsoft has made it easy with their Windows Subsystem for
 Linux.  If you've ever felt imposter syndrome, here and now is how you fix it.
 
+### Do Use Jupyter But Don't Get Stuck in "Lost Mode"
+
 The ultimate tool for SEO is Python, and the ultimate way to run Python is in
 Jupyter for experimental work and on Linux for 24x7 repetitive scheduling. Most
 Jupyter data jockeys get stuck in "Lost" mode where you have to sit there and
