@@ -21,9 +21,7 @@ hit the button, thereby losing many advantages of automation.
 This site solves this classic problem by closing the gap between desktop
 Jupyter Notebooks and headless Linux servers.
 
-### Chase The White Rabbit
-
-If you're ready to go down the rabbit hole, then <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me!</a>.
+### Chase The Rabbit
 
                                                                  _. 
                                                              /) /  \
@@ -33,5 +31,6 @@ If you're ready to go down the rabbit hole, then <a href="https://raw.githubuser
     | |___| | | | (_| \__ \  __/ | |  | |  __/_|  \  )   \"\   \    /
      \____|_| |_|\__,_|___/\___| |_|  |_|\___(_)   |__>-\_>_>   \__/
 
+If you're ready to go down the rabbit hole, then <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me!</a>.
 
 
