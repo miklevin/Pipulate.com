@@ -148,6 +148,9 @@ h3 {
 
 /* Reduce header size on mobile */
 @media only screen and (max-width: 720px) {
+  body > header > div > svg {
+    width: 90vw;
+  }
   h1 {
     font-size: 2.5rem;
   }
