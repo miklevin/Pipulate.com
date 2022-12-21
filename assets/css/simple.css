@@ -148,8 +148,8 @@ h3 {
 
 /* Reduce header size on mobile */
 @media only screen and (max-width: 720px) {
-  header > nav a:visited {
-    border: 2px solid var(--border);
+  header > nav a {
+    border: 1px solid var(--border);
   }
   body > header > div > svg {
     width: 100vw;
