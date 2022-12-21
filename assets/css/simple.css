@@ -147,7 +147,7 @@ h3 {
 }
 
 /* Reduce header size on mobile */
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 720px) {
   h1 {
     font-size: 2.5rem;
   }
@@ -280,16 +280,6 @@ header > nav a:hover {
   cursor: pointer;
 }
 
-/* Reduce nav side on mobile */
-@media only screen and (max-width: 420px) {
-  header > nav a {
-    border: none;
-    padding: 0;
-    text-decoration: underline;
-    line-height: 1;
-  }
-}
-
 /* Consolidate box styling */
 aside, details, pre, progress {
   background-color: var(--accent-bg);
@@ -307,7 +297,7 @@ aside {
 }
 
 /* Make aside full-width on mobile */
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 720px) {
   aside {
     width: 100%;
     float: none;
@@ -485,7 +475,7 @@ input[type="radio"]:checked::after {
 }
 
 /* Makes input fields wider on smaller screens */
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 720px) {
   textarea,
   select,
   input {
