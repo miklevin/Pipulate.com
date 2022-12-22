@@ -10,7 +10,7 @@ description: FOSS SEO Software
 ## Installing Pipulate
 
 Pipulate is a Linux server that runs in the background under Windows Subsystem
-for Linux through JupyterLab and Linux systemd services. Once Pipulate is
+for Linux (WSL) through JupyterLab and Linux systemd services. Once Pipulate is
 installed, you will have access to JupyterLab on your local machine at <a
 href="http://localhost:8080">locoalhost:8080</a> with a number of pre-installed
 Python packages for such tasks as:
@@ -21,6 +21,12 @@ Python packages for such tasks as:
 - Pulling data from Google Analytics 
 - Pulling data from Google Search Console
 - Emailing yourself screenshots and reports
+
+Each of these Notebooks can be run on-demand and interactively through
+JupyterLab, but also can be turned into a scheduled automated task running in
+the background of your computer exactly as it would on a server. The Pipulate
+experience so that you can turn almost anything that runs Linux and has a
+network connection into a Pipulate server.
 
 To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
 
