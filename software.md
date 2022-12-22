@@ -1,19 +1,28 @@
 ---
 title: FOSS SEO Awesome List
-description: Free and Open Source SEO Awesome List
 permalink: /software/
 group: software
+description: FOSS SEO Software
 ---
 
-# FOSS SEO Software
+# {{ page.description }}
 
 ## Installing Pipulate
 
 Pipulate is a Linux server that runs in the background under Windows Subsystem
-for Linux through JupyterLab and Linux systemd services. To install Pipulate,
-use the
-<a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>
-install script.
+for Linux through JupyterLab and Linux systemd services. Once Pipulate is
+installed, you will have access to JupyterLab on your local machine at <a
+href="http://localhost:8080">locoalhost:8080</a> with a number of pre-installed
+Python packages for such tasks as:
+
+- Crawling websites
+- Automating Web browsers
+- Scraping search results
+- Pulling data from Google Analytics 
+- Pulling data from Google Search Console
+- Emailing yourself screenshots and reports
+
+To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
 
 ## Local Jupyter vs. Google Colab, Azure Notebooks, Binder, etc.
 
