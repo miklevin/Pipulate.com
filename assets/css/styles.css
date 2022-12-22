@@ -19,26 +19,6 @@
   --disabled: #efefef;
 }
 
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    --code: #f06292;
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  /* Add a bit of transparency so light media isn't so glaring in dark mode */
-  img,
-  video {
-    opacity: 0.8;
-  }
-}
-
 /* Reset box-sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -146,27 +126,6 @@ h3 {
   line-height: 1.1;
 }
 
-/* Reduce header size on mobile */
-@media only screen and (max-width: 720px) {
-  body > header > div > svg {
-    width: 100vw;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2.1rem;
-  }
-
-  h3 {
-    font-size: 1.75rem;
-  }
-
-  h4 {
-    font-size: 1.25rem;
-  }
-}
 
 /* Format links & buttons */
 a,
@@ -297,15 +256,6 @@ aside {
   padding: 0 15px;
   margin-left: 15px;
   float: right;
-}
-
-/* Make aside full-width on mobile */
-@media only screen and (max-width: 720px) {
-  aside {
-    width: 100%;
-    float: none;
-    margin-left: 0;
-  }
 }
 
 article, fieldset {
@@ -475,15 +425,6 @@ input[type="radio"]:checked::after {
   background-color: var(--bg);
   left: 0.125em;
   font-size: 32px;
-}
-
-/* Makes input fields wider on smaller screens */
-@media only screen and (max-width: 720px) {
-  textarea,
-  select,
-  input {
-    width: 100%;
-  }
 }
 
 /* Set a height for color input */
@@ -731,3 +672,67 @@ progress:indeterminate::-moz-progress-bar {
     stroke-width: 0;
     stroke: currentColor;
     fill: currentColor;
+}
+
+/* Begin Media Queries */
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  /* Add a bit of transparency so light media isn't so glaring in dark mode */
+  img,
+  video {
+    opacity: 0.8;
+  }
+}
+
+/* Reduce header size on mobile */
+@media only screen and (max-width: 720px) {
+  body > header > div > svg {
+    width: 100vw;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2.1rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Make aside full-width on mobile */
+@media only screen and (max-width: 720px) {
+  aside {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+  }
+}
+
+/* Makes input fields wider on smaller screens */
+@media only screen and (max-width: 720px) {
+  textarea,
+  select,
+  input {
+    width: 100%;
+  }
+}
+
