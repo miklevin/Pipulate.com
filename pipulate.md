@@ -9,27 +9,17 @@ group: home
 
 ### Pipulate Is a Full Linux Server
 
-If you're running Windows 10 or 11, lucky you! You can run a Linux server in
-the background. Microsoft has made it easy with their Windows Subsystem for
-Linux (WSL), and it's worth it for all the new capabilities you'll have. If
-you've ever felt imposter syndrome, now is the time to fix it. Make your New
-Years resolution performing SEO in Python.
+If you're running Windows 10 or 11, Microsoft has made it easy for you to run a
+Linux server in the background. If you've ever felt imposter syndrome, now is
+the time to fix it. Make your New Years resolution doing SEO in Python, the
+advanced way.
 
 #### Don't Get Stuck in "Lost Mode"
 
 The ultimate tool for SEO is Python, and the easiest way to get started with
-Python is Jupyter. The problem becomes going from Jupyter to 24x7 automation.
-You too easily get locked into ***"Lost Mode"*** where you have to sit there
-and press a button. 
-
-The main purpose of Pipulate is to get you over the ***Lost*** mode hurdle.
-25x7 Linux daemons are a text-file away if you only know how to:
-
-    sudo vim /etc/systemd/system/awesome.service
-
-This site solves this classic problem by closing the gap between desktop
-Jupyter Notebooks and headless Linux servers. Do it on your Windows desktop
-just like you would on a real server, so moving it over is easy.
+Python is Jupyter Notebooks. The problem becomes going from Jupyter to 24x7
+automation. You too easily get locked into ***"Lost Mode"*** where you have to
+sit there and press a button. Pipulate gets you over that hurdle.
 
 ## Installing Pipulate
 
