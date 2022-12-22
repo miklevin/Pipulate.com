@@ -31,7 +31,7 @@ becoming beholden to yet another $30 to $300 per month proprietary product.
 
 To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
 
-## Local Jupyter vs. Google Colab, Azure Notebooks, Binder, etc.
+### Local Jupyter vs. Google Colab, Azure Notebooks, Binder, etc.
 
 Many people start Python SEO explorations in Jupyter Notebooks, which simply
 means through a Web browser. This is where most people fall into the trap of
