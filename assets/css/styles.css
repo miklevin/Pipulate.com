@@ -679,6 +679,7 @@ progress:indeterminate::-moz-progress-bar {
 @media only screen and (max-width: 720px) {
   header > nav {
     font-size: 4vw;
+    margin: 0 0 1rem 0.5rem;
   }
   body > header > div > svg {
     width: 100%;
