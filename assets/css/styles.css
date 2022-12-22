@@ -56,6 +56,7 @@ body > * {
 
 /* Make the header bg full width, but the content inline with body */
 body > header {
+  background-color: #00036a;
   background-color: var(--accent-bg);
   border-bottom: 1px solid var(--border);
   text-align: center;
@@ -207,7 +208,8 @@ label[type="button"]:hover {
 
 /* Format navigation */
 header > nav {
-  font-size: 1rem;
+  font-size: 1.8vw;
+  font-weight: bold;
   line-height: 2;
   padding: 1rem 0 0 0;
 }
@@ -577,15 +579,6 @@ progress:indeterminate::-moz-progress-bar {
     font-style: italic;
     font-family: 'Goldman';
     font-size: 1.3rem;
-}
- body > header {
-    background-color: #00036a;
-}
- header > nav {
-    font-size: 2.8vw;
-    font-weight: bold;
-    line-height: 2;
-    padding: 1rem 0 0 0;
 }
  body > footer {
     font-size: 1.5rem;
