@@ -5,8 +5,14 @@ permalink: /software/
 group: software
 ---
 
-# FOSS SEO Software in Pipulate
+# FOSS SEO Software
 
-Pipulate is the fully-built server from the <a
-href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
-Me</a> install script. 
+## Installing Pipulate
+
+Pipulate is a Linux server that runs in the background under Windows Subsystem
+for Linux through JupyterLab and Linux systemd services. To install Pipulate, 
+<a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a> install script. 
+
+## Jupyter Notebooks vs. Linux Services
+
+Describe what's going on here.
