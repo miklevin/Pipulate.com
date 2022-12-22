@@ -678,8 +678,8 @@ progress:indeterminate::-moz-progress-bar {
 /* Reduce header size on mobile */
 @media only screen and (max-width: 720px) {
   header > nav a, header > nav a:visited {
-    font-size: 4vw;
-    margin: 0 0 0 1vw;
+    font-size: 3.8vw;
+    margin: 0 0 0 5px;
   }
   body > header > div > svg {
     width: 100%;
