@@ -7,7 +7,7 @@ group: home
 
 # Pipulate Free & Open Source SEO Software
 
-#### Finally, a Sea-Change in SEO. The AI Writings are On The Wall
+### Finally, a Sea-Change in SEO. The AI Writings are On The Wall
 
 SEO is undergoing its first sea-shift in decades because of AI. You can't trick
 Google. Or at least, you won't be able to for very much longer. Do you think
