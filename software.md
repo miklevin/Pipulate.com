@@ -84,6 +84,34 @@ You're welcome.
 
 ### Python Pandas and DataFrames
 
+In case you didn't notice, we're already using Python Pandas from the above
+example. But this is where you get to understand DataFrames most often seen as
+the variable df. DataFrames are row-and-column table data like you would find
+in a tab in Excel or a table in SQL. The best way to represent table data with
+native Python objects (not Pandas) is as a list of tuples:
+
+```python
+table = [
+    ("one", "two", "three"),
+    ("four", "five", "six"),
+    ("seven", "eight", "nine"),
+    ("ten", "eleven", "twelve"),
+]
+```
+
+...which you can then turn into a Pandas DataFrame object like so:
+
+```python
+df = pd.DataFrame(table, columns=["A", "B", "C"])
+```
+
+And from there you can save it out as a CSV file or use it in further
+manipulations of row & column data such as joins, aggregations and unions. For
+you Excel users, that's VLookups, Pivot Tables and combining tabs, but it's a
+lot nicer in Python Pandas. Data Science, yay!
+
+You're welcome.
+
 ### Logging Into Google Services
 
 ### Listing Your Sites with Google Search Console (GSC)
