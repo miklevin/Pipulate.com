@@ -7,18 +7,18 @@ description: FOSS SEO Software
 
 # {{ page.description }}
 
-## Installing Linux & Pipulate
+### Installing Linux & Pipulate
 
-## Persistent Dict as Database
+### Persistent Dict as Database
 
-## Grabbing Data Quick & Easy
+### Grabbing Data Quick & Easy
 
-## Python Pandas and DataFrames
+### Python Pandas and DataFrames
 
-## Logging Into Google Services
+### Logging Into Google Services
 
-## Pulling Data From Google Analytics API
+### Pulling Data From Google Analytics API
 
-## Pulling Data From Google Analytics G4 API
+### Pulling Data From Google Analytics G4 API
 
-## Pulling Data From Google Search Console
+### Pulling Data From Google Search Console
