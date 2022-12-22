@@ -7,7 +7,7 @@ group: home
 
 # Pipulate Free & Open Source SEO Software
 
-### Finally, a Sea-Change in SEO. The AI Writings are On The Wall
+#### Finally, a Sea-Change in SEO. The AI Writings are On The Wall
 
 SEO is undergoing its first sea-shift in decades because of AI. You can't trick
 Google. Or at least, you won't be able to for very much longer. Do you think
@@ -16,7 +16,7 @@ a hundredfold better behind the closed doors of Google? It's just a matter of
 time now as they phase out PageRank and page-to-page linking in general as a
 primary relevancy signal. 
 
-### Signals Abound & Anything Might Be a Signal
+#### Signals Abound & Anything Might Be a Signal
 
 There are a lot more signals to read today, and they have to crisscross verify
 that you are the compellingly best thing to be served on this or that. You must
@@ -34,7 +34,7 @@ Linux, and it's worth it for all the new capabilities you'll have. If you've
 ever felt imposter syndrome, fix it here and now. Become a Python SEO capable
 of going the distance.
 
-### Don't Get Stuck in "Lost Mode"
+#### Don't Get Stuck in "Lost Mode"
 
 The ultimate tool for SEO is Python, and the easiest way to get started with
 Python is Jupyter. The problem becomes going from Jupyter to 24x7 automation.
