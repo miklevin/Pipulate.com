@@ -57,7 +57,30 @@ This is a million-dollar trick that gives you a lightweight NoSQL database for
 every occasion. Use it as a real database. Use it as a cache. It's fast and run
 by the instance of SQLite3 that comes built into Python.
 
+You're welcome.
+
 ### Grabbing Data Quick & Easy
+
+```python
+import pandas as pd
+
+url = 'https://www.worldometers.info/geography/alphabetical-list-of-countries/'
+df = pd.read_html(url)[0]
+df.to_csv("countries.csv", index=False)
+```
+
+That will drop a comma separated value file (CSV) on your drive in the same
+location as where you created the Jupyter Notebook. The file will contain a
+list of countries with populations, land area and density from the table that
+was displaying on that URL. This trick doesn't always work, but when it does,
+it's glorious. The process can be reversed as follows, and is another way to
+get database-like functionality without all the fuss.
+
+```python
+df = pd.read_csv("countries.csv")
+```
+
+You're welcome.
 
 ### Python Pandas and DataFrames
 
