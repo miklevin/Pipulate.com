@@ -5,7 +5,7 @@ permalink: /
 group: home
 ---
 
-## Pipulate Free & Open Source SEO Software
+# Pipulate Free & Open Source SEO Software
 
 ### Finally, a Sea-Change in SEO. The AI Writings are On The Wall
 
