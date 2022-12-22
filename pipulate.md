@@ -33,16 +33,6 @@ just like you would on a real server, so moving it over is easy.
 
 Learn vim and you'll never go hungry again!
 
-### Chase The Rabbit
-
-                                                                 _. 
-                                                             /) /  \
-      ____ _                      __  __      _       /)\_ _// /    |
-     / ___| |__   __ _ ___  ___  |  \/  | ___| |  ___(/_ 0 0   |    |
-    | |   | '_ \ / _` / __|/ _ \ | |\/| |/ _ \ |*(     =(_T_)= |    |
-    | |___| | | | (_| \__ \  __/ | |  | |  __/_|  \  )   \"\   \    /
-     \____|_| |_|\__,_|___/\___| |_|  |_|\___(_)   |__>-\_>_>   \__/
-
 If you're ready to go down the rabbit hole, then <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me!</a>.
 
 
