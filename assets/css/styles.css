@@ -89,21 +89,36 @@ body > footer {
 
 /* Format headers */
 h1 {
+  font-family: 'Goldman';
   font-size: 3rem;
+  font-weight: normal;
+  line-height: 1.1;
 }
 
 h2 {
+  font-family: 'Goldman';
   font-size: 2.6rem;
-  margin-top: 3rem;
+  font-weight: normal;
+  line-height: 1.1;
+  margin-top: 1rem;
 }
 
 h3 {
-  font-size: 2rem;
-  margin-top: 3rem;
+  font-family: 'mouse memoirs';
+  font-size: 2.5rem;
+  font-weight: normal;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 h4 {
-  font-size: 1.44rem;
+  font-family: 'Goldman';
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 1.8rem;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 h5 {
@@ -118,14 +133,6 @@ h6 {
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
-
-/* Fix line height when title wraps */
-h1,
-h2,
-h3 {
-  line-height: 1.1;
-}
-
 
 /* Format links & buttons */
 a,
@@ -583,26 +590,6 @@ progress:indeterminate::-moz-progress-bar {
  body > footer {
     font-size: 1.5rem;
     font-family: 'Goldman';
-}
- h1, h2, h4 {
-    font-family: 'Goldman';
-    font-weight: normal;
-}
- h2 {
-    margin-top: 1rem;
-}
- h3 {
-    font-family: 'mouse memoirs';
-    font-weight: normal;
-    font-size: 2.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
- h4 {
-    font-size: 1.6rem;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    line-height: 1.8rem;
 }
  .post-nav {
     display: flex;
