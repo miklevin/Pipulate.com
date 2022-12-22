@@ -1,6 +1,6 @@
 ---
 title: Pipulate
-description: Free and Open Source SEO Software
+description: Pipulate Free and Open Source SEO Software
 permalink: /
 group: home
 ---
