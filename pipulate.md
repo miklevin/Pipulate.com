@@ -9,11 +9,11 @@ group: home
 
 ### Pipulate Is a Full Linux Server
 
-But don't fear! You can run a full Linux server on your Windows desktop like
-never before. Microsoft has made it easy with their Windows Subsystem for
-Linux, and it's worth it for all the new capabilities you'll have. If you've
-ever felt imposter syndrome, fix it here and now. Become a Python SEO capable
-of going the distance.
+If you're running Windows 10 or 11, lucky you! You can run a Linux server in
+the background. Microsoft has made it easy with their Windows Subsystem for
+Linux (WSL), and it's worth it for all the new capabilities you'll have. If
+you've ever felt imposter syndrome, now is the time to fix it. Make your New
+Years resolution performing SEO in Python.
 
 #### Don't Get Stuck in "Lost Mode"
 
