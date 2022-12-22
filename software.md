@@ -12,7 +12,7 @@ description: FOSS SEO Software
 Pipulate is a Linux server that runs in the background under Windows Subsystem
 for Linux (WSL) through JupyterLab and Linux systemd services. Once Pipulate is
 installed, you will have access to JupyterLab on your local machine at <a
-href="http://localhost:8080">locoalhost:8080</a> with a number of pre-installed
+href="http://localhost:8080">localhost:8080</a> with a number of pre-installed
 Python packages for such tasks as:
 
 - Crawling websites
