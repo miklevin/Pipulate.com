@@ -19,6 +19,11 @@ href="http://localhost:8080">localhost:8080</a>. This is due to a limitation in
 WSL and I expect this requirement to change. Windows Terminal may have
 installed with Linux, but in case it didn't, grab it from the Microsoft Store.
 
+Once you have JupyterLab displaying in your Web browser, you're in business.
+Simply copy/paste any of the code in these examples into a new Notebook or go
+into the repo named pipulate and run the code from the example files found
+there. Those examples will match what you find here.
+
 ### Persistent Dict as Database
 
 Before doing anything else, you need to understand how to make the Python data
