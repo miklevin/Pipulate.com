@@ -16,8 +16,8 @@ href="http://localhost:8080">localhost:8080</a> with a number of pre-installed
 Python packages for such tasks as:
 
 - Crawling websites
-- Automating Web browsers
 - Scraping search results
+- Automating Web browsers
 - Pulling data from Google Analytics 
 - Pulling data from Google Search Console
 - Emailing yourself screenshots and reports
