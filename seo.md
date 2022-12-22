@@ -41,3 +41,22 @@ SEO is an important part of any online marketing strategy, as it helps to
 increase the visibility and accessibility of a website to search engines, which
 can lead to increased traffic and revenue.
 
+### Finally, a Sea-Change in SEO. The AI Writings are On The Wall
+
+SEO is undergoing its first sea-shift in decades because of AI. You can't trick
+Google. Or at least, you won't be able to for very much longer. Do you think
+that the kind of intelligence being expressed by the OpenAI stuff doesn't exist
+a hundredfold better behind the closed doors of Google? It's just a matter of
+time now as they phase out PageRank and page-to-page linking in general as a
+primary relevancy signal. 
+
+#### Signals Abound & Anything Might Be a Signal
+
+There are a lot more signals to read today, and they have to crisscross verify
+that you are the compellingly best thing to be served on this or that. You must
+put your best foot forward now in everything you publish. Old stuff that used
+to be the dribs and drabs of long-tail traffic catching net that had no harm in
+leaving published as a sort of archive can now harm you. The age of
+site-sculling is back, but not for PageRank flow and instead for a perfectly
+righteous, but still rather shallow, hierarchy of overall fewer URLs.
+
