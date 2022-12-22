@@ -13,10 +13,11 @@ To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme
 
 ### Using JupyterLab
 
-Once Linux and Pipulate are installed, you need to have a Linux Terminal open
-in order for Jupyter to be reachable at <a
-href="http://localhost:8080">localhost:8080</a>. This is due to a limitation in
-WSL and I expect this requirement to change. Windows Terminal may have
+After the Drink Me script is finished running, Linux and Pipulate will both be
+installed on your Windows system and JupyterLab will soon be reachable in a Web
+browser at <a href="http://localhost:8080">localhost:8080</a>. You will however
+have to open a Linux Terminal to "wake up" Jupyter. This is due to a limitation
+in WSL and I expect this requirement to change soon. Windows Terminal may have
 installed with Linux, but in case it didn't, grab it from the Microsoft Store.
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
