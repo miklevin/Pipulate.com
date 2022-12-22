@@ -27,8 +27,8 @@ there. Those examples will match what you find here.
 
 ### Persistent Dict as Database
 
-Before doing anything else, you need to understand how to make the Python data
-type known as a ***dictionary***, or simply dict, persistent. With a persistent
+Before doing anything else, you need to understand how to make the Python
+***dictionary*** datatype, or simply ***dict***, persistent. With a persistent
 dict, many requirements for a database you your day-to-day work seems to go
 away. A persistent dict really is a database, but you hardly have to think
 about it that way.
