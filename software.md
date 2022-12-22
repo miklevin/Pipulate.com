@@ -62,8 +62,15 @@ by the instance of SQLite3 that comes built into Python.
 
 ### Logging Into Google Services
 
-### Pulling Data From Google Analytics API
+### Listing Your Sites with Google Search Console (GSC)
+
+### Pulling Data From GSC
+
+### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
+
+### Pulling Data From GA
+
+### Pushing Data into a Google Spreadsheet.
 
 ### Pulling Data From Google Analytics G4 API
 
-### Pulling Data From Google Search Console
