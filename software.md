@@ -24,9 +24,10 @@ Python packages for such tasks as:
 
 Each of these Notebooks can be run on-demand and interactively through
 JupyterLab, but also can be turned into a scheduled automated task running in
-the background of your computer exactly as it would on a server. The Pipulate
-experience so that you can turn almost anything that runs Linux and has a
-network connection into a Pipulate server.
+the background of your computer exactly as it would on a server. Before long
+you'll be able to deploy Pipulate servers at home, on cloud, or just keep it on
+your laptop. The point is you'll know ***how*** this stuff works without
+becoming beholden to yet another $30 to $300 per month proprietary product.
 
 To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
 
