@@ -152,7 +152,7 @@ Sooner or later, you're going to want to push row & column data into a Google
 Spreadsheet. It can be as a datasource for Google Looker reports (previously
 Google Data Studio), or to be used directly by your audience as a sort of poor
 man's data dashboard. There's no shame in it. Some people use specialty
-packages like GSheets for this, but I say use the Google Client libraries
+packages like GSpread for this, but I say use the Google Client libraries
 directly. Here's how:
 
 ```python
@@ -677,6 +677,25 @@ with sqldict("crawl.db") as db:
         db.commit()
 ```
 
+### Crawling Websites Directly Into Google Sheets From Python
+
+#### First a Few Words About APIs
+
+Again I reiterate there are many pip installable packages you can use here to
+alleviate this next step, namely GSpread and PyGSheets but neither is popular
+enough to learn their API versus the only slightly harder direct-from-google
+Python API for Google Sheets. Packages like GSpread and PyGSheets which while
+undoubtedly offer convenience, are not so different from the main API
+(especially in this case) that you're better off than getting first-hand API
+experience.
+
+#### Official Is Best If Official Isn't That Much Worse
+
+The official Google Sheets API takes a list of tuples just like everything
+we've been doing with Pandas and it's easy to go back and forth between
+DataFrames and lists of tuples. Pandas even has a special word for this
+conventional data structure. They call it records. So conceptually we're
+shoving records into Google Sheets directly through Google's GSheets API.
 
 
 ### Capturing Search Engine Results
