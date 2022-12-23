@@ -644,13 +644,7 @@ comprehension to show the URLs that came back from the crawl:
 
 But it's not back in the database. We just fetched it concurrently and it's
 sitting in memory waiting to be lost by a Jupyter Reset Kernel (which you
-should be doing often). To write it back to the database, we have to take care
-of a tiny nuance. We have 2 lists: one of input and one of output. They are
-thankfully the same length, which I assured by giving the return_exception=True
-parameter. And even though the output contains url properties we could access,
-the database keys we used to fetch the data may be different because of
-redirects. So, we zip the 2 lists together, turn them into a dictionary and use
-that to do the updates like so:
+should be doing often). Write it back to the database like so:
 
 #### Zipping Lists into Dicts in Python
 
