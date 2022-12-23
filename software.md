@@ -261,14 +261,11 @@ the packages you're importing.
 
 ```python
 try:
-    from IPython.display import display, Markdown, Audio, HTML
+    from IPython.display import display, Audio
 
     is_jupyter = True
 except:
     is_jupyter = False
-
-if is_jupyter:
-    from IPython.display import display, Markdown, Audio, HTML
 
 
 def beep():
