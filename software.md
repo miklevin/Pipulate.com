@@ -511,6 +511,19 @@ with sqldict("crawl.db") as db:
 
 Getting the idea? Can you guess our next step?
 
+#### But First a Word On Python Context Manager and SQLite Commit
+
+Nuance to point out here is that I'm using something called the Python "context
+manager" with SqliteDict. You can tell the content manager by the "with/as"
+keywords and accompany indent. The "as" variable (really a file handle) goes
+away after the outdent. That's the point. That's it's context. 
+
+SqliteDict when used with the contact manager (there are other ways) won't
+commit chances to the persistent on-drive database file unless you do a
+.commit(). Because commit hits actual hardware and could slow things down on a
+big crawl, it's better to commit once per page (outer loop) rather than on the
+inner loop per link. 
+
 You're welcome.
 
 #### Recording Unvisited URLs into Database
