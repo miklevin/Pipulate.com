@@ -143,12 +143,12 @@ This is now connected to Google Sheets. Guess what comes next!
 
 ### Pushing Data Into a Google Sheet
 
-Sooner or later, you're going to want to push that Pandas DataFrame into a
-Google Spreadsheet. It can be as a datasource for Google Looker reports
-(previously Google Data Studio), or to be used directly by your audience as a
-sort of poor man's data dashboard. There's no shame in it. Some people use
-specialty packages like GSheets for this, but I say use the Google Client
-libraries directly. Here's how:
+Sooner or later, you're going to want to push row & column data into a Google
+Spreadsheet. It can be as a datasource for Google Looker reports (previously
+Google Data Studio), or to be used directly by your audience as a sort of poor
+man's data dashboard. There's no shame in it. Some people use specialty
+packages like GSheets for this, but I say use the Google Client libraries
+directly. Here's how:
 
 ```python
 import ohawf
@@ -156,7 +156,7 @@ import pandas as pd
 from apiclient.discovery import build
 from openpyxl.utils.cell import get_column_letter as a1
 
-sheet_id = "[copy/paste the Google Sheet ID from URL to here]"
+sheet_id = "1S33ljMCehGd8p-gab5AJzcGG-qZASd6jF8wpJXwJG60"
 
 creds = ohawf.get()
 service = build("sheets", "v4", credentials=creds)
@@ -168,9 +168,8 @@ table = [
     ("ten", "eleven", "twelve"),
 ]
 
-df = pd.DataFrame(table, columns=["A", "B", "C"])
-
-end_row, end_col = df.shape
+end_row = len(table)
+end_col = len(table[0])
 end_range = f"{a1(end_col)}{end_row}"
 range_names = f"A1:{end_range}"
 
