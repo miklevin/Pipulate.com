@@ -25,7 +25,7 @@ Simply copy/paste any of the code in these examples into a new Notebook or go
 into the repo named pipulate and run the code from the example files found
 there. Those examples will match what you find here.
 
-### Persistent Dict as Database
+### Use Persistent Dicts as Ridiculously Easy Databases
 
 Before doing anything else, you need to understand how to make the Python
 ***dictionary*** datatype, or simply ***dict***, persistent. With a persistent
@@ -114,7 +114,32 @@ You're welcome.
 
 ### Logging Into Google Services
 
+Actually just logging in can be the hardest part of many API projects,
+especially those involving Google Services. At this point, everyone else would
+be telling you to register as a Google Developer, make a project at the Cloud
+Console, download a client.json file, yadda, yadda not here. What you do is:
 
+```python
+import ohawf
+
+creds = ohawf.get()
+```
+
+This will cause a login prompt to pop up for browser-based authentication.
+Anyone with a Google account can do this without going through the rigmarole of
+the console.developers.google.com site. I did that and made a pip installable
+package to spare you the grief. Okay, so you have authorized credentials. What
+now? We build a service!
+
+```python 
+import ohawf
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("sheets", "v4", credentials=creds)
+```
+
+This is now connected to Google Sheets. Guess what comes next!
 
 ### Pushing Data Into a Google Sheet
 
@@ -163,8 +188,9 @@ result = (
 print("Done")
 ```
 
-And your Google Sheet will be updated. If this doesn't work immediately for
-you, you need to get ohawf wired to your own authentication.
+There's a ton you can do with the 
+[Google Sheets API](https://developers.google.com/sheets/api/guides/concepts)
+including reading data out, formatting, etc.
 
 You're welcome.
 
