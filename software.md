@@ -519,7 +519,7 @@ keywords and accompany indent. The "as" variable (really a file handle) goes
 away after the outdent. That's the point. That's it's context. 
 
 SqliteDict when used with the contact manager (there are other ways) won't
-commit chances to the persistent on-drive database file unless you do a
+commit changes to the persistent on-drive database file unless you do a
 .commit(). Because commit hits actual hardware and could slow things down on a
 big crawl, it's better to commit once per page (outer loop) rather than on the
 inner loop per link. 
