@@ -758,6 +758,65 @@ result = (
 print(result)
 ```
 
+#### But What About Log-File Style Updates?
+
+If you're adding something to the end of an existing list log-file style, you
+have to be able to find the starting point. While it's not the most efficient
+thing in the world, I find the best trick is to just load all the data on that
+tab and look for the first unclosed row of blank data. If data comes later,
+that closes it. The 2 above examples connect together to give you appending
+your new rows at the bottom, log-file style.
+
+```python
+import ohawf
+import pandas as pd
+from apiclient.discovery import build
+from openpyxl.utils.cell import get_column_letter as a1
+
+with open("sheet_id.txt") as fh:
+    spreadsheet_id = fh.readline()
+
+# Set the test-range
+sheet_range = 'Sheet1!A:Z'
+
+# Build the Sheets API client
+creds = ohawf.get()
+service = build('sheets', 'v4', credentials=creds)
+
+# Get the test-range (everything)
+result = service.spreadsheets().values().get(
+    spreadsheetId=spreadsheet_id, range=sheet_range).execute()
+rows = result.get('values', [])
+
+# Find the last row that has data
+last_row = len(rows)
+while last_row > 0 and not any(rows[last_row - 1]):
+    last_row -= 1
+
+# Load data
+df = pd.read_excel("crawl.xlsx")
+end_row, end_col = df.shape
+table = list(map(tuple, df.to_records(index=False)))
+
+# Insert column labels as row 1
+start_row = last_row + 1
+range_names = f"A{start_row}:{a1(end_col)}{end_row + start_row}"
+
+# Update Sheet
+result = (
+    service.spreadsheets()
+    .values()
+    .update(
+        spreadsheetId=spreadsheet_id,
+        range=range_names,
+        valueInputOption="USER_ENTERED",
+        body={"values": table},
+    )
+    .execute()
+)
+print(result)
+```
+
 ### Capturing Search Engine Results
 
 ### Taking Screenshot of Web Browser
