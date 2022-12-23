@@ -566,7 +566,7 @@ You're welcome.
 
 #### What Do You Do With a Database of Pages?
 
-What kind of investigations? Hand you not read this page? Let's extract the
+What kind of investigations? have you not read this page? Let's extract the
 title tags, create a Pandas DataFrame, save the URLs plus title tags as an
 Excel document and push it to Google Sheets… duhhh
 
