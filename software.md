@@ -594,7 +594,96 @@ df = pd.DataFrame(table, columns=["url", "title"])
 df.to_excel("crawl.xlsx", index=False)
 ```
 
-#### Recording Unvisited URLs into Database
+### Fetching Web Pages Concurrently With Python
+
+I really don't want to at this point because it will make your head explode.
+But I feel I really have to because people are going to ask, and it's the
+reason we used httpx over requests. If you have a list of URLs and you want to
+fetch all their page content all at once, classically a task for CURL or
+JavaScript, you do it like this, which can for example be used to update the
+crawl.db for a small website (small, because it's all "in-memory"):
+
+```python
+import httpx
+from asyncio import gather
+from sqlitedict import SqliteDict as sqldict
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
+# Build a list of URLs from prior crawl
+table = []
+with sqldict("crawl.db") as db:
+    for url in db:
+        table.append(url)
+
+# Fetch All Pages All At Once
+headers = {"user-agent": user_agent}
+async with httpx.AsyncClient(headers=headers) as machinegun:
+    responses = await gather(*[machinegun.get(url) for url in table], return_exceptions=True)
+
+print(responses)
+```
+
+You are especially welcome for the above code. That's another million-dollar
+bit of goodness there. Don't be jealous of JavaScript or CURL. You can do
+concurrency just fine in Python. I admit the pattern is a bit odd, but you'll
+get used to it.
+
+I promised you updating it back to the database, and there's a nuanced point
+here. They way I did this just built a list of responses whose response.url
+does not necessarily match the database URL-key because redirection. Not the
+case here, but it could be. So, we zip the 2 tables together. This is possible
+because return_exceptions=True ensures the size of the list out is the same as
+the list in. If you really wanted to, you can do a quick Python list
+comprehension to show the URLs that came back from the crawl:
+
+```python
+[x.url for x in responses]
+```
+
+But it's not back in the database. We just fetched it concurrently and it's
+sitting in memory waiting to be lost by a Jupyter Reset Kernel (which you
+should be doing often). To write it back to the database, we have to take care
+of a tiny nuance. We have 2 lists: one of input and one of output. They are
+thankfully the same length, which I assured by giving the return_exception=True
+parameter. And even though the output contains url properties we could access,
+the database keys we used to fetch the data may be different because of
+redirects. So, we zip the 2 lists together, turn them into a dictionary and use
+that to do the updates like so:
+
+#### Zipping Lists into Dicts in Python
+
+```python
+import httpx
+from asyncio import gather
+from sqlitedict import SqliteDict as sqldict
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
+# Build a list of URLs from prior crawl
+table = []
+with sqldict("crawl.db") as db:
+    for url in db:
+        table.append(url)
+
+# Fetch All Pages All At Once
+headers = {"user-agent": user_agent}
+async with httpx.AsyncClient(headers=headers) as machinegun:
+    responses = await gather(*[machinegun.get(url) for url in table], return_exceptions=True)
+
+# Zip input and output lists together into dict
+site_dict = dict(zip(table, responses))
+
+# Update the database with the new data (which was fetched concurrently)
+with sqldict("crawl.db") as db:
+    for url in site_dict:
+        db[url] = site_dict[url]
+        db.commit()
+```
+
+
 
 ### Capturing Search Engine Results
 
