@@ -259,6 +259,11 @@ Python function I've defined in these examples. Generally, you shouldn't have
 to define new functions in your Jupyter code because they're made available by
 the packages you're importing.
 
+If you look carefully you'll see some of Python's most awesome features
+demonstrated here such as anonymous functions (called lambdas), tuple unpacking
+(symmetrical variable assignment) and shim substitution for unavailable
+functions. It's all really demonstrated on the same line, really.
+
 ```python
 try:
     from IPython.display import display, Audio
@@ -266,13 +271,11 @@ try:
     is_jupyter = True
 except:
     is_jupyter = False
+    display, Audio = lambda x: x, lambda x: x
 
 
 def beep():
-    if is_jupyter:
-        display(Audio("beep.wav", autoplay=True))
-    else:
-        print("BEEP!")
+    display(Audio("beep.wav", autoplay=True))
 
 
 beep()
@@ -285,13 +288,12 @@ You're welcome.
 
 ### Crawling a Website
 
-Okay, we've done enough requiring Google Service login. Not everything you do
-in SEO requires a Google service. Sometimes you can go to the website itself
-and just crawl it. The important thing to know here is there's the "old way"
-and the "new way". The old way is lightweight and fast, but doesn't always
-work. The new way involves using an entire web browser but is slow. First, the
-old, easy way:
-
+Did somebody say crawl a website? Not everything you do in SEO requires a
+Google service. And you don't need ScreamingFrog either. Sometimes you can go
+to the website itself and just crawl it with Python. The important thing to
+know here is there's the "old way" and the "new way". The old way is
+lightweight and fast, but doesn't always work. The new way involves using an
+entire web browser but is slow. First, the old, easy way:
 
 
 ### Capturing Search Engine Results
