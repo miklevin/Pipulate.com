@@ -524,6 +524,43 @@ commit chances to the persistent on-drive database file unless you do a
 big crawl, it's better to commit once per page (outer loop) rather than on the
 inner loop per link. 
 
+You're welcome. Now let's get the missing pages:
+
+#### Performing a 1-Click-Depth Crawl of a Website
+
+```python
+import httpx
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
+with sqldict("crawl.db") as db:
+    for url in db:
+        response = db[url]
+        print(url, response)
+        if not response:
+            response = httpx.get(url, headers=headers)
+            db[url] = response
+            db.commit()
+```
+
+And here's the output:
+
+    https://mikelev.in <Response [200 OK]>
+    https://mikelev.in/ <Response [200 OK]>
+    https://mikelev.in/linux/ <Response [200 OK]>
+    https://mikelev.in/python/ <Response [200 OK]>
+    https://mikelev.in/vim/ <Response [200 OK]>
+    https://mikelev.in/git/ <Response [200 OK]>
+    https://mikelev.in/logo/ <Response [200 OK]>
+    https://mikelev.in/seo/ <Response [200 OK]>
+    https://mikelev.in/blog/ <Response [200 OK]>
+
+Almost magical, right? It's the perfect setup for an SEO investigation. You've
+preformed a 1 click-depth crawl of a website and stored ALL the browser-like
+view-source results (HTML) of the page into a local, easily accessed database
+for father investigation.
+
 You're welcome.
 
 #### Recording Unvisited URLs into Database
