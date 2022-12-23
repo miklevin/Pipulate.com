@@ -530,6 +530,7 @@ You're welcome. Now let's get the missing pages:
 
 ```python
 import httpx
+from sqlitedict import SqliteDict as sqldict
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 headers = {"user-agent": user_agent}
@@ -562,6 +563,36 @@ view-source results (HTML) of the page into a local, easily accessed database
 for father investigation.
 
 You're welcome.
+
+#### What Do You Do With a Database of Pages?
+
+What kind of investigations? Hand you not read this page? Let's extract the
+title tags, create a Pandas DataFrame, save the URLs plus title tags as an
+Excel document and push it to Google Sheets… duhhh
+
+We begin with just an Excel file. It's pretty much the exact same process as
+saving a csv, but it gives you a tiny bit of default formatting, making the
+presence of column labels very clear.
+
+### Crawling a Website Directly Into Excel Document
+
+```python
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+import pandas as pd
+
+table = []
+with sqldict("crawl.db") as db:
+    for url in db:
+        response = db[url]
+        if response:
+            soup = bsoup(response.text, "html.parser")
+            title = soup.title.string.strip()
+            atuple = (url, title)
+            table.append(atuple)
+df = pd.DataFrame(table, columns=["url", "title"])
+df.to_excel("crawl.xlsx", index=False)
+```
 
 #### Recording Unvisited URLs into Database
 
