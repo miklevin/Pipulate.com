@@ -755,7 +755,7 @@ result = (
     )
     .execute()
 )
-print(resultk)
+print(result)
 ```
 
 ### Capturing Search Engine Results
