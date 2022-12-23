@@ -868,6 +868,101 @@ print(result)
 
 ### Capturing Search Engine Results
 
+Did somebody say SERPs? Shhhhh! Maybe run VPN when you do this one so you don't
+look excessively like a robot. Don't do this too often nor with too long of
+keyword lists. Slipping 3 in like this is fine, without even using a delay.
+This is just the collection phase. Notice if you re-run this, it will not
+perform the SERP scrape again. It knows what it already collected.
+
+```python
+import httpx
+from urllib.parse import quote_plus
+from sqlitedict import SqliteDict as sqldict
+
+keywords = ["mike levin seo", "levinux", "pipulate"]
+search_base = "https://www.google.com/search?q="
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
+with sqldict("serps.db") as db:
+    for keyword in keywords:
+        if keyword not in db:
+            search_url = f"{search_base}{quote_plus(keyword)}"
+            print(search_url)
+            response = httpx.get(search_url, headers=headers)
+            db[keyword] = response
+            db.commit()
+```
+
+Data goes in, data comes out. We can take a quick spin through to make sure
+that it's a good http status code. We're looking for a 200 here. A 302
+indicates you've triggered the captcha.
+
+```python
+with sqldict("serps.db") as db:
+    for keyword in db:
+        response = db[keyword]
+        print(response.status_code, keyword)
+```
+
+You can extract out the search results including the title that appeared with
+the search listing and save it to a CSV, Excel File, drop in Google Sheets, you
+get the idea. I'll show CSV here 'cause it's the easiest. Notice how we're
+building a table by iterating through each set of SERPs and adding the position
+based on a counter in that loop. We're emptying out SERP sub-tables into one
+big master table, adding the search position and keyword searched-on as we do.
+
+```python
+import re
+import pandas as pd
+from sqlitedict import SqliteDict as sqldict
+
+def extract_serps(text):
+    """Return list of Google search results from provided "raw" SERP scrape.
+    Useful for checking whether SERPS actually collected or extracting results."""
+
+    rv = False
+    try:
+        div_pat = re.compile('<div class="yuRUbf">(.*?)</div>')
+        divs = re.findall(div_pat, text)
+        lot = []
+        for div in divs:
+            pat_url = re.compile('<a href="(.*?)"')
+            url_group = re.match(pat_url, div)
+            pat_title = re.compile('<h3 class="LC20lb MBeuO DKV0Md">(.*?)</h3>')
+            title_group = re.search(pat_title, div)
+            try:
+                url = url_group.groups(0)[0]
+            except:
+                url = ""
+            try:
+                title = title_group.groups(0)[0]
+            except:
+                title = ""
+            lot.append((url, title))
+        rv = lot
+    except:
+        pass
+    return rv
+
+table = []
+with sqldict("serps.db") as db:
+    for keyword in db:
+        response = db[keyword]
+        print(keyword)
+        extracted = extract_serps(response.text)
+        for i, serp in enumerate(extracted):
+            row = (i+1, keyword, serp[0], serp[1])
+            table.append(row)
+
+columns = ["position", "keyword", "url", "serp title"]
+df = pd.DataFrame(table, columns=columns)
+df.to_csv("serps.csv", index=False)
+```
+
+
+
+
 ### Taking Screenshot of Web Browser
 
 ### Listing Your Sites with Google Search Console (GSC)
