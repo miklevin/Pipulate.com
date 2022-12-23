@@ -9,7 +9,12 @@ description: FOSS SEO Software
 
 ### Installing Linux & Pipulate
 
-To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
+This is the page that SEOs should have been introduced to on Day 1. If you're
+early in your career, congratulations! You'll run circles around the
+competition, able to do so much more with so much less. Python and FOSS
+software is really that awesome. To install Pipulate, <a
+href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
+Me</a>.
 
 ### Using JupyterLab
 
@@ -372,13 +377,13 @@ for alink in ahrefs:
     print(alink)
 ```
 
-#### Extract Page Title With Beautiful Soup
-
 And there's all the links on the page. Pretty astounding, right? There's a
 whole bunch more about link.attrs if it has an hrefs attribute, turning
 relative links to absolute, blah, blah. But let's extract the title from the
 page we got. You'll find tons of advice trying to talk you out of using
 Beautiful Soup. It's beautiful! Just use it. It's this easy:
+
+#### Extract Page Title With Beautiful Soup
 
 ```python
 from sqlitedict import SqliteDict as sqldict
@@ -390,6 +395,50 @@ with sqldict("crawl.db") as db:
 soup = bsoup(response.text, "html.parser")
 title = soup.title.string.strip()
 print(title)
+```
+
+Yeah, so pulling a bunch of the above stuff together and dropping a crawl into
+a Google Sheet is a bit tricky because of relative vs. absolute links. Okay,
+let's tackle that here before we move onto SERP scraping, Google Analytics and
+the like. We need lists of URLs to work with for SEO after all. Sigh, okay.
+Don't hurt yourself following this:
+
+```python
+from bs4 import BeautifulSoup as bsoup
+from urllib.parse import urlparse, urljoin
+from sqlitedict import SqliteDict as sqldict
+
+url = "https://mikelev.in"
+with sqldict("crawl.db") as db:
+    response = db[url]
+
+# URL is already homepage but this is a precaution
+parts = urlparse(url)
+homepage = f"{parts.scheme}://{parts.netloc}"
+
+soup = bsoup(response.text, "html.parser")
+ahrefs = soup.find_all("a")
+seen = set()
+
+for link in ahrefs:
+    if "href" in link.attrs:
+        href = link.attrs["href"]
+        # Skip kooky protocols like email
+        if ":" in href and "//" not in href:
+            continue
+        # Convert relative links to absolute
+        if "://" not in href:
+            href = urljoin(homepage, href)
+        # Convert root slash to homepage
+        if href == "/":
+            href = homepage
+        # Strip stuff after hash (not formal part of URL)
+        if "#" in href:
+            href = href[: href.index("#")]
+        # Remove dupes and offsite links
+        if href[:len(homepage)] == homepage:
+            seen.add(href)
+print(seen)
 ```
 
 ### Capturing Search Engine Results
