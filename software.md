@@ -118,6 +118,45 @@ lot nicer in Python Pandas. Data Science, yay!
 
 You're welcome.
 
+While we're talking about Pandas DataFrames we may as well get this out of the
+way before we move on. Have you ever had a bunch of CSV files or Excel
+Spreadsheet tabs that you needed to combine into one? I'm talking about the
+stacking on top of each other combining and not the adding columns combining.
+If you need to do the equivalent of a SQL Union or an Excel... uhm... an Excel
+uhm... massive waste of copy/paste time, then note there is a better way.
+
+### Combining Multiple CSV Files Into One (like a SQL UNION)
+
+```python
+import pandas as pd
+from pathlib import Path
+from time import strptime
+
+# Make a list of all files in a folder
+files = Path("csvfiles").glob("*.csv")
+
+# Step through files, add some columns and append DataFrame to list
+lots = []
+for afile in files:
+    print(afile)
+    df = pd.read_csv(afile)
+    
+    # You sometimes need to add columns derived from filename
+    month = afile.name.split()[2][6:]
+    month = strptime(month, "%b").tm_mon
+    year = afile.name.split()[3]
+    year = year[:4]
+    df["month"] = month
+    df["year"] = year
+    lots.append(df)
+
+# Create a single DataFrame from df's in list and write to file.
+df_all = pd.concat(lots)
+df_all.to_csv("all_files.csv", index=False)
+```
+
+Ever try to do the equivalent in Excel? You're welcome.
+
 ### Logging Into Google Services
 
 Actually just logging in can be the hardest part of many API projects,
