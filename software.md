@@ -697,6 +697,66 @@ DataFrames and lists of tuples. Pandas even has a special word for this
 conventional data structure. They call it records. So conceptually we're
 shoving records into Google Sheets directly through Google's GSheets API.
 
+#### Updating Excel-Like Rectangular Range Region
+
+You saw from the above Google Sheet example that we can "blit" rectangular
+regions of data (lists of tuples) into specified Excel-style letter-ranges,
+such as A1:B2. We can target specific tabs with the standard convention used in
+Excel formulas:
+
+    'Sheet 1'!A1:B2
+
+Namely, an exclamation point goes before the range, and if there's a space in
+the name, you put single-quotes around the tab name. This whole thing is used
+in the GSheets API expected as input for where the list of tuples you provide
+is going to end up. 
+
+As you plan your blit, you may want to shift everything down by a row if you're
+going to insert column labels on row 1, or alternatively make row 1 of your
+data be column labels. Up to you, but any way you blit it, you've got to watch
+your range string. There will inevitably be use of offsets and you must know
+how many columns across and how many rows down your data has. That gets used in
+building the range string. 
+
+```python
+import pandas as pd
+from apiclient.discovery import build
+from openpyxl.utils.cell import get_column_letter as a1
+
+# Load data
+df = pd.read_excel("crawl.xlsx")
+end_row, end_col = df.shape
+
+# Convert Records to List of Tuples
+table = list(map(tuple, df.to_records(index=False)))
+
+# Insert column labels as row 1
+table.insert(0, ("url", "title"))
+start_row = 1
+range_names = f"A{start_row}:{a1(end_col)}{end_row + start_row}"
+
+# Load Google Sheet ID from file
+with open("sheet_id.txt") as fh:
+    spreadsheet_id = fh.readline()
+
+# Authenticate
+creds = ohawf.get()
+service = build("sheets", "v4", credentials=creds)
+
+# Update Sheet
+result = (
+    service.spreadsheets()
+    .values()
+    .update(
+        spreadsheetId=sheet_id,
+        range=range_names,
+        valueInputOption="USER_ENTERED",
+        body={"values": table},
+    )
+    .execute()
+)
+print(resultk)
+```
 
 ### Capturing Search Engine Results
 
