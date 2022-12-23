@@ -293,8 +293,90 @@ Google service. And you don't need ScreamingFrog either. Sometimes you can go
 to the website itself and just crawl it with Python. The important thing to
 know here is there's the "old way" and the "new way". The old way is
 lightweight and fast, but doesn't always work. The new way involves using an
-entire web browser but is slow. First, the old, easy way:
+entire web browser but is slow. 
 
+First, the old way. And we've got to learn to walk before we can crawl.  Even
+though we're doing it the old way, Google and many sites like to believe it's a
+real browser, so we set the often overlooked user agent:
+
+```python
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+```
+
+This is where we would typically use the massively popular ***Requests***
+package from Kenneth Reitz, but we want to set the stage for easy concurrency
+so we're starting out with the Requests API-compatible httpx package:
+
+```python
+import httpx
+
+url = "https://mikelev.in"
+response = httpx.get(url, headers=headers)
+print(response.text)
+```
+
+And there you go, that's a 1-page site-crawl. You're welcome. But wait! There's
+more! Remember that first thing on this page about easy peasy databases based
+on persistent Python dicts? This looks like a good time for storage!
+
+```python
+import httpx
+from sqlitedict import SqliteDict as sqldict
+
+url = "https://mikelev.in"
+response = httpx.get(url, headers=headers)
+with sqldict("crawl.db") as db:
+    db[url] = response
+    db.commit()
+```
+
+Wait, what? Did I just write the entire Requests-like httpx response object to
+a database on the hard drive? Yes indeedy I did. And I can reverse the process
+too (notice no http call):
+
+```python
+from sqlitedict import SqliteDict as sqldict
+
+with sqldict("crawl.db") as db:
+    for url in db:
+        response = db[url]
+        print(url, response)
+```
+
+Well there you go. Another million-dollar tip. But that's hardly a crawl you
+say? I've only gotten 1 page and haven't extracted any of the data out of it.
+Well all the code of the crawl would be too much to cram on this page, so let's
+just do some quick tricks and I'll refer you to the real Jupyter Notebooks in
+the Pipulate project for more extensive crawls. Let's extract some data with
+beautiful soup! I always love a good Alice reference.
+
+```python
+from bs4 import BeautifulSoup as bsoup
+
+soup = bsoup(response.text, "html.parser")
+ahrefs = soup.find_all("a")
+for alink in ahrefs:
+    print(alink)
+```
+
+And there's all the links on the page. Pretty astounding, right? There's a
+whole bunch more about link.attrs if it has an hrefs attribute, turning
+relative links to absolute, blah, blah. But let's extract the title from the
+page we got. You'll find tons of advice trying to talk you out of using
+Beautiful Soup. It's beautiful! Just use it. It's this easy:
+
+```python
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+
+url = "https://mikelev.in"
+with sqldict("crawl.db") as db:
+    response = db[url]
+soup = bsoup(response.text, "html.parser")
+title = soup.title.string.strip()
+print(title)
+```
 
 ### Capturing Search Engine Results
 
