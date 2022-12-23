@@ -969,8 +969,11 @@ df = pd.DataFrame(table, columns=columns)
 df.to_csv("serps.csv", index=False)
 ```
 
-
-
+One can easily imagine using our site crawling ability from examples higher on
+this page to crawl each of the URLs that came back in search. We could then
+compare the SERP Title (the title given to the page by Google) versus the
+actual title tag on the page. Many SEO deliverable-types suggest themselves.
+And just wait until we get to hitting Google Search Console and Analytics!
 
 ### Taking Screenshot of Web Browser
 
