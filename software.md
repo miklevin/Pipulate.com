@@ -697,6 +697,13 @@ DataFrames and lists of tuples. Pandas even has a special word for this
 conventional data structure. They call it records. So conceptually we're
 shoving records into Google Sheets directly through Google's GSheets API.
 
+You do however need to know some magic words to go from Python DataFrame to
+lists of tuples. Abracadabra!
+
+```python
+table = list(map(tuple, df.to_records(index=False)))
+```
+
 #### Updating Excel-Like Rectangular Range Region
 
 You saw from the above Google Sheet example that we can "blit" rectangular
