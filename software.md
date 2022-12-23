@@ -259,6 +259,7 @@ Python function I've defined in these examples. Generally, you shouldn't have
 to define new functions in your Jupyter code because they're made available by
 the packages you're importing.
 
+```python
 try:
     from IPython.display import display, Markdown, Audio, HTML
 
