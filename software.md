@@ -193,6 +193,58 @@ including reading data out, formatting, etc.
 
 You're welcome.
 
+### Connecting to Google Photos
+
+If you've followed the examples so far, you know the general pattern to connect
+to Google services of all sorts. You need only figure out the parameters for
+the Google API Client's connection-building factory class like so:
+
+```python 
+import ohawf
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("photoslibrary", "v1", credentials=creds, static_discovery=False)
+```
+
+While it's not classically SEO, you might be managing your visual assets in a
+Google Photos account and would like to automate against it for building sites
+or organizing assets. Point is, it's easy now that you know how to connect. So
+if you want to step through 50 videos in your Google Photos whether it's in the
+archive or not, you can do this which will show you the clickable links that
+will let you view them, given your browser on both the Linux side and the
+Windows side have been given login access to the account:
+
+```python
+import ohawf
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("photoslibrary", "v1", credentials=creds, static_discovery=False)
+
+for count in range(50):
+    args = {
+        "pageSize": 100,
+        "pageToken": npt,
+        "filters": {"includeArchivedMedia": True, "mediaTypeFilter": {"mediaTypes": ["VIDEO"]}},
+    }
+    results = service.mediaItems().search(body=args).execute()
+    npt = results.get("nextPageToken")
+    if "mediaItems" in results:
+        for item in results.get("mediaItems"):
+            gid = item['id']
+            url = item['productUrl']
+        print(f'{count} {gid} {url}')
+    if not npt:
+        break
+print('Done!')
+```
+
+This is quite rare code to be finding on the Internet. It works because of the
+sample scopes I include with ohawf includes Google Photos. 
+
+You're welcome.
+
 ### Crawling a Website
 
 ### Capturing Search Engine Results
