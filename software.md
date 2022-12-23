@@ -874,6 +874,13 @@ keyword lists. Slipping 3 in like this is fine, without even using a delay.
 This is just the collection phase. Notice if you re-run this, it will not
 perform the SERP scrape again. It knows what it already collected.
 
+#### Doing It Old School (The Top-10 World)
+
+It is also worth noting, this is the "old school" way of doing SEO, thinking of
+everything more or less a Top-10 ranking race on page-1 of search results.
+There's more to the story we'll get to in later examples including browser
+automation and parsing the page for news and other info. This is the basics.
+
 ```python
 import httpx
 from urllib.parse import quote_plus
