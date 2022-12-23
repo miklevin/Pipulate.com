@@ -193,6 +193,12 @@ including reading data out, formatting, etc.
 
 You're welcome.
 
+### Crawling a Website
+
+### Capturing Search Engine Results
+
+### Taking Screenshot of Web Browser
+
 ### Listing Your Sites with Google Search Console (GSC)
 
 ### Pulling Data From GSC
@@ -200,8 +206,6 @@ You're welcome.
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
 ### Pulling Data From GA
-
-### Pushing Data into a Google Spreadsheet.
 
 ### Pulling Data From Google Analytics G4 API
 
