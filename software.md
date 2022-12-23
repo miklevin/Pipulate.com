@@ -732,9 +732,11 @@ from openpyxl.utils.cell import get_column_letter as a1
 
 # Load data
 df = pd.read_excel("crawl.xlsx")
+
+# Grab row and column sizes
 end_row, end_col = df.shape
 
-# Convert Records to List of Tuples
+# Convert Records to List of Tuples (MAGIC WORDS)
 table = list(map(tuple, df.to_records(index=False)))
 
 # Insert column labels as row 1
