@@ -903,7 +903,9 @@ with sqldict("serps.db") as db:
 
 Data goes in, data comes out. We can take a quick spin through to make sure
 that it's a good http status code. We're looking for a 200 here. A 302
-indicates you've triggered the captcha.
+indicates you've triggered the captcha. Remember, this step is totally safe
+because the scraping is done. We're looking now at the raw-data we quickly
+plopped into storage from the above step.
 
 ```python
 with sqldict("serps.db") as db:
