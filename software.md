@@ -156,7 +156,7 @@ import pandas as pd
 from apiclient.discovery import build
 from openpyxl.utils.cell import get_column_letter as a1
 
-sheet_id = "1S33ljMCehGd8p-gab5AJzcGG-qZASd6jF8wpJXwJG60"
+sheet_id = "[Paste your Google Sheet ID (from URL) Here]"
 
 creds = ohawf.get()
 service = build("sheets", "v4", credentials=creds)
