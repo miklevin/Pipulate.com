@@ -222,6 +222,7 @@ from apiclient.discovery import build
 creds = ohawf.get()
 service = build("photoslibrary", "v1", credentials=creds, static_discovery=False)
 
+npt = "" 
 for count in range(50):
     args = {
         "pageSize": 100,
@@ -245,7 +246,55 @@ sample scopes I include with ohawf includes Google Photos.
 
 You're welcome.
 
+### Making Jupyter Beep
+
+In the above Google Photos example, I had the process stop after just 50
+videos. Why? It could take a very long time. You're going to get up and walk
+away, but wouldn't it be nice if you could hear the job finish? Call yourself
+back when the script's done running with a loud beep?
+
+This is a Jupyter trick, so you want to make sure you're in Jupyter. Most of
+the code here really is making sure you're in Jupyter. It's also the first
+Python function I've defined in these examples. Generally, you shouldn't have
+to define new functions in your Jupyter code because they're made available by
+the packages you're importing.
+
+try:
+    from IPython.display import display, Markdown, Audio, HTML
+
+    is_jupyter = True
+except:
+    is_jupyter = False
+
+if is_jupyter:
+    from IPython.display import display, Markdown, Audio, HTML
+
+
+def beep():
+    if is_jupyter:
+        display(Audio("beep.wav", autoplay=True))
+    else:
+        print("BEEP!")
+
+
+beep()
+```
+
+Now whenever you're running a long function like say a site-crawl, just throw a
+beep at the end and go get yourself a coffee.
+
+You're welcome.
+
 ### Crawling a Website
+
+Okay, we've done enough requiring Google Service login. Not everything you do
+in SEO requires a Google service. Sometimes you can go to the website itself
+and just crawl it. The important thing to know here is there's the "old way"
+and the "new way". The old way is lightweight and fast, but doesn't always
+work. The new way involves using an entire web browser but is slow. First, the
+old, easy way:
+
+
 
 ### Capturing Search Engine Results
 
