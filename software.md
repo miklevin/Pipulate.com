@@ -59,8 +59,9 @@ with sqldict("name.db") as db:
 ```
 
 This is a million-dollar trick that gives you a lightweight NoSQL database for
-every occasion. Use it as a real database. Use it as a cache. It's fast and run
-by the instance of SQLite3 that comes built into Python.
+every occasion. Use it as a real database. Use it as a cache. It's fast and
+even though it does take pip installing a 3rd party package, that's just to get
+the dictionary API to work with SQLite3 which is already included with Python.
 
 You're welcome.
 
