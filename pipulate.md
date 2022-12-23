@@ -54,7 +54,25 @@ one of the other cloud providers, resulting in the inability to do Browser
 automation, control your IP, install certain packages, and a general loss of
 control over your own destiny. Avoid this trap.
 
-### Jupyter Notebooks vs. Linux Services
+#### Logging Into Services Like Google
+
+As easy as these systems are to get a positive initial experience, much work in
+the field of SEO and Data Science requires logging into sites and services.
+This includes managing login credentials. Try accessing your Google Analytics
+or updating a Google Spreadsheet from one of these platforms. Getting through
+the login procedure along will be enough to send you running for the hills. And
+just wait until you try to automate a web browser!
+
+#### Local Linux Installs Under Windows Is a Sweet Spot
+
+Local installations of software still plays a very important role. If you want
+to change where you're surfing from, you can just use common Windows desktop
+VPN software and you will be changing where your "Linux machine" is surfing out
+from, just that easy. IP banned? No problem, cycle IP! Yes, while these things
+are technically doable in some cloud environments, nothing makes the obstacles
+just melt away like a local Linux install of JupyterLab on a Windows laptop.
+
+### Using Jupyter Vs. Automation
 
 Anything you "mock up" in a Jupyter Notebook can be cleaned up and moved over
 to a Linux service for running 24x7. Because Jupyter installs directly onto
