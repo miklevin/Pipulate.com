@@ -114,6 +114,37 @@ You're welcome.
 
 ### Logging Into Google Services
 
+Probably the hardest common thing to need to do as a Python SEO is to log into
+Google Services. There are a number of ways to do it, but here's the most
+common for Jupyter Notebooks:
+
+```python
+# Import the necessary libraries
+from google.oauth2.credentials import Credentials
+
+# Load the API credentials from the JSON file
+creds = Credentials.from_authorized_user_info(info=None, filename='client_secrets.json')
+```
+
+...which begs the question, how do you get a client_secrets.json file? To get a client_secrets.json file from Google for authenticating credentials, you will need to create a Google API project and enable the API that you want to use. You can do this by visiting the Google API Console (https://console.developers.google.com/).
+
+Here are the steps to create a client_secrets.json file:
+
+1. Go to the Google API Console and sign in with your Google account.
+1. Click the "Select a project" dropdown in the top menu and select "Create a new project".
+1. Give your project a name and click the "Create" button.
+1. After your project is created, click the "Enable APIs and Services" button.
+1. In the search bar, type the name of the API that you want to use (e.g. "Google Drive API") and click on the API when it appears in the search results.
+1. Click the "Enable" button to enable the API.
+1. After enabling the API, go to the "Credentials" page in the Google API Console.
+1. Click the "Create credentials" button and select "OAuth client ID" from the dropdown menu.
+1. Follow the prompts to create an OAuth 2.0 client ID. You will need to specify the type of application that you are building (e.g. "Web application") and provide the redirect URI for your application.
+1. After creating the OAuth 2.0 client ID, you will be given a client ID and a client secret. Download the JSON file containing your API credentials by clicking the "Download" button. Save this file to your computer and rename it to "client_secrets.json".
+
+You can then use the "client_secrets.json" file to authenticate with Google and get login credentials in Python. You can use the Google API client library for Python to do this.
+
+### Pushing Data Into a Google Sheet
+
 Sooner or later, you're going to want to push that Pandas DataFrame into a
 Google Spreadsheet. It can be as a datasource for Google Looker reports
 (previously Google Data Studio), or to be used directly by your audience as a
@@ -159,7 +190,10 @@ result = (
 print("Done")
 ```
 
-And your Google Sheet will be updated. You're welcome.
+And your Google Sheet will be updated. If this doesn't work immediately for
+you, you need to get ohawf wired to your own authentication.
+
+You're welcome.
 
 ### Listing Your Sites with Google Search Console (GSC)
 
