@@ -287,7 +287,8 @@ beep()
 ```
 
 Now whenever you're running a long function like say a site-crawl, just throw a
-beep at the end and go get yourself a coffee.
+beep at the end and go get yourself a coffee. And if the code ends up on a
+server, it'll pass silently.
 
 You're welcome.
 
@@ -403,6 +404,8 @@ let's tackle that here before we move onto SERP scraping, Google Analytics and
 the like. We need lists of URLs to work with for SEO after all. Sigh, okay.
 Don't hurt yourself following this:
 
+#### Turning Relative Links to Absolute Links
+
 ```python
 from bs4 import BeautifulSoup as bsoup
 from urllib.parse import urlparse, urljoin
@@ -440,6 +443,77 @@ for link in ahrefs:
             seen.add(href)
 print(seen)
 ```
+
+Okay so you've got a list of links found on a page but the URLs are not stored
+anywhere in a persistent database, nor was each URL actually visited and the
+response stored. An interesting note about the key/value pars of our sqlite
+dict: the values can be the special Python None value. That seems like a good
+way to turn our database into a to-do list of pages to visit, like so:
+
+```python
+from bs4 import BeautifulSoup as bsoup
+from urllib.parse import urlparse, urljoin
+from sqlitedict import SqliteDict as sqldict
+
+url = "https://mikelev.in"
+with sqldict("crawl.db") as db:
+    response = db[url]
+
+# URL is already homepage but this is a precaution
+parts = urlparse(url)
+homepage = f"{parts.scheme}://{parts.netloc}"
+
+soup = bsoup(response.text, "html.parser")
+ahrefs = soup.find_all("a")
+seen = set()
+
+with sqldict("crawl.db") as db:
+    for link in ahrefs:
+        if "href" in link.attrs:
+            href = link.attrs["href"]
+            if ":" in href and "//" not in href:
+                continue
+            if "://" not in href:
+                href = urljoin(homepage, href)
+            if href == "/":
+                href = homepage
+            if "#" in href:
+                href = href[: href.index("#")]
+            if href[:len(homepage)] == homepage:
+                seen.add(href)
+                if href not in db:
+                    db[href] = None
+    db.commit()
+```
+
+...and as usual with SqliteDict, you can reverse the process like so:
+
+```python
+from sqlitedict import SqliteDict as sqldict
+
+with sqldict("crawl.db") as db:
+    for url in db:
+        data = db[url]
+        print(url, data)
+```
+
+...which at the time of this writing produces:
+
+    https://mikelev.in <Response [200 OK]>
+    https://mikelev.in/ None
+    https://mikelev.in/linux/ None
+    https://mikelev.in/python/ None
+    https://mikelev.in/vim/ None
+    https://mikelev.in/git/ None
+    https://mikelev.in/logo/ None
+    https://mikelev.in/seo/ None
+    https://mikelev.in/blog/ None
+
+Getting the idea? Can you guess our next step?
+
+You're welcome.
+
+#### Recording Unvisited URLs into Database
 
 ### Capturing Search Engine Results
 
