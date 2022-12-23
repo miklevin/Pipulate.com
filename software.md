@@ -677,7 +677,7 @@ with sqldict("crawl.db") as db:
         db.commit()
 ```
 
-### Crawling Websites Directly Into Google Sheets From Python
+### Crawling Websites Into Google Sheets From Python
 
 #### First a Few Words About APIs
 
