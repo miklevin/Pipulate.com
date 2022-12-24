@@ -1662,7 +1662,117 @@ datatypes built into Python.
 
 ### Connecting to Google Analytics
 
-#### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
+Things are changing on the Google Analytics front. GA4mageddon is coming soon
+and all the old ways of querying Google Analytics through the API will go away
+because they're going to be <a
+href="https://support.google.com/analytics/answer/10089681?hl=en">deleting all
+that data</a> on July 1, 2023. Customers of the paid-for Google Analytics
+product 360 will have until July 1, 2024. Still, it is not a lot of time for
+changes this big on the Web and I'm torn whether I should even show you the
+"old way". But chances are many things you do the old way will still apply.
+
+# List All Google Analytics Accounts You Can Access
+
+```python
+accounts = service.management().accounts().list().execute()
+
+table = []
+for account in accounts["items"]:
+    name, aid = account["name"], account["id"]
+    table.append((aid, name))
+df = pd.DataFrame(table, columns=["Account ID", "Account Name"])
+df.to_csv("ga_accounts.csv", index=False)
+print(df)
+```
+
+Given a single Account ID from the above query, you can get a list of all its
+Web Properties. The concept of Web Properties is going away in Google Analytics
+3, but leading up to that plenty of people are going to have to do an
+accounting of everything under Universal Analytics, so it's still important.
+
+#### List All Web Properties for a Account
+
+So there's a lot of ways to go about this. There's the nested approach starting
+with above Account ID query, then the Web Properties queries indented a little,
+then a 3rd level of indent for Profile (a.k.a. View) IDs. But I've looked at
+ugly nested loops enough. We can extract all the Account IDs from the above
+DataFrame with the following. Take note that a ga_accounts.csv file must exist
+from running the above query.
+
+```python
+account_ids = list(df["Account ID"])
+```
+
+And now our "nesting" is a little less ugly:
+
+```python
+import ohawf
+import pandas as pd
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("analytics", "v3", credentials=creds)
+df = pd.read_csv("ga_accounts.csv")
+account_ids = list(df["Account ID"])
+
+table = []
+for aid in account_ids:
+    web_properties = service.management().webproperties().list(accountId=aid).execute()
+    for web_property in web_properties["items"]:
+        name, wid = web_property["name"], web_property["id"]
+        table.append((aid, name, wid))
+df = pd.DataFrame(table, columns=["Account ID", "Web Property Name", "WebPropertyID"])
+df.to_csv("ga_webproperties.csv", index=False)
+print(df)
+```
+
+And now we do the 3rd query, this time for the 3rd level-down in the old Google
+Analytics hierarchy of Accounts / Web Properties / Views (a.k.a. Profiles). As
+with the prior example, take note that a ga_webproperties.csv file must exist
+from executing the prior query. Also, because there are more views than
+anything else be aware of your API rate limit. You may exceed it and have to
+wait a day. The limit is 10,000 requests per user per day.
+
+#### List All Views (Profiles) per Web Property
+
+```python
+import ohawf
+import pandas as pd
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("analytics", "v3", credentials=creds)
+df = pd.read_csv("ga_webproperties.csv")
+
+ids = ["Account ID", "WebProperty ID"]
+idtuples = list(map(tuple, df[ids].to_records(index=False)))
+
+table = []
+for atuple in idtuples:
+    aid, wid = atuple
+    views = service.management().profiles().list(accountId=aid, webPropertyId=wid).execute()
+    for view in views['items']:
+        name, vid = view["name"], view["id"]
+        table.append((aid, wid, name, vid))
+
+columns = ["Account ID", "WebProperty ID", "View Name", "View ID"]
+df = pd.DataFrame(table, columns=columns)
+df.to_csv("ga_views.csv", index=False)
+print(df)
+```
+
+Okay, so now we have 3 files on disk:
+
+- ga_accounts.csv
+- ga_webproperties.csv
+- ga_views.csv
+
+We have through this approach done 3 separate queries and avoided the
+complexity of nested loops. Instead now, we will do a Pandas Join. This is the
+same thing as doing SQL Joins or Excel VLookups, but the much simpler Pandas
+way.
+
+
 
 #### Pulling Data From GA
 
@@ -1681,3 +1791,5 @@ datatypes built into Python.
 #### Scheduling an Email with Python
 
 #### Emailing n Zip File with Python
+
+### Connecting to Google Trends
