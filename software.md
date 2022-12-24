@@ -1671,7 +1671,7 @@ product 360 will have until July 1, 2024. Still, it is not a lot of time for
 changes this big on the Web and I'm torn whether I should even show you the
 "old way". But chances are many things you do the old way will still apply.
 
-# List All Google Analytics Accounts You Can Access
+#### List All Google Analytics Accounts You Can Access
 
 ```python
 accounts = service.management().accounts().list().execute()
