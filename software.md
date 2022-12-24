@@ -1393,7 +1393,43 @@ with sqldict("api_calls.db") as db:
             break
 ```
 
+...which shows:
+
+    I made a call for site mikelev.in on date 2022-11-30.
+    I made a call for site levinux.com on date 2022-11-30.
+    I made a call for site pipulate.com on date 2022-11-30.
+    I made a call for site mikelev.in on date 2022-11-29.
+    I made a call for site levinux.com on date 2022-11-29.
+    I made a call for site pipulate.com on date 2022-11-29.
+    I made a call for site mikelev.in on date 2022-11-28.
+    I made a call for site levinux.com on date 2022-11-28.
+    I made a call for site pipulate.com on date 2022-11-28.
+    I made a call for site mikelev.in on date 2022-11-27.
+    I made a call for site levinux.com on date 2022-11-27.
+    I made a call for site pipulate.com on date 2022-11-27.
+
 Did I mention million-dollar ideas? You're welcome.
+
+#### Python Dict Keys Like Database Primary Keys Ensure Uniqueness
+
+But what about duplicates? Never fear, sets are here! Python dict keys are
+actually sets, thus ensuring uniqueness due to the nature of sets.
+
+There's a number of surprisingly good things about using named tuples as
+database keys. In our case the nametuples are converted to strings because of
+how the SqliteDict package was written, but the same benefits apply. I do a
+simple conversion of nametuples to strings (for readability) but the same
+uniqueness benefits apply. I could have also pickled the keys, but it would
+have been more code and they'd be less readable. Eval is not evil. Just ask
+Raymond Hettinger, the core Python developer who wrote namedtuples.
+
+#### Use Named Tuples as Composite Primary Keys
+
+If you want the big picture, research multi-column (a.k.a. composite) primary
+keys and ponder their relationship to tuples being used as Python dict keys. It
+will blow your mind. Now we are converting these namedtuples to strings for use
+as dict-keys for SqliteDict, but all the same uniqueness constraints benefits
+are still present if you think about it.
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
