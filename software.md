@@ -1076,7 +1076,7 @@ You should see output something like:
     sc-domain:pipulate.com
     sc-domain:levinux.com
 
-### Calculating Start & End Dates For API
+### Generating Google-API-Friendly Dates
 
 You can take any of those above values (including sc-domain:) and use it to
 pull metrics. From GSC, keywords is the default dimension, meaning you at least
