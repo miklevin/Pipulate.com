@@ -1774,18 +1774,42 @@ df.to_csv("ga_views.csv", index=False)
 print(df)
 ```
 
-Okay, so now we have 3 files on disk:
+### Joining Tables With Pandas
+
+Okay, so now from the above Google Analytics queries, we have the following 3
+files on the drive:
 
 - ga_accounts.csv
 - ga_webproperties.csv
 - ga_views.csv
 
-We have through this approach done 3 separate queries and avoided the
-complexity of nested loops. Instead now, we will do a Pandas Join. This is the
-same thing as doing SQL Joins or Excel VLookups, but the much simpler Pandas
-way.
+Tables join on columns that we have in common, and we've made sure that they
+do. Accounts and WebProperties will join on the Account ID column, and the
+resulting Accounts+WebProperties table will join to the Views table on both the
+Account ID and WebProperty ID.
 
+This is similar to doing Joins in SQL or VLookups in Excel, but the much
+simpler Pandas way. There's different join options here with Pandas. A "pure"
+join can do it in one step and favors joining all tables on the same column,
+that column generally being the Index. Because one of our joins is going to use
+2 columns (Account ID and WebProperty ID), I'm going to use .merge() instead of
+.join().
 
+```python
+# Load csv files into DataFrames
+dfa = pd.read_csv("ga_accounts.csv")
+dfw = pd.read_csv("ga_webproperties.csv")
+dfv = pd.read_csv("ga_views.csv")
+
+# Join the 1st & 2nd, then that with the 3rd
+dfaw = dfa.merge(dfw, on="Account ID")
+dfawv = dfaw.merge(dfv, on=["Account ID", "WebProperty ID"])
+dfawv.to_csv("ga_network.csv", index=False)
+print(dfawv)
+```
+
+And that's it. Load ga_networks.csv into Excel, format it a bit and send it
+along to your boss in preparation for GA4mageddon.
 
 #### Pulling Data From GA
 
