@@ -821,8 +821,8 @@ Excel formulas:
 
 Namely, an exclamation point goes before the range, and if there's a space in
 the name, you put single-quotes around the tab name. This whole thing is used
-in the GSheets API as input for where the list of tuples you provide is going
-to end up. 
+in the GSheets API as input for where the list of tuples you provide
+is going to end up. 
 
 As you plan your blit, you may want to shift everything down by a row if you're
 going to insert column labels on row 1, or alternatively make row 1 of your
@@ -968,9 +968,14 @@ with sqldict("serps.db") as db:
 ```
 
 Data goes in, data comes out. We can take a quick spin through to make sure
-that it's a good http status code. We're looking for a 200 here. A 302
-indicates you've triggered the captcha. Remember, this step is totally safe
-because the scraping is done. We're looking now at the raw-data we quickly
+that it's a good http status code. We're looking for a 200 here. 
+
+    200 mike levin seo
+    200 levinux
+    200 pipulate
+
+A 302 indicates you've triggered the captcha. Remember, this step is totally
+safe because the scraping is done. We're looking now at the raw-data we quickly
 plopped into storage from the above step.
 
 ```python
