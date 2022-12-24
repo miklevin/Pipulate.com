@@ -1,4 +1,4 @@
----
+!---
 title: Awesome FOSS SEO Examples
 permalink: /software/
 group: software
@@ -169,10 +169,10 @@ manipulations of row & column data such as joins, aggregations and unions. For
 you Excel users, that's VLookups, Pivot Tables and combining tabs, but it's a
 lot nicer in Python Pandas. Data Science, yay!
 
-> Fill a table full of tuples and each record is a row.<br />  
-> Plug it into Pandas and your DataFrame will go<br />  
-> Into df's where you do stuff like in SQL or Excel<br />  
-> But w/APIs you'll prize for being timeless & done well.
+> Fill a table full of tuples and each record is a row.  
+> Plug it into Pandas and your DataFrame will go  
+> Into df's where you do stuff like in SQL or Excel  
+> But w/APIs you'll prize for being timeless & done well.  
 
 You're welcome.
 
@@ -1261,7 +1261,7 @@ You're welcome.
 > There's a Raymond who's a rebel  
 > And thinks eval is not evil  
 > So he gave us the named tuple  
-> Which is perfect for retrieval  
+> Which is perfect for retrieval!  
 
 When you're processing a long-running, API-hitting data-pulling job, there will
 be problems that are can be hard to track down. As the outer and inner loops
