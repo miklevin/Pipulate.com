@@ -1823,6 +1823,8 @@ along to your boss in preparation for GA4mageddon.
 
 ### Taking Screenshot of Web Browser
 
+### Connecting to Google Trends
+
 ### Sending an Email With Python
 
 #### Formatting an HTML Email with Python
@@ -1835,4 +1837,3 @@ along to your boss in preparation for GA4mageddon.
 
 #### Emailing n Zip File with Python
 
-### Connecting to Google Trends
