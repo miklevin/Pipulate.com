@@ -987,6 +987,8 @@ A 302 indicates you've triggered the captcha. Remember, this step is totally
 safe because the scraping is done. We're looking now at the raw-data we quickly
 plopped into storage from the above step.
 
+#### Extracting SERPs From Raw Scrape Data
+
 You can extract out the search results including the title that appeared with
 the search listing and save it to a CSV, Excel File, drop in Google Sheets, you
 get the idea. I'll show CSV here 'cause it's the easiest. Notice how we're
