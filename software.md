@@ -12,18 +12,23 @@ the techniques that make Python a joy to use, and complex deliverables simple.
 
 #### What You Will Find on This Page
 
-* TOC
+1. TOC
 {:toc}
 
 ### Getting Started With Pipulate
 
+On Windows 10 or 11, run the <a
+href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
+Me</a> script using the instructions found on that page. At first Pipulate
+looks just like JupyterLab being installed on Windows accessible at <a
+href="http://localhost:8080">localhost:8080</a>, but there are a few key
+differences:
+
 #### The Wonderful World of Linux
 
-After the <a
-href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
-Me</a> script is finished running, both Linux and Pipulate will be installed on
-your Windows system and JupyterLab will soon be reachable in a Web browser at
-<a href="http://localhost:8080">localhost:8080</a>. 
+- Jupyter is running on Linux (better for automation)
+- You have a ***repos*** folder containing ready-to-run examples
+- You can schedule Notebooks to run as Linux system services
 
 #### Microsoft Pauses systemd
 
