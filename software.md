@@ -79,8 +79,10 @@ with sqldict("name.db") as db:
 
 This is a million-dollar trick that gives you a lightweight NoSQL database for
 every occasion. It especially enables the pattern of grabbing and saving the
-raw-data first, then loading, extracting and transforming it (turning it into
-useful "deliverables") later.
+raw-data first, then loading, extracting and transforming it later.
+
+Bonus: ***ETL** stands for Extract, Transform & Load, standard terminology in
+the industry for this type of work.
 
 #### Persistent Dicts Wired to SQLite3
 
