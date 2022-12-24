@@ -59,6 +59,8 @@ expressed here in Python. Bringing you Pipulate is my Ikigai.
 
 ### Persistent Dicts as Easy Databases
 
+#### Here's Your First Million-Dollar Idea
+
 Before doing anything else, you need to understand how to make the Python
 ***dictionary*** datatype, or simply ***dict***, persistent. If this is
 gobbledygook to you, you need a primer on the 3 main Python datatypes: lists,
