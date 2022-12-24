@@ -1146,7 +1146,15 @@ df_all.to_csv("all_files.csv", index=False)
 
 You're welcome.
 
-### Taking Screenshot of Web Browser
+### Record Keeping With Named Tuples
+
+When you're processing a long-running, API-hitting data-pulling job, there will
+be errors, and it's sometimes hard to trace them down. A related problem is
+that you may be unsure exactly what the API-call was for some particular piece
+of saved data. Both these problems are fixed by generating a bunch of named
+tuples for your requests ahead of time. Let me just show you.
+
+
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
@@ -1154,3 +1162,4 @@ You're welcome.
 
 ### Pulling Data From Google Analytics G4 API
 
+### Taking Screenshot of Web Browser

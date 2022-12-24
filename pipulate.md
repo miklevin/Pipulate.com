@@ -7,6 +7,14 @@ group: home
 
 # {{ page.description }}
 
+### Your SEO Super-Powers Start Now
+
+Are you finding good sample Python code for SEO or asking ChatGPT to write some
+for you, but you need a place to run it? First you need to polish the code to
+suit your needs, best accomplished in Jupyter Notebooks. Then you have to put
+it somewhere to run 24x7. You probably also want to avoid paying for yet
+another X$/mo cloud service.
+
 ### Pipulate Is a Full Linux Server
 
 If you're running Windows 10 or 11, Microsoft has made it easy for you to run a
