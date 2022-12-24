@@ -7,12 +7,12 @@ description: Pipulate FOSS SEO Software
 
 # {{ page.description }}
 
-### Ready to Automate Examples
-
 When you work something out using my sample-code in JupyterLab, the next step
 really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
 or wherever generic Linux is run.
+
+#### What You Will Find on This Page
 
 * TOC
 {:toc}
@@ -34,7 +34,7 @@ due to a limitation in WSL and I expect this requirement to change soon.  You
 will want to use Windows Terminal which probably installed with Linux, but in
 case it didn't, grab it from the Microsoft Store.
 
-#### Copy/Paste These Examples Into Jupyter
+### Ready to Automate Examples
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
 Simply copy/paste any of the code in these examples into a new Notebook or go
