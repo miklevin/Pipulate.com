@@ -137,6 +137,8 @@ tables in Python. Much of the time, it's not even necessary.
 The best way to represent tables in Python without Pandas is as a list of
 tuples:
 
+#### List of Tuples
+
 ```python
 table = [
     ("one", "two", "three"),
@@ -151,6 +153,16 @@ table = [
 ```python
 df = pd.DataFrame(table, columns=["A", "B", "C"])
 ```
+
+Bonus: It's a small but sometimes important point that even though all these
+tricks will work with lists-of-lists, lists are a ***dynamic*** and mutable
+datatype, meaning tons of them is bad for your computer. Lists of tuples
+process much more efficiently.
+
+#### Saving df to CSV or Excel
+
+    df.to_csv("file.csv", index=False)
+    df.to_excel("file.xlsx", index=False)
 
 And from there you can save it out as a CSV file or use it in further
 manipulations of row & column data such as joins, aggregations and unions. For
