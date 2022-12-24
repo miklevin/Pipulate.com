@@ -121,12 +121,25 @@ The above example will drop a comma separated value file (CSV) on your drive in
 the same location as where you created the Jupyter Notebook. The file will
 contain a list of countries with populations, land area and density from the
 table that was displaying on that URL. This is direct from webpage to Pandas
-dataframe. Why wouldn't you? This trick doesn't always work, but when it does,
-it's glorious. The process can be reversed to read the CSV from your drive back
-into memory as follows.
+dataframe. Why wouldn't you? The process can be reversed to read the CSV from
+your drive back into memory as follows.
 
 ```python
 df = pd.read_csv("countries.csv")
+```
+
+This trick doesn't always work, but when it does, it's glorious. Sometimes you
+have to poke around. You actually get back a ***list*** of DataFrames and have
+to grab the right one. This will grab a history of web browsers. You can see
+how instead of grabbing the zero'th list, we're grabbing the 1st. Python uses
+zero-based indexes, so "1" actually means the second df in the list:
+
+```
+import pandas as pd
+
+url = "https://en.wikipedia.org/wiki/History_of_the_web_browser"
+list_of_dfs = pd.read_html(url)
+df = list_of_dfs[1]
 ```
 
 That pd.read_html() function really needs the data to be in HTML table tags. If
