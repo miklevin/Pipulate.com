@@ -2,12 +2,12 @@
 title: Awesome FOSS SEO Examples
 permalink: /software/
 group: software
-description: FOSS SEO Software Awesome Examples
+description: Pipulate FOSS SEO Software
 ---
 
 # {{ page.description }}
 
-### Awesome Examples for JupyterLab Is Pipulate
+### Ready to Automate Python SEO Examples
 
 When you work something out using my sample-code in JupyterLab, the next step
 really is to automate those things you like under systemd right on your Windows
