@@ -148,6 +148,11 @@ manipulations of row & column data such as joins, aggregations and unions. For
 you Excel users, that's VLookups, Pivot Tables and combining tabs, but it's a
 lot nicer in Python Pandas. Data Science, yay!
 
+> Fill a table full of tuples and each record is a row.<br />  
+> Plug it into Pandas and your DataFrame will go<br />  
+> Into df's where you do stuff like in SQL or Excel<br />  
+> But w/APIs you'll prize for being timeless & done well.
+
 You're welcome.
 
 ### Logging Into Google Services
