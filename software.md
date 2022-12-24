@@ -1080,11 +1080,11 @@ You should see output something like:
 
 You can take any of those above values (including sc-domain:) and use it to
 pull metrics. From GSC, keywords is the default dimension, meaning you at least
-always get keywords back, plus the usual metrics (clicks, impressions, ctr and
-position). But you usually have to at least give a start and end date in the
-input so the metrics are returned for a time-period. GSC goes back 16 months
-and takes the yyyy-mm-dd pattern for dates. So let's get the start and end
-dates for the last 16 months:
+always get keywords back, plus the usual GSC metrics (clicks, impressions, ctr
+and position). But you usually have to at least give a start and end date in
+the input so the metrics are returned for a time-period. GSC goes back 16
+months and takes the yyyy-mm-dd pattern for dates. So let's get the start and
+end dates for the last 16 months:
 
 ```python
 from datetime import datetime
