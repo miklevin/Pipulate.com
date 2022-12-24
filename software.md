@@ -87,10 +87,10 @@ the industry for this type of work.
 #### Persistent Dicts Wired to SQLite3
 
 Use persistent dicts as real databases. Use them as a caches to speed things
-up. Even though they do require a pip install of 3rd party package to activate,
-they're still just using the standard Python dictionary (dict) API. They're
-back-ended by the ubiquitous workhorse of the tech industry, SQLite3, which is
-already included with Python.
+up. Even though they do require a pip install of a 3rd party package to
+activate, they're still just using the standard Python dictionary (dict) API.
+They're back-ended by the ubiquitous workhorse of the tech industry, SQLite3,
+which is already included with Python.
 
 You're welcome.
 
