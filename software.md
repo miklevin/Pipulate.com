@@ -14,19 +14,36 @@ really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
 or really wherever generic Linux is run with access to the Net.
 
+#### Drink Me & Enter The Wonderful World of Linux
+
 After the <a
 href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
-Me</a> script is finished running, Linux and Pipulate will both be installed on
+Me</a> script is finished running, both Linux and Pipulate will be installed on
 your Windows system and JupyterLab will soon be reachable in a Web browser at
-<a href="http://localhost:8080">localhost:8080</a>. You will however have to
-open a Linux Terminal to "wake up" Jupyter. This is due to a limitation in WSL
-and I expect this requirement to change soon. Windows Terminal may have
-installed with Linux, but in case it didn't, grab it from the Microsoft Store.
+<a href="http://localhost:8080">localhost:8080</a>. 
+
+#### Microsoft Pauses systemd
+
+You will however have to open a Linux Terminal to "wake up" Jupyter. This is
+due to a limitation in WSL and I expect this requirement to change soon.
+Windows Terminal may have installed with Linux, but in case it didn't, grab it
+from the Microsoft Store.
+
+### Getting Started
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
 Simply copy/paste any of the code in these examples into a new Notebook or go
 into the repo named pipulate and run the code from the example files found
 there. Those examples will match what you find here.
+
+#### Rapid-Fire Million-Dollar Ideas
+
+While not technically an ***Awesome List*** for Python SEO, Pipulate is a list
+of awesome techniques and sample-code that brings you, I believe, a massive
+step closer to your love-worthy work and six-figure job goals. I've been in
+tech for over 30-years and SEO in particular as long as it's been a field. I've
+acquired quite a few million-dollar ideas over the years, and they are best
+expressed here in Python. Bringing you Pipulate is my Ikigai.
 
 ### Use Persistent Dicts as Ridiculously Easy Databases
 
