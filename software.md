@@ -172,10 +172,37 @@ print(df)
     31  2021  Chrome 88–96, Firefox 85–95, Microsoft Edge 88...
     32  2022  Chrome 97–107, Firefox 96–107, Microsoft Edge ...
 
-That pd.read_html() function really needs the data to be in HTML table tags. If
-it's just a list in plain text, you can use a similar trick, but with a few
-extra steps. Here's how we can get a list of all ***TLDs*** (top-level domains)
-from ICANN:
+Bonus: This is an interesting one because for the 32 years it covers, it's only
+showing 32 rows. That's because there are multiple browsers per row, separated
+by commas. This may be a bit advanced for this early, but we can ***explode***
+these 32 rows to 186 rows by forcing it to show one row per browser splitting
+the entries:
+
+```
+df["Web browsers"] = df["Web browsers"].apply(lambda x: x.split(", "))
+df_all = df.explode("Web browsers")
+print(df_all)
+```
+
+        Year           Web browsers
+    0   1990   WorldWideWeb (Nexus)
+    1   1991      Line Mode Browser
+    2   1992                 Erwise
+    2   1992         MacWWW (Samba)
+    2   1992               MidasWWW
+    ..   ...                    ...
+    32  2022         Firefox 96–107
+    32  2022  Microsoft Edge 97–107
+    32  2022            Opera 83–93
+    32  2022         Safari 15.4–16
+    32  2022        Vivaldi 5.1–5.5
+
+    [186 rows x 2 columns]
+
+That pd.read_html() function from the above examples really needs the data to
+be in HTML table tags. If it's just a list in plain text, you can use a similar
+trick, but with a few extra steps. Here's how we can get a list of all
+***TLDs*** (top-level domains) from ICANN:
 
 ```python
 import httpx
