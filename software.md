@@ -108,7 +108,7 @@ which is already included with Python.
 
 You're welcome.
 
-### Webpages to Pandas DataFrame
+### Grab Data From Webpages Easily
 
 Here's a way to grab some data quick and easy off of a webpage...
 
@@ -118,7 +118,23 @@ import pandas as pd
 url = 'https://www.worldometers.info/geography/alphabetical-list-of-countries/'
 df = pd.read_html(url)[0]
 df.to_csv("countries.csv", index=False)
+print(df)
 ```
+
+           #      Country  Population (2020)  Land Area  (Km²)  Density (P/Km²)
+    0      1  Afghanistan           38928346            652860               60
+    1      2      Albania            2877797             27400              105
+    2      3      Algeria           43851044           2381740               18
+    3      4      Andorra              77265               470              164
+    4      5       Angola           32866272           1246700               26
+    ..   ...          ...                ...               ...              ...
+    190  191    Venezuela           28435940            882050               32
+    191  192      Vietnam           97338579            310070              314
+    192  193        Yemen           29825964            527970               56
+    193  194       Zambia           18383955            743390               25
+    194  195     Zimbabwe           14862924            386850               38
+
+    [195 rows x 5 columns]
 
 The above example will drop a comma separated value file (CSV) on your drive in
 the same location as where you created the Jupyter Notebook. The file will
@@ -143,7 +159,20 @@ import pandas as pd
 url = "https://en.wikipedia.org/wiki/History_of_the_web_browser"
 list_of_dfs = pd.read_html(url)
 df = list_of_dfs[1]
+print(df)
 ```
+
+        Year                                       Web browsers
+    0   1990                               WorldWideWeb (Nexus)
+    1   1991                                  Line Mode Browser
+    2   1992         Erwise, MacWWW (Samba), MidasWWW, ViolaWWW
+    3   1993    AMosaic 1.0, Arena, Cello,[44] Lynx 2.0, Mosaic
+    4   1994  Agora (Argo), IBM WebExplorer, IBrowse, MacWeb...
+    ..   ...                                                ...
+    29  2019  Chrome 72–79, Firefox 65–71, Microsoft Edge, O...
+    30  2020  Chrome 80–87, Firefox 72–84, Microsoft Edge, O...
+    31  2021  Chrome 88–96, Firefox 85–95, Microsoft Edge 88...
+    32  2022  Chrome 97–107, Firefox 96–107, Microsoft Edge ...
 
 That pd.read_html() function really needs the data to be in HTML table tags. If
 it's just a list in plain text, you can use a similar trick, but with a few
@@ -157,7 +186,25 @@ import pandas as pd
 r = httpx.get("https://data.iana.org/TLD/tlds-alpha-by-domain.txt")
 df = pd.DataFrame(r.text.split("\n")[1:], columns=["tld"])
 df.to_csv("tlds.csv", index=False)
+print(df)
 ```
+
+Outputs:
+
+              tld
+    0         AAA
+    1        AARP
+    2      ABARTH
+    3         ABB
+    4      ABBOTT
+    ...       ...
+    1477       ZM
+    1478     ZONE
+    1479  ZUERICH
+    1480       ZW
+    1481         
+
+    [1482 rows x 1 columns]
 
 ### Understanding Pandas DataFrames
 
