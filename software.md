@@ -121,17 +121,27 @@ The above example will drop a comma separated value file (CSV) on your drive in
 the same location as where you created the Jupyter Notebook. The file will
 contain a list of countries with populations, land area and density from the
 table that was displaying on that URL. This is direct from webpage to Pandas
-dataframe. Why wouldn't you?
-
-This trick doesn't always work, but when it does, it's glorious. The process
-can be reversed as follows, and is another way to get database-like
-functionality without all the fuss.
+dataframe. Why wouldn't you? This trick doesn't always work, but when it does,
+it's glorious. The process can be reversed to read the CSV from your drive back
+into memory as follows.
 
 ```python
 df = pd.read_csv("countries.csv")
 ```
 
-You're welcome.
+That pd.read_html() function really needs the data to be in HTML table tags. If
+it's just a list in plain text, you can use a similar trick, but with a few
+extra steps. Here's how we can get a list of all ***TLDs*** (top-level domains)
+from ICANN:
+
+```python
+import httpx
+import pandas as pd
+
+r = httpx.get(url)
+df = pd.DataFrame(r.text.split("\n")[1:], columns=["tld"])
+df.to_csv("tlds.csv", index=False)
+```
 
 ### Understanding Pandas DataFrames
 
