@@ -97,7 +97,9 @@ which is already included with Python.
 
 You're welcome.
 
-### Grabbing Data Quick & Easy
+### Webpages to Pandas DataFrame
+
+Here's a way to grab some data quick and easy off of a webpage...
 
 ```python
 import pandas as pd
@@ -123,7 +125,7 @@ df = pd.read_csv("countries.csv")
 
 You're welcome.
 
-### Python Pandas and DataFrames
+### Understanding Pandas DataFrames
 
 In case you didn't notice, we're already using Python Pandas from the above
 example. But this is where you get to understand DataFrames which you'll most
@@ -786,7 +788,7 @@ with sqldict("crawl.db") as db:
         db.commit()
 ```
 
-### Crawling Websites Into Google Sheets
+### Update Google Sheet With API
 
 #### First a Few Words About APIs
 
@@ -1556,7 +1558,7 @@ will blow your mind. It's amazing how many benefits we can get of fancy,
 higher-end systems just through the intelligent and creative use of the common
 datatypes built into Python.
 
-### Google Analytics
+### Connecting to Google Analytics
 
 #### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
