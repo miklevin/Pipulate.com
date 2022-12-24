@@ -362,7 +362,6 @@ demonstrated here such as anonymous functions (called lambdas), tuple unpacking
 (symmetrical variable assignment) and shim substitution for unavailable
 functions. It's all really demonstrated on the same line, really.
 
-
 You're welcome.
 
 ### Crawling a Website
@@ -451,11 +450,43 @@ for alink in ahrefs:
     print(alink)
 ```
 
-And there's all the links on the page. Pretty astounding, right? There's a
-whole bunch more about link.attrs if it has an hrefs attribute, turning
-relative links to absolute, blah, blah. But let's extract the title from the
-page we got. You'll find tons of advice trying to talk you out of using
-Beautiful Soup. It's beautiful! Just use it. It's this easy:
+And there's all the links on the page. Pretty astounding, right? 
+
+    <a class="current" href="/">~/</a>
+    <a href="/linux/">Linux</a>
+    <a href="/python/">Python</a>
+    <a href="/vim/">vim</a>
+    <a href="/git/">git</a>
+    <a href="/logo/"><img border="0" src="/assets/logo/mike-levin.gif" style="vertical-align:middle"/></a>
+    <a href="/seo/">SEO</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/MikeLevin">Channel</a>
+    <a href="/linux/">Linux</a>
+    <a href="/python/">Python</a>
+    <a href="/vim/">vim</a>
+    <a href="/git/">git</a>
+    <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me!</a>
+    <a href="https://levinux.com">Levinux</a>
+    <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me!</a>
+    <a href="https://pipulate.com">Pipulate</a>
+    <a href="https://levinux.com">Levinux</a>
+    <a href="https://pipulate.com">Pipulate</a>
+    <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>
+    <a href="https://www.tiktok.com/@miklevin">TikTok</a>
+    <a href="https://github.com/miklevin">GitHub</a>
+    <a href="https://www.linkedin.com/in/miklevin/">LinkedIn</a>
+    <a href="https://www.facebook.com/mikelevinux">Facebook</a>
+    <a href="https://www.instagram.com/miklevin/">Instagram</a>
+    <a href="https://www.reddit.com/user/mikelevinux">Reddit</a>
+    <a href="https://twitter.com/miklevin">Twitter</a>
+    <a href="https://levinux.com">Levinux</a>
+    <a href="https://pipulate.com">Pipulate</a>
+    <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">DrinkMe!</a>
+
+There's a whole bunch more about link.attrs if it has an hrefs attribute,
+turning relative links to absolute, blah, blah. But let's extract the title
+from the page we got. You'll find tons of advice trying to talk you out of
+using Beautiful Soup. It's beautiful! Just use it. It's this easy:
 
 #### Extract Page Title With Beautiful Soup
 
