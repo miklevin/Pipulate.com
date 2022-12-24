@@ -1276,7 +1276,7 @@ what we're going here is a sort of tree-shaking reprocessing ability. So how do
 you do that? My favorite trick! A cheap dict database! We populate it these
 namedtuples as keys and the values set to None. We then only process keys whose
 values are none, and you can repeat that process until there are no more
-None's...
+None's, or for x-number of times or whatever.
 
 ```python
 from datetime import datetime
@@ -1315,6 +1315,53 @@ with sqldict("api_calls.db") as db:
     db.commit()
 print('Done')
 ```
+
+Now we can break out the actual pulling of the data separate, getting rid of
+all that arg-building date nonsense (they're already built) and just shake the
+trees...
+
+```python
+from sqlitedict import SqliteDict as sqldict
+from collections import namedtuple
+
+Args = namedtuple("Args", "site, date")
+
+# Simulate an API-call
+def get_data(**kwargs):
+    rv = None
+    if all(item in kwargs for item in ['site', 'date']):
+        site = kwargs["site"]
+        date = kwargs["date"]
+        rv = f"I made a call for site {site} on date {date}."
+    return rv
+
+# Shake the trees 5 times!
+for i in range(5):
+    print(f"Loop {i + 1}")
+    with sqldict("api_calls.db") as db:
+        for api_call in db:
+            data = db[api_call]
+            if data == None:
+                args = eval(api_call)
+                data = get_data(site=args.site, date=args.date)
+                db[api_call] = data
+                db.commit()
+print('Done')
+```
+
+And you can step through the database and look at the data. Any unsuccessful
+data-fetches will still read "None".
+
+```python
+with sqldict("api_calls.db") as db:
+    for i, api_call in enumerate(db):
+        data = db[api_call]
+        print(data)
+        if i > 10:
+            break
+```
+
+Did I mention million-dollar ideas? You're welcome.
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
