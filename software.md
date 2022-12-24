@@ -969,8 +969,10 @@ You should see output something like:
     sc-domain:pipulate.com
     sc-domain:levinux.com
 
-You can take any of those values (including sc-domain:) and use it to pull
-metrics. From GSC, keywords is the default dimension, meaning you at least
+### Calculating Start & End Dates For API
+
+You can take any of those above values (including sc-domain:) and use it to
+pull metrics. From GSC, keywords is the default dimension, meaning you at least
 always get keywords back, plus the usual metrics (clicks, impressions, ctr and
 position). But you usually have to at least give a start and end date in the
 input so the metrics are returned for a time-period. GSC goes back 16 months
@@ -1009,6 +1011,8 @@ for x in range(months_back):
     2021-11-01 2021-11-30
     2021-10-01 2021-10-31
     2021-09-01 2021-09-30
+
+### Pulling Data From GSC
 
 Okay, so let's pull some data!
 
@@ -1141,8 +1145,6 @@ df_all.to_csv("all_files.csv", index=False)
 ```
 
 You're welcome.
-
-### Pulling Data From GSC
 
 ### Taking Screenshot of Web Browser
 
