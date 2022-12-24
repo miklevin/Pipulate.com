@@ -107,9 +107,12 @@ df.to_csv("countries.csv", index=False)
 The above example will drop a comma separated value file (CSV) on your drive in
 the same location as where you created the Jupyter Notebook. The file will
 contain a list of countries with populations, land area and density from the
-table that was displaying on that URL. This trick doesn't always work, but when
-it does, it's glorious. The process can be reversed as follows, and is another
-way to get database-like functionality without all the fuss.
+table that was displaying on that URL. This is direct from webpage to Pandas
+dataframe. Why wouldn't you?
+
+This trick doesn't always work, but when it does, it's glorious. The process
+can be reversed as follows, and is another way to get database-like
+functionality without all the fuss.
 
 ```python
 df = pd.read_csv("countries.csv")
