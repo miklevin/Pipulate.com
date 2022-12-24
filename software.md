@@ -12,7 +12,7 @@ description: Pipulate FOSS SEO Software
 When you work something out using my sample-code in JupyterLab, the next step
 really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
-or really wherever generic Linux is run with access to the Net.
+or wherever generic Linux is run.
 
 #### Drink Me & Enter The Wonderful World of Linux
 
