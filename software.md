@@ -1783,7 +1783,7 @@ files on the drive:
 - ga_webproperties.csv
 - ga_views.csv
 
-Tables join on columns that we have in common, and we've made sure that they
+Tables join on columns that they have in common, and we've made sure that they
 do. Accounts and WebProperties will join on the Account ID column, and the
 resulting Accounts+WebProperties table will join to the Views table on both the
 Account ID and WebProperty ID.
