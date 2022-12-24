@@ -1,4 +1,4 @@
-!---
+---
 title: Awesome FOSS SEO Examples
 permalink: /software/
 group: software
@@ -13,6 +13,9 @@ When you work something out using my sample-code in JupyterLab, the next step
 really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
 or wherever generic Linux is run.
+
+* TOC
+{:toc}
 
 #### Enter Wonderful World of Linux
 
@@ -35,9 +38,6 @@ Once you have JupyterLab displaying in your Web browser, you're in business.
 Simply copy/paste any of the code in these examples into a new Notebook or go
 into the repo named pipulate and run the code from the example files found
 there. Those examples will match what you find here.
-
-* TOC
-{:toc}
 
 #### Rapid-Fire Million-Dollar Ideas
 
