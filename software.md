@@ -119,7 +119,7 @@ often see around the Net as the variable ***df***. When you see df, think Excel
 tab or SQL table. DataFrames are row-and-column data. You'll also hear the term
 ***matrices*** or simply ***tables***.
 
-The Python 3rd party library, but now ubiquitous, Pandas provides the special
+The ubiquitous Python 3rd party library called Pandas provides the special
 datatype called DataFrame to handle such row & column data. If you've outgrown
 Excel or want to do SQL stuff without a huge tech liability, Pandas is your
 answer. However, you don't ***have*** to use Pandas DataFrames to manipulate
