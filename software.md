@@ -17,7 +17,9 @@ or wherever generic Linux is run.
 * TOC
 {:toc}
 
-#### Enter Wonderful World of Linux
+### Getting Started With Pipulate
+
+#### The Wonderful World of Linux
 
 After the <a
 href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
@@ -32,7 +34,7 @@ due to a limitation in WSL and I expect this requirement to change soon.  You
 will want to use Windows Terminal which probably installed with Linux, but in
 case it didn't, grab it from the Microsoft Store.
 
-### Getting Started With Pipulate
+#### Copy/Paste These Examples Into Jupyter
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
 Simply copy/paste any of the code in these examples into a new Notebook or go
