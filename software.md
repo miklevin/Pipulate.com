@@ -617,10 +617,10 @@ Getting the idea? Can you guess our next step?
 
 #### But First a Word On Python Context Manager and SQLite Commit
 
-Nuance to point out here is that I'm using something called the Python "context
-manager" with SqliteDict. You can tell the content manager by the "with/as"
-keywords and accompany indent. The "as" variable (really a file handle) goes
-away after the outdent. That's the point. That's it's context. 
+A nuance here is that I'm using something called the Python "context manager"
+with SqliteDict. You can tell the content manager by the "with/as" keywords and
+accompany indent. The "as" variable (really a file handle) goes away after the
+outdent. That's the point. That's it's context. 
 
 SqliteDict when used with the contact manager (there are other ways) won't
 commit changes to the persistent on-drive database file unless you do a
