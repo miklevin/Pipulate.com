@@ -14,7 +14,7 @@ really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
 or wherever generic Linux is run.
 
-#### Drink Me & Enter The Wonderful World of Linux
+#### Enter Wonderful World of Linux
 
 After the <a
 href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
