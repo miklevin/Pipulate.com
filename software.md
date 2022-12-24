@@ -81,7 +81,7 @@ This is a million-dollar trick that gives you a lightweight NoSQL database for
 every occasion. It especially enables the pattern of grabbing and saving the
 raw-data first, then loading, extracting and transforming it later.
 
-Bonus: ***ETL** stands for Extract, Transform & Load, standard terminology in
+Bonus: ***ETL*** stands for Extract, Transform & Load, standard terminology in
 the industry for this type of work.
 
 #### Persistent Dicts Wired to SQLite3
@@ -104,12 +104,12 @@ df = pd.read_html(url)[0]
 df.to_csv("countries.csv", index=False)
 ```
 
-That will drop a comma separated value file (CSV) on your drive in the same
-location as where you created the Jupyter Notebook. The file will contain a
-list of countries with populations, land area and density from the table that
-was displaying on that URL. This trick doesn't always work, but when it does,
-it's glorious. The process can be reversed as follows, and is another way to
-get database-like functionality without all the fuss.
+The above example will drop a comma separated value file (CSV) on your drive in
+the same location as where you created the Jupyter Notebook. The file will
+contain a list of countries with populations, land area and density from the
+table that was displaying on that URL. This trick doesn't always work, but when
+it does, it's glorious. The process can be reversed as follows, and is another
+way to get database-like functionality without all the fuss.
 
 ```python
 df = pd.read_csv("countries.csv")
