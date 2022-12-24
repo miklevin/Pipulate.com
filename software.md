@@ -138,7 +138,7 @@ from ICANN:
 import httpx
 import pandas as pd
 
-r = httpx.get(url)
+r = httpx.get("https://data.iana.org/TLD/tlds-alpha-by-domain.txt")
 df = pd.DataFrame(r.text.split("\n")[1:], columns=["tld"])
 df.to_csv("tlds.csv", index=False)
 ```
