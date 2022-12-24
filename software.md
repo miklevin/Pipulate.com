@@ -200,9 +200,8 @@ creds = ohawf.get()
 
 This will cause a login prompt to pop up for browser-based authentication.
 Anyone with a Google account can do this without going through the rigmarole of
-the console.developers.google.com site. I did that and made a pip installable
-package to spare you the grief. Okay, so you have authorized credentials. What
-now? We build a service!
+the console.developers.google.com site. I basically did the hard work for you,
+so you can connect right away and get to business...
 
 ```python 
 import ohawf
