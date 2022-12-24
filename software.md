@@ -968,7 +968,16 @@ with sqldict("serps.db") as db:
 ```
 
 Data goes in, data comes out. We can take a quick spin through to make sure
-that it's a good http status code. We're looking for a 200 here. 
+that it's a good http status code. 
+
+```python
+with sqldict("serps.db") as db:
+    for keyword in db:
+        response = db[keyword]
+        print(response.status_code, keyword)
+```
+
+We're looking for 200's here. 
 
     200 mike levin seo
     200 levinux
@@ -977,13 +986,6 @@ that it's a good http status code. We're looking for a 200 here.
 A 302 indicates you've triggered the captcha. Remember, this step is totally
 safe because the scraping is done. We're looking now at the raw-data we quickly
 plopped into storage from the above step.
-
-```python
-with sqldict("serps.db") as db:
-    for keyword in db:
-        response = db[keyword]
-        print(response.status_code, keyword)
-```
 
 You can extract out the search results including the title that appeared with
 the search listing and save it to a CSV, Excel File, drop in Google Sheets, you
