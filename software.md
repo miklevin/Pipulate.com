@@ -178,10 +178,19 @@ You're welcome.
 
 ### Logging Into Google Services
 
-Actually just logging in can be the hardest part of many API projects,
-especially those involving Google Services. At this point, everyone else would
-be telling you to register as a Google Developer, make a project at the Cloud
-Console, download a client.json file, yadda, yadda not here. What you do is:
+A lot more people would be doing advanced SEO work in Jupyter were it not so
+difficult to log into Google services. OAuth2 login is the bane of many
+aspiring SEO Pythonista's existence.
+
+#### The Bane of Our Existence
+
+Actually just logging into Google can be the hardest part of many projects,
+especially those involving Analytics, Search Console or Sheets. Most other
+sites at this point will be telling you to register as a Google Developer, make
+a project at the Cloud Console, download a client.json file, yadda, yadda. It's
+not terrible advice if you can manage it, and it gives you more options than
+the way I provide here. The way I provide here has this one distinct advantage:
+it's going to work for you here and now.
 
 ```python
 import ohawf
