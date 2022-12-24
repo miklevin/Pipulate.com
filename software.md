@@ -154,7 +154,7 @@ how instead of grabbing the zero'th list, we're grabbing the 1st. Python uses
 zero-based indexes, so "1" actually means the second df in the list:
 
 ```python
-import pandas as pd
+ipythonmport pandas as pd
 
 url = "https://en.wikipedia.org/wiki/History_of_the_web_browser"
 list_of_dfs = pd.read_html(url)
@@ -247,8 +247,10 @@ process much more efficiently.
 
 #### Saving df to CSV or Excel
 
-    df.to_csv("file.csv", index=False)
-    df.to_excel("file.xlsx", index=False)
+```python
+df.to_csv("file.csv", index=False)
+df.to_excel("file.xlsx", index=False)
+```
 
 And from there you can save it out as a CSV file or use it in further
 manipulations of row & column data such as joins, aggregations and unions. For
