@@ -125,38 +125,6 @@ stacking on top of each other combining and not the adding columns combining.
 If you need to do the equivalent of a SQL Union or an Excel... uhm... an Excel
 uhm... massive waste of copy/paste time, then note there is a better way.
 
-### Combining Multiple CSV Files Into One (like a SQL UNION)
-
-```python
-import pandas as pd
-from pathlib import Path
-from time import strptime
-
-# Make a list of all files in a folder
-files = Path("csvfiles").glob("*.csv")
-
-# Step through files, add some columns and append DataFrame to list
-lots = []
-for afile in files:
-    print(afile)
-    df = pd.read_csv(afile)
-    
-    # You sometimes need to add columns derived from filename
-    month = afile.name.split()[2][6:]
-    month = strptime(month, "%b").tm_mon
-    year = afile.name.split()[3]
-    year = year[:4]
-    df["month"] = month
-    df["year"] = year
-    lots.append(df)
-
-# Create a single DataFrame from df's in list and write to file.
-df_all = pd.concat(lots)
-df_all.to_csv("all_files.csv", index=False)
-```
-
-Ever try to do the equivalent in Excel? You're welcome.
-
 ### Logging Into Google Services
 
 Actually just logging in can be the hardest part of many API projects,
@@ -975,11 +943,208 @@ compare the SERP Title (the title given to the page by Google) versus the
 actual title tag on the page. Many SEO deliverable-types suggest themselves.
 And just wait until we get to hitting Google Search Console and Analytics!
 
-### Taking Screenshot of Web Browser
-
 ### Listing Your Sites with Google Search Console (GSC)
 
+Okay, let's do GSC. It's worth pointing out what the [Google code
+examples](https://developers.google.com/webmaster-tools/v1/quickstart/quickstart-python) 
+looks like. Ugh! It's like they obfuscate it on purpose. Let's make it as easy
+as possible. First let's get a list of GSC sites to which our Google login has
+access:
+
+```python
+import ohawf
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("searchconsole", "v1", credentials=creds)
+gsc_sites = service.sites().list().execute()
+sites = [x["siteUrl"] for x in gsc_sites["siteEntry"]]
+for site in sites:
+    print(site)
+```
+
+You should see output something like:
+
+    sc-domain:mikelev.in
+    sc-domain:pipulate.com
+    sc-domain:levinux.com
+
+You can take any of those values (including sc-domain:) and use it to pull
+metrics. From GSC, keywords is the default dimension, meaning you at least
+always get keywords back, plus the usual metrics (clicks, impressions, ctr and
+position). But you usually have to at least give a start and end date in the
+input so the metrics are returned for a time-period. GSC goes back 16 months
+and takes the yyyy-mm-dd pattern for dates. So let's get the start and end
+dates for the last 16 months:
+
+```python
+from datetime import datetime
+from dateutil.relativedelta import relativedelta as rd
+
+months_back = 16
+for x in range(months_back):
+    start_date = datetime.now().date().replace(day=1) - rd(months=x)
+    end_date = start_date + rd(months=1) - rd(days=1)
+    pattern = "%Y-%m-%d"
+    start_date = start_date.strftime(pattern)
+    end_date = end_date.strftime(pattern)
+    print(start_date, end_date)
+```
+
+...which gives this:
+
+    2022-12-01 2022-12-31
+    2022-11-01 2022-11-30
+    2022-10-01 2022-10-31
+    2022-09-01 2022-09-30
+    2022-08-01 2022-08-31
+    2022-07-01 2022-07-31
+    2022-06-01 2022-06-30
+    2022-05-01 2022-05-31
+    2022-04-01 2022-04-30
+    2022-03-01 2022-03-31
+    2022-02-01 2022-02-28
+    2022-01-01 2022-01-31
+    2021-12-01 2021-12-31
+    2021-11-01 2021-11-30
+    2021-10-01 2021-10-31
+    2021-09-01 2021-09-30
+
+Okay, so let's pull some data!
+
+```python
+creds = ohawf.get()
+service = build("searchconsole", "v1", credentials=creds)
+
+site = "sc-domain:mikelev.in"
+start_date = "2022-11-01"
+end_date = "2022-11-30"
+
+query = {
+    "dimensions": ["QUERY"],
+    "startDate": start_date,
+    "endDate": end_date,
+}
+
+results = service.searchanalytics().query(siteUrl=site, body=query).execute()
+
+columns = ["keys", "clicks", "impressions", "ctr", "position"]
+
+table = [
+    (x["keys"][0], x["clicks"], x["impressions"], x["ctr"], x["position"])
+    for x in results["rows"]
+]
+
+df = pd.DataFrame(table, columns=columns)
+filename = f"{site.replace(':', '_')}_{start_date}.csv"
+df.to_csv(filename, index=False)
+```
+
+It's time we stopped littering up the directory we're working in with CSV
+files. When we combine the 2 above steps, we'll be producing 16 csv files, and
+they should drop into a directory that maybe doesn't exist yet:
+
+```python
+from pathlib import Path
+
+Path("gsc").mkdir(exist_ok=True)
+```
+
+And so putting it all together, we get:
+
+```python
+import ohawf
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
+from apiclient.discovery import build
+from dateutil.relativedelta import relativedelta as rd
+
+creds = ohawf.get()
+service = build("searchconsole", "v1", credentials=creds)
+
+site = "sc-domain:mikelev.in"
+columns = ["keys", "clicks", "impressions", "ctr", "position"]
+
+months_back = 16
+Path("gsc").mkdir(exist_ok=True)
+for x in range(months_back):
+    start_date = datetime.now().date().replace(day=1) - rd(months=x)
+    end_date = start_date + rd(months=1) - rd(days=1)
+    pattern = "%Y-%m-%d"
+    start_date = start_date.strftime(pattern)
+    end_date = end_date.strftime(pattern)
+    query = {
+        "dimensions": ["QUERY"],
+        "startDate": start_date,
+        "endDate": end_date,
+    }
+    results = service.searchanalytics().query(siteUrl=site, body=query).execute()
+    table = [
+        (x["keys"][0], x["clicks"], x["impressions"], x["ctr"], x["position"])
+        for x in results["rows"]
+    ]
+    df = pd.DataFrame(table, columns=columns)
+    filename = f"gsc/{site.replace(':', '_')}_{start_date}.csv"
+    df.to_csv(filename, index=False)
+    print(filename)
+```
+
+...which outputs:
+
+    gsc/sc-domain_mikelev.in_2022-12-01.csv
+    gsc/sc-domain_mikelev.in_2022-11-01.csv
+    gsc/sc-domain_mikelev.in_2022-10-01.csv
+    gsc/sc-domain_mikelev.in_2022-09-01.csv
+    gsc/sc-domain_mikelev.in_2022-08-01.csv
+    gsc/sc-domain_mikelev.in_2022-07-01.csv
+    gsc/sc-domain_mikelev.in_2022-06-01.csv
+    gsc/sc-domain_mikelev.in_2022-05-01.csv
+    gsc/sc-domain_mikelev.in_2022-04-01.csv
+    gsc/sc-domain_mikelev.in_2022-03-01.csv
+    gsc/sc-domain_mikelev.in_2022-02-01.csv
+    gsc/sc-domain_mikelev.in_2022-01-01.csv
+    gsc/sc-domain_mikelev.in_2021-12-01.csv
+    gsc/sc-domain_mikelev.in_2021-11-01.csv
+    gsc/sc-domain_mikelev.in_2021-10-01.csv
+    gsc/sc-domain_mikelev.in_2021-09-01.csv
+
+### Combining Multiple CSV Files Into One (like a SQL UNION)
+
+Okay so now we've got a folder full of CSVs with no way to tell them apart
+except for the filename. So if we were to want to load all these CSVs back in
+and treat them like a single DataFrame, table, tab or whatnot, what to do? Have
+you ever tried to combine multiple CSVs in Excel? Not fun. Here in Python with
+Pandas? Fun! Like so. The main thing to notice is pd.concat() which turns a
+list of column-compatible dataframes into a single dataframe.
+
+```python
+import pandas as pd
+from pathlib import Path
+from time import strptime
+
+# Make a list of all files in a folder
+files = Path("gsc").glob("*.csv")
+
+# Step through files, add some columns and append DataFrame to list
+lots = []
+for afile in files:
+    print(afile)
+    df = pd.read_csv(afile)
+    month_of = afile.name.split("_")[2][:-4]
+    df["month of"] = month_of
+    lots.append(df)
+
+# Create a single DataFrame from df's in list and write to file.
+df_all = pd.concat(lots)
+df_all.to_csv("all_files.csv", index=False)
+```
+
+You're welcome.
+
 ### Pulling Data From GSC
+
+### Taking Screenshot of Web Browser
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
