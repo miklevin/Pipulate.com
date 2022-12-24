@@ -1558,3 +1558,15 @@ datatypes built into Python.
 ### Pulling Data From Google Analytics G4 API
 
 ### Taking Screenshot of Web Browser
+
+### Sending an Email With Python
+
+#### Formatting an HTML Email with Python
+
+#### Emailing an Attachment With Python
+
+#### Zipping Files with Python
+
+#### Scheduling an Email with Python
+
+#### Emailing n Zip File with Python
