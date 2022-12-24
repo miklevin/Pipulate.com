@@ -1144,12 +1144,73 @@ You're welcome.
 ### Record Keeping With Named Tuples
 
 When you're processing a long-running, API-hitting data-pulling job, there will
-be errors, and it's sometimes hard to trace them down. A related problem is
-that you may be unsure exactly what the API-call was for some particular piece
-of saved data. Both these problems are fixed by generating a bunch of named
-tuples for your requests ahead of time. Let me just show you.
+be problems that are can be hard to track down. As the outer and inner loops
+are processed, something gets skipped but the overall job keeps going because
+the job must complete. You come back later. Did something go wrong? How will
+you now? Examining the output? Implementing log files?
 
+It turns out that Python offers the perfect mechanism to minimize moving parts
+and to know easily what hasn't processed yet. It has the added benefit of
+eliminating nested looks and "flattening" the job to just stepping through a
+single list of pre-bundled sets of API-arguments. Let me show you.
 
+Let's say you need to look at the date of every day of this millennium so far.
+
+from datetime import datetime
+from dateutil.relativedelta import relativedelta as rd
+
+```python
+x = 1
+dates = []
+while True:
+    adate = datetime.now().date().replace(day=1) - rd(days=x)
+    pattern = "%Y-%m-%d"
+    if adate < datetime(2000, 1, 1).date():
+        break
+    adate = adate.strftime(pattern)
+    dates.append(adate)
+    print(adate)
+    x += 1
+```
+
+This is the abbreviated output:
+
+    2022-11-30
+    2022-11-29
+    2022-11-28
+    2022-11-27
+    ...
+    2000-01-04
+    2000-01-03
+    2000-01-02
+    2000-01-01
+
+At the time of this writing, that's 8370 dates. Now let's say you need to
+process these dates for each of the following sites. This technique by the way
+of turning a plain text list into a python list as a wonderful convenience.
+
+```python
+sites = """
+mikelev.in
+levinux.com
+pipulate.com
+""".split("/")[1:-1]
+```
+
+That's 8370 x 3, or 25110 rows to process. The "processing loop" for every site
+for every date looks like this:
+
+```
+for asite in sites:
+    for adate in dates:
+        api_call = f"{asite} {adaate}"
+```
+
+Now if you actually used this loop for processing and something went wrong, how
+would you ever know. If you were going to reprocess in order to fill-in the
+missed API-calls are you going to rerun the entire loop. Is that going to
+reprocess every line and burn through your API quota and waste a lot of time?
+No! Of course not. Let's build record-keeping directly into this job.
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
