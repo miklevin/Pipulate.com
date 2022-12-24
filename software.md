@@ -9,12 +9,7 @@ description: FOSS SEO Software
 
 ### Installing Linux & Pipulate
 
-This is the page that SEOs should have been introduced to on Day 1. If you're
-early in your career, congratulations! You'll run circles around the
-competition, able to do so much more with so much less. Python and FOSS
-software is really that awesome. To install Pipulate, <a
-href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
-Me</a>.
+To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
 
 ### Using JupyterLab
 

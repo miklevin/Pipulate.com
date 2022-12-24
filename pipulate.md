@@ -9,6 +9,10 @@ group: home
 
 ### Your SEO Super-Powers Start Now
 
+This is the site that SEOs should have been introduced to on Day 1. If you're
+early in your career, congratulations! You'll run circles around the
+competition, able to do so much more with so much less.
+
 Are you finding good sample Python code for SEO or asking ChatGPT to write some
 for you, but you need a place to run it? First you need to polish the code to
 suit your needs, best accomplished in Jupyter Notebooks. Then you have to put
