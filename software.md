@@ -7,7 +7,7 @@ description: Pipulate FOSS SEO Software
 
 # {{ page.description }}
 
-### Ready to Automate Python SEO Examples
+### Ready to Automate Examples
 
 When you work something out using my sample-code in JupyterLab, the next step
 really is to automate those things you like under systemd right on your Windows
@@ -32,7 +32,7 @@ due to a limitation in WSL and I expect this requirement to change soon.  You
 will want to use Windows Terminal which probably installed with Linux, but in
 case it didn't, grab it from the Microsoft Store.
 
-### Getting Started
+### Getting Started With Pipulate
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
 Simply copy/paste any of the code in these examples into a new Notebook or go
@@ -48,7 +48,7 @@ tech for over 30-years and SEO in particular as long as it's been a field. I've
 acquired quite a few million-dollar ideas over the years, and they are best
 expressed here in Python. Bringing you Pipulate is my Ikigai.
 
-### Use Persistent Dicts as Ridiculously Easy Databases
+### Persistent Dicts as Easy Databases
 
 Before doing anything else, you need to understand how to make the Python
 ***dictionary*** datatype, or simply ***dict***, persistent. If this is
@@ -701,7 +701,7 @@ df = pd.DataFrame(table, columns=["url", "title"])
 df.to_excel("crawl.xlsx", index=False)
 ```
 
-### Fetching Web Pages Concurrently With Python
+### Concurrent Web Crawls
 
 I really don't want to at this point because it will make your head explode.
 But I feel I really have to because people are going to ask, and it's the
@@ -786,7 +786,7 @@ with sqldict("crawl.db") as db:
         db.commit()
 ```
 
-### Crawling Websites Into Google Sheets From Python
+### Crawling Websites Into Google Sheets
 
 #### First a Few Words About APIs
 
@@ -1053,7 +1053,7 @@ compare the SERP Title (the title given to the page by Google) versus the
 actual title tag on the page. Many SEO deliverable-types suggest themselves.
 And just wait until we get to hitting Google Search Console and Analytics!
 
-### Google Search Console
+### Connecting to Search Console
 
 #### Listing Your Sites with Google Search Console (GSC)
 
@@ -1556,11 +1556,13 @@ will blow your mind. It's amazing how many benefits we can get of fancy,
 higher-end systems just through the intelligent and creative use of the common
 datatypes built into Python.
 
-### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
+### Google Analytics
 
-### Pulling Data From GA
+#### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
-### Pulling Data From Google Analytics G4 API
+#### Pulling Data From GA
+
+#### Pulling Data From Google Analytics G4 API
 
 ### Taking Screenshot of Web Browser
 
