@@ -114,8 +114,9 @@ You're welcome.
 ### Python Pandas and DataFrames
 
 In case you didn't notice, we're already using Python Pandas from the above
-example. But this is where you get to understand DataFrames most often seen as
-the variable df. DataFrames are row-and-column table data like you would find
+example. But this is where you get to understand DataFrames which you'll most
+often see around the Net as the variable ***df***. When you see df, think Excel
+tab or SQL table. DataFrames are row-and-column table data like you would find
 in a tab in Excel or a table in SQL. The best way to represent table data with
 native Python objects (not Pandas) is as a list of tuples:
 
