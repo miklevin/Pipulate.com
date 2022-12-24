@@ -681,7 +681,7 @@ We begin with just an Excel file. It's pretty much the exact same process as
 saving a csv, but it gives you a tiny bit of default formatting, making the
 presence of column labels very clear.
 
-### Crawling a Website Directly Into Excel Document
+#### Crawling a Website Directly Into Excel Document
 
 ```python
 from sqlitedict import SqliteDict as sqldict
@@ -1053,7 +1053,9 @@ compare the SERP Title (the title given to the page by Google) versus the
 actual title tag on the page. Many SEO deliverable-types suggest themselves.
 And just wait until we get to hitting Google Search Console and Analytics!
 
-### Listing Your Sites with Google Search Console (GSC)
+### Google Search Console
+
+#### Listing Your Sites with Google Search Console (GSC)
 
 Okay, let's do GSC. It's worth pointing out what the [Google code
 examples](https://developers.google.com/webmaster-tools/v1/quickstart/quickstart-python) 
@@ -1079,7 +1081,7 @@ You should see output something like:
     sc-domain:pipulate.com
     sc-domain:levinux.com
 
-### Generating Google-API-Friendly Dates
+#### Generating Google-API-Friendly Dates
 
 You can take any of those above values (including sc-domain:) and use it to
 pull metrics. From GSC, keywords is the default dimension, meaning you at least
@@ -1122,7 +1124,7 @@ for x in range(months_back):
     2021-10-01 2021-10-31
     2021-09-01 2021-09-30
 
-### Pulling Data From GSC
+#### Pulling Data From GSC
 
 Okay, so let's pull some data!
 
@@ -1223,7 +1225,7 @@ for x in range(months_back):
     gsc/sc-domain_mikelev.in_2021-10-01.csv
     gsc/sc-domain_mikelev.in_2021-09-01.csv
 
-### Combining Multiple CSV Files Into One (like a SQL UNION)
+#### Combining Multiple CSV Files Into One (like a SQL UNION)
 
 Okay so now we've got a folder full of CSVs with no way to tell them apart
 except for the filename. So if we were to want to load all these CSVs back in
