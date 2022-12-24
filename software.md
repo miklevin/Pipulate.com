@@ -821,8 +821,8 @@ Excel formulas:
 
 Namely, an exclamation point goes before the range, and if there's a space in
 the name, you put single-quotes around the tab name. This whole thing is used
-in the GSheets API expected as input for where the list of tuples you provide
-is going to end up. 
+in the GSheets API as input for where the list of tuples you provide is going
+to end up. 
 
 As you plan your blit, you may want to shift everything down by a row if you're
 going to insert column labels on row 1, or alternatively make row 1 of your
