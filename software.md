@@ -48,10 +48,14 @@ expressed here in Python. Bringing you Pipulate is my Ikigai.
 ### Use Persistent Dicts as Ridiculously Easy Databases
 
 Before doing anything else, you need to understand how to make the Python
-***dictionary*** datatype, or simply ***dict***, persistent. With a persistent
-dict, many requirements for a database in your day-to-day work seems to go
-away. A persistent dict really is a database, but you hardly have to think
-about it that way.
+***dictionary*** datatype, or simply ***dict***, persistent. If this is
+gobbledygook to you, you need a primer on the 3 main Python datatypes: lists,
+tuples and dicts. Dicts are like common JavaScript JSON. That is, they're
+key/value pairs. 
+
+With a persistent dict, many requirements for a database in your day-to-day
+work seems to go away. A persistent dict really is a database, but you hardly
+have to think about it that way.
 
 ```python
 from sqlitedict import SqliteDict as sqldict
