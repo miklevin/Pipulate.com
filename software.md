@@ -1,23 +1,26 @@
 ---
-title: FOSS SEO Awesome List
+title: Awesome FOSS SEO Examples
 permalink: /software/
 group: software
-description: FOSS SEO Software
+description: FOSS SEO Software Awesome Examples
 ---
 
 # {{ page.description }}
 
-### Installing Linux & Pipulate
+### Awesome Examples for JupyterLab Is Pipulate
 
-To install Pipulate, <a href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink Me</a>.
+When you work something out using my sample-code in JupyterLab, the next step
+really is to automate those things you like under systemd right on your Windows
+laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
+or really wherever generic Linux is run with access to the Net.
 
-### Using JupyterLab
-
-After the Drink Me script is finished running, Linux and Pipulate will both be
-installed on your Windows system and JupyterLab will soon be reachable in a Web
-browser at <a href="http://localhost:8080">localhost:8080</a>. You will however
-have to open a Linux Terminal to "wake up" Jupyter. This is due to a limitation
-in WSL and I expect this requirement to change soon. Windows Terminal may have
+After the <a
+href="https://raw.githubusercontent.com/miklevin/drinkme/main/install.bat">Drink
+Me</a> script is finished running, Linux and Pipulate will both be installed on
+your Windows system and JupyterLab will soon be reachable in a Web browser at
+<a href="http://localhost:8080">localhost:8080</a>. You will however have to
+open a Linux Terminal to "wake up" Jupyter. This is due to a limitation in WSL
+and I expect this requirement to change soon. Windows Terminal may have
 installed with Linux, but in case it didn't, grab it from the Microsoft Store.
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
