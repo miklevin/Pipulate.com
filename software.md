@@ -14,9 +14,6 @@ really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
 or wherever generic Linux is run.
 
-* TOC
-{:toc}
-
 #### Enter Wonderful World of Linux
 
 After the <a
@@ -31,6 +28,9 @@ You will however have to open a Linux Terminal to "wake up" Jupyter. This is
 due to a limitation in WSL and I expect this requirement to change soon.  You
 will want to use Windows Terminal which probably installed with Linux, but in
 case it didn't, grab it from the Microsoft Store.
+
+* TOC
+{:toc}
 
 ### Getting Started
 
