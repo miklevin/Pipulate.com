@@ -24,8 +24,6 @@ looks just like JupyterLab being installed on Windows accessible at <a
 href="http://localhost:8080">localhost:8080</a>, but there are a few key
 differences:
 
-#### The Wonderful World of Linux
-
 - Jupyter is running on Linux (better for automation)
 - You have a ***repos*** folder containing ready-to-run examples
 - You can schedule Notebooks to run as Linux system services
