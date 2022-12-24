@@ -894,13 +894,12 @@ with sqldict("crawl.db") as db:
 
 #### First a Few Words About APIs
 
-Again I reiterate there are many pip installable packages you can use here to
-alleviate this next step, namely GSpread and PyGSheets but neither is popular
-enough to learn their API versus the only slightly harder direct-from-google
-Python API for Google Sheets. Packages like GSpread and PyGSheets which while
-undoubtedly offer convenience, are not so different from the main API
-(especially in this case) that you're better off than getting first-hand API
-experience.
+There are many pip installable packages you can use here to alleviate this next
+step, namely GSpread and PyGSheets but neither is popular enough to learn their
+API versus the only slightly harder direct-from-google Python API for Google
+Sheets. Packages like GSpread and PyGSheets which while undoubtedly offer
+convenience, are not so different from the main API (especially in this case)
+that you're better off than getting first-hand API experience.
 
 #### Official Is Best If Official Isn't That Much Worse
 
