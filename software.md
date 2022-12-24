@@ -734,10 +734,12 @@ bit of goodness there. Don't be jealous of JavaScript or CURL. You can do
 concurrency just fine in Python. I admit the pattern is a bit odd, but you'll
 get used to it.
 
+#### Keeping Inputs & Outputs In Sync (Zippable)
+
 I promised you updating it back to the database, and there's a nuanced point
-here. They way I did this just built a list of responses whose response.url
-does not necessarily match the database URL-key because redirection. Not the
-case here, but it could be. So, we zip the 2 tables together. This is possible
+here. The way I did this just built a list of responses whose response.url does
+not necessarily match the database URL-key because redirection. Not the case
+here, but it could be. So, we zip the 2 tables together. This is possible
 because return_exceptions=True ensures the size of the list out is the same as
 the list in. If you really wanted to, you can do a quick Python list
 comprehension to show the URLs that came back from the crawl:
