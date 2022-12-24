@@ -45,7 +45,8 @@ there. Those examples will match what you find here.
 When you work something out using my sample-code in JupyterLab, the next step
 really is to automate those things you like under systemd right on your Windows
 laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
-or wherever generic Linux is run.
+or wherever generic Linux is run. This may sound difficult, but it is easier
+than you think because there is a sample of it running on your laptop.
 
 #### Rapid-Fire Million-Dollar Ideas
 
