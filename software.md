@@ -201,6 +201,8 @@ Outputs:
 
     [186 rows x 2 columns]
 
+#### Reading HTML Tables vs. Plain Text
+
 That pd.read_html() function from the above examples really needs the data to
 be in HTML table tags. If it's just a list in plain text, you can use a similar
 trick, but with a few extra steps. Here's how we can get a list of all
