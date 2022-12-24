@@ -184,6 +184,8 @@ df_all = df.explode("Web browsers")
 print(df_all)
 ```
 
+Outputs:
+
         Year           Web browsers
     0   1990   WorldWideWeb (Nexus)
     1   1991      Line Mode Browser
