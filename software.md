@@ -1194,7 +1194,7 @@ sites = """
 mikelev.in
 levinux.com
 pipulate.com
-""".split("/")[1:-1]
+""".split("\n")[1:-1]
 ```
 
 That's 8370 x 3, or 25110 rows to process. The "processing loop" for every site
@@ -1238,6 +1238,83 @@ dictionary API.
     Args(site='foo.com', date='2022-11-30')
     foo.com
     2022-11-30
+
+Now we ***almost*** put it all together. This next step creates a list of
+nametuples that are our API-calls. This is already a "flattened" list that can
+be processed without the nested loops:
+
+```python
+from datetime import datetime
+from collections import namedtuple
+from dateutil.relativedelta import relativedelta as rd
+
+Args = namedtuple("Args", "site, date")
+sites = ['mikelev.in', 'levinux.com', 'pipulate.com']
+
+x = 1
+dates = []
+while True:
+    adate = datetime.now().date().replace(day=1) - rd(days=x)
+    pattern = "%Y-%m-%d"
+    if adate < datetime(2000, 1, 1).date():
+        break
+    adate = adate.strftime(pattern)
+    dates.append(adate)
+    x += 1
+
+api_calls = []
+for adate in dates:
+    for asite in sites:
+        api_call = Args(asite, adate)
+        api_calls.append(api_call)
+```
+
+But there is one final step to do to make this list of namedtuple args into a
+practical list for housekeeping what's been processed and what hasn't. Because
+APIs out there in the wild are often so flaky (timeouts, unavailability, etc.)
+what we're going here is a sort of tree-shaking reprocessing ability. So how do
+you do that? My favorite trick! A cheap dict database! We populate it these
+namedtuples as keys and the values set to None. We then only process keys whose
+values are none, and you can repeat that process until there are no more
+None's...
+
+```python
+from datetime import datetime
+from collections import namedtuple
+from sqlitedict import SqliteDict as sqldict
+from dateutil.relativedelta import relativedelta as rd
+
+Args = namedtuple("Args", "site, date")
+
+# List all sites to process
+sites = ['mikelev.in', 'levinux.com', 'pipulate.com']
+
+# Lits all days to process (this Millennium)
+x = 1
+dates = []
+while True:
+    adate = datetime.now().date().replace(day=1) - rd(days=x)
+    pattern = "%Y-%m-%d"
+    if adate < datetime(2000, 1, 1).date():
+        break
+    adate = adate.strftime(pattern)
+    dates.append(adate)
+    x += 1
+
+# Build API-arguments for each date for each site
+api_calls = []
+for adate in dates:
+    for asite in sites:
+        api_call = Args(asite, adate)
+        api_calls.append(api_call)
+
+# Populate database with API-args as keys but value None
+with sqldict("api_calls.db") as db:
+    for acall in api_calls:
+        db[str(acall)] = None
+    db.commit()
+print('Done')
+```
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
