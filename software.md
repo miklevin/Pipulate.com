@@ -25,9 +25,9 @@ your Windows system and JupyterLab will soon be reachable in a Web browser at
 #### Microsoft Pauses systemd
 
 You will however have to open a Linux Terminal to "wake up" Jupyter. This is
-due to a limitation in WSL and I expect this requirement to change soon.
-Windows Terminal may have installed with Linux, but in case it didn't, grab it
-from the Microsoft Store.
+due to a limitation in WSL and I expect this requirement to change soon.  You
+will want to use Windows Terminal which probably installed with Linux, but in
+case it didn't, grab it from the Microsoft Store.
 
 ### Getting Started
 
