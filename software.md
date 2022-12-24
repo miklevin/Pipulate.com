@@ -1788,6 +1788,8 @@ do. Accounts and WebProperties will join on the Account ID column, and the
 resulting Accounts+WebProperties table will join to the Views table on both the
 Account ID and WebProperty ID.
 
+#### Better Than SQL Joins and Excel VLookups
+
 This is similar to doing Joins in SQL or VLookups in Excel, but the much
 simpler Pandas way. There's different join options here with Pandas. A "pure"
 join can do it in one step and favors joining all tables on the same column,
