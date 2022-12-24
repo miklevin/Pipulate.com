@@ -1813,9 +1813,13 @@ print(dfawv)
 And that's it. Load ga_networks.csv into Excel, format it a bit and send it
 along to your boss in preparation for GA4mageddon.
 
-#### Pulling Data From GA
+#### Pulling Metrics Data from Universal Analytics
 
-#### Pulling Data From Google Analytics G4 API
+### Working With the GA4 Analytics API
+
+#### Listing Sites on GA4
+
+#### Pulling Metrics Data from GA4
 
 ### Taking Screenshot of Web Browser
 
