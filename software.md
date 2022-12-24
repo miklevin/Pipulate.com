@@ -1427,9 +1427,9 @@ Raymond Hettinger, the core Python developer who wrote namedtuples.
 
 If you want the big picture, research multi-column (a.k.a. composite) primary
 keys and ponder their relationship to tuples being used as Python dict keys. It
-will blow your mind. Now we are converting these namedtuples to strings for use
-as dict-keys for SqliteDict, but all the same uniqueness constraints benefits
-are still present if you think about it.
+will blow your mind. It's amazing how many benefits we can get of fancy,
+higher-end systems just through the intelligent and creative use of the common
+datatypes built into Python.
 
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
