@@ -1669,7 +1669,9 @@ href="https://support.google.com/analytics/answer/10089681?hl=en">deleting all
 that data</a> on July 1, 2023. Customers of the paid-for Google Analytics
 product 360 will have until July 1, 2024. Still, it is not a lot of time for
 changes this big on the Web and I'm torn whether I should even show you the
-"old way". But chances are many things you do the old way will still apply.
+"old way". But chances are many things you do the old way will still apply
+&#151; especially for Account IDs which aren't changing and which is our first
+example:
 
 #### List All Google Analytics Accounts You Can Access
 
@@ -1685,12 +1687,18 @@ df.to_csv("ga_accounts.csv", index=False)
 print(df)
 ```
 
+This is the shortest of the 3 lists we're generating. There are less Accounts
+than Web Properties and Views. So instead of creating one great big object with
+the whole 3-level hierarchy (possible, but messy), we're going to create 3
+DataFrames and save them out as CSVs. Then we're going to join the CSVs as the
+last step.
+
+#### List All Web Properties for a Account
+
 Given a single Account ID from the above query, you can get a list of all its
 Web Properties. The concept of Web Properties is going away in Google Analytics
 3, but leading up to that plenty of people are going to have to do an
 accounting of everything under Universal Analytics, so it's still important.
-
-#### List All Web Properties for a Account
 
 So there's a lot of ways to go about this. There's the nested approach starting
 with above Account ID query, then the Web Properties queries indented a little,
@@ -1703,7 +1711,9 @@ from running the above query.
 account_ids = list(df["Account ID"])
 ```
 
-And now our "nesting" is a little less ugly:
+We still will have a loop, but this simple list of Account IDs is what we will
+iterate through. Instead of relying on these Account IDs still being in memory,
+we load them back from the CSV on the drive.
 
 ```python
 import ohawf
@@ -1729,9 +1739,12 @@ print(df)
 And now we do the 3rd query, this time for the 3rd level-down in the old Google
 Analytics hierarchy of Accounts / Web Properties / Views (a.k.a. Profiles). As
 with the prior example, take note that a ga_webproperties.csv file must exist
-from executing the prior query. Also, because there are more views than
-anything else be aware of your API rate limit. You may exceed it and have to
-wait a day. The limit is 10,000 requests per user per day.
+from executing the prior query. I'm going to grab both the Account IDs and
+WebProperty IDs because the next query requires both.
+
+Also, because there are more views than anything else be aware of your API rate
+limit. You may exceed it and have to wait a day. The limit is 10,000 requests
+per user per day.
 
 #### List All Views (Profiles) per Web Property
 
