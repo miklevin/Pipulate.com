@@ -148,8 +148,9 @@ df = pd.read_csv("countries.csv")
 This trick doesn't always work, but when it does, it's glorious. Sometimes you
 have to poke around. You actually get back a ***list*** of DataFrames and have
 to grab the right one. This will grab a history of web browsers. You can see
-how instead of grabbing the zero'th list, we're grabbing the 1st. Python uses
-zero-based indexes, so "1" actually means the second df in the list:
+how instead of grabbing the zero'th item in the list, we're grabbing the 1st.
+Python uses zero-based indexes, so "1" actually means the second df in the
+list:
 
 ```python
 ipythonmport pandas as pd
@@ -159,6 +160,8 @@ list_of_dfs = pd.read_html(url)
 df = list_of_dfs[1]
 print(df)
 ```
+
+Outputs:
 
         Year                                       Web browsers
     0   1990                               WorldWideWeb (Nexus)
