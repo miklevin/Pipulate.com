@@ -36,6 +36,9 @@ Simply copy/paste any of the code in these examples into a new Notebook or go
 into the repo named pipulate and run the code from the example files found
 there. Those examples will match what you find here.
 
+* TOC
+{:toc}
+
 #### Rapid-Fire Million-Dollar Ideas
 
 While not technically an ***Awesome List*** for Python SEO, Pipulate is a list
