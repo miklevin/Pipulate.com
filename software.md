@@ -147,9 +147,9 @@ df.to_csv("tlds.csv", index=False)
 
 In case you didn't notice, we're already using Python Pandas from the above
 example. But this is where you get to understand DataFrames which you'll most
-often see around the Net as the variable ***df***. When you see df, think Excel
-tab or SQL table. DataFrames are row-and-column data. You'll also hear the term
-***matrices*** or simply ***tables***.
+often see around the Net as the variable ***df***. When you see df, think
+***Excel tab*** or ***SQL table***. DataFrames are row-and-column data. You'll
+also hear the term ***matrices*** or simply ***tables***.
 
 The ubiquitous Python 3rd party library called Pandas provides the special
 datatype called DataFrame to handle such row & column data. If you've outgrown
