@@ -670,9 +670,9 @@ You're welcome.
 
 #### What Do You Do With a Database of Pages?
 
-What kind of investigations? have you not read this page? Let's extract the
-title tags, create a Pandas DataFrame, save the URLs plus title tags as an
-Excel document and push it to Google Sheets… duhhh
+What kind of investigations? Let's extract the title tags, create a Pandas
+DataFrame, save the URLs plus title tags as an Excel document and push it to
+Google Sheets.
 
 We begin with just an Excel file. It's pretty much the exact same process as
 saving a csv, but it gives you a tiny bit of default formatting, making the
