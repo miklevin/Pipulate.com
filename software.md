@@ -106,8 +106,6 @@ activate, they're still just using the standard Python dictionary (dict) API.
 They're back-ended by the ubiquitous workhorse of the tech industry, SQLite3,
 which is already included with Python.
 
-You're welcome.
-
 ### Grab Data From Webpages Easily
 
 Here's a way to grab some data quick and easy off of a webpage...
@@ -262,8 +260,6 @@ lot nicer in Python Pandas. Data Science, yay!
 > Into df's where you do stuff like in SQL or Excel  
 > But w/APIs you'll prize for being timeless & done well.  
 
-You're welcome.
-
 ### Logging Into Google Services
 
 A lot more people would be doing advanced SEO work in Jupyter were it not so
@@ -351,8 +347,6 @@ There's a ton you can do with the
 [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts)
 including reading data out, formatting, etc.
 
-You're welcome.
-
 ### Connecting to Google Photos
 
 If you've followed the examples so far, you know the general pattern to connect
@@ -404,8 +398,6 @@ print('Done!')
 This is quite rare code to be finding on the Internet. It works because of the
 sample scopes I include with ohawf includes Google Photos. 
 
-You're welcome.
-
 ### Making Jupyter Beep
 
 In the above Google Photos example, I had the process stop after just 50
@@ -450,8 +442,6 @@ demonstrated here such as anonymous functions (called lambdas), tuple unpacking
 (symmetrical variable assignment) and shim substitution for unavailable
 functions. It's all really demonstrated on the same line, really.
 
-You're welcome.
-
 ### Crawling a Website
 
 Did somebody say crawl a website? Not everything you do in SEO requires a
@@ -486,9 +476,9 @@ response = httpx.get(url, headers=headers)
 print(response.text)
 ```
 
-And there you go, that's a 1-page site-crawl. You're welcome. But wait! There's
-more! Remember that first thing on this page about easy peasy databases based
-on persistent Python dicts? This looks like a good time for storage!
+And there you go, that's a 1-page site-crawl. But wait! There's more! Remember
+that first thing on this page about easy peasy databases based on persistent
+Python dicts? This looks like a good time for storage!
 
 #### Putting Python Site Crawl into Database
 
@@ -716,7 +706,7 @@ commit changes to the persistent on-drive database file unless you do a
 big crawl, it's better to commit once per page (outer loop) rather than on the
 inner loop per link. 
 
-You're welcome. Now let's get the missing pages:
+Now let's get the missing pages:
 
 #### Performing a 1-Click-Depth Crawl of a Website
 
@@ -753,8 +743,6 @@ Almost magical, right? It's the perfect setup for an SEO investigation. You've
 preformed a 1 click-depth crawl of a website and stored ALL the browser-like
 view-source results (HTML) of the page into a local, easily accessed database
 for father investigation.
-
-You're welcome.
 
 #### What Do You Do With a Database of Pages?
 
@@ -1344,8 +1332,6 @@ df_all = pd.concat(lots)
 df_all.to_csv("all_files.csv", index=False)
 ```
 
-You're welcome.
-
 ### Record Keeping With Named Tuples
 
 > There's a Raymond who's a rebel  
@@ -1618,7 +1604,7 @@ with sqldict("api_calls.db") as db:
     I made a call for site levinux.com on date 2022-11-27.
     I made a call for site pipulate.com on date 2022-11-27.
 
-Did I mention million-dollar ideas? You're welcome.
+Did I mention million-dollar ideas? This is one.
 
 #### Python Dict Keys Like Database Primary Keys Ensure Uniqueness
 
