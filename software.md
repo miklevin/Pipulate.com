@@ -74,9 +74,17 @@ with sqldict("name.db") as db:
 ```
 
 This is a million-dollar trick that gives you a lightweight NoSQL database for
-every occasion. Use it as a real database. Use it as a cache. It's fast and
-even though it does take pip installing a 3rd party package, that's just to get
-the dictionary API to work with SQLite3 which is already included with Python.
+every occasion. It especially enables the pattern of grabbing and saving the
+raw-data first, then loading, extracting and transforming it (turning it into
+useful "deliverables") later.
+
+#### Persistent Dicts Wired to SQLite3
+
+Use persistent dicts as real databases. Use them as a caches to speed things
+up. They're fast &#51; and even though they do require a pip install of 3rd
+party package to activate, they're still just using the standard Python
+dictionary (dict) API. They're back-ended by the ubiquitous workhorse of the
+tech industry, SQLite3, which is already included with Python.
 
 You're welcome.
 
