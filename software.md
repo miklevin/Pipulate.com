@@ -153,7 +153,7 @@ to grab the right one. This will grab a history of web browsers. You can see
 how instead of grabbing the zero'th list, we're grabbing the 1st. Python uses
 zero-based indexes, so "1" actually means the second df in the list:
 
-```
+```python
 import pandas as pd
 
 url = "https://en.wikipedia.org/wiki/History_of_the_web_browser"
