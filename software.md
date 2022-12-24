@@ -1269,6 +1269,32 @@ for adate in dates:
         api_calls.append(api_call)
 ```
 
+In Jupyter we can look at the first 10 sets of API arguments like so:
+
+```python
+api_calls[:10]
+```
+
+...which shows:
+
+    [Args(site='mikelev.in', date='2022-11-30'),
+     Args(site='levinux.com', date='2022-11-30'),
+     Args(site='pipulate.com', date='2022-11-30'),
+     Args(site='mikelev.in', date='2022-11-29'),
+     Args(site='levinux.com', date='2022-11-29'),
+     Args(site='pipulate.com', date='2022-11-29'),
+     Args(site='mikelev.in', date='2022-11-28'),
+     Args(site='levinux.com', date='2022-11-28'),
+     Args(site='pipulate.com', date='2022-11-28'),
+     Args(site='mikelev.in', date='2022-11-27')]
+
+#### Product of a Cartesian Join
+
+...and gives you a pretty good idea of what we're doing (I hope). It is every
+combination of property and date. This is the product of a cross-join, a.k.a.
+Cartesian Join, that was accomplished with the nested loop iterating through
+all sites and dates.
+
 But there is one final step to do to make this list of namedtuple args into a
 practical list for housekeeping what's been processed and what hasn't. Because
 APIs out there in the wild are often so flaky (timeouts, unavailability, etc.)
@@ -1318,7 +1344,9 @@ print('Done')
 
 Now we can break out the actual pulling of the data separate, getting rid of
 all that arg-building date nonsense (they're already built) and just shake the
-trees...
+trees. 
+
+#### Shaking the API Trees
 
 ```python
 from sqlitedict import SqliteDict as sqldict
@@ -1328,7 +1356,9 @@ Args = namedtuple("Args", "site, date")
 
 # Simulate an API-call
 def get_data(**kwargs):
+    # Splatting named arguments into dict (great trick!)
     rv = None
+    # All paramters present? (another great trick!)
     if all(item in kwargs for item in ['site', 'date']):
         site = kwargs["site"]
         date = kwargs["date"]
@@ -1351,6 +1381,8 @@ print('Done')
 
 And you can step through the database and look at the data. Any unsuccessful
 data-fetches will still read "None".
+
+#### Spinning Through Results
 
 ```python
 with sqldict("api_calls.db") as db:
