@@ -1212,6 +1212,33 @@ missed API-calls are you going to rerun the entire loop. Is that going to
 reprocess every line and burn through your API quota and waste a lot of time?
 No! Of course not. Let's build record-keeping directly into this job.
 
+Factory constructors are one of those annoying things from object oriented
+design that we manage to avoid in most of our Python SEO work, but this is one
+delightfully unobjectionable exception. Let's import the constructor:
+
+```python
+# Import factory template
+from collections import namedtuple
+
+# Create new factory constructor
+Args = namedtuple("Args", "site, date")
+
+# Use constructor to create instance
+args = Args("foo.com", "2022-11-30")
+
+print(args)
+print(args.site)
+print(args.date)
+```
+
+Produces this output. Look carefully. Notice how you can use dot-notation to
+access values inside a namedtuple. This is easier than the square-bracket
+dictionary API.
+
+    Args(site='foo.com', date='2022-11-30')
+    foo.com
+    2022-11-30
+
 ### Listing Your Accounts, Web Properties & Views with Google Analytics (GA)
 
 ### Pulling Data From GA
