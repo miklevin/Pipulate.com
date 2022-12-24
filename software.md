@@ -1258,6 +1258,11 @@ You're welcome.
 
 ### Record Keeping With Named Tuples
 
+> There's a Raymond who's a rebel  
+> And thinks eval is not evil  
+> So he gave us the named tuple  
+> Which is perfect for retrieval  
+
 When you're processing a long-running, API-hitting data-pulling job, there will
 be problems that are can be hard to track down. As the outer and inner loops
 are processed, something gets skipped but the overall job keeps going because
