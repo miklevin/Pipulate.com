@@ -7,10 +7,8 @@ description: Pipulate FOSS SEO Software
 
 # {{ page.description }}
 
-Welcome to the big Pipulate example page. If you study this page top-down,
-you'll have a pretty good overview of the most common tasks that need to be
-performed by an SEO, from site crawling to connecting to Google Analytics and
-Search Console, to performing SERP monitoring and auto-emailing reports.
+Study this page to learn many of the best tricks needed for SEO, plus many of
+the techniques that make Python a joy to use, and complex deliverables simple.
 
 #### What You Will Find on This Page
 
