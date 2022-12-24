@@ -116,9 +116,17 @@ You're welcome.
 In case you didn't notice, we're already using Python Pandas from the above
 example. But this is where you get to understand DataFrames which you'll most
 often see around the Net as the variable ***df***. When you see df, think Excel
-tab or SQL table. DataFrames are row-and-column table data like you would find
-in a tab in Excel or a table in SQL. The best way to represent table data with
-native Python objects (not Pandas) is as a list of tuples:
+tab or SQL table. DataFrames are row-and-column data. You'll also hear the term
+***matrices*** or simply ***tables***.
+
+The Python 3rd party library, but now ubiquitous, Pandas provides the special
+datatype called DataFrame to handle such row & column data. If you've outgrown
+Excel or want to do SQL stuff without a huge tech liability, Pandas is your
+answer. However, you don't ***have*** to use Pandas DataFrames to manipulate
+tables in Python. Much of the time, it's not even necessary.
+
+The best way to represent tables in Python without Pandas is as a list of
+tuples:
 
 ```python
 table = [
@@ -141,13 +149,6 @@ you Excel users, that's VLookups, Pivot Tables and combining tabs, but it's a
 lot nicer in Python Pandas. Data Science, yay!
 
 You're welcome.
-
-While we're talking about Pandas DataFrames we may as well get this out of the
-way before we move on. Have you ever had a bunch of CSV files or Excel
-Spreadsheet tabs that you needed to combine into one? I'm talking about the
-stacking on top of each other combining and not the adding columns combining.
-If you need to do the equivalent of a SQL Union or an Excel... uhm... an Excel
-uhm... massive waste of copy/paste time, then note there is a better way.
 
 ### Logging Into Google Services
 
@@ -1142,9 +1143,12 @@ for x in range(months_back):
 Okay so now we've got a folder full of CSVs with no way to tell them apart
 except for the filename. So if we were to want to load all these CSVs back in
 and treat them like a single DataFrame, table, tab or whatnot, what to do? Have
-you ever tried to combine multiple CSVs in Excel? Not fun. Here in Python with
-Pandas? Fun! Like so. The main thing to notice is pd.concat() which turns a
-list of column-compatible dataframes into a single dataframe.
+you ever tried to combine multiple CSVs in Excel? Not fun. In SQL this is
+called a UNION, also not much fun.
+
+Here in Python with Pandas? It is fun, and you do it like so. The main thing to
+notice is pd.concat() which turns a list of column-compatible dataframes into a
+single dataframe.
 
 ```python
 import pandas as pd
