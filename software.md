@@ -329,12 +329,10 @@ This is a Jupyter trick, so you want to make sure you're in Jupyter. Most of
 the code here really is making sure you're in Jupyter. It's also the first
 Python function I've defined in these examples. Generally, you shouldn't have
 to define new functions in your Jupyter code because they're made available by
-the packages you're importing.
+the packages you're importing. That's a trick to keep the code you're actually
+looking at just the important overarching program-flow stuff.
 
-If you look carefully you'll see some of Python's most awesome features
-demonstrated here such as anonymous functions (called lambdas), tuple unpacking
-(symmetrical variable assignment) and shim substitution for unavailable
-functions. It's all really demonstrated on the same line, really.
+#### Beep at End Of Script
 
 ```python
 try:
@@ -356,6 +354,14 @@ beep()
 Now whenever you're running a long function like say a site-crawl, just throw a
 beep at the end and go get yourself a coffee. And if the code ends up on a
 server, it'll pass silently.
+
+#### Anonymous Lambda Functions & Tuple Unpacking
+
+If you look carefully you'll see some of Python's most awesome features
+demonstrated here such as anonymous functions (called lambdas), tuple unpacking
+(symmetrical variable assignment) and shim substitution for unavailable
+functions. It's all really demonstrated on the same line, really.
+
 
 You're welcome.
 
