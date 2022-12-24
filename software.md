@@ -7,10 +7,10 @@ description: Pipulate FOSS SEO Software
 
 # {{ page.description }}
 
-When you work something out using my sample-code in JupyterLab, the next step
-really is to automate those things you like under systemd right on your Windows
-laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
-or wherever generic Linux is run.
+Welcome to the big Pipulate example page. If you study this page top-down,
+you'll have a pretty good overview of the most common tasks that need to be
+performed by an SEO, from site crawling to connecting to Google Analytics and
+Search Console, to performing SERP monitoring and auto-emailing reports.
 
 #### What You Will Find on This Page
 
@@ -40,6 +40,11 @@ Once you have JupyterLab displaying in your Web browser, you're in business.
 Simply copy/paste any of the code in these examples into a new Notebook or go
 into the repo named pipulate and run the code from the example files found
 there. Those examples will match what you find here.
+
+When you work something out using my sample-code in JupyterLab, the next step
+really is to automate those things you like under systemd right on your Windows
+laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
+or wherever generic Linux is run.
 
 #### Rapid-Fire Million-Dollar Ideas
 
