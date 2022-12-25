@@ -1928,6 +1928,8 @@ request = RunReportRequest(
     property=f"properties/[Your GA4 Property ID Here]",
     metrics=[Metric(name="sessions")],
     date_ranges=[DateRange(start_date="2022-01-01", end_date="2022-12-31")],
+
+i
 )
 
 response = client.run_report(request)
@@ -1947,9 +1949,15 @@ print(getsource(Metric))
 
 #### Listing Sites on GA4
 
-### Keyword Histograms
+### Keyword Analysis
 
-### Keyword Clustering
+#### Gathering Sites From Keyword
+
+#### Extracting Keywords From Pages
+
+#### Generating Keyword Histograms
+
+#### Keyword Clustering (Hub & Spokes)
 
 ### Taking Screenshot of Web Browser
 
