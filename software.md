@@ -300,10 +300,10 @@ aspiring SEO Pythonista's existence.
 Actually just logging into Google can be the hardest part of many projects,
 especially those involving Analytics, Search Console or Sheets. Most other
 sites at this point will be telling you to register as a Google Developer, make
-a project at the Cloud Console, download a client.json file, yadda, yadda. It's
-not terrible advice if you can manage it, and it gives you more options than
-the way I provide here. The way I provide here has this one distinct advantage:
-it's going to work for you here and now.
+a project at the Cloud Console, download a credentials.json file, yadda, yadda.
+It's not terrible advice if you can manage it, and it gives you more options
+than the way I provide here. The way I provide here has this one distinct
+advantage: it's going to work for you here and now.
 
 ```python
 import ohawf
@@ -1729,7 +1729,7 @@ from apiclient.discovery import build
 
 creds = ohawf.get()
 service = build("analytics", "v3", credentials=creds)
-df = pd.read_csv("ga_accounts.csv")
+df = pd.read_csv("ga_accounts.csv")  # Generated from prior example
 account_ids = list(df["Account ID"])
 
 table = []
@@ -1762,7 +1762,7 @@ from apiclient.discovery import build
 
 creds = ohawf.get()
 service = build("analytics", "v3", credentials=creds)
-df = pd.read_csv("ga_webproperties.csv")
+df = pd.read_csv("ga_webproperties.csv")  # Generated from prior example
 
 ids = ["Account ID", "WebProperty ID"]
 idtuples = list(map(tuple, df[ids].to_records(index=False)))
@@ -1821,6 +1821,28 @@ And that's it. Load ga_networks.csv into Excel, format it a bit and send it
 along to your boss in preparation for GA4mageddon.
 
 #### Pulling Metrics Data from Universal Analytics
+
+All the GA examples so far have been getting your IDs. The View IDs (a.k.a.
+Profile IDs) are the ones we actually use in metrics-pulling queries. One of
+the most important things to know here is Google's <a
+href="https://ga-dev-tools.web.app/query-explorer/">Query Explorer</a> tool.
+They also have it for <a
+href="https://ga-dev-tools.web.app/ga4/query-explorer/">GA4</a>. This is where
+you experiment, which is important because the requests are somewhat hard to
+construct. You can check out their notoriously obfuscated <a
+href="https://developers.google.com/analytics/devguides/reporting/core/v4/quickstart/service-py">example</a>
+which in my opinion prevents people from doing this sort of work than helps.
+Here's how simple it should be. It could be even simpler, but I'm generating
+the start and end dates automatically.
+
+#### Analytics Reporting API v4 != Google Analytics 4 (GA4)
+
+Also note that this approach uses the Google Analytics Reporting API v4 we're
+using here is not the same thing as Google Analytics 4 (GA4). The way I'm
+showing here uses the Core Reporting API, which you can identify by the
+connection service being built from apiclient.discovery.build with lines like:
+
+    service = build("analyticsreporting", "v4", credentials=creds)
 
 ### Working With the GA4 Analytics API
 
