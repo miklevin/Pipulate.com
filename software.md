@@ -727,8 +727,8 @@ Getting the idea? Can you guess our next step?
 
 #### But First a Word On Python Context Manager and SQLite Commit
 
-A nuance here is that I'm using something called the Python "context manager"
-with SqliteDict. You can tell the content manager by the "with/as" keywords and
+A A Nuance I'm using something called the Python "context manager" with
+SqliteDict. You can tell the content manager by the "with/as" keywords and
 accompany indent. The "as" variable (really a file handle) goes away after the
 outdent. That's the point. That's it's context. 
 
