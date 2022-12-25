@@ -2046,7 +2046,10 @@ print("Done")
 ```
 
 We shoved the date-logic into the above code. Now we're shoving the raw data
-collection into the following code:
+collection into the following code. There's a lot good process here. If the
+data collection skipped a week, re-running it will fill it in. Plus all the
+logic to extract can be separated from the date-logic and separated from the
+raw data collection phase.
 
 ```python
 import ohawf
@@ -2057,17 +2060,6 @@ from sqlitedict import SqliteDict as sqldict
 creds = ohawf.get()
 service = build("searchconsole", "v1", credentials=creds)
 site = "sc-domain:mikelev.in"
-
-columns = [
-    "start_date",
-    "end_date",
-    "keyword",
-    "url",
-    "clicks",
-    "impressions",
-    "ctr",
-    "position",
-]
 
 with sqldict("gsc_weekly.db") as db:
     for str_range in db:
@@ -2087,6 +2079,52 @@ with sqldict("gsc_weekly.db") as db:
             db[str_range] = results
             db.commit()
 print("Done")
+```
+
+And now we "flatten" the GSC raw data-pull into a CSV:
+
+```python
+import pandas as pd
+from collections import namedtuple
+from sqlitedict import SqliteDict as sqldict
+
+Range = namedtuple("Range", "start_date, end_date")
+
+columns = [
+    "start_date",
+    "end_date",
+    "keyword",
+    "url",
+    "clicks",
+    "impressions",
+    "ctr",
+    "position",
+]
+
+table = []
+with sqldict("gsc_weekly.db") as db:
+    for str_range in db:
+        arange = eval(str_range)
+        data = db[str_range]
+        if "rows" in data:
+            week_table = [
+                (
+                    arange.start_date,
+                    arange.end_date,
+                    x["keys"][0],
+                    x["keys"][1],
+                    x["clicks"],
+                    x["impressions"],
+                    x["ctr"],
+                    x["position"],
+                )
+                for x in data['rows']
+            ]
+            df = pd.DataFrame(week_table)
+            table.append(df)
+df = pd.concat(table)
+df.columns = columns
+df.to_csv("gsc_monthly.csv", index=False)
 ```
 
 #### Extracting Keywords From Pages
