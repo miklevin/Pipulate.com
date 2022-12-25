@@ -1395,10 +1395,10 @@ single list of pre-bundled sets of API-arguments. Let me show you.
 
 Let's say you need to look at the date of every day of this millennium so far.
 
+```python
 from datetime import datetime
 from dateutil.relativedelta import relativedelta as rd
 
-```python
 x = 1
 dates = []
 while True:
@@ -2007,13 +2007,16 @@ depth and keep it finite, it's fine. 'Aight?
 
 ### Keyword Analysis
 
+Given a URL, there are a few way to get its keywords. If you own the site and
+it's been verified in Google Search Console, then you can feed a URL to the GSC
+API and get back the keywords that lead to that page, plus the usual metrics
+for the time-period:
+
+
+
 Let's do keyword analysis and make it meta, okay? What's a meta for? It's for
 stupid jokes on SEO sites doing stupid data-tricks. The URL of this page, I
 know is https://pipulate.com/software/ and so, I can crawl it:
-
-
-
-#### Gathering Sites From Keyword
 
 #### Extracting Keywords From Pages
 
