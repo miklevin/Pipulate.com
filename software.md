@@ -153,7 +153,7 @@ Python uses zero-based indexes, so "1" actually means the second df in the
 list:
 
 ```python
-ipythonmport pandas as pd
+import pandas as pd
 
 url = "https://en.wikipedia.org/wiki/History_of_the_web_browser"
 list_of_dfs = pd.read_html(url)
@@ -520,6 +520,9 @@ Python dicts? This looks like a good time for storage!
 import httpx
 from sqlitedict import SqliteDict as sqldict
 
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
 url = "https://mikelev.in"
 response = httpx.get(url, headers=headers)
 with sqldict("crawl.db") as db:
@@ -856,6 +859,20 @@ comprehension to show the URLs that came back from the crawl:
 
 ```python
 [x.url for x in responses]
+```
+
+Outputs:
+
+```python
+[URL('https://mikelev.in'),
+ URL('https://mikelev.in/'),
+ URL('https://mikelev.in/linux/'),
+ URL('https://mikelev.in/python/'),
+ URL('https://mikelev.in/vim/'),
+ URL('https://mikelev.in/git/'),
+ URL('https://mikelev.in/logo/'),
+ URL('https://mikelev.in/seo/'),
+ URL('https://mikelev.in/blog/')]
 ```
 
 But it's not back in the database. We just fetched it concurrently and it's
