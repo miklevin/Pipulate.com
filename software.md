@@ -1856,7 +1856,7 @@ query = {
         ],
         "pageSize": "1",
         "samplingLevel": "SMALL",
-        "viewId": [your view id here],
+        "viewId": [Your GA View ID Here],
     }
 }
 
@@ -1900,6 +1900,48 @@ client = BetaAnalyticsDataClient(credentials=creds)
 ```
 
 ### Working With the GA4 Analytics API
+
+And that's our cue to move onto the future of Google Analytics. Bare bones
+example? Congratulations! You found ***the one*** that exists on the Internet.
+And wow do the patterns change. In the place of build (technically,
+apiclient.discovery.build) is BetaAnalyticsDataClient (technically,
+google.analytics.data_v1beta.BetaAnalyticsDataClient). These names will change
+as the Python GA4 client libraries stabilize.
+
+```python
+import ohawf
+from google.analytics.data_v1beta import BetaAnalyticsDataClient
+
+# We use this new pattern for sub-imports
+from google.analytics.data_v1beta.types import (
+    RunReportRequest,
+    DateRange,
+    Metric
+)
+
+creds = ohawf.get()
+client = BetaAnalyticsDataClient(credentials=creds)
+
+request = RunReportRequest(
+    property=f"properties/[Your GA4 Property ID Here]",
+    metrics=[Metric(name="sessions")],
+    date_ranges=[DateRange(start_date="2022-01-01", end_date="2022-12-31")],
+)
+
+response = client.run_report(request)
+print(response)
+```
+
+And yes, that works. Something to notice here which I'm keeping a close eye on
+is the use of custom data objects to build arguments, such as DateRage and
+Metric. I'm only just getting an handle on these using the <a
+href="https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema">documentation
+here</a>. There's a lot to learn! You can always look at the source code with:
+
+```python
+from inspect import getsource
+print(getsource(Metric))
+```
 
 #### Listing Sites on GA4
 
