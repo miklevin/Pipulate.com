@@ -1967,6 +1967,10 @@ print(getsource(Metric))
 
 #### Dealing With Login Issues
 
+#### Extracting Data The Easy Way
+
+#### Extracting Data If It's JavaScript
+
 #### Saving The Entire DOM
 
 ### Connecting to Google Trends
