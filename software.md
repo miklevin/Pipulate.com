@@ -1832,8 +1832,34 @@ you experiment, which is important because the requests are somewhat hard to
 construct. You can check out their notoriously obfuscated <a
 href="https://developers.google.com/analytics/devguides/reporting/core/v4/quickstart/service-py">example</a>
 which in my opinion prevents people from doing this sort of work than helps.
-Here's how simple it should be. It could be even simpler, but I'm generating
-the start and end dates automatically.
+Here's how simple it should be.  Why nobody shows barebones examples like this
+except for me, I'll never know.
+
+```python
+import ohawf
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("analyticsreporting", "v4", credentials=creds)
+
+# Create the Google Analytics query
+query = {
+    "reportRequests": {
+        "dateRanges": [{"endDate": "2022-12-31", "startDate": "2022-01-01"}],
+        "metrics": [
+            {"expression": "ga:users"},
+            {"expression": "ga:newusers"},
+            {"expression": "ga:sessions"},
+            {"expression": "ga:bouncerate"},
+            {"expression": "ga:pageviewsPerSession"},
+            {"expression": "ga:avgSessionDuration"},
+        ],
+        "pageSize": "1",
+        "samplingLevel": "SMALL",
+        "viewId": "252894703",
+    }
+}
+```
 
 #### Analytics Reporting API v4 != Google Analytics 4 (GA4)
 
@@ -1843,6 +1869,11 @@ showing here uses the Core Reporting API, which you can identify by the
 connection service being built from apiclient.discovery.build with lines like:
 
     service = build("analyticsreporting", "v4", credentials=creds)
+
+
+# Execute query and print response
+response = service.reports().batchGet(body=query).execute()
+print(response)
 
 ### Working With the GA4 Analytics API
 
