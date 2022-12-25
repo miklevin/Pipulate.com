@@ -1683,6 +1683,12 @@ example:
 #### List All Google Analytics Accounts You Can Access
 
 ```python
+import ohawf
+import pandas as pd
+from apiclient.discovery import build
+
+creds = ohawf.get()
+service = build("analytics", "v3", credentials=creds)
 accounts = service.management().accounts().list().execute()
 
 table = []
