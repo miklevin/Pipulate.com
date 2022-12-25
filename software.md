@@ -1958,7 +1958,8 @@ print(getsource(Metric))
 When I showed this for Non-GA4, I felt compelled to save out 3 CSVs because of
 the 3 levels of hierarchy. But with GA4, it's just a bunch of Property IDs
 under each Account ID. That's only 2-levels of hierarchy, and so I'll mix the 2
-different API-styles and do it with a nested loop and one table.
+different API-styles and do it with a nested loop and one table and save it out
+as ga4_properties.csv.
 
 ```python
 import ohawf
