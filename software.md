@@ -1856,24 +1856,48 @@ query = {
         ],
         "pageSize": "1",
         "samplingLevel": "SMALL",
-        "viewId": "252894703",
+        "viewId": [your view id here],
     }
 }
-```
-
-#### Analytics Reporting API v4 != Google Analytics 4 (GA4)
-
-Also note that this approach uses the Google Analytics Reporting API v4 we're
-using here is not the same thing as Google Analytics 4 (GA4). The way I'm
-showing here uses the Core Reporting API, which you can identify by the
-connection service being built from apiclient.discovery.build with lines like:
-
-    service = build("analyticsreporting", "v4", credentials=creds)
-
 
 # Execute query and print response
 response = service.reports().batchGet(body=query).execute()
-print(response)
+print(response)}
+```
+
+Bonus: if you're a paid GA 360 customer and have a higher resolution sampling
+rate available to you, you can get it by adding this to the query, which puts
+another key/value pair in the query dict object at the same level as
+reportRequests:
+
+```python
+query["useResourceQuotas"] = True
+```
+
+Wait, what? Hitting the Google Analytics API has been that simple all these
+years? Yup. Then why don't more people do it? Because simple examples are hard
+to find. Want to know what's even harder to find than a simple GA API V4
+example? A simple GA4 example. No, they're not the same thing!
+
+#### Analytics Reporting API v4 != Google Analytics 4 (GA4)
+
+The language and terminology surrounding this stuff is infuriating. The above
+example uses the Google Analytics Reporting API v4, which is part of the Core
+Reporting API, which is not the same thing as Google Analytics 4 (GA4), which
+is part of the Google Analytics Data API. Roughly speaking, the Core Reporting
+API is the "old way" which is still used for most things except GA4 as far as I
+can tell. The older Core Reporting API can be recognized through its use of
+apiclient.discovery.build with lines like:
+
+```
+service = build("analyticsreporting", "v4", credentials=creds)
+```
+
+The new GA4 way can be recognized as of the time of this writing by:
+
+```python
+client = BetaAnalyticsDataClient(credentials=creds)
+```
 
 ### Working With the GA4 Analytics API
 
