@@ -291,18 +291,18 @@ lot nicer in Python Pandas. Data Science, yay!
 
 ### Logging Into Google Services
 
-A lot more people would be doing advanced SEO work in Jupyter were it not so
-difficult to log into Google services. OAuth2 login is the bane of many
-aspiring SEO Pythonista's existence.
+A lot more people would be doing advanced SEO work in Python and Jupyter were
+it not so difficult to log into Google services. OAuth2 login is the bane of
+many aspiring SEO Pythonista's existence.
 
-#### The Bane of Our Existence
+#### OAuth2 The Bane of Our Existence
 
 Actually just logging into Google can be the hardest part of many projects,
 especially those involving Analytics, Search Console or Sheets. Most other
 sites at this point will be telling you to register as a Google Developer, make
 a project at the Cloud Console, download a credentials.json file, yadda, yadda.
 It's not terrible advice if you can manage it, and it gives you more options
-than the way I provide here. The way I provide here has this one distinct
+than the way I provide here. But the way I provide here has this one distinct
 advantage: it's going to work for you here and now.
 
 ```python
@@ -1908,6 +1908,8 @@ apiclient.discovery.build) is BetaAnalyticsDataClient (technically,
 google.analytics.data_v1beta.BetaAnalyticsDataClient). These names will change
 as the Python GA4 client libraries stabilize.
 
+#### Pulling Data from GA4
+
 ```python
 import ohawf
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
@@ -1945,7 +1947,9 @@ print(getsource(Metric))
 
 #### Listing Sites on GA4
 
-#### Pulling Metrics Data from GA4
+### Keyword Histograms
+
+### Keyword Clustering
 
 ### Taking Screenshot of Web Browser
 
