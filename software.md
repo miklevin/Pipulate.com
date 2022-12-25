@@ -1955,6 +1955,39 @@ print(getsource(Metric))
 
 #### Listing Sites on GA4
 
+When I showed this for Non-GA4, I felt compelled to save out 3 CSVs because of
+the 3 levels of hierarchy. But with GA4, it's just a bunch of Property IDs
+under each Account ID. That's only 2-levels of hierarchy, and so I'll mix the 2
+different API-styles and do it with a nested loop and one table.
+
+```python
+import ohawf
+import pandas as pd
+from apiclient.discovery import build
+from google.analytics.admin import AnalyticsAdminServiceClient
+from google.analytics.admin_v1alpha.types import ListPropertiesRequest
+
+creds = ohawf.get()
+service = build("analytics", "v3", credentials=creds)
+accounts = service.management().accounts().list().execute()
+
+table = []
+for account in accounts["items"]:
+    name, aid = account["name"], account["id"]
+    client = AnalyticsAdminServiceClient(credentials=creds)
+    results = client.list_properties(
+        ListPropertiesRequest(filter=f"parent:accounts/{aid}", show_deleted=True)
+    )
+    for item in results:
+        pid = item.name.split("/")[1]
+        prop = item.display_name
+        table.append((name, aid, prop, pid))
+
+df = pd.DataFrame(table, columns=["Account", "Account ID", "Property", "Property ID"])
+df.to_csv("ga4_properties.csv", index=False)
+print("Done")
+```
+
 ### Keyword Analysis
 
 #### Gathering Sites From Keyword
