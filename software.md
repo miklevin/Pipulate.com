@@ -1959,7 +1959,15 @@ print(getsource(Metric))
 
 #### Keyword Clustering (Hub & Spokes)
 
-### Taking Screenshot of Web Browser
+### Web Browser Automation
+
+#### Taking Screenshot of Web Browser
+
+#### Inspector Recordings to Jupyter
+
+#### Dealing With Login Issues
+
+#### Saving The Entire DOM
 
 ### Connecting to Google Trends
 
