@@ -2007,16 +2007,87 @@ depth and keep it finite, it's fine. 'Aight?
 
 ### Keyword Analysis
 
-Given a URL, there are a few way to get its keywords. If you own the site and
-it's been verified in Google Search Console, then you can feed a URL to the GSC
-API and get back the keywords that lead to that page, plus the usual metrics
-for the time-period:
+When it comes to keywords, there are many starting points, and the question of
+whether you should even be thinking in terms of keywords anymore due to AI.
+Well, you've got to start somewhere and where I'm going to start is pulling
+enough keyword data to do some simple linear regression. Doing linear is
+basically just line-fitting between time-series points and is something any
+good SEO should be able to do, even before taking up the machine learning
+stuff. It's a lot like ye-old machine learning. We start by deciding what
+time-series increment we want. Days is too granular and months is to chunky.
+Weeks? Weeks are smooth. So let's use our tricks to turn a database into a
+to-do checklist:
 
+```python
+from datetime import datetime
+from collections import namedtuple
+from sqlitedict import SqliteDict as sqldict
+from dateutil.relativedelta import relativedelta as rd
 
+Range = namedtuple("Range", "start_date, end_date")
 
-Let's do keyword analysis and make it meta, okay? What's a meta for? It's for
-stupid jokes on SEO sites doing stupid data-tricks. The URL of this page, I
-know is https://pipulate.com/software/ and so, I can crawl it:
+x = 1
+dates = []
+end_date = datetime.now().date() - rd(days=4)
+with sqldict("gsc_weekly.db") as db:
+    while True:
+        start_date = end_date - rd(weeks=1)
+        if end_date < datetime(2000, 1, 1).date():
+            break
+        pattern = "%Y-%m-%d"
+        api_start_date = start_date.strftime(pattern)
+        api_end_date = end_date.strftime(pattern)
+        arange = (Range(api_start_date, api_end_date))
+        end_date = end_date - rd(weeks=x)
+        db[str(arange)] = None
+        x+= 1
+    db.commit()
+print("Done")
+```
+
+We shoved the date-logic into the above code. Now we're shoving the raw data
+collection into the following code:
+
+```python
+import ohawf
+from collections import namedtuple
+from apiclient.discovery import build
+from sqlitedict import SqliteDict as sqldict
+
+creds = ohawf.get()
+service = build("searchconsole", "v1", credentials=creds)
+site = "sc-domain:mikelev.in"
+
+columns = [
+    "start_date",
+    "end_date",
+    "keyword",
+    "url",
+    "clicks",
+    "impressions",
+    "ctr",
+    "position",
+]
+
+with sqldict("gsc_weekly.db") as db:
+    for str_range in db:
+        data = db[str_range]
+        if not data:
+            arange = eval(str_range)
+
+            query = {
+                "dimensions": ["QUERY", "PAGE"],
+                "startDate": arange.start_date,
+                "endDate": arange.end_date,
+            }
+
+            results = (
+                service.searchanalytics().query(siteUrl=site, body=query).execute()
+            )
+            db[str_range] = results
+            db.commit()
+print("Done")
+```
 
 #### Extracting Keywords From Pages
 
