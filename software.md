@@ -500,6 +500,9 @@ so we're starting out with the Requests API-compatible httpx package:
 ```python
 import httpx
 
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
 url = "https://mikelev.in"
 response = httpx.get(url, headers=headers)
 print(response.text)
@@ -1989,7 +1992,26 @@ df.to_csv("ga4_properties.csv", index=False)
 print("Done")
 ```
 
+### N-Depth Crawl
+
+Never do a crawl without an N-Depth limit. And even then, try to keep that
+silly number low. Nobody wants to be crawling a site forever, and resources
+aren't infinite. This is especially true if you're crawling onto our
+potentially resource-starved Windows laptop, which is the norm. You can use
+leading SEO-crawling software for that, which has every sort of
+API-integration, and that's fine. Or you can figure out how to do it for
+yourself, because crawlers aren't really that hard. So long as you control the
+depth and keep it finite, it's fine. 'Aight?
+
+[Flesh-out an N-depth crawler here]
+
 ### Keyword Analysis
+
+Let's do keyword analysis and make it meta, okay? What's a meta for? It's for
+stupid jokes on SEO sites doing stupid data-tricks. The URL of this page, I
+know is https://pipulate.com/software/ and so, I can crawl it:
+
+
 
 #### Gathering Sites From Keyword
 
