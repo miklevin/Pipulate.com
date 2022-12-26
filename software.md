@@ -2213,13 +2213,13 @@ for i in range(1, 7):
     exec(command)
 ```
 
-And now for some awesome SO. It's similar to above, but we calculate the linear
-regression slope for every keyword and use that to choose which to show as the
-winners and losers, landing pages and such. This report can be used to know
-where to defend, where to attack and where to pay the most attention during
-site cleanups and migrations.
+And now for some awesome SEO. It's similar to above, but we calculate the
+linear regression slope for every keyword and use that to choose which to show
+as the winners and losers, landing pages and such. This report can be used to
+know where to defend, where to attack and where to pay the most attention
+during site cleanups and migrations.
 
-#### Calculating Slope & Drawing Linear Regression Lines
+#### Finding Your Site's Winners & Losers Through Linear Regression
 
 ```python
 import warnings
@@ -2228,7 +2228,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from IPython.display import display, Markdown
 
-size_from_ends = 1000
+size_from_ends = 50  # The number of Winners & Losers you want to see
 warnings.filterwarnings("ignore")
 
 # Let's make some headlines!
@@ -2248,7 +2248,7 @@ df_winners = df_winners.sort_values(
     ["position_count", "position_mean"], ascending=[False, True]
 )
 
-# Create a dict of landing pages per keyword
+# Create a dict of landing pages per keyword (for later use)
 dflp = df_weekly[["keyword", "url"]]
 sot = set(map(tuple, dflp.to_records(index=False)))
 lpdict = {}
@@ -2258,6 +2258,7 @@ for key, value in sot:
     else:
         lpdict[key] = [value]
 
+# Grab number of rows so we don't mis-chop larger DataFrame.
 samples = len(df_weekly.end_date.unique())
 
 # Calculate the slope of the fit linear regression line.
