@@ -2008,18 +2008,23 @@ depth and keep it finite, it's fine. 'Aight?
 
 [Flesh-out an N-depth crawler here]
 
-### Keyword Analysis
+### Keyword Position Linear Regression
 
 When it comes to keywords, there are many starting points, and the question of
 whether you should even be thinking in terms of keywords anymore due to AI.
 Well, you've got to start somewhere and where I'm going to start is pulling
-enough keyword data to do some simple linear regression. Doing linear is
-basically just line-fitting between time-series points and is something any
-good SEO should be able to do, even before taking up the machine learning
-stuff. It's a lot like ye-old machine learning. We start by deciding what
-time-series increment we want. Days is too granular and months is to chunky.
-Weeks? Weeks are smooth. So let's use our tricks to turn a database into a
-to-do checklist:
+enough keyword data to do some simple linear regression. 
+
+#### Fancy Words for Line-Fitting
+
+Doing linear regression is basically just line-fitting between time-series
+points and is something any good SEO should be able to do, even before taking
+up the machine learning stuff. It's a lot like ye-old machine learning. We
+start by deciding what time-series increment we want. Days is too granular and
+months is to chunky.  Weeks? Weeks are smooth. So let's use our tricks to turn
+a database into a to-do checklist:
+
+#### GSC Weekly SERPs API Query
 
 ```python
 from datetime import datetime
@@ -2047,6 +2052,8 @@ with sqldict("gsc_weekly.db") as db:
     db.commit()
 print("Done")
 ```
+
+#### GSC Weekly SERPs Raw Data Collection
 
 We shoved the date-logic into the above code. Now we're shoving the raw data
 collection into the following code. There's a lot good process here. If the
@@ -2083,6 +2090,8 @@ with sqldict("gsc_weekly.db") as db:
             db.commit()
 print("Done")
 ```
+
+#### Raw Data to Tabular Data Transform
 
 And now we "flatten" the GSC raw data-pull into a CSV:
 
@@ -2135,12 +2144,13 @@ easily load and do different investigations without hitting the GSC API over
 and over. The advantages are both speed and having the power of Pandas and
 other Python packages to do your analysis. 
 
-We can many aggregation questions involving sums and averages of clicks,
-impressions and position. So first we're going to do some investigations with
-"flat think". It's not the best way for SEO, but it will get us plotting some
-graphs right away.
+#### Graphing Time Series Vs. Metric
 
-#### Graphing Time Series Vs. GSC Metrics
+We'll do the linear regression in the example ***after*** this one because we
+have to learn the basics of matplotlib graphing. This draws a line-graph of
+search positions for keywords that we choose with summed metrics such as
+clicks, sorted by descending. So you will see important keywords from this
+example, but not actual ***winners and losers***.
 
 ```python
 import pandas as pd
