@@ -1250,6 +1250,9 @@ for x in range(months_back):
 Okay, so let's pull some data!
 
 ```python
+import ohawf
+from apiclient.discovery import build
+
 creds = ohawf.get()
 service = build("searchconsole", "v1", credentials=creds)
 
@@ -2129,11 +2132,15 @@ df.to_csv("gsc_weekly.csv", index=False)
 
 Now we've got our weekly per-keyword/per-url GSC metrics on our drive we can
 easily load and do different investigations without hitting the GSC API over
-and over. The advantages are both speed and having the power of the Pandas to
-do your analysis. We can many aggregation questions involving sums and averages
-of clicks, impressions and position. So first we're going to do some
-investigations with "flat think". It's not the best way for SEO, but it will
-get us plotting some graphs right away.
+and over. The advantages are both speed and having the power of Pandas and
+other Python packages to do your analysis. 
+
+We can many aggregation questions involving sums and averages of clicks,
+impressions and position. So first we're going to do some investigations with
+"flat think". It's not the best way for SEO, but it will get us plotting some
+graphs right away.
+
+#### Graphing Time Series Vs. GSC Metrics
 
 ```python
 import pandas as pd
@@ -2159,7 +2166,13 @@ for win in winners:
     plt.show()
 ```
 
-And for position
+The story for plotting the GSC position metric is usually a little bit
+different, because more isn't better, so we can't sum. We have to take the
+average of positions for each point on the time-series of the Y-axis. Also, we
+want to invert the Y-axis, because lower is better, starting with position 1
+and usually only a maximum of position 100.
+
+#### Graphing Google Search Positions Over Time
 
 ```python
 import pandas as pd
@@ -2183,6 +2196,131 @@ for win in winners:
     ax.plot(df)
     plt.xticks(rotation=90)
     plt.show()
+```
+
+So what about landing pages? And couldn't that output be a little prettier? I'd
+like actual HTML H1's, H2's and the like output directly in Jupyter. Let's
+generate some hx functions the briefest I know how:
+
+```python
+from IPython.display import display, Markdown
+
+# Let's make some headlines!
+for i in range(1, 7):
+    func_name = f"h{i}"
+    num_hashes = '#' * i
+    command = fr"{func_name} = lambda x: display(Markdown('{num_hashes} %s' % x))"
+    exec(command)
+```
+
+And now for some awesome SO. It's similar to above, but we calculate the linear
+regression slope for every keyword and use that to choose which to show as the
+winners and losers, landing pages and such. This report can be used to know
+where to defend, where to attack and where to pay the most attention during
+site cleanups and migrations.
+
+#### Calculating Slope & Drawing Linear Regression Lines
+
+```python
+import warnings
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.display import display, Markdown
+
+size_from_ends = 1000
+warnings.filterwarnings("ignore")
+
+# Let's make some headlines!
+for i in range(1, 7):
+    func_name = f"h{i}"
+    num_hashes = "#" * i
+    command = rf"{func_name} = lambda x: display(Markdown('{num_hashes} %s' % x))"
+    exec(command)
+
+# Read the dump of GSC Weekly data
+df_weekly = pd.read_csv("gsc_weekly.csv")
+
+# Calculate the average search position and number of data points
+df_winners = df_weekly.groupby("keyword").agg({"position": ["count", "mean"]})
+df_winners.columns = list(map("_".join, df_winners.columns.values))
+df_winners = df_winners.sort_values(
+    ["position_count", "position_mean"], ascending=[False, True]
+)
+
+# Create a dict of landing pages per keyword
+dflp = df_weekly[["keyword", "url"]]
+sot = set(map(tuple, dflp.to_records(index=False)))
+lpdict = {}
+for key, value in sot:
+    if key in lpdict:
+        lpdict[key].append(value)
+    else:
+        lpdict[key] = [value]
+
+samples = len(df_weekly.end_date.unique())
+
+# Calculate the slope of the fit linear regression line.
+keywords = list(df_winners.index)
+table = []
+for keyword in keywords:
+    df = df_weekly[df_weekly["keyword"] == keyword][["end_date", "position"]]
+    df["end_date"] = pd.to_datetime(df["end_date"])
+    lot = list(map(tuple, df.to_records(index=False)))
+    x = [int(x[0]) for x in lot]
+    y = [int(x[1]) for x in lot]
+    coefficients = np.polyfit(x, y, 1)
+    slope = f"{-1 * coefficients[0] * 100000000000000000:.2f}"
+    row = (keyword, slope)
+    table.append(row)
+
+# Join keyword positions, sample frequenc & slope.
+df = pd.DataFrame(table, columns=["keyword", "slope"])
+df["slope"] = df["slope"].astype(float)
+df = df.set_index("keyword")
+df = df_winners.join([df])
+df = df[df["position_count"] > samples / 2]
+df.sort_values(by=["slope"], ascending=[False], inplace=True)
+
+# Ensure whole list of keywords not sorter than end ranges.
+if df.shape[1] > (size_from_ends * 2):
+    size_from_ends = df.shape[1] / 2
+
+# Grab the 2 ends, representing fasters winners and losers.
+df_best = df.iloc[:size_from_ends, :]
+df_worst = df.iloc[-size_from_ends:, :]
+df_ends = pd.concat([df_best, df_worst])
+movers = list(df_ends.index)
+
+# Show top winner and loser top reression lines.
+for i, mover in enumerate(movers):
+    if not i:
+        h1("Gainers")
+        i2 = i
+    if i == size_from_ends:
+        h1("Losers")
+        i2 = 0
+    df = df_weekly[df_weekly["keyword"] == mover][["end_date", "position"]]
+    df["end_date"] = pd.to_datetime(df["end_date"])
+    lot = list(map(tuple, df.to_records(index=False)))
+    x = [x[0] for x in lot]
+    x2 = [int(x[0]) for x in lot]
+    y = [int(x[1]) for x in lot]
+    plt.xticks(rotation=90)
+    plt.scatter(x, y)
+    coefficients = np.polyfit(x2, y, 1)
+    slope = f"{-1 * coefficients[0] * 100000000000000000:.2f}"
+    h2(f"{i2 + 1}: {mover}")
+    i2 += 1
+    h3(f"slope: {slope}")
+    for apage in lpdict[mover]:
+        print(apage)
+    regression_line = np.poly1d(coefficients)
+    plt.plot(x, regression_line(x2), "r--")
+    plt.gca().set_ylim(1, 100)
+    plt.gca().invert_yaxis()
+    plt.show()
+    display(Markdown("---"))
 ```
 
 #### Extracting Keywords From Pages
