@@ -2008,23 +2008,24 @@ depth and keep it finite, it's fine. 'Aight?
 
 [Flesh-out an N-depth crawler here]
 
-### Keyword Position Linear Regression
+### Keyword Analysis With Linear Regression
 
-When it comes to keywords, there are many starting points, and the question of
-whether you should even be thinking in terms of keywords anymore due to AI.
-Well, you've got to start somewhere and where I'm going to start is pulling
-enough keyword data to do some simple linear regression. 
+It's going to take a few steps to get to the linear regression, which is just a
+fancy word for line-fitting. In other words, we will plot the positions
+keywords held in search for your site and draw a line to see if it's sloping up
+or down. Those that slope up are opportunity or winners. Those that slope down
+are in danger or losers. This is the first version of machine learning before
+we get to the fancy type. Doing linear regression is something every good SEO
+and Data Scientist should be able to do.
 
-#### Fancy Words for Line-Fitting
+#### Pulling The Data
 
-Doing linear regression is basically just line-fitting between time-series
-points and is something any good SEO should be able to do, even before taking
-up the machine learning stuff. It's a lot like ye-old machine learning. We
-start by deciding what time-series increment we want. Days is too granular and
-months is to chunky.  Weeks? Weeks are smooth. So let's use our tricks to turn
-a database into a to-do checklist:
+Our first step is pulling the GSC data that we'll be plotting in a time-series.
+We're going to use "weekly" date-ranges to keep the overall amount of data
+small enough to easily manage. And so we're going to make the namedtuples that
+define the API calls and fill them in as keys in a database for record keeping.
 
-#### GSC Weekly SERPs API Query
+#### Named Tuples For Date Ranges
 
 ```python
 from datetime import datetime
