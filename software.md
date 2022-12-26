@@ -2124,8 +2124,15 @@ with sqldict("gsc_weekly.db") as db:
             table.append(df)
 df = pd.concat(table)
 df.columns = columns
-df.to_csv("gsc_monthly.csv", index=False)
+df.to_csv("gsc_weekly.csv", index=False)
 ```
+
+Now we've got a csv on our drive we can easily load and do different
+investigations without hitting the GSC API over and over. The advantages are
+both speed and having the power of the Pandas to do your groupings,
+aggregations and such. It's already aggregated data because I asked for weekly
+data instead of daily, but subsequent aggregations will be all the faster.
+
 
 #### Extracting Keywords From Pages
 
