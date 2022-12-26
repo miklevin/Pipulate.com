@@ -2127,12 +2127,63 @@ df.columns = columns
 df.to_csv("gsc_weekly.csv", index=False)
 ```
 
-Now we've got a csv on our drive we can easily load and do different
-investigations without hitting the GSC API over and over. The advantages are
-both speed and having the power of the Pandas to do your groupings,
-aggregations and such. It's already aggregated data because I asked for weekly
-data instead of daily, but subsequent aggregations will be all the faster.
+Now we've got our weekly per-keyword/per-url GSC metrics on our drive we can
+easily load and do different investigations without hitting the GSC API over
+and over. The advantages are both speed and having the power of the Pandas to
+do your analysis. We can many aggregation questions involving sums and averages
+of clicks, impressions and position. So first we're going to do some
+investigations with "flat think". It's not the best way for SEO, but it will
+get us plotting some graphs right away.
 
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+number_of_keywords = 3
+metrics = ["clicks", "impressions", "ctr"]
+metric = metrics[0]
+
+df_weekly = pd.read_csv("gsc_weekly.csv")
+df_winners = df_weekly.groupby("keyword")[metric].sum().sort_values(ascending=False)
+df_winners = df_winners.iloc[0:number_of_keywords]
+winners = list(df_winners.index)
+
+for win in winners:
+    print(win)
+    df = df_weekly[df_weekly["keyword"] == win][["end_date", "position"]]
+    df["end_date"] = pd.to_datetime(df["end_date"])
+    df = df.set_index("end_date")
+    fig, ax = plt.subplots()
+    plt.xticks(rotation=90)
+    ax.plot(df)
+    plt.show()
+```
+
+And for position
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+number_of_keywords = 10
+
+df_weekly = pd.read_csv("gsc_weekly.csv")
+df_winners = df_weekly.groupby("keyword").agg({'position': ['count', 'mean']})
+df_winners.columns = list(map('_'.join, df_winners.columns.values))
+df_winners = df_winners.sort_values(['position_count', 'position_mean'], ascending=[False, True])s
+winners = list(df_winners.index[:30])
+
+for win in winners:
+    print(win)
+    df = df_weekly[df_weekly["keyword"] == win][["end_date", "position"]]
+    df["end_date"] = pd.to_datetime(df["end_date"])
+    df = df.set_index("end_date")
+    fig, ax = plt.subplots()
+    ax.set_ylim(100, 1)
+    ax.plot(df)
+    plt.xticks(rotation=90)
+    plt.show()
+```
 
 #### Extracting Keywords From Pages
 
