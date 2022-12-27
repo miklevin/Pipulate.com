@@ -2359,7 +2359,7 @@ compare the effectiveness of the methods.
 
 #### Getting All URLs with GSC
 
-```pythonservice = build("analytics", "v3", credentials=creds)
+```python
 import ohawf
 from datetime import datetime
 from apiclient.discovery import build
