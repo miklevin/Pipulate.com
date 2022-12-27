@@ -2022,6 +2022,8 @@ Our first step is pulling the GSC data that we'll be plotting in a time-series.
 We're going to use "weekly" date-ranges to keep the overall amount of data
 small enough to easily manage. And so we're going to make the namedtuples that
 define the API calls and fill them in as keys in a database for record keeping.
+This step doesn't display anything. It just populates a database with keys we
+use in the steps that follow.
 
 ```python
 from datetime import datetime
@@ -2050,13 +2052,16 @@ with sqldict("gsc_weekly.db") as db:
 print("Done")
 ```
 
+Now we've got gsc_weekly.db containing a bunch of keys that will control the
+API-calls in the next step.
+
 #### Populating the GSC Weekly Raw Data
 
-We shoved the date-logic into the above code. Now we're shoving the raw data
-collection into the following code. There's a lot good process here. If the
-data collection skipped a week, re-running it will fill it in. Plus all the
-logic to extract can be separated from the date-logic and separated from the
-raw data collection phase.
+This is about staying organized. Whereas we put all the date-logic in the above
+code and won't have to look at it again. we'll put the raw data-pull logic in
+this step. We won't be doing any transforms or display. We do this to separate
+complexity and to shove it around where it belongs. It is for example safe to
+re-run because it won't collect data for the same time-period twice.
 
 ```python
 import ohawf
@@ -2090,7 +2095,10 @@ print("Done")
 
 #### Transforming GSC Raw Data to Tables
 
-And now we "flatten" the GSC raw data-pull into a CSV:
+The above step was a "raw data pull", meaning we now have to "flatten" the data
+and turn it into something more like rows & columns which are easier to work
+with in the following steps. It's also easy to save it out as a CSV file and
+then we can just load the CSV file in the steps that follow.
 
 ```python
 import pandas as pd
@@ -2136,20 +2144,25 @@ df.columns = columns
 df.to_csv("gsc_weekly.csv", index=False)
 ```
 
+Okay, gsc_weekly.csv is now on the drive and we can do rapid investigations
+without worrying about all the complexity of gathering or transforming the
+data. It's time to get to graphing.
+
 #### Simple Graphing of Time Series
 
 Now we've got our weekly per-keyword/per-url GSC metrics on our drive we can
 easily load and do different investigations without hitting the GSC API over
 and over. The advantages are both speed and having the power of Pandas and
-other Python packages to do your analysis. 
+other Python packages to do your analysis. We'll do the linear regression in
+the example ***after*** this one because we have to learn the basics of
+matplotlib first. 
 
-We'll do the linear regression in the example ***after*** this one because we
-have to learn the basics of matplotlib graphing. This draws a line-graph of
-search positions for keywords that we choose with summed metrics such as
-clicks, sorted by descending. So you will see important keywords from this
-example, but not actual ***winners and losers***. I give 2 very similar
-examples below because plotting clicks and impressions is different from
-plotting positions. There's subtle differences like flipping the Y-axis.
+The example that follows draws a line-graph of search positions for keywords
+that we choose with summed metrics such as clicks, sorted by descending. So you
+will see important keywords from this example, but not actual ***winners and
+losers***. I give 2 very similar examples below because plotting clicks and
+impressions is different from plotting positions. There's subtle differences
+like flipping the Y-axis. First, the "sum-able" metrics:
 
 #### Plotting Clicks or Impressions
 
@@ -2177,13 +2190,13 @@ for win in winners:
     plt.show()
 ```
 
-The story for plotting the GSC ***position*** metric is usually a little bit
-different, because more isn't better, so we can't sum. We have to take the
-average of positions for each point on the time-series of the Y-axis. Also, we
-want to invert the Y-axis, because lower is better, starting with position 1
-and usually only a maximum of position 100.
+#### Graphing Search Positions is Different
 
-#### Graphing Search Positions
+Okay, and now for the metric that can't be summed. The story for plotting
+***search positions*** is different. You can't sum a number of position #1's
+and have it meaningful. It's got to be an average. We want 1 at the top of the
+graph and 100 at the bottom, which is flipping the Y-axis. And because it's a
+known range of 1 to 100, we can fix that range.
 
 ```python
 import pandas as pd
