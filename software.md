@@ -2018,14 +2018,12 @@ are in danger or losers. This is the first version of machine learning before
 we get to the fancy type. Doing linear regression is something every good SEO
 and Data Scientist should be able to do.
 
-#### Pulling The Data
+#### Managing the Data Pull with Named Tuples
 
 Our first step is pulling the GSC data that we'll be plotting in a time-series.
 We're going to use "weekly" date-ranges to keep the overall amount of data
 small enough to easily manage. And so we're going to make the namedtuples that
 define the API calls and fill them in as keys in a database for record keeping.
-
-#### Named Tuples For Date Ranges
 
 ```python
 from datetime import datetime
@@ -2054,7 +2052,7 @@ with sqldict("gsc_weekly.db") as db:
 print("Done")
 ```
 
-#### GSC Weekly SERPs Raw Data Collection
+#### Populating the GSC Weekly Raw Data
 
 We shoved the date-logic into the above code. Now we're shoving the raw data
 collection into the following code. There's a lot good process here. If the
@@ -2092,7 +2090,7 @@ with sqldict("gsc_weekly.db") as db:
 print("Done")
 ```
 
-#### Raw Data to Tabular Data Transform
+#### Transforming GSC Raw Data to Tables
 
 And now we "flatten" the GSC raw data-pull into a CSV:
 
@@ -2140,25 +2138,29 @@ df.columns = columns
 df.to_csv("gsc_weekly.csv", index=False)
 ```
 
+#### Simple Graphing of Time Series
+
 Now we've got our weekly per-keyword/per-url GSC metrics on our drive we can
 easily load and do different investigations without hitting the GSC API over
 and over. The advantages are both speed and having the power of Pandas and
 other Python packages to do your analysis. 
 
-#### Graphing Time Series Vs. Metric
-
 We'll do the linear regression in the example ***after*** this one because we
 have to learn the basics of matplotlib graphing. This draws a line-graph of
 search positions for keywords that we choose with summed metrics such as
 clicks, sorted by descending. So you will see important keywords from this
-example, but not actual ***winners and losers***.
+example, but not actual ***winners and losers***. I give 2 very similar
+examples below because plotting clicks and impressions is different from
+plotting positions. There's subtle differences like flipping the Y-axis.
+
+#### Plotting Clicks or Impressions
 
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
 
 number_of_keywords = 3
-metrics = ["clicks", "impressions", "ctr"]
+metrics = ["clicks", "impressions"]
 metric = metrics[0]
 
 df_weekly = pd.read_csv("gsc_weekly.csv")
@@ -2177,13 +2179,13 @@ for win in winners:
     plt.show()
 ```
 
-The story for plotting the GSC position metric is usually a little bit
+The story for plotting the GSC ***position*** metric is usually a little bit
 different, because more isn't better, so we can't sum. We have to take the
 average of positions for each point on the time-series of the Y-axis. Also, we
 want to invert the Y-axis, because lower is better, starting with position 1
 and usually only a maximum of position 100.
 
-#### Graphing Google Search Positions Over Time
+#### Graphing Search Positions
 
 ```python
 import pandas as pd
@@ -2194,8 +2196,8 @@ number_of_keywords = 10
 df_weekly = pd.read_csv("gsc_weekly.csv")
 df_winners = df_weekly.groupby("keyword").agg({'position': ['count', 'mean']})
 df_winners.columns = list(map('_'.join, df_winners.columns.values))
-df_winners = df_winners.sort_values(['position_count', 'position_mean'], ascending=[False, True])s
-winners = list(df_winners.index[:30])
+df_winners = df_winners.sort_values(['position_count', 'position_mean'], ascending=[False, True])
+winners = list(df_winners.index[:number_of_keywords])
 
 for win in winners:
     print(win)
@@ -2209,9 +2211,11 @@ for win in winners:
     plt.show()
 ```
 
-So what about landing pages? And couldn't that output be a little prettier? I'd
-like actual HTML H1's, H2's and the like output directly in Jupyter. Let's
-generate some hx functions the briefest I know how:
+#### Jupyter Headline Functions
+
+We're about to display a whole lot of stuff and could really benefit by being
+able to use h1 and h2 tags in Jupyter similar to HTML. So here's a function to
+spin out h1 through h6.
 
 ```python
 from IPython.display import display, Markdown
@@ -2224,13 +2228,13 @@ for i in range(1, 7):
     exec(command)
 ```
 
-And now for some awesome SEO. It's similar to above, but we calculate the
-linear regression slope for every keyword and use that to choose which to show
-as the winners and losers, landing pages and such. This report can be used to
-know where to defend, where to attack and where to pay the most attention
-during site cleanups and migrations.
+#### Understand Winners & Losers with Linear Regression
 
-#### Finding Your Site's Winners & Losers Through Linear Regression
+And now for some awesome SEO. It's similar to above, but we calculate the slope
+of the trendline for for every keyword and use that to choose which to show as
+the winners and losers, landing pages and such. This report can be used to know
+where to defend, where to attack and where to pay the most attention during
+site cleanups and migrations.
 
 ```python
 import warnings
