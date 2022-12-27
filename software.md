@@ -2429,6 +2429,44 @@ df.columns = columns
 df.to_csv("ga_urls.csv", index=False)
 ```
 
+#### Getting All URLs with GA
+
+With GA, it can get ridiculous if you have a big site because it has every
+tracking parameter in there. So we take some precautions to filter it on the
+data-pull. Otherwise you might get back more data than is reasonable. Here's
+the first part that does the raw data pull and capture.
+
+```python
+increment = 50000
+start_row = 1
+proceed = True
+while proceed == True:
+    with sqldict("ga_urls.db", timeout=4000000) as db:
+        print(f"start {start_row}")
+        if start_row not in db:
+            req = get(
+                ids=f"ga:[your viewid here]",
+                start_date=last_year,
+                end_date=today,
+                metrics="ga:entrances",
+                sort="-ga:entrances",
+                dimensions="ga:landingPagePath",
+                samplingLevel="HIGHER_PRECISION",
+                max_results=f"{increment}",
+                start_index=f"{start_row}",
+                filters = "ga:landingPagePath!~'?'"
+            )
+            results = req.execute()
+            sleep(5)
+            if "rows" not in results:
+                proceed = False
+            db[str(start_row)] = results
+            db.commit()
+            print("Commit")
+        start_row += increment
+print("Done")
+```
+
 #### Extracting Keywords From Pages
 
 #### Generating Keyword Histograms
