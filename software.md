@@ -2359,6 +2359,7 @@ compare the effectiveness of the methods.
 
 #### Getting All URLs with GSC
 
+```python
 import ohawf
 from datetime import datetime
 from apiclient.discovery import build
@@ -2397,6 +2398,7 @@ while proceed == True:
             print("Commit")
         start_row += 1000
 print("Done")
+```
 
 Okay, all the raw GSC URL data for a year is on the drive. Now we can spin
 through the raw data and create a flattened CSV file:
