@@ -1901,7 +1901,7 @@ API is the "old way" which is still used for most things except GA4 as far as I
 can tell. The older Core Reporting API can be recognized through its use of
 apiclient.discovery.build with lines like:
 
-```
+```python
 service = build("analyticsreporting", "v4", credentials=creds)
 ```
 
@@ -2359,7 +2359,7 @@ compare the effectiveness of the methods.
 
 #### Getting All URLs with GSC
 
-```python
+```pythonservice = build("analytics", "v3", credentials=creds)
 import ohawf
 from datetime import datetime
 from apiclient.discovery import build
@@ -2370,7 +2370,7 @@ creds = ohawf.get()
 
 service = build("searchconsole", "v1", credentials=creds)
 today = datetime.now()
-last_year = today - rd(year=1)
+last_year = today - rd(months=12)
 today = f"{today}"[:10]
 last_year = f"{last_year}"[:10]
 site = "sc-domain:[your site here]"
