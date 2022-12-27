@@ -1995,19 +1995,6 @@ df.to_csv("ga4_properties.csv", index=False)
 print("Done")
 ```
 
-### N-Depth Crawl
-
-Never do a crawl without an N-Depth limit. And even then, try to keep that
-silly number low. Nobody wants to be crawling a site forever, and resources
-aren't infinite. This is especially true if you're crawling onto our
-potentially resource-starved Windows laptop, which is the norm. You can use
-leading SEO-crawling software for that, which has every sort of
-API-integration, and that's fine. Or you can figure out how to do it for
-yourself, because crawlers aren't really that hard. So long as you control the
-depth and keep it finite, it's fine. 'Aight?
-
-[Flesh-out an N-depth crawler here]
-
 ### Keyword Analysis With Linear Regression
 
 It's going to take a few steps to get to the linear regression, which is just a
@@ -2491,6 +2478,19 @@ df.drop_duplicates(subset=['url'], inplace=True)
 print(df.shape)
 df.to_csv("ga_urls.csv", index=False)
 ```
+
+### N-Depth Crawl
+
+Never do a crawl without an N-Depth limit. And even then, try to keep that
+silly number low. Nobody wants to be crawling a site forever, and resources
+aren't infinite. This is especially true if you're crawling onto our
+potentially resource-starved Windows laptop, which is the norm. You can use
+leading SEO-crawling software for that, which has every sort of
+API-integration, and that's fine. Or you can figure out how to do it for
+yourself, because crawlers aren't really that hard. So long as you control the
+depth and keep it finite, it's fine. 'Aight?
+
+[Flesh-out an N-depth crawler here]
 
 #### Extracting Keywords From Pages
 
