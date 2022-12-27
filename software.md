@@ -2350,6 +2350,10 @@ for i, mover in enumerate(movers):
     display(Markdown("---"))
 ```
 
+Yeah, so maybe I'll paste some graphics in here to show you the output. Until I
+do the nice little touches like that so that the casual user can "get it", this
+will remain a hidden gem.
+
 ### Getting All URLs of Site
 
 There are various approaches to getting all URLs for a site. You can get it
