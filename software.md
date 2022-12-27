@@ -2479,18 +2479,22 @@ print(df.shape)
 df.to_csv("ga_urls.csv", index=False)
 ```
 
-### N-Depth Crawl
+### 3 Click-Depth Crawl
 
-Never do a crawl without an N-Depth limit. And even then, try to keep that
-silly number low. Nobody wants to be crawling a site forever, and resources
-aren't infinite. This is especially true if you're crawling onto our
-potentially resource-starved Windows laptop, which is the norm. You can use
-leading SEO-crawling software for that, which has every sort of
-API-integration, and that's fine. Or you can figure out how to do it for
-yourself, because crawlers aren't really that hard. So long as you control the
-depth and keep it finite, it's fine. 'Aight?
+So we've got a list of URLs from both Google Analytics and Search Console. The
+technique we used can grab up to a million URLs from GA, and I believe up to
+50,000 from Search Console. Now it's time for an actual crawl of the site, but
+let me tell you, big open-ended crawls are stupid. With the 2-Click-Depth crawl
+we wrote earlier on this page, we could just make it recursive or loop x-number
+of times. The problem is giving you a crappy crawl experience. 
 
-[Flesh-out an N-depth crawler here]
+The problem with big, open-ended Web crawlers that allow >=4 click-depth is
+that you'll be waiting forever for the crawl to finish, right while it's
+creating enormous files. It's kind of the same problem on ScreamingFrog or
+DeepCrawl. So I'm going to give you a good crawl experience by limiting the
+example given here to 3-Depth and actually not collecting any data off the
+pages except for links. This should run well even on large sites and provide a
+lot of uncommon insight.
 
 #### Extracting Keywords From Pages
 
