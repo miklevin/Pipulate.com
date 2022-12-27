@@ -2467,6 +2467,31 @@ while proceed == True:
 print("Done")
 ```
 
+This can take awhile. And I had to keep upping the timeout on the Sqlite Dict.
+But once the raw data was on the drive, we can flatten it quick and easy:
+
+```python
+import pandas as pd
+from sqlitedict import SqliteDict as sqldict
+
+root = "https://[yoursite]"
+table = []
+with sqldict("ga_urls.db") as db:
+    for start_row in db:
+        results = db[start_row]
+        if "rows" in results:
+            lot = [(f"{root}{x[0]}", x[1]) for x in results['rows'] if x[0] != '(other)']
+            df = pd.DataFrame(lot)
+            table.append(df)
+            print(start_row)
+
+df = pd.concat(table)
+df.columns = ["url", "entrances"]
+df.drop_duplicates(subset=['url'], inplace=True)
+print(df.shape)
+df.to_csv("ga_urls.csv", index=False)
+```
+
 #### Extracting Keywords From Pages
 
 #### Generating Keyword Histograms
