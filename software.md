@@ -2350,6 +2350,79 @@ for i, mover in enumerate(movers):
     display(Markdown("---"))
 ```
 
+### Getting All URLs of Site
+
+There are various approaches to getting all URLs for a site. You can get it
+from Google Analytics. You can get it from Search Console. You can get it from
+crawling the site directly. You can do it all 3 ways and join the results to
+compare the effectiveness of the methods.
+
+#### Getting All URLs with GSC
+
+import ohawf
+from datetime import datetime
+from apiclient.discovery import build
+from sqlitedict import SqliteDict as sqldict
+from dateutil.relativedelta import relativedelta as rd
+
+creds = ohawf.get()
+
+service = build("searchconsole", "v1", credentials=creds)
+today = datetime.now()
+last_year = today - rd(year=1)
+today = f"{today}"[:10]
+last_year = f"{last_year}"[:10]
+site = "sc-domain:[your site here]"
+start_row = 0
+
+proceed = True
+while proceed == True:
+    with sqldict("gsc_urls.db") as db:
+        print(f"start {start_row}")
+        if start_row not in db:
+            query = {
+                "dimensions": ["PAGE"],
+                "startDate": last_year,
+                "endDate": today,
+                "rowLimit": 1000,
+                "startRow": start_row,
+            }
+            results = (
+                service.searchanalytics().query(siteUrl=site, body=query).execute()
+            )
+            if "rows" not in results:
+                proceed = False
+            db[str(start_row)] = results
+            db.commit()
+            print("Commit")
+        start_row += 1000
+print("Done")
+
+Okay, all the raw GSC URL data for a year is on the drive. Now we can spin
+through the raw data and create a flattened CSV file:
+
+```python
+import pandas as pd
+from sqlitedict import SqliteDict as sqldict
+
+table = []
+with sqldict("gsc_urls.db") as db:
+    for start_row in db:
+        results = db[start_row]
+        if "rows" in results:
+            rows = results["rows"]
+            lot = [
+                (x["keys"][0], x["clicks"], x["impressions"], x["ctr"], x["position"])
+                for x in rows
+            ]
+            table.append(pd.DataFrame(lot))
+
+columns = ["url", "clicks", "impressions", "ctr", "position"]
+df = pd.concat(table)
+df.columns = columns
+df.to_csv("ga_urls.csv", index=False)
+```
+
 #### Extracting Keywords From Pages
 
 #### Generating Keyword Histograms
