@@ -2014,9 +2014,7 @@ It's going to take a few steps to get to the linear regression, which is just a
 fancy word for line-fitting. In other words, we will plot the positions
 keywords held in search for your site and draw a line to see if it's sloping up
 or down. Those that slope up are opportunity or winners. Those that slope down
-are in danger or losers. This is the first version of machine learning before
-we get to the fancy type. Doing linear regression is something every good SEO
-and Data Scientist should be able to do.
+are in danger or losers. It's simple machine learning and good solid SEO.
 
 #### Managing the Data Pull with Named Tuples
 
