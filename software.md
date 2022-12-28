@@ -2488,6 +2488,7 @@ pages per run. You can easily modify the code to change that, but the point of
 this is to get some quick data in for visualizing site hierarchies through
 network node graph visualizers.
 
+
 ```python
 import httpx
 import pandas as pd
@@ -2538,6 +2539,7 @@ def onsite_links(href):
                 seen.add(href)
     return seen
 
+
 def feedback(i, t=False):
     if not i % 1000:
         if t:
@@ -2547,11 +2549,12 @@ def feedback(i, t=False):
     elif not i % 10:
         print(".", end="")
 
+
 # Let's make some headlines!
 for i in range(1, 7):
     func_name = f"h{i}"
-    num_hashes = '#' * i
-    command = fr"{func_name} = lambda x: display(Markdown('{num_hashes} %s' % x))"
+    num_hashes = "#" * i
+    command = rf"{func_name} = lambda x: display(Markdown('{num_hashes} %s' % x))"
     exec(command)
 
 # Seed Crawl with click-depth 1 & 2
@@ -2609,14 +2612,18 @@ len_to_crawl
 if len_to_crawl:
     if len_to_crawl < max_crawl_per_run:
         max_crawl_per_run = len_to_crawl
-    h2(f"Crawling {max_crawl_per_run} of {len_to_crawl} pages at click-depth {max_depth}:")
+    h2(
+        f"Crawling {max_crawl_per_run} of {len_to_crawl} pages at click-depth {max_depth}:"
+    )
     with sqldict("ncrawl.db") as db:
         for i, url in enumerate(to_crawl):
             db[url] = onsite_links(url)
             db.commit()
             print(f"{max_crawl_per_run - i} ", end="")
             if i >= max_crawl_per_run:
-                h4(f"Another {max_crawl_per_run} urls will be visited each time you run.")
+                h4(
+                    f"Another {max_crawl_per_run} urls will be visited each time you run."
+                )
                 break
 else:
     next_depth = max_depth + 1
@@ -2640,6 +2647,122 @@ else:
         db.commit()
     h3(f"On the next run click-dept {next_depth} will be crawled.")
 h3("Done")
+```
+
+### 3D Visualization of Website Crawl Link Graph
+
+I still have some work to do on this code and will be replacing it with a
+version that has labeled nodes, but for now it's pretty amazing we can do this:
+
+```python
+# Import the required packages
+import pandas as pd
+import networkx as nx
+import plotly.graph_objects as go
+from sqlitedict import SqliteDict as sqldict
+
+table = []
+with sqldict("ncrawl.db") as db:
+    for i, url in enumerate(db):
+        links = db[url]
+        if links:
+            for link in links:
+                table.append((url, link))
+df = pd.DataFrame(table).iloc[:, :]
+
+dedupe_me = list(df[0].unique()) + list(df[1].unique())
+
+seen = set()
+new_list = []
+for url in dedupe_me:
+    if url not in seen:
+        new_list.append(url)
+        seen.add(url)
+
+url_dict = dict([(x[1], x[0]) for x in enumerate(new_list)])
+
+G = nx.Graph()
+for url in df[0].unique():
+    G.add_node(url_dict[url])
+
+edges = list(map(tuple, (df.to_records(index=False))))
+for edge in edges:
+    l, r = edge
+    G.add_edge(url_dict[l], url_dict[r])
+
+spring_3D = nx.spring_layout(G, dim=3, seed=18)
+Num_nodes = len(spring_3D)
+x_nodes = [spring_3D[i][0] for i in range(Num_nodes)]
+y_nodes = [spring_3D[i][1] for i in range(Num_nodes)]
+z_nodes = [spring_3D[i][2] for i in range(Num_nodes)]
+
+edge_list = G.edges()
+x_edges = []
+y_edges = []
+z_edges = []
+
+for edge in edge_list:
+    # format: [beginning,ending,None]
+    x_coords = [spring_3D[edge[0]][0], spring_3D[edge[1]][0], None]
+    x_edges += x_coords
+
+    y_coords = [spring_3D[edge[0]][1], spring_3D[edge[1]][1], None]
+    y_edges += y_coords
+
+    z_coords = [spring_3D[edge[0]][2], spring_3D[edge[1]][2], None]
+    z_edges += z_coords
+
+trace_edges = go.Scatter3d(
+    x=x_edges,
+    y=y_edges,
+    z=z_edges,
+    mode="lines",
+    line=dict(color="black", width=2),
+    hoverinfo="none",
+)
+
+trace_nodes = go.Scatter3d(
+    x=x_nodes,
+    y=y_nodes,
+    z=z_nodes,
+    mode="markers",
+    marker=dict(
+        symbol="circle",
+        size=10,
+        colorscale=["lightgreen", "magenta"],  # either green or mageneta
+        line=dict(color="black", width=0.5),
+    ),
+    hoverinfo="text",
+)
+
+axis = dict(
+    showbackground=False,
+    showline=False,
+    zeroline=False,
+    showgrid=False,
+    showticklabels=False,
+    title="",
+)
+
+layout = go.Layout(
+    title="3D Graph of Website",
+    width=1000,
+    height=1000,
+    showlegend=True,
+    scene=dict(
+        xaxis=dict(axis),
+        yaxis=dict(axis),
+        zaxis=dict(axis),
+    ),
+    margin=dict(t=100),
+    hovermode="closest",
+)
+
+# Include the traces we want to plot and create a figure
+data = [trace_edges, trace_nodes]
+fig = go.Figure(data=data, layout=layout)
+
+fig.show()
 ```
 
 #### Generating Keyword Histograms
