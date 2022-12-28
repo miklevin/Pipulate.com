@@ -2505,7 +2505,7 @@ from IPython.display import display, Markdown
 
 # Configuration
 max_crawl_per_run = 500
-homepage = "https:yoursitehere.com"
+homepage = "https://www.pcmag.com/"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 headers = {"user-agent": user_agent}
 dbname = "ncrawl.db"
@@ -2607,6 +2607,8 @@ len_to_crawl = len(to_crawl)
 len_to_crawl
 
 if len_to_crawl:
+    if len_to_crawl < max_crawl_per_run:
+        max_crawl_per_run = len_to_crawl
     h2(f"Crawling {max_crawl_per_run} of {len_to_crawl} pages at click-depth {max_depth}:")
     with sqldict("ncrawl.db") as db:
         for i, url in enumerate(to_crawl):
@@ -2633,7 +2635,8 @@ else:
         db.commit()
     with sqldict("ndepth.db") as db:
         for url in table:
-            db[url] = next_depth
+            if url not in db:
+                db[url] = next_depth
         db.commit()
     h3(f"On the next run click-dept {next_depth} will be crawled.")
 h3("Done")
