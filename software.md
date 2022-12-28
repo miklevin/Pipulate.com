@@ -1216,11 +1216,14 @@ end dates for the last 16 months:
 from datetime import datetime
 from dateutil.relativedelta import relativedelta as rd
 
+patterns = ["%Y-%m-%d", "%d-%m-%Y"]
+pattern = patterns[0]
+
+# Typical month ranges for GA APIs
 months_back = 16
 for x in range(months_back):
     start_date = datetime.now().date().replace(day=1) - rd(months=x)
     end_date = start_date + rd(months=1) - rd(days=1)
-    pattern = "%Y-%m-%d"
     start_date = start_date.strftime(pattern)
     end_date = end_date.strftime(pattern)
     print(start_date, end_date)
@@ -2615,6 +2618,7 @@ if len_to_crawl:
     h2(
         f"Crawling {max_crawl_per_run} of {len_to_crawl} pages at click-depth {max_depth}:"
     )
+    h3(f"This is discovering links for a click depth {max_depth + 1} crawl.")
     with sqldict("ncrawl.db") as db:
         for i, url in enumerate(to_crawl):
             db[url] = onsite_links(url)
@@ -2772,11 +2776,54 @@ fig = go.Figure(data=data, layout=layout)
 fig.show()
 ```
 
+### Web Browser Automation
+
+#### Just Pop Up a Browser
+
+Here's the bare bones to just pop up a web browser defaulted to Google's search
+page. You'll notice the paths are Linux paths. If you're on Windows, you should
+be running WSL so all the examples from around the Internet actually work on
+your machine. Few places are the benefits of "keeping it Linux" as apparent as
+browser automation. <a href="https://mikelev.in/ux/">Drink Me</a> if you
+haven't done so already. You won't be sorry. Windows now supports Linux
+graphics.
+
+I should also add that this is uniquely Jupyter Notebook / JupyterLab-friendly
+code because of their custom event loop. This wouldn't work in just a plain .py
+file. When we're ready to transpose from Jupyter to headless Linux server
+automation, we're going to wrap every aysnc call in an async function. But
+until that time comes, rejoice at how easy Microsoft Playwright browser
+automation is under Jupyter!
+
+```python
+import asyncio
+from playwright.async_api import Playwright, async_playwright, expect, TimeoutError
+
+chrome_exe = "/usr/bin/google-chrome"
+user_data = "/home/ubuntu/.config/google-chrome/"
+downloads_path = "/home/ubuntu/Downloads"
+
+async with async_playwright() as p:
+    playwright = await async_playwright().start()
+    browser = await playwright.chromium.launch_persistent_context(
+        user_data_dir=user_data,
+        headless=False,
+        accept_downloads=True,
+        executable_path=chrome_exe,
+        channel="chrome",
+        no_viewport=True,
+        slow_mo=10,
+        downloads_path=downloads_path,
+        # args=["--start-maximized"],
+    )
+
+    page = await browser.new_page()
+    await page.goto("https://www.google.com/")
+```
+
 #### Generating Keyword Histograms
 
 #### Keyword Clustering (Hub & Spokes)
-
-### Web Browser Automation
 
 #### Taking Screenshot of Web Browser
 
