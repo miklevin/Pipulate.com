@@ -2649,10 +2649,17 @@ else:
 h3("Done")
 ```
 
-### 3D Visualization of Website Crawl Link Graph
+So what can you even do with a crawl like this that doesn't collect any on-page
+data but for the "a href" links? Well, you can visualize the link graph, of
+course! 2 splendid tools to the rescue: NetworkX and Plotly!
+
+### 3D Interactive Website Crawl Visualization
 
 I still have some work to do on this code and will be replacing it with a
-version that has labeled nodes, but for now it's pretty amazing we can do this:
+version that has labeled nodes, but for now it's pretty amazing we can do this.
+It will take the crawl data saved out from the above crawl and make it a 3D
+interactive link graph revealing the hierarchy of the site. I recommend
+limiting yourself to plotting 2 or 3 click-depth data. It gets crazy at 4.
 
 ```python
 # Import the required packages
