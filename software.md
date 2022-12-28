@@ -2483,7 +2483,7 @@ df.to_csv("ga_urls.csv", index=False)
 
 Crawlers run out of control too easily and takes up too much storage on your
 drive too readily. So to make a this a successful crawl you can control, it
-neither collects on-page data beyond links, nor will it crawl more than a 500
+neither coedge_xllects on-page data beyond links, nor will it crawl more than a 500
 pages per run. You can easily modify the code to change that, but the point of
 this is to get some quick data in for visualizing site hierarchies through
 network node graph visualizers.
@@ -2505,7 +2505,7 @@ from IPython.display import display, Markdown
 
 # Configuration
 max_crawl_per_run = 500
-homepage = "https://www.pcmag.com/"
+homepage = "https://mikelev.in/"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 headers = {"user-agent": user_agent}
 dbname = "ncrawl.db"
