@@ -2505,7 +2505,7 @@ from IPython.display import display, Markdown
 
 # Configuration
 max_crawl_per_run = 500
-homepage = "https://www.pcmag.com/"
+homepage = "https:yoursitehere.com"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 headers = {"user-agent": user_agent}
 dbname = "ncrawl.db"
