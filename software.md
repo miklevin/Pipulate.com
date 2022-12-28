@@ -2479,24 +2479,165 @@ print(df.shape)
 df.to_csv("ga_urls.csv", index=False)
 ```
 
-### 3 Click-Depth Crawl
+### N-Click-Depth Crawl
 
-So we've got a list of URLs from both Google Analytics and Search Console. The
-technique we used can grab up to a million URLs from GA, and I believe up to
-50,000 from Search Console. Now it's time for an actual crawl of the site, but
-let me tell you, big open-ended crawls are stupid. With the 2-Click-Depth crawl
-we wrote earlier on this page, we could just make it recursive or loop x-number
-of times. The problem is giving you a crappy crawl experience. 
+Crawlers run out of control too easily and takes up too much storage on your
+drive too readily. So to make a this a successful crawl you can control, it
+neither collects on-page data beyond links, nor will it crawl more than a 500
+pages per run. You can easily modify the code to change that, but the point of
+this is to get some quick data in for visualizing site hierarchies through
+network node graph visualizers.
 
-The problem with big, open-ended Web crawlers that allow >=4 click-depth is
-that you'll be waiting forever for the crawl to finish, right while it's
-creating enormous files. It's kind of the same problem on ScreamingFrog or
-DeepCrawl. So I'm going to give you a good crawl experience by limiting the
-example given here to 3-Depth and actually not collecting any data off the
-pages except for links. This should run well even on large sites and provide a
-lot of uncommon insight.
+```python
+import httpx
+import pandas as pd
+from time import time
+from asyncio import gather
+from collections import Counter
+from bs4 import BeautifulSoup as bsoup
+from urllib.parse import urlparse, urljoin
+from sqlitedict import SqliteDict as sqldict
+from IPython.display import display, Markdown
 
-#### Extracting Keywords From Pages
+# Note: This crawler will not run out of control because it locks stubbornly onto
+# completing each click-depth and is only recording the link graph and no on-page
+# content. This is useful for getting the URLs and visualizing the link graph.
+
+# Configuration
+max_crawl_per_run = 500
+homepage = "https://www.pcmag.com/"
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+dbname = "ncrawl.db"
+start = time()
+
+
+# Function to get absolute links from a URL
+def onsite_links(href):
+    response = httpx.get(href, headers=headers)
+    soup = bsoup(response.text, "html.parser")
+    ahrefs = soup.find_all("a")
+    seen = set()
+    for link in ahrefs:
+        if "href" in link.attrs:
+            href = link.attrs["href"]
+            # Skip kooky protocols like email
+            if ":" in href and "//" not in href:
+                continue
+            # Convert relative links to absolute
+            if "://" not in href:
+                href = urljoin(homepage, href)
+            # Convert root slash to homepage
+            if href == "/":
+                href = homepage
+            # Strip stuff after hash (not formal part of URL)
+            if "#" in href:
+                href = href[: href.index("#")]
+            # Remove dupes and offsite links
+            if href[: len(homepage)] == homepage:
+                seen.add(href)
+    return seen
+
+def feedback(i, t=False):
+    if not i % 1000:
+        if t:
+            print(f"\nProcessed: {i} of {t}")
+        else:
+            print(f"\nProcessed: {i}")
+    elif not i % 10:
+        print(".", end="")
+
+# Let's make some headlines!
+for i in range(1, 7):
+    func_name = f"h{i}"
+    num_hashes = '#' * i
+    command = fr"{func_name} = lambda x: display(Markdown('{num_hashes} %s' % x))"
+    exec(command)
+
+# Seed Crawl with click-depth 1 & 2
+h1(f"Crawling {homepage}")
+links = onsite_links(homepage)
+table = []
+with sqldict("ncrawl.db") as db:
+    db[homepage] = links
+    for link in links:
+        if link not in db:
+            db[link] = None
+            table.append(link)
+    db.commit()
+
+# Record the click-depth 1 & 2 pages
+with sqldict("ndepth.db") as db:
+    db[homepage] = 1
+    for link in table:
+        db[link] = 2
+    db.commit()
+
+h2("Counting discovered but unvisited links.")
+h3("This can take awhile past click-depth of 2.")
+table = []
+with sqldict("ncrawl.db") as db:
+    for i, url in enumerate(db):
+        feedback(i, len(db))
+        row = (url, db[url])
+        table.append(row)
+    print()
+df = pd.DataFrame(table)
+df.columns = ["url", "links"]
+df.set_index("url", inplace=True)
+
+h2("Figuring out deepest click-depths.")
+h3("This can take awhile past click-depth of 2.")
+table = []
+with sqldict("ndepth.db") as db:
+    for i, link in enumerate(db):
+        feedback(i, len(db))
+        row = (link, db[link])
+        table.append(row)
+    print()
+df_depth = pd.DataFrame(table)
+df_depth.columns = ["url", "depth"]
+df_depth.set_index("url", inplace=True)
+df = df.join([df_depth])
+max_depth = df["depth"].max()
+
+to_crawl = df[(df["depth"] == max_depth) & (df["links"].isnull())]
+to_crawl = list(to_crawl.index)
+len_to_crawl = len(to_crawl)
+len_to_crawl
+
+if len_to_crawl:
+    h2(f"Crawling {max_crawl_per_run} of {len_to_crawl} pages at click-depth {max_depth}:")
+    with sqldict("ncrawl.db") as db:
+        for i, url in enumerate(to_crawl):
+            db[url] = onsite_links(url)
+            db.commit()
+            print(f"{max_crawl_per_run - i} ", end="")
+            if i >= max_crawl_per_run:
+                h4(f"Another {max_crawl_per_run} urls will be visited each time you run.")
+                break
+else:
+    next_depth = max_depth + 1
+    h2(f"Done click-depth {max_depth}. Setting up tables for click-depth {next_depth}.")
+    table = []
+    with sqldict("ncrawl.db") as db:
+        table = []
+        for url in db:
+            links = db[url]
+            if links:
+                for link in links:
+                    table.append(link)
+    with sqldict("ncrawl.db") as db:
+        for url in table:
+            db[url] = None
+        db.commit()
+    with sqldict("ndepth.db") as db:
+        for url in table:
+            db[url] = next_depth
+        db.commit()
+    h3(f"On the next run click-dept {next_depth} will be crawled.")
+h3("Done")
+```
 
 #### Generating Keyword Histograms
 
