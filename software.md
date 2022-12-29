@@ -238,6 +238,28 @@ Outputs:
 
     [1482 rows x 1 columns]
 
+### Loading Text as JSON from Web
+
+If you happen to know where some JSON can be found on the Internet such as this
+master list of Categories for Google Trends, you can load it directly as
+structured data... well, not always. In this case instead of the prettier way
+of loading the .json() method of an httpx response object, I need to load it as
+a string first so we can chop off the first 4 characters. The resulting text
+can be turned into JSON using Python's standard json package. 
+
+```python
+import json
+import httpx
+
+# Make a request to the webpage
+response = httpx.get('https://trends.google.com/trends/api/explore/pickers/category?hl=en-US&tz=240')
+gtrendcats = json.loads(response.text[4:])
+```
+
+This is just a reminder that not all data is rows and columns. Sometimes you
+get jagged arrays. But when it is row & column data, you can use a Pandas
+DataFrame!
+
 ### Understanding Pandas DataFrames
 
 In case you didn't notice, we're already using Python Pandas from the above
