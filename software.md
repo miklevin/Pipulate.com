@@ -256,6 +256,27 @@ response = httpx.get('https://trends.google.com/trends/api/explore/pickers/categ
 gtrendcats = json.loads(response.text[4:])
 ```
 
+```javascript
+{'children': [{'children': [{'name': 'Celebrities & Entertainment News',
+     'id': 184},
+    {'children': [{'name': 'Animated Films', 'id': 1104},
+      {'name': 'Anime & Manga', 'id': 317},
+      {'name': 'Cartoons', 'id': 319},
+      {'name': 'Comics', 'id': 318}],
+     'name': 'Comics & Animation',
+     'id': 316},
+...
+    {'children': [{'name': 'Tourist Boards & Visitor Centers', 'id': 1392},
+      {'name': 'Vacation Offers', 'id': 1019}],
+     'name': 'Travel Agencies & Services',
+     'id': 1010},
+    {'name': 'Travel Guides & Travelogues', 'id': 1011}],
+   'name': 'Travel',
+   'id': 67}],
+ 'name': 'All categories',
+ 'id': 0}
+```
+
 This is just a reminder that not all data is rows and columns. Sometimes you
 get jagged arrays. But when it is row & column data, you can use a Pandas
 DataFrame!
