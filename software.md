@@ -1216,37 +1216,42 @@ end dates for the last 16 months:
 from datetime import datetime
 from dateutil.relativedelta import relativedelta as rd
 
-patterns = ["%Y-%m-%d", "%d-%m-%Y"]
+# Pick your API's date format
+patterns = ["%Y-%m-%d", "%d-%m-%Y", "%Y/%m/%d", "%d/%m/%Y"]
 pattern = patterns[0]
 
 # Typical month ranges for GA APIs
 months_back = 16
+table = []
 for x in range(months_back):
     start_date = datetime.now().date().replace(day=1) - rd(months=x)
     end_date = start_date + rd(months=1) - rd(days=1)
     start_date = start_date.strftime(pattern)
     end_date = end_date.strftime(pattern)
-    print(start_date, end_date)
+    table.append((start_date, end_date))
+
+for timetuple in table:
+    print(timetuple)
 ```
 
 ...which gives this:
 
-    2022-12-01 2022-12-31
-    2022-11-01 2022-11-30
-    2022-10-01 2022-10-31
-    2022-09-01 2022-09-30
-    2022-08-01 2022-08-31
-    2022-07-01 2022-07-31
-    2022-06-01 2022-06-30
-    2022-05-01 2022-05-31
-    2022-04-01 2022-04-30
-    2022-03-01 2022-03-31
-    2022-02-01 2022-02-28
-    2022-01-01 2022-01-31
-    2021-12-01 2021-12-31
-    2021-11-01 2021-11-30
-    2021-10-01 2021-10-31
-    2021-09-01 2021-09-30
+    ('2022-12-01', '2022-12-31')
+    ('2022-11-01', '2022-11-30')
+    ('2022-10-01', '2022-10-31')
+    ('2022-09-01', '2022-09-30')
+    ('2022-08-01', '2022-08-31')
+    ('2022-07-01', '2022-07-31')
+    ('2022-06-01', '2022-06-30')
+    ('2022-05-01', '2022-05-31')
+    ('2022-04-01', '2022-04-30')
+    ('2022-03-01', '2022-03-31')
+    ('2022-02-01', '2022-02-28')
+    ('2022-01-01', '2022-01-31')
+    ('2021-12-01', '2021-12-31')
+    ('2021-11-01', '2021-11-30')
+    ('2021-10-01', '2021-10-31')
+    ('2021-09-01', '2021-09-30')
 
 #### Pulling Data From GSC
 
@@ -2803,11 +2808,13 @@ chrome_exe = "/usr/bin/google-chrome"
 user_data = "/home/ubuntu/.config/google-chrome/"
 downloads_path = "/home/ubuntu/Downloads"
 
+headless = False
+
 async with async_playwright() as p:
     playwright = await async_playwright().start()
     browser = await playwright.chromium.launch_persistent_context(
         user_data_dir=user_data,
-        headless=False,
+        headless=headless,
         accept_downloads=True,
         executable_path=chrome_exe,
         channel="chrome",
@@ -2821,6 +2828,7 @@ async with async_playwright() as p:
     await page.goto("https://www.google.com/")
 ```
 
+<!--
 #### Generating Keyword Histograms
 
 #### Keyword Clustering (Hub & Spokes)
@@ -2852,4 +2860,4 @@ async with async_playwright() as p:
 #### Emailing n Zip File with Python
 
 ### Finding Most Recent GSC Data
-
+-->
