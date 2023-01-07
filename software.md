@@ -38,15 +38,13 @@ case it didn't, grab it from the Microsoft Store.
 ### Ready to Automate Examples
 
 Once you have JupyterLab displaying in your Web browser, you're in business.
-Simply copy/paste any of the code in these examples into a new Notebook or go
-into the repo named pipulate and run the code from the example files found
-there. Those examples will match what you find here.
+You can copy/paste examples from this page into a new Notebook, or load similar
+examples from the practice folder found there.
 
-When you work something out using my sample-code in JupyterLab, the next step
-really is to automate those things you like under systemd right on your Windows
-laptop, or more reliably on a Raspberry Pi, home server or NAS, in the Cloud,
-or wherever generic Linux is run. This may sound difficult, but it is easier
-than you think because there is a sample of it running on your laptop.
+As you get good at it, you'll use nbdev to create .py files from the notebooks
+which can be used directly in-location as Linux daemons &#151; right on your
+Windows system. And because it's so similar to a real-world server deployment,
+24x7 automation is one git clone away from a Raspberry Pi, NAS or cloud server.
 
 #### Rapid-Fire Million-Dollar Ideas
 
