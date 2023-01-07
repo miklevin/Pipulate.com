@@ -10,6 +10,14 @@ description: Pipulate FOSS SEO Software
 Study this page to learn many of the best tricks needed for SEO, plus many of
 the techniques that make Python a joy to use, and complex deliverables simple.
 
+#### Let's Stay Organized Out There, People
+
+```python
+from pathlib import Path
+
+Path("data").mkdir(exist_ok=True)
+```
+
 #### What You Will Find on This Page
 
 1. TOC
