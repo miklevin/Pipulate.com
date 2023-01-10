@@ -161,6 +161,7 @@ list:
 ```python
 import pandas as pd
 
+pd.set_option('display.max_rows', None)
 url = "https://en.wikipedia.org/wiki/History_of_the_web_browser"
 list_of_dfs = pd.read_html(url)
 df = list_of_dfs[1]
@@ -1844,7 +1845,7 @@ for atuple in idtuples:
         name, vid = view["name"], view["id"]
         table.append((aid, wid, name, vid))
 
-columns = ["Account ID", "WebProperty ID", "View Name", "View ID"]
+columns = ["Account ID", "WebPropertyID", "View Name", "View ID"]
 df = pd.DataFrame(table, columns=columns)
 df.to_csv("ga_views.csv", index=False)
 print(df)
@@ -1931,7 +1932,7 @@ query = {
 
 # Execute query and print response
 response = service.reports().batchGet(body=query).execute()
-print(response)}
+print(response)
 ```
 
 Bonus: if you're a paid GA 360 customer and have a higher resolution sampling
