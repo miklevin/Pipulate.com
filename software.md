@@ -120,6 +120,26 @@ import this
 
 #### Let's Stay Organized Out There, People
 
+Okay, so Python .py files create their own namespaces based on their filenames.
+Hopefully you've got that. Now the next unit of organization is naturally the
+folder, a.k.a. the "directory". It's not worth fighting which to call it
+because neither actually exist. They are only bits on your drive which we thunk
+down with some simple labels and defined behaviors so we can actually interact
+with them. Got that? You've got to thunk to grok.
+
+And with that said, make a directory for your current work. I like to use
+"practice" so that I don't have to think of a nice strong label right away. So
+use the OS or command-line or whatever to make a folder. Inside that folder you
+do your work and will start accumulating "output" data files. These might be
+***csv***'s, ***txt***'s, ***db***'s or other. If they start to clutter your
+working directory, put them in a subfolder.
+
+This or something like it should appear near the top of almost every program
+you make that makes outputs data that you want to store locally (not on the
+cloud). And to keep costs & dependencies down while keeping performance up,
+that should be almost everything. I put million-page crawls in such data
+folders, even on my feeble laptop.
+
 ```python
 from pathlib import Path
 
