@@ -84,7 +84,8 @@ about it.
 Files can either run as stand-alone programs, so you could run foo.py directly.
 Or foo.py can be imported by other files as resources that get conveniently
 grouped so that their own internal variable names don't collide. This leads to
-one of the most common and befuddling bits of code you'll see in Python:
+one of the most common and befuddling bits of code you'll see everywhere in
+Python:
 
 ```python
 if __name__ == "__main__":
@@ -119,6 +120,19 @@ potential object to explore. Get to know its type(). While this can be
 frustrating, beware power-tools. It doesn't make sense to rely on Microsoft
 Intellisense for your inquisitive abilities, so beware of being charmed by
 VSCode.
+
+#### CompPsych!
+
+Common wisdom says ***global variables*** are bad. Well, since files import
+files, what's global in one is contained in a namespace in another. The "bar"
+value in the above example would be considered a global variable.
+
+Contrary to what Java-brainwashed CompSci grads will tell you, it's completely
+valid to make generous use of global variables knowing you're making convenient
+bundles of foo.this and foo.that. Python's delightful because it lets you flip
+a giant foo.you of practical antipatterns at compsci snobs who have no defense
+but to sit and watch it run. Java people don't like Python people much. We fart
+in their general direction.
 
 This will all make sense after awhile. There's a few simple rules that govern
 it all so don't worry.
