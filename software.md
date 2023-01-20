@@ -18,16 +18,18 @@ the techniques that make Python a joy to use, and complex deliverables simple.
 #### Python is Not What You Think
 
 Think of Python as just helping you think better where the imprecise spoken
-word fails you. Python builds on some very well designed principles or
-assumptions. A good example is that files are your #1 means of organizing, and
-files can "import" other files whose contents get automatically bundled up into
-a neat and tidy ***namespace***.
+word fails. Python builds on some very well designed principles or assumptions.
+A good example is that files are your #1 means of organizing, and files can
+***import*** other files whose contents get automatically bundled up into a
+neat and tidy ***namespace***.
 
     foo.py
 
-And that file contains:
+And the foo.py contains the following code:
 
-    bar = 123
+```python
+bar = 123
+```
 
 ...then if you import foo.py into filename.py, you have access to the "bar"
 value in foo's "namespace". This will all make sense to you shortly. Given
@@ -44,14 +46,23 @@ print(foo.bar)
 
     >> 123
 
-#### You Need to Grok Namespaces
+#### You Gotta Grok Namespaces
 
-It's essential to understand namespaces. Python's creator, Guido van Rossum,
-put certain conventions into Python which are the gifts that keep giving.
+It's essential to understand namespaces. Python's creator Guido van Rossum made
+certain language design choices which have become the gifts that keep giving.
+Other languages have done similar things, but few do it quite so well as
+Python, meaning users can just chug along doing work without thinking about it
+much. It all easily ***internalizes***.
+
 Namespaces give you benefits of ***Object Oriented*** design without knowing or
-having to think about it. In other words, Guido is keeping you, and the rest of
-the world, organized by forcing every file to be its own ***namespace*** by
-convention.
+having to think about it. In other words, Guido is keeping you and the rest of
+the world organized by forcing every file to be its own ***namespace*** by
+convention. Common wisdom says you can avoid **OO** design in Python if you
+want to, but you really can't. You'll just get the benefits without thinking
+about it.
+
+> That ain't OO that's the way you do it
+> Namespace for nothin' and imports for free
 
 Files, which are also namespaces, can either run as stand-alone programs, so
 you could run foo.py directly. Or foo.py can be imported by other files as
