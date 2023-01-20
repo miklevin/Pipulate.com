@@ -44,9 +44,12 @@ value in foo's ***namespace***.
 A namspace is a space for names. The same names can exist in different
 namespaces without colliding with each other. If you want to simplify it, think
 of it in terms of each namespace being a different universe in the multiverse
-(you youth!). This will all make sense to you shortly. Given foo.py and
-filename.py are in the same folder, Here's the contents of filename.py that
-loads bar's values:
+(you youth!). 
+
+#### import foo
+
+This will all make sense to you shortly. Given foo.py and filename.py are in
+the same folder, Here's the contents of filename.py that loads bar's values:
 
 ```python
 import foo
