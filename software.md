@@ -15,6 +15,8 @@ the techniques that make Python a joy to use, and complex deliverables simple.
 1. TOC
 {:toc}
 
+### A Word on Python
+
 #### Python is Not What You Think
 
 Think of Python as just helping you think better where the imprecise spoken
