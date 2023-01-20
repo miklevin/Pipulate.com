@@ -10,6 +10,85 @@ description: Pipulate FOSS SEO Software
 Study this page to learn many of the best tricks needed for SEO, plus many of
 the techniques that make Python a joy to use, and complex deliverables simple.
 
+#### You Need to Learn Python
+
+Don't think of Python as a programming language. Think of it as an aide to
+logical thinking that will help you with many aspects of life that require
+more precision than the spoken word can provide. It's important to know that
+files are your #1 means of organizing, and files can "import" other files
+repeatedly without negative side-effects. So if you have a file:
+
+    foo.py
+
+And that file contains:
+
+    bar = 123
+
+...then if you import foo.py into filename.py, you have access to the "bar"
+value in foo's "namespace". This will all make sense to you shortly. Given
+foo.py and filename.py are in the same folder, Here's the contents of
+filename.py that loads bar's values:
+
+```python
+import foo
+
+print(foo.bar)
+```
+
+...which outputs:
+
+    >> 123
+
+#### You Need to Grok Namespaces
+
+See? If you don't, re-read and test it out in Jupyter. You've got to get this
+point. It's essential. Python's creator, Guido van Rossum, designed certain
+brilliant conventions into Python which are the gifts that keep giving. This is
+one of them. This is one of the places where you get the benefit of abstract
+and difficult to grok concepts like Object Oriented without even knowing it.
+
+In other words, Guido is keeping you, and the rest of the world, organized by
+forcing every file to be its own ***namespace*** by convention, which can
+either stand-alone to run its own code, or be imported by other files as
+resources that get conveniently grouped so that their own internal variable
+names don't collide with variable names that may already exist.
+
+And in case you're wondering, filename.py can import foo.py, but foo.py can
+also import filename.py to no ill effect. You'd probably want to avoid it for
+simplicity's sake, but such is the resiliency of Python that such circular
+import reference won't break your code. On a similar note, you can re-import
+foo.py from filename.py repeatedly to no ill effect.
+
+If you want deeper insight into the Zen of Python:
+
+```python
+import this
+```
+
+...and notice the last line.
+
+##### The Zen of Python, by Tim Peters
+
+- Beautiful is better than ugly.
+- Explicit is better than implicit.
+- Simple is better than complex.
+- Complex is better than complicated.
+- Flat is better than nested.
+- Sparse is better than dense.
+- Readability counts.
+- Special cases aren't special enough to break the rules.
+- Although practicality beats purity.
+- Errors should never pass silently.
+- Unless explicitly silenced.
+- In the face of ambiguity, refuse the temptation to guess.
+- There should be one-- and preferably only one --obvious way to do it.
+- Although that way may not be obvious at first unless you're Dutch.
+- Now is better than never.
+- Although never is often better than *right* now.
+- If the implementation is hard to explain, it's a bad idea.
+- If the implementation is easy to explain, it may be a good idea.
+- Namespaces are one honking great idea -- let's do more of those!
+
 #### Let's Stay Organized Out There, People
 
 ```python
@@ -1746,6 +1825,9 @@ example:
 
 #### List All Google Analytics Accounts You Can Access
 
+Unfortunately, you have to switch between v3 and v4 of the GA API to get
+everything you need. When enumerating accounts, you need to use GA v3.
+
 ```python
 import ohawf
 import pandas as pd
@@ -1902,8 +1984,10 @@ you experiment, which is important because the requests are somewhat hard to
 construct. You can check out their notoriously obfuscated <a
 href="https://developers.google.com/analytics/devguides/reporting/core/v4/quickstart/service-py">example</a>
 which in my opinion prevents people from doing this sort of work than helps.
-Here's how simple it should be.  Why nobody shows barebones examples like this
-except for me, I'll never know.
+Here's how simple it should be. Why nobody shows barebones examples like this
+except for me, I'll never know. I have a hypothesis that it's because the easy
+examples don't work well with Microsoft Intellisense on which most developers
+are now dependent. 
 
 ```python
 import ohawf
@@ -2052,6 +2136,14 @@ df = pd.DataFrame(table, columns=["Account", "Account ID", "Property", "Property
 df.to_csv("ga4_properties.csv", index=False)
 print("Done")
 ```
+
+And if you think moving from GA v4 to GA4 is confusing, there's still a GA v3
+you sometimes have to use. You see that in the above example that enumerates
+Accounts, Web Properties and Profiles where service.management() is invoked. GA
+v4 doesn't have .management() but v3 does. Ugh! So can you also pull data with
+GA v3? Yes, and you sometimes have to in order to prevent broken out
+"dimension rows" from collapsing down into summary counts. Here's a GA v3 query
+that returns URLs 
 
 ### Keyword Analysis With Linear Regression
 
