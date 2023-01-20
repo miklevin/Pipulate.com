@@ -61,8 +61,8 @@ convention. Common wisdom says you can avoid **OO** design in Python if you
 want to, but you really can't. You'll just get the benefits without thinking
 about it.
 
-> That ain't OO that's the way you do it
-> Namespace for nothin' and imports for free
+> That ain't OO that's the way you do it  
+> Namespace for nothin' and imports for free  
 
 Files, which are also namespaces, can either run as stand-alone programs, so
 you could run foo.py directly. Or foo.py can be imported by other files as
@@ -2167,7 +2167,156 @@ Accounts, Web Properties and Profiles where service.management() is invoked. GA
 v4 doesn't have .management() but v3 does. Ugh! So can you also pull data with
 GA v3? Yes, and you sometimes have to in order to prevent broken out
 "dimension rows" from collapsing down into summary counts. Here's a GA v3 query
-that returns URLs 
+that returns all the broken-out URLs with a query whose equivalent would only
+return aggregate summary values in GA v4:
+
+```python
+import ohawf
+from time import sleep
+from collections import namedtuple
+from apiclient.discovery import build
+from sqlitedict import SqliteDict as sqldict
+
+creds = ohawf.get()
+service = build("analytics", "v3", credentials=creds)
+
+with open("profiles.txt") as fh:
+    profiles = [x.strip() for x in fh.readlines()]
+
+start_date = "2022-01-01"
+end_date = "2023-01-09"
+
+Args = namedtuple("Args", "profile, npt")
+
+# Create the keys for uncollected data
+with sqldict("ga.db") as db:
+    for profile in profiles:
+        profile = int(profile)
+        for npt in range(1, 50001, 10000):
+            arg = Args(profile, npt)
+            if str(arg) not in db:
+                print(arg)
+                db[str(arg)] = None
+        db.commit()
+
+# Function to get GA data with v3 API
+# Breaks out URL rows with filter or segment applied (unlike v4)
+def ga(profile, npt):
+    return (
+        service.data()
+        .ga()
+        .get(
+            ids=f"ga:{profile}",
+            start_date=start_date,
+            end_date=end_date,
+            dimensions="ga:landingPagePath",
+            segment="gaid::-5",
+            metrics="ga:users,ga:newusers,ga:sessions,ga:bouncerate,ga:pageviewsPerSession,ga:avgSessionDuration",
+            sort="-ga:sessions",
+            # filters="ga:medium==organic",
+            start_index=f"{npt}",
+            max_results="10000",
+        )
+        .execute()
+    )
+
+with sqldict("ga.db") as db:
+    for key in db:
+        tkey = eval(key)
+        profile, npt = tkey
+        data = db[key]
+        if data == None:
+            print(f"Hitting API for profile: {profile} npt: {npt}")
+            response = ga(profile, npt)
+            db[key] = response
+            db.commit()
+            sleep(10)
+```
+
+This program can be restated with Google Analytics v4, but it won't break out
+the URL rows:
+
+```python
+import ohawf
+from time import sleep
+from collections import namedtuple
+from apiclient.discovery import build
+from sqlitedict import SqliteDict as sqldict
+
+creds = ohawf.get()
+service = build("analyticsreporting", "v4", credentials=creds)
+
+start_date = "2022-01-01"
+end_date = "2023-01-09"
+
+# Create the Google Analytics query
+def query(profile, npt):
+    qry = {
+        "reportRequests": {
+            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
+            "metrics": [
+                {"expression": "ga:users"},
+                {"expression": "ga:newusers"},
+                {"expression": "ga:sessions"},
+                {"expression": "ga:bouncerate"},
+                {"expression": "ga:pageviewsPerSession"},
+                {"expression": "ga:avgSessionDuration"},
+            ],
+            # "segments": [{"segmentId": "gaid::-5"}],
+            # "dimensions": [{"name": "ga:segment", "name": "ga:landingPagePath"}],
+            "dimensions": [{"name": "ga:landingPagePath"}],
+            "orderBys": [
+                {"fieldName": "ga:sessions", "sortOrder": "DESCENDING"},
+            ],
+            "samplingLevel": "SMALL",
+            "pageSize": "10000",
+            "pageToken": f"{npt}",
+            "viewId": f"{profile}",
+        }
+    }
+    return qry
+
+ga = lambda x: service.reports().batchGet(body=x).execute()
+
+with open("profiles.txt") as fh:
+    profiles = [x.strip() for x in fh.readlines()]
+
+Args = namedtuple("Args", "profile, npt")
+
+
+# Create the keys for uncollected data
+with sqldict("ga.db") as db:
+    for profile in profiles:
+        profile = int(profile)
+        for npt in range(0, 50000, 10000):
+            arg = Args(profile, npt)
+            if str(arg) not in db:
+                print(arg)
+                db[str(arg)] = None
+        db.commit()
+
+# Perform queries and collect data
+with sqldict("ga.db") as db:
+    for key in db:
+        tkey = eval(key)
+        profile, npt = tkey
+        data = db[key]
+        if data == None:
+            print(f"Hitting API for profile: {profile} npt: {npt}")
+            response = ga(query(profile, npt))
+            db[key] = response
+            db.commit()
+            sleep(10)
+```
+
+So much about managing large API data-pulls is expressed in the above two
+examples. Always create your database keys that represent API-calls ahead of
+time, even though you don't have data yet. Treat your set of keys as beforehand
+data so you know exactly how many locks you need to turn before you have all
+the data you want. If jobs fail in the middle, you just check which doors are
+still locked and do 2nd passes to fill in the gaps. It's good housekeeping and
+acknowledges the reality that APIs (data sources) on the Internet are often
+flaky. 
 
 ### Keyword Analysis With Linear Regression
 
