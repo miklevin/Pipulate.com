@@ -61,6 +61,8 @@ Other languages have done similar things, but few do it quite so well as
 Python, meaning users can just chug along doing work without thinking about it
 much. It all easily ***internalizes***.
 
+#### Don't Fear the OO
+
 Namespaces give you benefits of ***Object Oriented*** design without knowing or
 having to think about it. In other words, Guido is keeping you and the rest of
 the world organized by forcing every file to be its own ***namespace*** by
@@ -71,10 +73,9 @@ about it.
 > That ain't OO that's the way you do it  
 > Namespace for nothin' and imports for free  
 
-Files, which are also namespaces, can either run as stand-alone programs, so
-you could run foo.py directly. Or foo.py can be imported by other files as
-resources that get conveniently grouped so that their own internal variable
-names don't collide with variable names that may already exist. This leads to
+Files can either run as stand-alone programs, so you could run foo.py directly.
+Or foo.py can be imported by other files as resources that get conveniently
+grouped so that their own internal variable names don't collide. This leads to
 one of the most common and befuddling bits of code you'll see in Python:
 
 ```python
@@ -86,14 +87,43 @@ This is a very geeky way of saying:
 
 > Run if called as a .py-file but don't run if imported.
 
-There's a lot in Python that you just have to be told. It will make sense after
-awhile. There's a few simple rules that govern it all so don't worry.
+This also assumes you've ***def***ined a function in the .py-file called "main"
+that can be called in this way. If no def main(): is there, this code will
+fail. But if you completely remove these lines, the code will run just the
+same. Harumpf! Stuff like this we seasoned Pythonistas fail to explain to the
+newbs, but they're such important humps to get over. 
+
+#### Pythonic Indoctrination
+
+There's a lot in Python that you just have to be told. At first you'll feel
+like a \_\_dunder_\_.head(), not knowing that you're looking at someone's
+privates when you see double-underscore, or that a .dotsomething is a function
+definition while .dotsomething() is actually ***calling*** that same function,
+simultaneously providing a place where you could provide input (between the
+parenthesis) if needed. 
+
+#### Don't Get Py Charmed by Intellisense
+
+Also, a .dotsomething might actually be a simple property like width or height
+instead of a function definition, so you've got to explore those objects with
+dir() and help() to see what's what. Every variablename in Python is a
+potential object to explore. Get to know its type(). While this can be
+frustrating, beware power-tools. It doesn't make sense to rely on Microsoft
+Intellisense for your inquisitive abilities, so beware of being charmed by
+VSCode.
+
+This will all make sense after awhile. There's a few simple rules that govern
+it all so don't worry.
+
+#### Recursion Protection
 
 And in case you're wondering, filename.py can import foo.py, but foo.py can
 also import filename.py to no ill effect. You'd probably want to avoid it for
 simplicity's sake, but such is the resiliency of Python that such circular
 import reference won't break your code. On a similar note, you can re-import
 foo.py from filename.py repeatedly to no ill effect.
+
+#### The Zen of Python
 
 If you want deeper insight into the Zen of Python:
 
