@@ -44,7 +44,13 @@ value in foo's ***namespace***.
 A namspace is a space for names. The same names can exist in different
 namespaces without colliding with each other. If you want to simplify it, think
 of it in terms of each namespace being a different universe in the multiverse
-(you youth!). 
+and different spider-people can exist so long as they don't all try to:
+
+```python
+from spiderverse import *
+```
+
+That would be a mess, but it would give Sony a fighting chance against Disney.
 
 #### import foo
 
