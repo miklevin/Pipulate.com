@@ -10,13 +10,18 @@ description: Pipulate FOSS SEO Software
 Study this page to learn many of the best tricks needed for SEO, plus many of
 the techniques that make Python a joy to use, and complex deliverables simple.
 
-#### You Need to Learn Python
+#### What You Will Find on This Page
 
-Don't think of Python as a programming language. Think of it as an aide to
-logical thinking that will help you with many aspects of life that require
-more precision than the spoken word can provide. It's important to know that
-files are your #1 means of organizing, and files can "import" other files
-repeatedly without negative side-effects. So if you have a file:
+1. TOC
+{:toc}
+
+#### Python is Not What You Think
+
+Think of Python as just helping you think better where the imprecise spoken
+word fails you. Python builds on some very well designed principles or
+assumptions. A good example is that files are your #1 means of organizing, and
+files can "import" other files whose contents get automatically bundled up into
+a neat and tidy ***namespace***.
 
     foo.py
 
@@ -41,17 +46,30 @@ print(foo.bar)
 
 #### You Need to Grok Namespaces
 
-See? If you don't, re-read and test it out in Jupyter. You've got to get this
-point. It's essential. Python's creator, Guido van Rossum, designed certain
-brilliant conventions into Python which are the gifts that keep giving. This is
-one of them. This is one of the places where you get the benefit of abstract
-and difficult to grok concepts like Object Oriented without even knowing it.
+It's essential to understand namespaces. Python's creator, Guido van Rossum,
+put certain conventions into Python which are the gifts that keep giving.
+Namespaces give you benefits of ***Object Oriented*** design without knowing or
+having to think about it. In other words, Guido is keeping you, and the rest of
+the world, organized by forcing every file to be its own ***namespace*** by
+convention.
 
-In other words, Guido is keeping you, and the rest of the world, organized by
-forcing every file to be its own ***namespace*** by convention, which can
-either stand-alone to run its own code, or be imported by other files as
+Files, which are also namespaces, can either run as stand-alone programs, so
+you could run foo.py directly. Or foo.py can be imported by other files as
 resources that get conveniently grouped so that their own internal variable
-names don't collide with variable names that may already exist.
+names don't collide with variable names that may already exist. This leads to
+one of the most common and befuddling bits of code you'll see in Python:
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+This is a very geeky way of saying:
+
+> Run if called as a .py-file but don't run if imported.
+
+There's a lot in Python that you just have to be told. It will make sense after
+awhile. There's a few simple rules that govern it all so don't worry.
 
 And in case you're wondering, filename.py can import foo.py, but foo.py can
 also import filename.py to no ill effect. You'd probably want to avoid it for
@@ -87,7 +105,7 @@ import this
 - Although never is often better than *right* now.
 - If the implementation is hard to explain, it's a bad idea.
 - If the implementation is easy to explain, it may be a good idea.
-- Namespaces are one honking great idea -- let's do more of those!
+- ***Namespaces are one honking great idea &#151; let's do more of those!***
 
 #### Let's Stay Organized Out There, People
 
@@ -96,11 +114,6 @@ from pathlib import Path
 
 Path("data").mkdir(exist_ok=True)
 ```
-
-#### What You Will Find on This Page
-
-1. TOC
-{:toc}
 
 ### Getting Started With Pipulate
 
