@@ -24,7 +24,7 @@ word fails. Python builds on some very well designed principles or assumptions.
 A good example is that files are your #1 means of organizing, and files can
 ***import*** other files whose contents get automatically bundled up into a
 neat and tidy ***namespace***. For example, let's say you have a file on your
-drive name:
+drive named:
 
     foo.py
 
@@ -36,12 +36,17 @@ bar = 123
 ```
 
 ...then if you import foo.py into filename.py, you have access to the ***bar***
-value in foo's ***namespace***. A namspace is a space for names. The same names
-can exist in different namespaces without colliding with each other. If you
-want to simplify it, think of it in terms of each namespace being a different
-universe in the multiverse (you youth!). This will all make sense to you
-shortly. Given foo.py and filename.py are in the same folder, Here's the
-contents of filename.py that loads bar's values:
+value in foo's ***namespace***. 
+
+> If this sounds like blah blah blah, get JupyterLab installed on your machine
+> right now and test this. You need this Ah-Ha! moment to proceed.
+
+A namspace is a space for names. The same names can exist in different
+namespaces without colliding with each other. If you want to simplify it, think
+of it in terms of each namespace being a different universe in the multiverse
+(you youth!). This will all make sense to you shortly. Given foo.py and
+filename.py are in the same folder, Here's the contents of filename.py that
+loads bar's values:
 
 ```python
 import foo
