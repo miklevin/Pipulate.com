@@ -23,20 +23,25 @@ Think of Python as just helping you think better where the imprecise spoken
 word fails. Python builds on some very well designed principles or assumptions.
 A good example is that files are your #1 means of organizing, and files can
 ***import*** other files whose contents get automatically bundled up into a
-neat and tidy ***namespace***.
+neat and tidy ***namespace***. For example, let's say you have a file on your
+drive name:
 
     foo.py
 
-And the foo.py contains the following code:
+And the contents of the Python text-file named foo.py is only the following
+single line of code:
 
 ```python
 bar = 123
 ```
 
-...then if you import foo.py into filename.py, you have access to the "bar"
-value in foo's "namespace". This will all make sense to you shortly. Given
-foo.py and filename.py are in the same folder, Here's the contents of
-filename.py that loads bar's values:
+...then if you import foo.py into filename.py, you have access to the ***bar***
+value in foo's ***namespace***. A namspace is a space for names. The same names
+can exist in different namespaces without colliding with each other. If you
+want to simplify it, think of it in terms of each namespace being a different
+universe in the multiverse (you youth!). This will all make sense to you
+shortly. Given foo.py and filename.py are in the same folder, Here's the
+contents of filename.py that loads bar's values:
 
 ```python
 import foo
