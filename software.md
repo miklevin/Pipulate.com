@@ -3189,6 +3189,8 @@ This is how you do browser automation under JupyterLab on a Windows PC running
 WSL and JupyterLab running in your Windows browser but the server portion under
 Linux (not Anaconda nor Jupyter-Desktop).
 
+##### Barebones Chromium without Session Memory
+
 ```python
 import asyncio
 from playwright.async_api import Playwright, async_playwright
@@ -3205,6 +3207,18 @@ async with async_playwright() as playwright:
     await page.goto(site)
     await asyncio.sleep(delay)
     await browser.close()
+```
+
+##### Chromium with Session Memory and User Agent Cloaking
+
+```python
+import asyncio
+from playwright.async_api import Playwright, async_playwright
+
+delay = 5
+slow_mo = 100
+headless = False
+site = "https://www.google.com/"
 
 # Chromium with Session Memory and User Agent Cloaking
 session_folder = "session"
@@ -3218,6 +3232,18 @@ async with async_playwright() as playwright:
     await page.goto(site)
     await asyncio.sleep(delay)
     await browser.close()
+```
+
+##### Firefox without Session Memory
+
+```python
+import asyncio
+from playwright.async_api import Playwright, async_playwright
+
+delay = 5
+slow_mo = 100
+headless = False
+site = "https://www.google.com/"
 
 # Firefox without Session Memory
 async with async_playwright() as playwright:
@@ -3227,6 +3253,18 @@ async with async_playwright() as playwright:
     await page.goto(site)
     await asyncio.sleep(delay)
     await browser.close()
+```
+
+##### Genuine Linux Chrome with Real User Data
+
+```python
+import asyncio
+from playwright.async_api import Playwright, async_playwright
+
+delay = 5
+slow_mo = 100
+headless = False
+site = "https://www.google.com/"
 
 # Genuine Linux Chrome with Real User Data
 chrome_exe = "/usr/bin/google-chrome"
