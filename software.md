@@ -3183,32 +3183,55 @@ fig.show()
 
 ### Web Browser Automation
 
-#### Just Pop Up a Browser
+#### Chromium, Firefox & Chrome Automation
 
-Here's the bare bones to just pop up a web browser defaulted to Google's search
-page. You'll notice the paths are Linux paths. If you're on Windows, you should
-be running WSL so all the examples from around the Internet actually work on
-your machine. Few places are the benefits of "keeping it Linux" as apparent as
-browser automation. <a href="https://mikelev.in/ux/">Drink Me</a> if you
-haven't done so already. You won't be sorry. Windows now supports Linux
-graphics.
-
-I should also add that this is uniquely Jupyter Notebook / JupyterLab-friendly
-code because of their custom event loop. This wouldn't work in just a plain .py
-file. When we're ready to transpose from Jupyter to headless Linux server
-automation, we're going to wrap every aysnc call in an async function. But
-until that time comes, rejoice at how easy Microsoft Playwright browser
-automation is under Jupyter!
+This is how you do browser automation under JupyterLab on a Windows PC running
+WSL and JupyterLab running in your Windows browser but the server portion under
+Linux (not Anaconda nor Jupyter-Desktop).
 
 ```python
 import asyncio
-from playwright.async_api import Playwright, async_playwright, expect, TimeoutError
+from playwright.async_api import Playwright, async_playwright
 
+delay = 5
+slow_mo = 100
+headless = False
+site = "https://www.google.com/"
+
+# Barebones Chromium without Session Memory
+async with async_playwright() as playwright:
+    browser = await playwright.chromium.launch(headless=headless, slow_mo=slow_mo)
+    page = await browser.new_page()
+    await page.goto(site)
+    await asyncio.sleep(delay)
+    await browser.close()
+
+# Chromium with Session Memory and User Agent Cloaking
+session_folder = "session"
+ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+
+async with async_playwright() as playwright:
+    browser = await playwright.chromium.launch_persistent_context(
+        session_folder, headless=headless, slow_mo=slow_mo, user_agent=ua
+    )
+    page = await browser.new_page()
+    await page.goto(site)
+    await asyncio.sleep(delay)
+    await browser.close()
+
+# Firefox without Session Memory
+async with async_playwright() as playwright:
+    browser = await playwright.firefox.launch(headless=headless, slow_mo=slow_mo)
+    context = await browser.new_context()
+    page = await context.new_page()
+    await page.goto(site)
+    await asyncio.sleep(delay)
+    await browser.close()
+
+# Genuine Linux Chrome with Real User Data
 chrome_exe = "/usr/bin/google-chrome"
 user_data = "/home/ubuntu/.config/google-chrome/"
 downloads_path = "/home/ubuntu/Downloads"
-
-headless = False
 
 async with async_playwright() as p:
     playwright = await async_playwright().start()
@@ -3219,14 +3242,18 @@ async with async_playwright() as p:
         executable_path=chrome_exe,
         channel="chrome",
         no_viewport=True,
-        slow_mo=10,
+        slow_mo=slow_mo,
         downloads_path=downloads_path,
         # args=["--start-maximized"],
     )
 
     page = await browser.new_page()
-    await page.goto("https://www.google.com/")
+    await page.goto(site)
+    await asyncio.sleep(delay)
+    await browser.close()
+
 ```
+
 
 <!--
 #### Generating Keyword Histograms
