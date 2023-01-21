@@ -84,8 +84,8 @@ convention. Common wisdom says you can avoid **OO** design in Python if you
 want to, but you really can't. You'll just get the benefits without thinking
 about it.
 
-> That ain't OO that's the way you do it  
-> Namespace for nothin' and imports for free  
+> That ain't OO that's the way you do it;  
+> Namespaces for nothin' and imports for free!  
 
 Files can either run as stand-alone programs, so you could run foo.py directly.
 Or foo.py can be imported by other files as resources that get conveniently
@@ -111,7 +111,7 @@ newbs, but they're such important humps to get over.
 #### Pythonic Indoctrination
 
 There's a lot in Python that you just have to be told. At first you'll feel
-like a \_\_dunder_\_.head(), not knowing that you're looking at someone's
+like a \_\_dunder_\_.head() not knowing that you're looking at someone's
 privates when you see double-underscore, or that a .dotsomething is a function
 definition while .dotsomething() is actually ***calling*** that same function,
 simultaneously providing a place where you could provide input (between the
