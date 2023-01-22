@@ -73,8 +73,8 @@ braces or "end" keywords) is another.
 
 #### Ah-Ha Moment Required
 
-> If this sounds like blah blah blah, get JupyterLab installed on your machine
-> right now and test this. You need this Ah-Ha! moment to proceed.
+> If this sounds like blah blah blah, <a href="https://mikelev.in/ux">get JupyterLab installed</a>
+> on your machine right now and test this. You need this Ah-Ha! moment to proceed.
 
 #### Let Spiderman Explain
 
