@@ -3297,15 +3297,16 @@ async with async_playwright() as p:
 
 ### Concurrent URL Crawl to Parquet
 
-This builds on from above crawler code. You should have sqlite databases
-siting on your drive which are the link and depth databases, respectively. We
-continue on using the ***./crawl.db*** data and launched a massively parallel
-concurrent crawl at the site using everything Python can muster. We use the
-PyPI httpx requests-like package for that, except it supports a concurrent
-context manager to... well, look and see. Hard to express, but there is some
-code brevity magic going on here to express concurrency so well. I limit a
-concurrent URL content-grab to 1000. You have to re-run it to get through the
-list.
+This builds on from above crawler code. You should have sqlite databases siting
+on your drive which are the link and depth databases, respectively. We continue
+on using the ***./crawl/depth.db*** data and launched a concurrent crawl at the
+site using everything Python can muster. 
+
+We use the PyPI httpx requests-like package for that, except it supports a
+concurrent context manager to... well, look and see. Hard to express, but there
+is some code brevity magic going on here to express concurrency so well. I
+limit a concurrent URL content-grab to 1000. You have to re-run it to get
+through the list if the crawl returned more than 1000 pages.
 
 ```python
 import httpx
