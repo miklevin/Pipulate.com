@@ -13,10 +13,9 @@ the techniques that make Python a joy to use, and complex deliverables simple.
 #### What You Will Find on This Page
 
 ***Spoiler:*** I'm pitching you FOSS SEO Software, but I'm going to be teaching
-you Python. See? Python ***IS*** the FOSS SEO Software. Jump on this bandwagon
-now while the jumping's good. Mastering ***generic tech*** just became possible
-in the mainstream because Microsoft made Linux under Windows a ***wsl
---install*** away.
+you ***Python***. See? Python ***IS*** the FOSS SEO Software. Jump on this
+bandwagon now while the jumping's good. Mastering ***generic tech*** just
+became possible in the mainstream because Windows now includes Linux.
 
 1. TOC
 {:toc}
