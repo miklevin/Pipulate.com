@@ -62,9 +62,8 @@ print(foo.bar)
 
     >> 123
 
-So by importing import foo.py from filename.py gives filename.py access to the
-***bar*** value in foo's ***namespace*** and you're using namespaces like it or
-not. 
+So importing import foo.py from filename.py gives filename.py access to
+***bar*** in foo's ***namespace*** and you're using namespaces like it or not. 
 
 #### Indents Matters
 
