@@ -66,10 +66,18 @@ print(foo.bar)
 
 So by importing import foo.py from filename.py gives filename.py access to the
 ***bar*** value in foo's ***namespace*** and you're using namespaces like it or
-not. Forced namespaces via filenames is just one great example of "obviously
-right" Python deign decisions. Making sequential lines of code with the same
-level of indent automatically group as a code-block (without needing curly
-braces or "end" keywords) is another.
+not. 
+
+#### Indents Matters
+
+Forced namespaces via filenames is just one great example of "obviously right"
+Python deign decisions. Making sequential lines of code with the same level of
+indent automatically group as a code-block is another.
+
+Most languages litter things up with all these curly braces and "end" keywords,
+but then go ahead strive to indent like Python anyway for readability. Python
+says just make all that indenting mean something and you can do away with the
+nearly infinite visual clutter of other languages.
 
 #### Ah-Ha Moment Required
 
