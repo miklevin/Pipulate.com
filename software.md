@@ -3186,8 +3186,11 @@ fig.show()
 #### Chromium, Firefox & Chrome Automation
 
 This is how you do browser automation under JupyterLab on a Windows PC running
-WSL and JupyterLab running in your Windows browser but the server portion under
-Linux (not Anaconda nor Jupyter-Desktop).
+the Linux version of JupyterLab under WSL. It feels just like running native
+Jupyter, but it's back-ended by Linux with the server-friendly Microsoft
+Playwright controlling the Linux versions of Chromium, Firefox or Chrome either
+showing the browser as you go for development and debugging, or heedlessly for
+running on a scheduled basis 24x7 (broken out of Jupyter).
 
 ##### Barebones Chromium without Session Memory
 
