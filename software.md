@@ -149,6 +149,8 @@ about it.
 > That ain't OO that's the way you do it;  
 > Namespaces for nothin' and imports for free!  
 
+#### Just Gotta Be Told
+
 Files can either run as stand-alone programs, so you could run foo.py directly.
 Or foo.py can be imported by other files as resources that get conveniently
 grouped so that their own internal variable names don't collide. This leads to
