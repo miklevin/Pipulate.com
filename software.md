@@ -30,11 +30,13 @@ spoken words fail. Imagine if English had no ambiguity or double meaning, and
 every time you said something it was interpreted exactly as you meant, so
 expressing yourself with precision becomes easy breezy. That's Python.
 
-But all computer languages do that? Yes, but Python is particularly well
-designed to fade into the background and let you flow. A good example is that
-files are your #1 means of organizing, creating neat and tidy ***namespace***
-&#151; sneaking enforced good habits on you with you almost never thinking
-about it.
+#### Flowing Expressiveness
+
+Yes, but don't all computer languages do that? Yes, but Python is particularly
+well designed to fade into the background and let you flow. A good example is
+that files are your #1 means of organizing, creating neat and tidy
+***namespace*** &#151; sneaking enforced good habits on you with you almost
+never thinking about it.
 
 #### Import Fu
 
