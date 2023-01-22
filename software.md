@@ -3295,6 +3295,135 @@ async with async_playwright() as p:
 
 ```
 
+### From List of URLs to Crawled Content Parquet
+
+This builds on from above crawler code. You should have sqlite databases
+siting on your drive which are the link and depth databases, respectively. We
+continue on using the ***./crawl.db*** data and launched a massively parallel
+concurrent crawl at the site using everything Python can muster. We use the
+PyPI httpx requests-like package for that, except it supports a concurrent
+context manager to... well, look and see. Hard to express, but there is some
+code brevity magic going on here to express concurrency so well. I limit a
+concurrent URL content-grab to 1000. You have to re-run it to get through the
+list.
+
+```python
+import httpx
+import pandas as pd
+from pathlib import Path
+from asyncio import gather
+from collections import Counter
+from bs4 import BeautifulSoup as bsoup
+from sqlitedict import SqliteDict as sqldict
+
+data = "crawl"
+depthdb = f"{data}/depth.db"
+responsedb = f"{data}/responses.db"
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
+# Load URLs from link crawl
+table = []
+with sqldict(depthdb) as db:
+    for url in db:
+        table.append(url)
+print(f"Total URLs: {len(table)}")
+
+# Plan the crawl
+if not Path(responsedb).exists():
+    with sqldict(responsedb) as db:
+        for url in table:
+            db[url] = None
+        db.commit()
+
+# Find uncrawled URLs
+urls = []
+with sqldict(responsedb) as db:
+    uncrawled = 0
+    for url in table:
+        resposne = db[url]
+        if response == None and uncrawled <= 1000:
+            uncrawled += 1
+            urls.append(url)
+print(f"Uncrawled URLs: {len(urls)}")
+
+# Crawl uncrawled URLs
+async with httpx.AsyncClient(headers=headers) as client:
+    apromise = gather(*[client.get(url) for url in urls], return_exceptions=True)
+    with sqldict(responsedb, timeout=5000) as db:
+        for response in await apromise:
+            try:
+                db[str(response.url)] = response
+                db.commit()
+            except:
+                ...
+print("Done crawl")
+
+c = Counter()
+with sqldict(responsedb) as db:
+    for url in db:
+        response = db[url]
+        if type(response) == httpx.Response:
+            status_code = response.status_code
+            c[status_code] += 1
+
+for status_code in c:
+    print(f"{status_code} pages: {c[status_code]}")
+
+table = []
+heading_tags = ["h1", "h2", "h3", "h4", "h5", "h6"]
+with sqldict(responsedb) as db:
+    for url in db:
+        response = db[url]
+        if type(response) == httpx.Response:
+            status_code = response.status_code
+            html = response.text
+            soup = bsoup(response.text, "html.parser")
+
+            try:
+                title = soup.title.string.strip()
+            except:
+                title = None
+            try:
+                description = soup.find("meta", attrs={"name": "description"}).attrs[
+                    "content"
+                ]
+            except:
+                description = None
+            try:
+                headlines = "\n\n".join(
+                    [
+                        f"{x.text.strip()}"
+                        for x in soup.find_all(heading_tags)
+                        if x.text.strip()
+                    ]
+                )
+            except:
+                headlines = None
+            stripped_strings = " ".join(soup.stripped_strings)
+            body_copy = " ".join(
+                [x for x in [title, description, stripped_strings] if x]
+            )
+            atuple = (
+                str(response.url),
+                response.status_code,
+                title,
+                description,
+                headlines,
+                body_copy,
+                str(soup),
+            )
+            table.append(atuple)
+
+
+cols = ["url", "status_code", "title", "description", "headlines", "body_copy", "html"]
+
+df = pd.DataFrame(table, columns=cols)
+df.to_parquet(f"{data}/extration.parquet")
+print(f"{df.shape[0]} URLs")
+print("Done")
+```
 
 <!--
 #### Generating Keyword Histograms
