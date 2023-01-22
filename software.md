@@ -19,14 +19,20 @@ the techniques that make Python a joy to use, and complex deliverables simple.
 
 #### Python is Not What You Think
 
-Think of Python as just helping you think better where the imprecise spoken
-word fails. Python builds on some very well designed principles or assumptions.
-A good example is that files are your #1 means of organizing, and files can
-***import*** other files whose contents get automatically bundled up into a
-neat and tidy ***namespace***. For example, let's say you have a file on your
-drive...
+Think of Python as a tool to help you think better &#151; where imprecise
+spoken words fail. Imagine if English had no ambiguity or double meaning, and
+every time you said something it was interpreted exactly as you meant, so
+expressing yourself with precision becomes easy breezy. That's Python.
+
+But all computer languages do that? Yes, but Python is particularly well
+designed to fade into the background and let you flow. A good example is that
+files are your #1 means of organizing, creating neat and tidy ***namespace***
+&#151; sneaking enforced good habits on you with you almost never thinking
+about it.
 
 #### Import Fu
+
+For example, let's say you have a file on your drive...
 
     foo.py
 
@@ -51,7 +57,11 @@ print(foo.bar)
     >> 123
 
 So by importing import foo.py from filename.py gives filename.py access to the
-***bar*** value in foo's ***namespace***. 
+***bar*** value in foo's ***namespace*** and you're using namespaces like it or
+not. Forced namespaces via filenames is just one great example of "obviously
+right" Python deign decisions. Making sequential lines of code with the same
+level of indent automatically group as a code-block (without needing curly
+braces or "end" keywords) is another.
 
 #### Ah-Ha Moment Required
 
