@@ -23,7 +23,7 @@ in the mainstream because Windows now includes Linux. Things are different.
 
 #### Python is Not What You Think
 
-Think of Python as a tool to help you think better &#151; where imprecise
+Think of Python as a tool to improve your thought process where imprecise
 spoken words fail. Imagine if English had no ambiguity or double meaning, and
 every time you said something it was interpreted exactly as you meant, so
 expressing yourself with precision becomes easy breezy. That's Python.
