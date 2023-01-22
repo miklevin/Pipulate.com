@@ -53,10 +53,14 @@ print(foo.bar)
 So by importing import foo.py from filename.py gives filename.py access to the
 ***bar*** value in foo's ***namespace***. 
 
+#### Ah-Ha Moment Required
+
 > If this sounds like blah blah blah, get JupyterLab installed on your machine
 > right now and test this. You need this Ah-Ha! moment to proceed.
 
-A namspace is a space for names. The same names can exist in different
+#### Let Spiderman Explain
+
+A namespace is a space for names. The same names can exist in different
 namespaces without colliding with each other. If you want to simplify it, think
 of it in terms of each namespace being a different universe in the multiverse
 and different spider-people can exist so long as they don't all try to:
@@ -65,12 +69,10 @@ and different spider-people can exist so long as they don't all try to:
 from spiderverse import *
 ```
 
-This would be a mess. If you did that, you would only end up with one
-spider-person because all instances would collide in the same namespace and
-only the last one technically imported would survive &#151; probably Chuck
-Norris Spiderman. In order to have all he spider-people in the same main
-namespace without having to type spiderverse all the time, you'd use the
-rename-on-import trick that pandas and numpy always do:
+If you did that, all instances of spider-people would collide and only Chuck
+Norris Spiderman would survive. In order to have all he spider-people in the
+same main namespace without having to type the long word "spiderverse" all the
+time, you'd use the rename-on-import trick that pandas and numpy always do:
 
 ```python
 import pandas as pd
@@ -84,6 +86,24 @@ Now you could refer to the spider-people individually:
 sv.spiderpig
 sv.spidergwen
 sv.peniparker
+```
+
+But if you only wanted one spider-person in particular you could:
+
+```python
+from spiderverse import spidergwen
+```
+
+...and you could also rename at the same time:
+
+```python
+from spiderverse import spidergwen as sg
+```
+
+...and could call sg's methods (internal functions) easily:
+
+```python
+sg.shoot_web()
 ```
 
 #### You Gotta Grok Namespaces
