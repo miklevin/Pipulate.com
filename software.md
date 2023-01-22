@@ -24,19 +24,34 @@ word fails. Python builds on some very well designed principles or assumptions.
 A good example is that files are your #1 means of organizing, and files can
 ***import*** other files whose contents get automatically bundled up into a
 neat and tidy ***namespace***. For example, let's say you have a file on your
-drive named:
+drive...
+
+#### Import Fu
 
     foo.py
 
-And the contents of the Python text-file named foo.py is only the following
-single line of code:
+Let's say the contents of foo.py is only the following single line of code:
 
 ```python
 bar = 123
 ```
 
-...then if you import foo.py into filename.py, you have access to the ***bar***
-value in foo's ***namespace***. 
+Understand? You only one one file so far and it only has 1 line of content. Now
+we introduce a 2nd file called filename.py and inside that, you put only these
+two lines:
+
+```python
+import foo
+
+print(foo.bar)
+```
+
+...which when run output:
+
+    >> 123
+
+So by importing import foo.py from filename.py gives filename.py access to the
+***bar*** value in foo's ***namespace***. 
 
 > If this sounds like blah blah blah, get JupyterLab installed on your machine
 > right now and test this. You need this Ah-Ha! moment to proceed.
@@ -50,22 +65,26 @@ and different spider-people can exist so long as they don't all try to:
 from spiderverse import *
 ```
 
-That would be a mess, but it would give Sony a fighting chance against Disney.
-
-#### import foo
-
-This will all make sense to you shortly. Given foo.py and filename.py are in
-the same folder, Here's the contents of filename.py that loads bar's values:
+This would be a mess. If you did that, you would only end up with one
+spider-person because all instances would collide in the same namespace and
+only the last one technically imported would survive &#151; probably Chuck
+Norris Spiderman. In order to have all he spider-people in the same main
+namespace without having to type spiderverse all the time, you'd use the
+rename-on-import trick that pandas and numpy always do:
 
 ```python
-import foo
-
-print(foo.bar)
+import pandas as pd
+import numpy as np
+import spiderverse as sv
 ```
 
-...which outputs:
+Now you could refer to the spider-people individually:
 
-    >> 123
+```python
+sv.spiderpig
+sv.spidergwen
+sv.peniparker
+```
 
 #### You Gotta Grok Namespaces
 
