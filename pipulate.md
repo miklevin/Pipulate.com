@@ -7,6 +7,10 @@ group: home
 
 # {{ page.description }}
 
+- The time is right for a Free and Open Source SEO product.
+- The time is ripe for big changes in the field of SEO.
+- The time is rife with bad advice on how to proceed.
+
 ### Your SEO Super-Powers Start Now
 
 This is the site that SEOs should have been introduced to on Day 1. If you're
