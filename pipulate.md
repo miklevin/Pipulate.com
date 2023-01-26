@@ -37,7 +37,7 @@ URL is still all-powerful. But you don't need more. You need fewer and better.
 If a Microsoft AI steals from you, you can assert your rights if you licensed
 the content found on your URLs properly. Those citations back to you will
 include what? A URL! So it's still about the URL, the relationships between
-then and the content found there.
+them and the content found there.
 
 #### Yes, Yes, AI. But Linux + Python First
 
