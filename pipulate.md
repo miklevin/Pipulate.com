@@ -11,6 +11,13 @@ group: home
 - The time is ripe for big changes in the field of SEO.
 - The time is rife with bad advice on how to proceed.
 
+Let me help guide you through the rise of AI. All old products are becoming
+rapidly broken and irrelevant. You need to be able to conduct ***ad hoc
+investigations*** from scratch, using any API, any datasource, any product or
+service, often skirting the paid ones predating on your fear, uncertainty and
+doubt (FUD). I ask for little at Pipulate and give the world. It's FOSS,
+people!
+
 ### Your SEO Super-Powers Start Now
 
 This is the site that SEOs should have been introduced to on Day 1. If you're
