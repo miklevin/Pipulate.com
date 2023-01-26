@@ -43,7 +43,19 @@ them and the content found there.
 
 Things are different. And it's not because AI. Sure that's huge and will change
 everything. But what's the killer feature? No, not cheating on your exams! It's
-writing code &#151; Python code in particular. 
+writing code &#151; Python code in particular; sometimes AI-assisted, but
+always actually understood by you. The "understood by you" part is what we
+focus on here at Pipulate. 
+
+#### Beware the Bad Examples
+
+ChatGPT is going to give you bad examples, bad templates and bad patterns just
+like StackOverflow and many Github projects will. You've got to be in the know
+and on your guard and the best copy/paster in the business. That's how you grow
+strong in the age of AI &#151; that's how you win in the age of AI. Python
+literacy. And of course writing your own unique (well licensed) content. I
+figure I'll do both here at this site. For example, ChatGPT isn't going to tell
+you about the importance of persistent dicts as a critical first step. I will.
 
 #### But Will Python Win?
 
