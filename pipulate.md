@@ -7,20 +7,26 @@ group: home
 
 # {{ page.description }}
 
-- The time is right for a Free and Open Source SEO product.
-- The time is ripe for big changes in the field of SEO.
-- The time is rife with bad advice on how to proceed.
+- The time is ***right*** for a Free and Open Source SEO product.
+- The time is ***ripe*** for big changes in the field of SEO.
+- The time is ***rife*** with bad advice on how to proceed.
 
 ### Fight the FUD
 
-Let me help guide you through the rise of AI. All old products are becoming
-rapidly broken and irrelevant. You need to be able to conduct ***ad hoc
-investigations*** from scratch, using any API, any datasource, any product or
-service, often avoiding paid ones predating on your fear, uncertainty and doubt
-(FUD). I ask for little at Pipulate and give the world. It's FOSS, people! And
-it's all the right bandwagons: Linux, Python, Data Engineering & AI.
+Let me help guide you through the ***rise of AI***. All old products are
+becoming rapidly broken and irrelevant. You need to be able to conduct ***ad
+hoc investigations*** from scratch, using any API, any datasource, any product
+or service &#151; often while avoiding the paid ones that position themselves
+as "necessary" and prey on your fear, uncertainty and doubt (***FUD***). 
 
-One leads to the next to the next to the next. Start here.
+#### You'll Lika the FOSSome Sauce
+
+I ask for little at Pipulate and give the world. It's FOSS, people! Sharing
+this with you, and the deeper spiritual experience it leads to, is my Ikigai.
+And it's all the right bandwagons: Linux, Python, Data Engineering & AI. One
+leads to the next to the next to the next. Stuff that appears too daunting or
+aspirational on the surface rapidly melt away into stuff you do daily while
+hardly thinking, the way I journal daily in vim.
 
 #### Your SEO Super-Powers Start Now
 
