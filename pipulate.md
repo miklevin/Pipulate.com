@@ -11,18 +11,42 @@ group: home
 - The time is ripe for big changes in the field of SEO.
 - The time is rife with bad advice on how to proceed.
 
+### Fight the FUD
+
 Let me help guide you through the rise of AI. All old products are becoming
 rapidly broken and irrelevant. You need to be able to conduct ***ad hoc
 investigations*** from scratch, using any API, any datasource, any product or
-service, often skirting the paid ones predating on your fear, uncertainty and
-doubt (FUD). I ask for little at Pipulate and give the world. It's FOSS,
-people!
+service, often avoiding paid ones predating on your fear, uncertainty and doubt
+(FUD). I ask for little at Pipulate and give the world. It's FOSS, people! And
+it's all the right bandwagons: Linux, Python, Data Engineering & AI.
 
-### Your SEO Super-Powers Start Now
+One leads to the next to the next to the next. Start here.
 
-This is the site that SEOs should have been introduced to on Day 1. If you're
-early in your career, congratulations! You'll run circles around the
-competition, able to do so much more with so much less.
+#### Your SEO Super-Powers Start Now
+
+This is the site that SEOs should have been introduced to on Day 1. It focuses
+on universal truths that were true in the days of AltaVista, they are true in
+these days of Google, and I believe they're still true in what comes next. The
+URL is still all-powerful. But you don't need more. You need fewer and better.
+If a Microsoft AI steals from you, you can assert your rights if you licensed
+the content found on your URLs properly. Those citations back to you will
+include what? A URL! So it's still about the URL, the relationships between
+then and the content found there.
+
+#### Yes, Yes, AI. But Linux + Python First
+
+Things are different. And it's not because AI. Sure that's huge and will change
+everything. But what's the killer feature? No, not cheating on your exams! It's
+writing code &#151; Python code in particular. 
+
+#### But Will Python Win?
+
+Yes, Python will win. Nothing will promote Python like copy/paste code samples
+you're expected to get to run. You're either in the world of NodeJS and Web
+Frameworks, or you're in the world of Python through Jupyter Notebooks. There's
+not even a contest. Python is so much better for the newb and all things not
+WebDev. But so much is WebDev! Blah, blah. Python is rapidly on its way to
+becoming the new ***lingua franca of tech***, second only to Linux.
 
 #### AI Can Write It But Will It Run?
 
