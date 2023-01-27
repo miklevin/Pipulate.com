@@ -7,6 +7,19 @@ group: foss
 
 # FOSS SEO Software
 
+### What is FOSS SEO Software?
+
+FOSS SEO Software is free and open source search engine optimization software.
+This instance is a compilation of software components which you customize and
+assemble into products you can call your own for the purpose of building
+audience to your website or other Internet properties. Other FOSS SEO Software
+products may be pre-built into one of the deliverable-types you can make here.
+
+#### Who is FOSS SEO Software For?
+
+While labeled "SEO" most of the techniques outlined here are equally applicable
+for the fields of ***Data Science*** and ***Data Engineering***.
+
 ## What is FOSS?
 
 FOSS stands for "Free and Open Source Software." Free and open source software
