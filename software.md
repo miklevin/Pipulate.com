@@ -1,5 +1,5 @@
 ---
-title: Awesome FOSS SEO Examples
+title: What is FOSS SEO Software?
 permalink: /software/
 group: software
 description: Pipulate FOSS SEO Software
@@ -7,8 +7,17 @@ description: Pipulate FOSS SEO Software
 
 # {{ page.description }}
 
+### What is FOSS SEO Software?
+
+FOSS SEO Software stands for free and open source search engine optimization
+software. It is a compilation of software components which you customize and
+assemble into products you can call your own for the purpose of building
+audience to your website or other Internet properties.
+
 Study this page to learn many of the best tricks needed for SEO, plus many of
 the techniques that make Python a joy to use, and complex deliverables simple.
+While labeled "SEO" most of the techniques outlined here are equally applicable
+for the fields of ***Data Science*** and ***Data Engineering***.
 
 #### What You Will Find on This Page
 
