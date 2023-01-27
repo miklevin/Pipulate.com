@@ -31,11 +31,11 @@ expressing yourself with precision becomes easy breezy. That's Python.
 
 #### Flowing Expressiveness
 
-Yes, but don't all computer languages do that? Yes, but Python is particularly
-well designed to fade into the background and let you flow. A good example is
-that files are your #1 means of organizing, creating neat and tidy
-***namespace*** &#151; sneaking enforced good habits on you with you almost
-never thinking about it.
+Aren't all programming languages more explicit that spoken languages? Yes, but
+Python is particularly well designed to fade into the background and let you
+flow. A good example is that files are your #1 means of organizing, creating
+neat and tidy ***namespace*** &#151; sneaking enforced good habits on you with
+you almost never thinking about it.
 
 #### Import Fu
 
