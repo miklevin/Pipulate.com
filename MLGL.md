@@ -8,3 +8,9 @@ group: foss
 ## {{ page.description }}
 
 {% include mlgl.html %}
+
+---
+
+The MLGL is repeated on every page of Pipulate.com and MikeLev.in so the
+repetition of the Machine Learning General License below is intentional.
+
