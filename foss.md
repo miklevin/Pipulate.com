@@ -10,12 +10,14 @@ group: foss
 ### Urgent for Content Creators
 
 Web AI-crawlers are working your content into their training models and not
-compensating or even citing you. The process whitewashes your content to make
-it arguably unrecognizable as yours, with no compensation or acknowledgement.
+citing or compensating you. The process whitewashes your content to make it
+arguably unrecognizable as yours, with no compensation or acknowledgement.
 These companies have billion-dollar warchests to fight you on the legal issues,
 so you have to do everything you can to protect yourself and your content.
 Explicitly stating the terms under which machine learning systems are allowed
-to use your content in their training models is a necessary first step.
+to use your content in their training models is a necessary first step. Use the
+<a href="/MLGL">Machine Learning General License, Alpha</a> or something like
+it.
 
 ### What is FOSS SEO Software?
 
