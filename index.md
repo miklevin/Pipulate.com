@@ -26,7 +26,7 @@ browsers using the resources of your local machine.
 1. TOC
 {:toc}
 
-### The Lingua Franca of Tech
+## The Lingua Franca of Tech
 
 Python has become ubiquitous. That means it's found everywhere today. It has
 replaced Perl as the standard language included with nearly every Linux
@@ -40,7 +40,7 @@ life. While it's still not perfect, what is? Python hitting this ***good
 enough*** 80/20-rule sweet-spot for so long across so many industries and in
 education makes it the one language to take up if you must choose only one.
 
-### Crash Course in Python
+## Crash Course in Python
 
 There's plenty of great resources on Python. I want to jump right into the SEO
 Notebooks, but before we do there are just a few words I'd like to say to get
@@ -49,7 +49,7 @@ indents, the dot-notation, and the top-down order-of-execution. If you need
 more, use one of the many books or online resources on learning Python. And as
 a bonus, double-quotes and single-quotes are used pretty much interchangeably.
 
-#### Explanation of Import
+### Explanation of Import
 
 Almost every Python code example you see will start with an `import` statement.
 This is because Python like many languages does not load everything it might
@@ -97,7 +97,7 @@ about importing Python packages since it's usually the first line of code
 you'll encounter in many projects. By the way, you will often hear the term
 ***libraries*** and ***packages*** being used interchangeably.
 
-#### Indents Matter
+### Indents Matter
 
 The next thing to know about Python that is very different from other languages
 is that the amount of indent at the beginning of each line matters. Lines that
@@ -113,7 +113,7 @@ improving code readability and reducing the overall amount of code that you
 need to write and look at. Code written in other languages often looks
 unnecessarily bloated after working in Python for awhile.
 
-#### Order of Execution
+### Order of Execution
 
 Sometimes Python will look ridiculously easy and other times it will look mind
 bogglingly complex. Working in Jupyter Notebooks as we are here, the goal is to
@@ -196,4 +196,7 @@ print(adict["one"])
 
 And that's what we need to know for making the lightweight database system
 we'll be using everywhere in these Jupyter Notebook FOSS SEO examples.
+
+## Database From Dict
+
 
