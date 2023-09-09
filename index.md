@@ -160,7 +160,9 @@ grow longer and shorter, and are thus referred to as mutable or dynamic.
 Position in the list matters and you can use numbers to access data at
 positions in the list. 
 
+```python
 alist = ["Item one", "Item two", "Item three"]
+```
 
 Tuples are like lists of a fixed-size and often referred to as static or
 immutable. They're used all over the place in Python to pass data where
