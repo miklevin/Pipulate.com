@@ -13,5 +13,5 @@ kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
-  toc_levels: 2
+  toc_levels: 2..2
 
