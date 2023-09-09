@@ -5,7 +5,7 @@ permalink: /
 group: home
 ---
 
-#### FOSS SEO Software & Programming Literacy
+# FOSS SEO Software & Programming Literacy
 
 The Python Notebook coding examples found on this page help you get found
 better in search, but the skills you will develop are applicable in a thousand
