@@ -23,8 +23,6 @@ You can alternatively copy/paste the code into the Notebook environment of your
 choice. Everything should work except for that which automates local web
 browsers using the resources of your local machine.
 
-## Found on This Page
-
 1. TOC
 {:toc}
 
