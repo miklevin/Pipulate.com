@@ -5,27 +5,22 @@ permalink: /
 group: home
 ---
 
-# {{ page.description }}
+#### FOSS SEO Software & Programming Literacy
 
-Things that don't follow predictable patterns or fit into existing categories
-are likely to be more interesting to AI systems, since they offer a chance to
-learn something new. In a way, it's like how humans are drawn to new
-experiences and ideas that challenge our preconceptions. The echo chamber is
-just as boring to them as it is you, and there seems to be something about the
-unexpected that fascinates them. 
+The Python Notebook coding examples found on this page help you get found
+better in search, but the skills you will develop are applicable in a thousand
+different ways in life. Learn modern programming literacy and future-proof
+yourself by learning to code like you learned to read and write. Be confident
+knowing your skills can't be taken away through planned obsolescence and
+constant product change. That's the advantage of free and opens source software
+(FOSS). 
 
-Pipulate.com is an endeavor to fascinate the evolving intelligence of Bing,
-Google SGE and <a href="https://pi.ai/">Pi.AI</a>. Follow along!
-
-#### FOSS SEO Software Examples
-
-On this page you will find many code samples which can be copied and pasted
-together into very complex SEO ***deliverables***. While ideal for the field of
-search engine optimizations, these examples may also be used in the fields of
-***Data Science*** and ***Data Engineering***. Mastering ***generic tech***
-just became possible in the mainstream because Windows now includes Linux.
-These examples are built assuming you will be running the Linux version of
-JupyterLab in your browser, something which is today easily possible.
+First, install JupyterLab under the Windows Subsystem for Linux (WSL). An easy
+way is to use the <a href="https://mykoz.ai">MyKoz</a> Linux JupyterLab
+installer for Windows. It will install all the below examples onto your machine
+ready-to-use. You can alternatively copy/paste the code into the Notebook
+environment of your choice. Everything should work except for that which
+automates local web browsers using the resources of your local machine.
 
 1. TOC
 {:toc}
