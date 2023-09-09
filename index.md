@@ -147,13 +147,13 @@ This is the last part of the Python crash course because I must discuss
 ***dicts*** before we turn them into the easy to use databases we're going to
 need for our FOSS SEO work like site-crawling.
 
-The three main datatypes in Python are ***lists***, ***tuples*** and
-***dicts***. There are many others which you'll encounter in other programming
-languages like integers and strings, but lists, tuples and dicts (dictionaries)
-are what really differentiate Python and give it a lot of its distinct
-personality as a programming language. They are ***container*** datatypes that
-***hold sequences*** of numbers, strings and other values, and are used
-everywhere as building blocks of your program.
+The three main datatypes in Python are `lists`, `tuples` and `dicts`. There are
+many others which you'll encounter in other programming languages like integers
+and strings, but lists, tuples and dicts (dictionaries) are what really
+differentiate Python and give it a lot of its distinct personality as a
+programming language. They are ***container*** datatypes that ***hold
+sequences*** of numbers, strings and other values, and are used everywhere as
+building blocks of your program.
 
 Lists let you add and remove items from a list, much like it sounds. They can
 grow longer and shorter, and are thus referred to as mutable or dynamic.
