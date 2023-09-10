@@ -276,7 +276,7 @@ database.
 from sqlitedict import SqliteDict as sqldict
 
 with sqldict("name.db") as db:
-    db["some key"] = "Some Value"
+    db["www.example.com"] = "HTML of the page"
     db.commit()
 ```
 
