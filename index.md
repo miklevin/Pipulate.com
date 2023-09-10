@@ -26,7 +26,7 @@ browsers using the resources of your local machine.
 1. TOC
 {:toc}
 
-## The Lingua Franca of Tech
+## Python: The New Lingua Franca of Tech
 
 Python has become ubiquitous. That means it's found everywhere today. It has
 replaced Perl as the standard language included with nearly every Linux
@@ -49,7 +49,7 @@ indents, the dot-notation, and the top-down order-of-execution. If you need
 more, use one of the many books or online resources on learning Python. And as
 a bonus, double-quotes and single-quotes are used pretty much interchangeably.
 
-### Explanation of Import
+### You Encounter Imports Right Away
 
 Almost every Python code example you see will start with an `import` statement.
 This is because Python like many languages does not load everything it might
@@ -63,6 +63,8 @@ If `foo` is being imported, somewhere on your system there is a file named
 in the directory you're working out of, but also there are special paths where
 Python always checks, including ***standard libraries***, plus things that have
 been explicitly installed afterward, using the ***pip install*** command.
+
+### Imports Create Namespaces
 
 When such an import occurs, a ***namespace*** is created for it which contains
 all its stuff that you can access using ***dot notation***.
@@ -86,6 +88,8 @@ print(foo.bar)
 ...it will produce the following output when you run the program:
 
     >> 123
+
+### Imports Load Functions & Classes Into Memory
 
 Notice while a value is set in the file that gets imported, you don't see any
 ***side effects*** of the code having actually run until it is ***invoked*** by
@@ -239,7 +243,7 @@ if a:
 The above has given a bare minim overview of Python so that we can get our web
 crawler underway.
 
-## Database From Dict
+## Python Dict as Database
 
 URLs and webpages make for perfect key/value pairs in a Python dictionary. So
 it makes sense to ***crawl a site into a dictionary***. The problem with that
@@ -301,4 +305,16 @@ you're not setting the stage to learn ***SQL*** later on at some point, another
 very powerful and important language, but not one you need to learn up-front
 when the dict API will do.
 
+## Rebooting Pipulate Project
 
+Every few years I reboot the Pipulate project using my new thinking, so I have
+"wiped" the examples that were previously on the site and I'll be rebuilding it
+up here as one long page. When I'm done, I'll refine it, breaking it into
+separate pages. 
+
+My new thinking is that I will maintain a `pipulate.py` file side by side with
+the Jupyter Notebook files `[Notebook Name].ipynb` example files. This will
+allow us to ***externalize*** anything t a function into a common
+resource that can be used between files. 
+
+###
