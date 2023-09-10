@@ -101,17 +101,27 @@ print(foo.bar)
 
     >> 123
 
-### Imports Load Functions & Classes Into Memory
+### Imports Load Functions Into Memory
 
 Notice while a value is set in the file that gets imported, you don't see any
 ***side effects*** of the code having actually run until it is ***invoked*** by
 the print function being called. So importing import `foo.py` from
 `filename.py` gives filename.py access to ***bar*** in foo's ***namespace***.
 
-There's plenty more to learn, but this is one of the most important to know
-about importing Python packages since it's usually the first line of code
-you'll encounter in many projects. By the way, you will often hear the term
-***libraries*** and ***packages*** being used interchangeably.
+### Built-in's, Functions and Classes
+
+The `print()` command is a built-in function. It is one of the ***built-in***
+functions that doesn't require an import and is loaded into the ***global***
+namespace. Imports might also load a special type of function called a `class`
+into memory, which are like functions but use a lot of ***dot notation*** in
+part of a coding style called ***object oriented***.
+
+There's plenty more to learn, but the high-level idea of what imports are doing
+is one of the most important to know since it's one of the first things you
+encounter, being the first line of code in many programs. As I freshen up
+Pipulate, I will be moving many of its more complex bits of reusable code into
+an importable `pipulate.py` module. The term ***library***, ***package*** and
+***module*** are often used interchangeably.
 
 ### Indents Matter
 
