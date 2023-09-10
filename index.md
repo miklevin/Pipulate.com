@@ -186,6 +186,8 @@ it a lot of its distinct personality as a programming language, turning it into
 more of a framework of prefabricated components than just a general programming
 language.
 
+#### Lists
+
 Lists let you add and remove items from a list, much like it sounds. They can
 grow longer and shorter, and are thus referred to as mutable or dynamic
 objects. Position in the list matters and you can use numbers to access data at
@@ -203,15 +205,28 @@ alist.append("Item four")  # Adds a fourth item to the list
 last_item = alist.pop()  # Sets last_item to last item and removes it from list
 ```
 
+#### Tuples
+
 Tuples are like lists of a fixed-size and often referred to as static or
 immutable. They're used all over the place in Python to pass data where
 fixed-positions have meaning. They use parenthesis instead of square brackets.
-At first lists and tuples look very similar, but their use cases are very
-different in ways we'll defer talking about for now.
 
 ```python
 atuple = ("Item one", "Item two", "Item three")
 ```
+
+At first lists and tuples look very similar, but their use cases are very
+different. Because they don't have dynamic capabilities like appending and
+popping, they are more memory efficient, so when you ***nest*** objects to
+achieve data structures like the rows and columns of a spreadsheet, you would
+typically use a list as the outer object and tuples inside. The following is a
+3x3 grid constructed of three rows of tuples inside one list.
+
+```python
+list_of_tuples = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+```
+
+#### Dicts
 
 A Python dictionary (or just dict) contains key/value pairs. You'll sometimes
 here key-value pairs, name-value pairs, or label-value pairs. These terms are
