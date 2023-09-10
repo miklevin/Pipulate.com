@@ -43,7 +43,7 @@ people do manage to ***find the love*** in JavaScript, it's necessity for
 web-oriented work makes it feel like more of a logical choice as a general
 purpose programming language than it is.
 
-### Python Was Destined for You
+### Python Was Designed for You
 
 The love for Python runs deep in a way that you will not encounter with many
 other programming languages. The story starts with a language called ***ABC***
@@ -167,27 +167,40 @@ We will avoid doing this in our Notebooks here, but you should know that's a
 trick to keep the main function from running if it ever gets imported as a
 library instead of being run directly.
 
+### Primitive and Object Data Types
+
+There are many types of data in Python and other programming languages. The
+tiniest ones are called ***primitives*** and are mostly integers, floats and
+strings which are just numbers and alphanumeric data. Sometimes you'll hear
+them referred to as low-level datatypes. But there are also larger and more
+feature-rich types of data we call ***objects***.
+
 ### Lists, Tuples and Dicts
 
-This is the last part of the Python crash course because I must discuss
-***dicts*** before we turn them into the easy to use databases we're going to
-need for our FOSS SEO work like site-crawling.
-
-The three main datatypes in Python are `lists`, `tuples` and `dicts`. There are
-many others which you'll encounter in other programming languages like integers
-and strings, but lists, tuples and dicts (dictionaries) are what really
-differentiate Python and give it a lot of its distinct personality as a
-programming language. They are ***container*** datatypes that ***hold
-sequences*** of numbers, strings and other values, and are used everywhere as
-building blocks of your program.
+The three most popular higher-level datatype object models in Python are
+`lists`, `tuples` and `dicts`. We call them models because when you're using a
+list, tuple or dict, you're using an ***instance*** of that model which you
+have created, sort of like stamping something out from a template. Lists,
+tuples and dicts (dictionaries) are what really differentiate Python and give
+it a lot of its distinct personality as a programming language, turning it into
+more of a framework of prefabricated components than just a general programming
+language.
 
 Lists let you add and remove items from a list, much like it sounds. They can
-grow longer and shorter, and are thus referred to as mutable or dynamic.
-Position in the list matters and you can use numbers to access data at
+grow longer and shorter, and are thus referred to as mutable or dynamic
+objects. Position in the list matters and you can use numbers to access data at
 positions in the list. 
 
 ```python
 alist = ["Item one", "Item two", "Item three"]
+```
+
+You can do things like append to a list and pop items off a list. Having such
+unique capabilities built into an object type is what makes it special.
+
+```python
+alist.append("Item four")  # Adds a fourth item to the list
+last_item = alist.pop()  # Sets last_item to last item and removes it from list
 ```
 
 Tuples are like lists of a fixed-size and often referred to as static or
@@ -236,7 +249,7 @@ what we will be building upon in a moment for our web crawler. This is the
 key/value setting everywhere in these Jupyter Notebook FOSS SEO examples,
 making it persistent with the dictionary trick to follow.
 
-### End Python Crash Course
+### Assigning Values Versus Equivalency Operators
 
 There's plenty more to learn about Python. It's often said Python is a language
 you can learn in a weekend and then spend the rest of your life mastering. If I
@@ -249,6 +262,8 @@ the hash symbol `#` is for comments. So...
 a = 1  # Sets the variable named a to 1
 a == 1  # Tests wether the value in a is 1, and will return True in this case
 ```
+
+### All Objects Can Evaluate True or False
 
 Many things when tested directly in Python will return `True` or `False`
 depending on the value they contain. If something contains a zero `0`, an empty
