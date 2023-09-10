@@ -503,7 +503,7 @@ practice to restart the kernel between runs in Jupyter Notebooks. Once you
 change the value in `config.py` and restart the kernel, you can re-run
 `30_Configuration.ipynb` and you'll have your new site folder.
 
-## Extracting Crawl Data
+### Extracting Crawl Data
 
 In `40_Extraction.ipynb` we reverse the process of putting data into the
 database to get the data out. While this is written to loop through every key
@@ -562,3 +562,174 @@ with sqldict(responsedb) as db:
             print(f"{headline.name}: {headline.text.strip()}")
         print()
 ```
+
+## Finding Links On a Page
+
+So now let's put our first function in an external file called `pipulate.py`.
+It takes as its input the soup object and any URL from the site and it returns
+a list of on-site ***absolute*** URLs with duplicates removed:
+
+```python
+from urllib.parse import urlparse, urljoin
+
+def links(soup, url):
+    """Return on-site links from page duplicates removed."""
+    parts = urlparse(url)
+    homepage = f"{parts.scheme}://{parts.netloc}/"
+    ahrefs = soup.find_all("a")
+    seen = set()
+    for link in ahrefs:
+        if "href" in link.attrs:
+            href = link.attrs["href"]
+            # Skip kooky protocols like email
+            if ":" in href and "//" not in href:
+                continue
+            # Convert relative links to absolute
+            if "://" not in href:
+                href = urljoin(homepage, href)
+            # Convert root slash to homepage
+            if href == "/":
+                href = homepage
+            # Strip stuff after hash (not formal part of URL)
+            if "#" in href:
+                href = href[: href.index("#")]
+            # Remove dupes and offsite links
+            if href[: len(homepage)] == homepage:
+                seen.add(href)
+    return seen
+```
+
+Our next Notebook file, `50_Zeroclick.ipynb` gets a list of links from the page
+as simply as this:
+
+```python
+import config
+import pipulate
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+
+responsedb = f"{config.name}/responses.db"
+
+with sqldict(responsedb) as db:
+    response = db[config.site]
+    soup = bsoup(response.text, "html.parser")
+
+links = pipulate.links(soup, config.site)
+```
+
+It's this level of simplicity that we strive for in the entire process so our
+individual Notebook files are small and we could even have interactive sessions
+with the SEO client. This is where your abilities by taking the FOSS SEO
+approach will exceed those who are forced to buy crawlers and site audit tools.
+
+The data you are retrieving is yours and Python-native and ready to transform
+into any other system. I can feed machine learning (AI) and other automated
+systems. But we'll table that discussion for a moment. Let's to the easiest
+possible things with the largest possible payoffs, so you can discuss the
+client's site with more authority than anyone using paid products. Even though
+we ***possess the links*** for a click-depth of 1 crawl, we have not performed
+it yet.
+
+## Visualizing The Link Graph
+
+The temptation is to immediately crawl this new list of links we're sitting on
+extracted from the homepage and throw them into `responses.db` like we did with
+the homepage, but that would be throwing out some of the most important data
+in the SEO game, the Link Graph!
+
+One of the least acknowledged important factors of SEO is at what click-depth a
+URL is from the homepage, with the premise being that a harder to find page is
+naturally going to be found less, linked-to less and overall less important to
+search. The homepage is the most important page. Things linked-to immediately
+from the homepage are more important to search. You get the reasoning? You can
+even use network visualization tools to show how the webpages all link together
+and rotate it like a 3D-map. But most crawlers throw out this data or make it
+inaccessible or only available as a click-depth ***count*** in a report. We're
+going to keep it.
+
+### Capturing Click-Depth Per URL
+
+With this one addition to the above code, we now have recorded at what
+click-depth each of these homepage URLs was found.
+
+```python
+clickdepthdb = f"{config.name}/clickdepths.db"
+
+with sqldict(clickdepthdb) as db:
+    db[config.site] = 0
+    for url in links:
+        db[url] = 1
+    db.commit()
+```
+
+Super-simple, right? Easy to follow. We just establish a brand new database
+whose sole purpose is to record at what click-depth each URL was first found.
+It's easy to query and its easy to visualize the pyramid-like site hierarchy
+graph we could draw from this. But it still doesn't record the juiciest bit,
+the actual link graph itself. We need to create ***edges*** for network
+visualization software.
+
+### Capturing Network Edges
+
+There's a lot of ways I could record the ***link-from*** and ***link-to***
+data relationships as we crawl. And the thing is with this Python dict API that
+we're using for super-easy database, keys must be unique and it's the from+to
+URL combination that makes it unique. So the link-fron and the link-to values
+belong glued together as a database key! Fortunately, Python provides a way to
+do that in the form of tuples. We have to do the one additional step of
+***pickling*** the tuple to use it as a database key in sqlitedict.
+
+```python
+edgesdb = f"{config.name}/edges.db"
+
+with sqldict(edgesdb) as db:
+    for url in links:
+        atuple = (config.site, url)
+        db[pickle.dumps(atuple)] = None
+    db.commit()
+```
+
+And to confirm that the data comes out like it went in:
+
+```python
+with sqldict(edgesdb) as db:
+    for apickle in db:
+        print(pickle.loads(apickle))
+```
+
+All together, `50_Zeroclick.ipynb` looks like this:
+
+```python
+import config
+import pickle
+import pipulate
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+
+# Load the homepage back into memory
+responsedb = f"{config.name}/responses.db"
+with sqldict(responsedb) as db:
+    response = db[config.site]
+    soup = bsoup(response.text, "html.parser")
+
+# Get all the links from the homepage
+links = pipulate.links(soup, config.site)
+
+# Record all the click-depth 1 pages
+clickdepthdb = f"{config.name}/clickdepths.db"
+with sqldict(clickdepthdb) as db:
+    db[config.site] = 0
+    for url in links:
+        db[url] = 1
+    db.commit()
+
+# Record all the click-depth 1 edges
+edgesdb = f"{config.name}/edges.db"
+with sqldict(edgesdb) as db:
+    for url in links:
+        atuple = (config.site, url)
+        db[pickle.dumps(atuple)] = None
+    db.commit()
+```
+
+
