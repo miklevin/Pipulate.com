@@ -403,3 +403,102 @@ project_name = "test"
 project_path = Path(project_name)
 project_path.mkdir(parents=True, exist_ok=True)
 ```
+
+All the files that you see created here with pipulate will also be able to be
+downloaded from [Pipulate on Github](https://github.com/miklevin/pipulate).
+
+### Using Import for Configuration Values
+
+We are going to want a very prescribed order with these Notebooks. Each step
+may be very tiny such as this first one which is for file organization. This is
+both a way to learn Python, particularly through Jupyter Notebook, and to
+perform a full SEO Audit on a site. We can use the Python import system for
+setting global configuration values across all the Notebooks. We simply have to
+ensure each Notebook has `import config` near the top. Here's a sample config
+file that contains only a project name and a site homepage URL. There are so
+many other approaches to configuration files, but this is the easiest, leaning
+into Python's default behavior and strengths.
+
+```python
+# file: config.py
+
+name = "mike"
+site = "https://mikelev.in/"
+```
+
+For the sake of education, I've made a new notebook `20_Configuration.ipynb`. I
+won't create whole new notebooks for steps this small throughout the project,
+but for beginners, making your own module and loading values from an external
+file is a big enough step that I want to separate the files. The new Notebook
+looks like this:
+
+```python
+# filename: 20_Configuration.ipynb
+import config
+from pathlib import Path
+
+project_path = Path(config.name)
+project_path.mkdir(parents=True, exist_ok=True)
+```
+
+## 1-Page Crawl (Save Homepage to Database)
+
+I am going to keep the overall project as simple as possible. Website crawls
+get out of hand fast. It can wind up in the attempt to download hundreds of
+thousands of pages with days-long waits, producing network traffic that will
+get your IP banned. We are taking a very conservative and cautious approach
+here. The example below will simply save the homepage of the `site` in your
+`config.py` file to the storage drive. You can think of it as a 1-page crawl if
+you like. This is the same as saving the ***view-source*** HTML-code you can
+see in the browser for any webpage. It's actually better because the entire
+***response object*** from the `requests` call is saved, so you have the
+success status code, the response headers and a bunch of other geeky stuff that
+could come in common later.
+
+```python
+# filename: 30_Homepage.ipynb
+import config
+import requests
+from sqlitedict import SqliteDict as sqldict
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+response = requests.get(config.site, headers=headers)
+
+responsedb = f"{config.name}/responses.db"
+
+with sqldict(responsedb) as db:
+    db[config.site] = response
+    db.commit()
+```
+
+If you're following along in a Jupyter Notebook and want to see the HTML of the
+page, go to a new cell block and try:
+
+```python
+print(response.text)
+```
+
+Congratulations! You have just done a ***zero click-depth*** crawl! You
+actually are sitting on top of a lot of good information. We will move onto
+extracting and viewing the data more cleanly than printing all the HTML in the
+next step, but a word on file management, first. And you'll get to learn one of
+the nuances of the import statement. 
+
+### Working on Different Sites
+
+Want to work on different sites? You may encounter the issue that Jupyter
+Notebook keeps the Python program running in a sort of frozen state between you
+running cells. This means that are your values from your `config.py` file are
+sticky. If you change it in the file for another project name and site, the new
+directory won't get created until you ***restart the kernel!*** It's not
+difficult. 
+
+### Restarting the Kernel
+
+You will find it under the `Kernel` dropdown menu in JupyterLab. As a shortcut,
+you can hit the `Esc` key if your cursor is active in any of the cells, then
+type zero, zero `0,0` on your keyboard. It's very common and indeed good
+practice to restart the kernel between runs in Jupyter Notebooks. Once you
+change the value in `config.py` and restart the kernel, you can re-run
+`30_Configuration.ipynb` and you'll have your new site folder.
