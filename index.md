@@ -26,7 +26,7 @@ browsers using the resources of your local machine.
 1. TOC
 {:toc}
 
-## Python: The New Lingua Franca of Tech
+## Python Is The New Lingua Franca of Tech
 
 Python has become ubiquitous. That means it's found everywhere today. It has
 replaced Perl as the standard language included with nearly every Linux
@@ -34,11 +34,23 @@ distribution, fortifying it in the world of tech in ways which even JavaScript
 can not compete. The fact that Python only continues to rise in popularity in
 the face of everything that ***should have killed it*** tells you a lot. 
 
-While plenty of people find love in JavaScript, it is of necessity. The love
-for Python runs deep in a way that you will not encounter with many things in
-life. While it's still not perfect, what is? Python hitting this ***good
-enough*** 80/20-rule sweet-spot for so long across so many industries and in
-education makes it the one language to take up if you must choose only one.
+### A Word on JavaScript & WebDev
+
+You can't take up web development (webdev) without needing to program a little
+JavaScript. The JavaScript ***frameworks*** like ReactJS and VueJS are just big
+enough that they can consume you and become your main focus. While plenty of
+people do manage to ***find the love*** in JavaScript, it's necessity for
+web-oriented work makes it feel like more of a logical choice as a general
+purpose programming language than it is.
+
+### Python Was Destined for You
+
+The love for Python runs deep in a way that you will not encounter with many
+other programming languages. The story starts with a language called ***ABC***
+which was designed to be friendly to beginners. While it's still not perfect,
+what is? Python hitting this ***good enough*** 80/20-rule sweet-spot for so
+long across so many industries and in education makes it the one language to
+take up if you must choose only one.
 
 ## Crash Course in Python
 
@@ -252,7 +264,7 @@ we use the ***sqlitedict*** library from PyPi.org. If you're on a system built
 by the mykoz script, you already have it installed. If not, `pip install
 sqlitedict`.
 
-### Interface Wrappers
+### Python Wrappers Simplify Complexity
 
 A very useful, popular and lightweight database is distributed with Python.
 It's called ***SQLite***. Technically, it's sqlite3. Python lets you use this
