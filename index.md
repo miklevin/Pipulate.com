@@ -782,15 +782,16 @@ responsedb = f"{config.name}/responses.db"
 for i, url in enumerate(onedepth):
     with sqldict(responsedb) as db:
         countdown = len(onedepth) - i
-        if url not in db:
+        if url in db:
+            response = db[url]
+            print(countdown, response.status_code, url)
+        else:
             print(countdown, url, end=" ")
             response = requests.get(url, headers=headers)
             print(response.status_code)
             db[url] = response
             db.commit()
             sleep(.5)
-        else:
-            print(countdown, url)
 ```
 
 There's plenty of nuance to point out here in the coding. I'm putting a
@@ -801,3 +802,70 @@ keeping the code as simple as possible to look at for now. Once this is done,
 you'll have a pretty sizable file on your storage device. Depending on the size
 of the site you're crawling, it could easily grow to a few hundred megabytes.
 It is all the ***view-source*** HTML code of every page that was visited.
+
+I like the way it counts down from the number of URLs that it knows it's going
+to have to visit. It give a real sense of how long you're going to have to
+wait. I also like that if the page was already fetched, the
+`response.status_code` prints before the URL, and if the page is being fetched,
+it prints ***after*** the URL.
+
+### Recording Click-Depth and Edges
+
+We're not really done the 1 Click-Depth crawl until we record the new links we
+found that will be used for the 2 Click-Depth crawl. Even though the above
+actually recorded all the content from the pages visited, this post-processing
+step extracts the newly discovered links, which go in 2 different databases.
+Including the homepage as the top, we have enough now to draw a link graph (a
+network diagram) like a 3-level pyramid: the homepage, the pages linked from
+the homepage, and the pages linked off of the secondary pages.
+
+```python
+clickdepthdb = f"{config.name}/clickdepths.db"
+edgesdb = f"{config.name}/edges.db"
+
+with sqldict(responsedb) as db:
+    for i, url in enumerate(onedepth):
+        countdown = len(onedepth) - i
+        print(countdown, end=" ")
+        if url in db:
+            response = db[url]
+            if response.status_code == 200:
+                soup = bsoup(response.text, "html.parser")
+                links = pipulate.links(soup, url)
+                # Record newly discoverd links as click-depth 2
+                with sqldict(clickdepthdb) as db2:
+                    for link in links:
+                        if link not in db2:
+                            db2[link] = 2
+                    db2.commit()
+                # Record what pages new links were found on (edges) 
+                with sqldict(edgesdb) as db3:
+                    for url in links:
+                        atuple = (url, link)
+                        db3[pickle.dumps(atuple)] = None
+                    db3.commit()
+```
+
+Here we actually do allow ourselves to nest the `with sqldict` database
+connections because it would take a lot of time to do the link extraction
+against all this data twice, so you'll see the use of `db2` and `db3`
+connection names to avoid conflicting with the already-open `db`.
+
+Again, there's little nuances to notice. When to .commit() to a database, for
+example? During the crawl code we commit after every page is fetched,
+***banking the data*** such as it were, because a re-run is expensive in that
+it would have to re-crawl every page of the site if it didn't commit
+***inside*** the loop. Whereas at the post-processing stage the idea is to get
+through it all as fast as possible, and one final commit ***outside*** the loop
+is faster. If things go wrong, a re-run doesn't cause repeat crawling so we
+choose processing speed over more frequent database writes.
+
+## Deep Enough?
+
+At this point, depending on the size of the site you're crawling you may have
+hundreds of megabytes of data on your storage device. And that's just the
+"view-source" HTML of the pages you crawled. That's not even images, rendered
+JavaScript or other resources. The good news is that this is usually enough for
+quality SEO. You have the homepage, all the pages it links to, and now about
+all the next-level of links. We should go for some of the big and unexpected
+payoffs of the FOSS SEO approach.
