@@ -123,7 +123,7 @@ Pipulate, I will be moving many of its more complex bits of reusable code into
 an importable `pipulate.py` module. The term ***library***, ***package*** and
 ***module*** are often used interchangeably.
 
-### Indents Matter
+### Indents Matter (White space)
 
 The next thing to know about Python that is very different from other languages
 is that the amount of indent at the beginning of each line matters. Lines that
@@ -139,7 +139,7 @@ improving code readability and reducing the overall amount of code that you
 need to write and look at. Code written in other languages often looks
 unnecessarily bloated after working in Python for awhile.
 
-### Order of Execution
+### Top-Down Order of Execution
 
 Sometimes Python will look ridiculously easy and other times it will look mind
 bogglingly complex. Working in Jupyter Notebooks as we are here, the goal is to
@@ -328,7 +328,7 @@ or cumbersome in another thing with a simpler interface is a common trick in
 tech, and particularly common in Python. So SQLite's SQL interface is being
 wrapped to look like the dict interface.
 
-### Context Manager
+### The Context Manager Opens and Closes Connections
 
 Part of the API simplification trick is getting rid of explicit ***open*** and
 ***close*** instructions to the connection to the database. Whenever Python or
@@ -422,8 +422,8 @@ into Python's default behavior and strengths.
 ```python
 # file: config.py
 
-name = "mike"
-site = "https://mikelev.in/"
+name = "example"
+site = "https://www.example.com/"
 ```
 
 For the sake of education, I've made a new notebook `20_Configuration.ipynb`. I
@@ -502,3 +502,63 @@ type zero, zero `0,0` on your keyboard. It's very common and indeed good
 practice to restart the kernel between runs in Jupyter Notebooks. Once you
 change the value in `config.py` and restart the kernel, you can re-run
 `30_Configuration.ipynb` and you'll have your new site folder.
+
+## Extracting Crawl Data
+
+In `40_Extraction.ipynb` we reverse the process of putting data into the
+database to get the data out. While this is written to loop through every key
+in the database, given that it was a 1-page crawl, there is only one `record`
+in the database. As a reminder, we're using the Python `dict` interface,
+meaning that the page's URL is the key and the Requests package's ***response
+object*** is the value. It's powered by SQLite in the background. And it is a
+***read only*** process below. Take note of the lack of a `.commit()`.
+
+```python
+import config
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+
+responsedb = f"{config.name}/responses.db"
+
+with sqldict(responsedb) as db:
+    for url in db:
+        response = db[url]
+        soup = bsoup(response.text, "html.parser")
+        title = soup.title.string.strip()
+        print(title)
+```
+
+If you're an SEO, having this capability is table stakes. The leading desktop
+webcrawler won't even let you save a crawl without paying a few hundred
+dollars. Python is free and the capabilities stay with you for life. And this
+is not just a Jupyter Notebook thing. You can build actual scheduled
+automations around this same code to work as an SEO monitor, or dozens of other
+***deliverables*** you can easily imagine.
+
+Here's a version that extracts many more of the fields of interest to SEOs.
+
+```python
+import config
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+
+responsedb = f"{config.name}/responses.db"
+
+with sqldict(responsedb) as db:
+    for url in db:
+        response = db[url]
+        soup = bsoup(response.text, "html.parser")
+        title = soup.title.string.strip()
+        description = soup.find('meta', attrs={'name': 'description'})['content']
+        canonical = soup.find('link', attrs={'rel': 'canonical'})['href']
+        headlines = soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"])
+        headlines.sort(key=lambda x: int(x.name[1:]))
+        print(url)
+        print(f"Canonical: {canonical}")
+        print(f"Status code: {response.status_code}")
+        print(f"Title: {title}")
+        print(f"Meta description: {description}")
+        for headline in headlines:
+            print(f"{headline.name}: {headline.text.strip()}")
+        print()
+```
