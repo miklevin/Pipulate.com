@@ -194,11 +194,111 @@ values in a dict using the keys:
 print(adict["one"])
 ```
 
+Which displays:
+
     >> Item one
 
-And that's what we need to know for making the lightweight database system
-we'll be using everywhere in these Jupyter Notebook FOSS SEO examples.
+We can likewise add new keys to the dictionary like so:
+
+```python
+adict["Arbitrary key"] = "Arbitrary value"
+```
+
+This ability to throw new key/value pairs into a Python dictionary object is
+what we will be building upon in a moment for our web crawler. This is the
+***key knowledge*** we're building upon (pun intended). We'll be using this
+key/value setting everywhere in these Jupyter Notebook FOSS SEO examples,
+making it persistent with the dictionary trick to follow.
+
+### End Python Crash Course
+
+There's plenty more to learn about Python. It's often said Python is a language
+you can learn in a weekend and then spend the rest of your life mastering. If I
+were to leave you with one last important piece of information before we dive
+into our web crawler, it would be that a double-equals `==` is a ***comparison
+operator*** whereas a single equals `=` is an ***assignment operator***. And
+the hash symbol `#` is for comments. So...
+
+```python
+a = 1  # Sets the variable named a to 1
+a == 1  # Tests wether the value in a is 1, and will return True in this case
+```
+
+Many things when tested directly in Python will return `True` or `False`
+depending on the value they contain. If something contains a zero `0`, an empty
+string or a special value called `None`, it will return ***False*** when
+tested. If they contain anything else, they return ***True***. This is often
+used to make code more concise. Colons `:` are used at the end of
+***conditional operators*** like so:
+
+```python
+if a:
+    print("A has a value.")
+```
+
+The above has given a bare minim overview of Python so that we can get our web
+crawler underway.
 
 ## Database From Dict
+
+URLs and webpages make for perfect key/value pairs in a Python dictionary. So
+it makes sense to ***crawl a site into a dictionary***. The problem with that
+is the content will be lost the moment the Python program stops running. And so
+we use the ***sqlitedict*** library from PyPi.org. If you're on a system built
+by the mykoz script, you already have it installed. If not, `pip install
+sqlitedict`.
+
+### Interface Wrappers
+
+A very useful, popular and lightweight database is distributed with Python.
+It's called ***SQLite***. Technically, it's sqlite3. Python lets you use this
+database directly with the `sqlite3` built-in package, but we're not going to
+be using it because we can use the `dict` datatype interface much more easily.
+***Wrapping*** one thing whose interface or ***API*** is somewhat complicated
+or cumbersome in another thing with a simpler interface is a common trick in
+tech, and particularly common in Python. So SQLite's SQL interface is being
+wrapped to look like the dict interface.
+
+### Context Manager
+
+Part of the API simplification trick is getting rid of explicit ***open*** and
+***close*** instructions to the connection to the database. Whenever Python or
+any system needs to interact with an outside physical resources such as storage
+(databases, files, etc.), there is the necessity to manage that connection to
+that resource. Of course computers being computers, this tedious housekeeping
+can be automated. Python's way of doing it is with something called the
+***context manager***. For devices that support it, Python can use the `with`
+keyword to get rid of all this opening and closing. The sqlitedict package adds
+the Python dict API and context manager support to the built-in SQLite
+database.
+
+```python
+from sqlitedict import SqliteDict as sqldict
+
+with sqldict("name.db") as db:
+    db["some key"] = "Some Value"
+    db.commit()
+```
+
+### Things to Notice
+
+Two things to notice about the above example are that on the import, we
+***rename*** a single component we're plucking out of the sqlitedict library to
+make it easier to use later. And we have to explicitly ***commit*** the change
+we just made to the dict in order for it to get saved permanently. Otherwise,
+the change is only ***in-memory***. This is different than with a normal dict,
+but it is a small price to pay to use the dict API for a persistent database.
+
+### Endlessly Useful Database Trick
+
+I believe this simple database trick of making a Python dict persistent is so
+fundamental and useful that it should be built into Python. It does away with
+mountains of complexity and unnecessary deliberation over what database and API
+to use for key-based data storage. Something similar ***can*** be done with a
+Python library called `pickle`, but the code is more complicated and it does
+not use SQLite for the actual data, so the performance is much slower and
+you're not setting the stage to learn ***SQL*** later on at some point, another
+very powerful and important language, but not one you need to learn up-front
+when the dict API will do.
 
 
