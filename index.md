@@ -732,4 +732,72 @@ with sqldict(edgesdb) as db:
     db.commit()
 ```
 
+## 1 Click-Depth Crawl
 
+Depending on how many pages were linked from the site's homepage, this is the
+first part of the process that may make you sit and wait. The homepage could
+have anywhere from zero links to a few hundred. If it has any more than that,
+the site has a topical focus problem with too many individual pages vying for
+an attempt to receive relevancy from being linked from the homepage.
+
+Now there are faster ways to do this with ***concurrency*** but we're going for
+simplicity and control. Sit and watch the crawl take place with this bit of
+code from `60_Oneclick.ipynb`. Follow along and watch each URL that's being
+fetched and it's (hopefully) 200 response-code. Watch for patterns in the URL
+structure. You will learn a lot knowing these are all homepage links. And
+JupyterLab hyperlinks the URL so you can click on any of the links that scroll
+by to take a look at the page.
+
+```python
+import config
+import pickle
+import pipulate
+import requests
+from time import sleep
+from sqlitedict import SqliteDict as sqldict
+from bs4 import BeautifulSoup as bsoup
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+headers = {"user-agent": user_agent}
+
+# Build a list of all URLs found on homepage
+clickdepthdb = f"{config.name}/clickdepths.db"
+onedepth = []
+with sqldict(clickdepthdb) as db:
+    for url in db:
+        depth = db[url]
+        if depth == 1:
+            onedepth.append(url)
+```
+
+The above code sets the stage for the crawl. I use this `onedepth` table to
+eliminate nesting the `with sqldict` database connections. We fill the onedepth
+table with only those URLs we intend to crawl for the next step. I import
+everything at the top of this Notebook even though some of those won't be
+called until the following steps. The next step does the actual crawl.
+
+```python
+responsedb = f"{config.name}/responses.db"
+
+for i, url in enumerate(onedepth):
+    with sqldict(responsedb) as db:
+        countdown = len(onedepth) - i
+        if url not in db:
+            print(countdown, url, end=" ")
+            response = requests.get(url, headers=headers)
+            print(response.status_code)
+            db[url] = response
+            db.commit()
+            sleep(.5)
+        else:
+            print(countdown, url)
+```
+
+There's plenty of nuance to point out here in the coding. I'm putting a
+half-second delay between each pageload. I could eliminate that or randomize it
+based on whether the site has crawler-blocking issues. You could also throw in
+a modulo operator to make it take a long pause between every few pageloads. I'm
+keeping the code as simple as possible to look at for now. Once this is done,
+you'll have a pretty sizable file on your storage device. Depending on the size
+of the site you're crawling, it could easily grow to a few hundred megabytes.
+It is all the ***view-source*** HTML code of every page that was visited.
