@@ -191,7 +191,7 @@ language.
 Lists let you add and remove items from a list, much like it sounds. They can
 grow longer and shorter, and are thus referred to as mutable or dynamic
 objects. Position in the list matters and you can use numbers to access data at
-positions in the list. 
+positions in the list. You can create lists using ***square brackets***.
 
 ```python
 alist = ["Item one", "Item two", "Item three"]
@@ -205,11 +205,22 @@ alist.append("Item four")  # Adds a fourth item to the list
 last_item = alist.pop()  # Sets last_item to last item and removes it from list
 ```
 
+And you can access items in a list using their ***zero-based index***.
+
+```python
+print(alist[1])  # Prints 2nd item in list
+```
+
+outputs:
+
+    >> Item two
+
 #### Tuples
 
 Tuples are like lists of a fixed-size and often referred to as static or
 immutable. They're used all over the place in Python to pass data where
-fixed-positions have meaning. They use parenthesis instead of square brackets.
+fixed-positions have meaning. They use ***parenthesis*** instead of square
+brackets.
 
 ```python
 atuple = ("Item one", "Item two", "Item three")
@@ -233,7 +244,8 @@ here key-value pairs, name-value pairs, or label-value pairs. These terms are
 all used to describe a data structure that consists of a pair of data elements:
 a key (or name or label) and a value. The key is a unique identifier, and the
 value is the associated data. They're like lists, but instead of having numeric
-locations to access values, they have other values.
+locations to access values, they have other values. Dicts can be created with
+***curly braces***.
 
 ```python
 adict = {"one": "Item one", "two": "Item two", "three": "Item three"}
@@ -242,7 +254,8 @@ adict = {"one": "Item one", "two": "Item two", "three": "Item three"}
 The keys are the ***one***, ***two*** and ***three*** to the left of the colon.
 The values are to the right. Dict keys must be unique. The Web is like a giant
 dictionary with URLs being keys and webpages being the values. You access
-values in a dict using the keys:
+values in a dict using the keys. Square brackets are used just like with
+indexes in a list, but instead of numerical values, you use the key.
 
 ```python
 print(adict["one"])
@@ -366,7 +379,27 @@ separate pages.
 
 My new thinking is that I will maintain a `pipulate.py` file side by side with
 the Jupyter Notebook files `[Notebook Name].ipynb` example files. This will
-allow us to ***externalize*** anything t a function into a common
-resource that can be used between files. 
+allow us to ***externalize*** anything to a function into a common resource
+that can be used as a common resource between different Pipulate Jupyter
+Notebook examples. As I finish, I'll update the ***pip installable*** version
+of Pipulate with the latest.
 
-###
+## File Organization With Pathlib
+
+Paths (where stuff is) are always a tricky issue in tech. In Python as with
+many programming languages, the default is for a program to look for its
+resources in the very same location from which it was run. Consequently, there
+is often a ***file clutter*** problem. Conversely, if you start organizing
+things into an excessively deep subfolder structure, it becomes a pain to find
+things. We will strike a compromise by using ***project names*** which we will
+for now put directly in the `pipulate` repo folder. The ***repo*** terminology
+refers to the fact that it is a git ***repository***.
+
+```python
+# filename: 10_Organization.ipynb
+from pathlib import Path
+
+project_name = "test"
+project_path = Path(project_name)
+project_path.mkdir(parents=True, exist_ok=True)
+```
