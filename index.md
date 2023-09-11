@@ -851,21 +851,32 @@ connections because it would take a lot of time to do the link extraction
 against all this data twice, so you'll see the use of `db2` and `db3`
 connection names to avoid conflicting with the already-open `db`.
 
-Again, there's little nuances to notice. When to .commit() to a database, for
-example? During the crawl code we commit after every page is fetched,
-***banking the data*** such as it were, because a re-run is expensive in that
-it would have to re-crawl every page of the site if it didn't commit
-***inside*** the loop. Whereas at the post-processing stage the idea is to get
-through it all as fast as possible, and one final commit ***outside*** the loop
-is faster. If things go wrong, a re-run doesn't cause repeat crawling so we
-choose processing speed over more frequent database writes.
+### Database Commit Per Loop Vs. End
 
-## Deep Enough?
+Notice when we `.commit()` to a database, paying close attention to indenting.
+During the crawl code we commit after every page is fetched, ***banking the
+data*** such as it were, because a re-run is expensive in that it would have to
+re-crawl every page of the site if it didn't commit ***inside*** the loop.
+
+Whereas at the post-processing stage the idea is to get through it all as fast
+as possible, and one final commit ***outside*** the loop is faster. If things
+go wrong, a re-run doesn't cause repeat crawling so we choose processing speed
+over more frequent database writes.
+
+### Deep Enough is Enough
 
 At this point, depending on the size of the site you're crawling you may have
 hundreds of megabytes of data on your storage device. And that's just the
 "view-source" HTML of the pages you crawled. That's not even images, rendered
-JavaScript or other resources. The good news is that this is usually enough for
-quality SEO. You have the homepage, all the pages it links to, and now about
-all the next-level of links. We should go for some of the big and unexpected
-payoffs of the FOSS SEO approach.
+JavaScript or other resources. This is usually enough to get started with SEO,
+because it includes the homepage and all the page deemed important enough to be
+linked from the homepage.
+
+It is nice to go to the 2-clicks in from the homepage, but depending on the
+size of the site it could be a monumental task for this approach, and I will
+expand Pipulate in the future to with strategies to accommodate extremely large
+crawls. But for now, Pipulate is for the homepage, secondary pages, and because
+secondary pages contain the links to the tertiary pages, we have them in the
+link graph (the depth and edges databases) but not the crawl (responses
+database).
+
