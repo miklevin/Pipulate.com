@@ -293,3 +293,65 @@ if a:
 The above has given a bare minim overview of Python so that we can get our web
 crawler underway.
 
+## Python Dict as Database
+
+URLs and webpages make for perfect key/value pairs in a Python dictionary. So
+it makes sense to ***crawl a site into a dictionary***. The problem with that
+is the content will be lost the moment the Python program stops running. And so
+we use the ***sqlitedict*** library from PyPi.org. If you're on a system built
+by the mykoz script, you already have it installed. If not, `pip install
+sqlitedict`.
+
+### Python Wrappers Simplify Complexity
+
+A very useful, popular and lightweight database is distributed with Python.
+It's called ***SQLite***. Technically, it's sqlite3. Python lets you use this
+database directly with the `sqlite3` built-in package, but we're not going to
+be using it because we can use the `dict` datatype interface much more easily.
+***Wrapping*** one thing whose interface or ***API*** is somewhat complicated
+or cumbersome in another thing with a simpler interface is a common trick in
+tech, and particularly common in Python. So SQLite's SQL interface is being
+wrapped to look like the dict interface.
+
+### The Context Manager Opens and Closes Connections
+
+Part of the API simplification trick is getting rid of explicit ***open*** and
+***close*** instructions to the connection to the database. Whenever Python or
+any system needs to interact with an outside physical resources such as storage
+(databases, files, etc.), there is the necessity to manage that connection to
+that resource. Of course computers being computers, this tedious housekeeping
+can be automated. Python's way of doing it is with something called the
+***context manager***. For devices that support it, Python can use the `with`
+keyword to get rid of all this opening and closing. The sqlitedict package adds
+the Python dict API and context manager support to the built-in SQLite
+database.
+
+```python
+from sqlitedict import SqliteDict as sqldict
+
+with sqldict("name.db") as db:
+    db["www.example.com"] = "HTML of the page"
+    db.commit()
+```
+
+### Things to Notice
+
+Two things to notice about the above example are that on the import, we
+***rename*** a single component we're plucking out of the sqlitedict library to
+make it easier to use later. And we have to explicitly ***commit*** the change
+we just made to the dict in order for it to get saved permanently. Otherwise,
+the change is only ***in-memory***. This is different than with a normal dict,
+but it is a small price to pay to use the dict API for a persistent database.
+
+### Endlessly Useful Database Trick
+
+I believe this simple database trick of making a Python dict persistent is so
+fundamental and useful that it should be built into Python. It does away with
+mountains of complexity and unnecessary deliberation over what database and API
+to use for key-based data storage. Something similar ***can*** be done with a
+Python library called `pickle`, but the code is more complicated and it does
+not use SQLite for the actual data, so the performance is much slower and
+you're not setting the stage to learn ***SQL*** later on at some point, another
+very powerful and important language, but not one you need to learn up-front
+when the dict API will do.
+
