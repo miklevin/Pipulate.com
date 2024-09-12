@@ -25,6 +25,21 @@ group: home
 
 In a landscape where SEO tools are either costly or limited, Pipulate offers a robust alternative that you can run yourself. No more worrying about disappearing files or IP restrictions. With Pipulate, you have complete control over your SEO automation process.
 
+## Prepare Your Environment
+
+To make the most out of Pipulate upon launch, we recommend installing Nix on your Windows or macOS system ahead of time. Nix ensures that the software runs consistently across all machines, providing a reliable and reproducible environment. This preparation will allow you to dive straight into using Pipulate as soon as it's available.
+
+**Learn More About Nix**
+
+- **Official Nix Documentation**: Explore the comprehensive [Nix Manual](https://nixos.org/manual/nix/stable/) for detailed information on installation, configuration, and usage.
+- **Getting Started with Nix**: Check out the [Nix Pills](https://nixos.org/guides/nix-pills/) series—a beginner-friendly set of tutorials to help you grasp the fundamentals of Nix.
+- **NixOS Wiki**: Visit the [NixOS Wiki](https://nixos.wiki/) for practical examples, community tips, and in-depth explanations of Nix concepts.
+
+By familiarizing yourself with Nix now, you'll be ready to harness the full power of Pipulate's open-source SEO automation when it launches.
+
+---
+
 ## Stay Tuned!
 
-We're working hard to bring Pipulate back better than ever. 
+We're working hard to bring Pipulate back better than ever. In the meanwhile, go
+ahead and install Nix on your Mac or Windows system. 
