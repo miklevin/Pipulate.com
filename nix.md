@@ -5,16 +5,16 @@ permalink: /nix/
 group: nix
 ---
 
-Installing Nix on macOS using Determinate Systems' installer is a smart and
-efficient choice for your development workflow. Nix provides a reproducible and
-declarative package management system, ensuring that you and your co-developers
-are using the exact same dependencies and configurations. This eliminates the
-classic "it works on my machine" problem, streamlining collaboration and
-reducing setup time. The Determinate Systems' installer simplifies the
-installation process, making it easy even for those new to Nix. By following
-these instructions, your team can quickly align their development environments,
-allowing you to focus on writing and running code seamlessly across all
-machines.
+# Installing Nix on macOS
+
+Nix provides a reproducible and declarative package management system, ensuring
+that you and your co-developers are using the exact same dependencies and
+configurations. This eliminates the classic "it works on my machine" problem,
+streamlining collaboration and reducing setup time. The Determinate Systems'
+installer simplifies the installation process, making it easy even for those new
+to Nix. By following these instructions, your team can quickly align their
+development environments, allowing you to focus on writing and running code
+seamlessly across all machines.
 
 ### **Step 1: Open Terminal**
 
