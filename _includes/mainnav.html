@@ -1,6 +1,7 @@
 <nav>
 <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
-<a {% if page.group == 'nix' or page.category == 'nix' %}class="current" {% endif %}href="/nix/">Nix</a>
+<a {% if page.group == 'nix-mac' or page.category == 'nix-mac' %}class="current" {% endif %}href="/nix-mac/">Nix on macOS</a>
+<a {% if page.group == 'nix-win' or page.category == 'nix-win' %}class="current" {% endif %}href="/nix-win/">Nix on Windows</a>
 <!--
 <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
 <a {% if page.group == 'python' or page.category == 'python' %}class="current" {% endif %}href="/python/">Python</a>
