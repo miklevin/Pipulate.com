@@ -70,7 +70,7 @@ sudo apt install curl -y
 Run the Determinate Systems' Nix installer:
 
 ```bash
-sh <(curl -L https://install.determinate.systems/nix)
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
 ```
 
 #### **Step 6: Follow the Installation Prompts**

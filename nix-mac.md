@@ -35,7 +35,7 @@ seamlessly across all machines.
 In the Terminal window, paste the following command and press `Enter`:
 
 ```bash
-sh <(curl -L https://install.determinate.systems/nix)
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
 ```
 
 ---
