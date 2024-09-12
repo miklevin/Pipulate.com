@@ -16,6 +16,8 @@ to Nix. By following these instructions, your team can quickly align their
 development environments, allowing you to focus on writing and running code
 seamlessly across all machines.
 
+---
+
 ### **Step 1: Open Terminal**
 
 - **Via Spotlight Search:**
