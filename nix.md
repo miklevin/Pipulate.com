@@ -1,7 +1,7 @@
 ---
 title: Nix on macOS
 description: Step-by-step guide to installing Nix on macOS using Determinate Systems' installer. Simplify collaboration with reproducible environments using Nix flakes.
-permalink: /
+permalink: /nix/
 group: home
 ---
 
