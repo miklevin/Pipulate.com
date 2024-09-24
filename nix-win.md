@@ -60,7 +60,8 @@ sudo apt upgrade
 
 #### **Step 4: Install Required Dependencies**
 
-Install `curl` if it's not already installed:
+Install `curl` if it's not already installed (it was already installed on Ubuntu
+24.04 last time I checked):
 
 ```bash
 sudo apt install curl -y
