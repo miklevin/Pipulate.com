@@ -55,6 +55,7 @@ In the Ubuntu terminal, update the package lists:
 
 ```bash
 sudo apt update
+sudo apt upgrade
 ```
 
 #### **Step 4: Install Required Dependencies**
