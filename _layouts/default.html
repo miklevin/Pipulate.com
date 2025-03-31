@@ -17,8 +17,37 @@
 
   gtag('config', '{{ site.gaid }}');
 </script>
+<style>
+    /* Disable slider on mobile */
+    @media (max-width: 768px) {
+        #widthSliderContainer {
+            display: none;
+        }
+    }
+    /* Ensure smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    /* Prevent layout shifts for images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    /* Add sticky slider styles */
+    #widthSliderContainer {
+        position: sticky;
+        top: 0;
+        background-color: var(--background-color);
+        padding: 10px 0;
+        z-index: 100;
+    }
+</style>
 </head>
 <body>
+<div class="container">
+    <div id="widthSliderContainer">
+        <input type="range" id="widthSlider" min="850" max="3000" value="1405" />
+    </div>
 <header>
 {% include mainnav.html %}
 </header>
@@ -28,5 +57,89 @@
 <footer>
 {% include footernav.html %}
 </footer>
+</div>
+
+<script>
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+    }
+
+    // Function to get a cookie
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    // Set the maximum width of the slider to the page width in pixels
+    const MAX_WIDTH = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+    const slider = document.getElementById('widthSlider');
+    const container = document.querySelector('.container');
+
+    // Update the slider's max attribute to match the page width
+    slider.max = MAX_WIDTH;
+
+    // Set initial slider value from cookie or calculate default middle value
+    const savedWidth = getCookie('containerWidth');
+    const defaultWidth = Math.min(1600, Math.floor((850 + MAX_WIDTH) / 2));
+    slider.value = savedWidth ? savedWidth : defaultWidth;
+
+    // Disable slider functionality on mobile
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    function updateWidth() {
+        if (isMobile()) return;
+        const newWidth = slider.value;
+        container.style.maxWidth = `${newWidth}px`;
+        
+        // Save the new width to a cookie
+        setCookie('containerWidth', newWidth, 30);
+    }
+
+    // Add event listeners
+    if (!isMobile()) {
+        slider.addEventListener('input', updateWidth);
+    }
+
+    updateWidth(); // Initialize with saved or default value
+
+    // Create a media query to limit the maximum width on larger screens
+    const style = document.createElement('style');
+    style.textContent = `
+        @media (min-width: ${MAX_WIDTH}px) {
+            body > footer, body > header, body > main {
+                max-width: 850px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Handle window resize
+    let resizeTimer;
+    function handleResize() {
+        if (window.innerWidth > 768) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                location.reload();
+            }, 250);
+        }
+    }
+    window.addEventListener('resize', function() {
+        if (!isMobile()) {
+            handleResize();
+        }
+    });
+</script>
 </body>
 </html>
