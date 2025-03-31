@@ -5,7 +5,7 @@ permalink: /
 group: home
 ---
 
-# Pipulate Free & Open Source SEO with and for LLMs
+# Pipulate Free & Open Source SEO *with & for* LLMs
 
 <div style="text-align: center;">
   <img src="/pipulate-ai-seo.svg" alt="Pipulate Free & Open Source SEO with and for LLMs">
