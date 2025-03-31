@@ -6,17 +6,17 @@
     "Helvetica Neue", sans-serif;
   --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 
-  /* Default (light) theme */
-  --bg: #fff;
-  --accent-bg: #f5f7ff;
-  --text: #212121;
-  --text-light: #585858;
-  --border: #898EA4;
-  --accent: #0d47a1;
-  --code: #d81b60;
-  --preformatted: #444;
+  /* Default theme - now dark by default */
+  --bg: #000;
+  --accent-bg: #121212;
+  --text: #ffffff;
+  --text-light: #aaaaaa;
+  --border: #555555;
+  --accent: #ffb300;
+  --code: #f06292;
+  --preformatted: #ccc;
   --marked: #ffdd33;
-  --disabled: #efefef;
+  --disabled: #222222;
 }
 
 /* Reset box-sizing */
