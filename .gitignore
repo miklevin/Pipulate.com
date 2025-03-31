@@ -1,0 +1,16 @@
+*.bak
+*.csv
+*.dat
+*.dir
+*.ini
+*.log
+*.pyc
+*.swp
+*.lock
+.DS_Store
+.bundle/
+.gem/
+/dist
+__pycache__/
+_site/
+flake.lock
