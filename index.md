@@ -8,7 +8,7 @@ group: home
 # Pipulate Free & Open Source SEO *with & for* LLMs
 
 <div style="text-align: center;">
-  <img src="/pipulate-ai-seo.svg" alt="Pipulate Free & Open Source SEO with and for LLMs">
+  <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs">
 </div>
 
 > Workflows are WET as WET can be. The Crud is DRY as DRY.  
