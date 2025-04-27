@@ -11,8 +11,8 @@ group: home
   <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs">
 </div>
 
-> Workflows are WET (explicit & step-by-step). CRUD is DRY (uses BaseApp).
-> You do not need the Cloud because *no lock-in need apply!*
+> Workflows are WET (explicit & step-by-step). CRUD is DRY (uses BaseApp).  
+> You do not need the Cloud because *no lock-in need apply!*  
 
 **Table of Contents**
 * [What is Pipulate?](#what-is-pipulate)
@@ -233,8 +233,8 @@ The UI is constructed primarily with server-rendered HTML fragments delivered vi
 * WebSockets and Server-Sent Events (SSE) provide real-time updates (e.g., for chat, live development reloading).
 
 ```
-                    HTMX+Python enables a world-class
-                   Python front-end Web Development environment.
+                        HTMX+Python enables a world-class
+                 Python front-end Web Development environment.
                              ┌─────────────────────┐
                              │    Navigation Bar   │  - No template language (like Jinja2)
                              ├─────────┬───────────┤  - HTML elements are Python functions
