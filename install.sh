@@ -143,9 +143,10 @@ echo "  cd ${TARGET_DIR} && nix develop  "
 print_separator
 echo
 
-# When piping to sh, the 'exec' might not work as expected
-# Instead, use this approach which ensures we're in the right directory
-# and starts nix develop properly
+# When piping through sh, we need to explicitly create a new interactive shell
+# This is the key fix to make it work properly with curl | sh
 cd "${TARGET_DIR}"
-# Launch nix develop directly
-nix develop
+
+# The important part: exec a new bash that runs nix develop
+# This replaces the current non-interactive sh with an interactive bash running nix develop
+exec bash -c "cd ${TARGET_DIR} && exec nix develop"
