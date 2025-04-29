@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pipulate Installer v1.0.2 - Cache-busting version
+# Pipulate Installer v1.0.3 - Cache-busting version
 
 # Strict mode
 set -euo pipefail
@@ -145,14 +145,14 @@ print_separator
 echo
 
 # When piping through sh, interactive shells won't work
-# Instead, provide clear instructions and start the server automatically
+# Ensure dependencies are installed before starting the server
 cd "${TARGET_DIR}"
 
-echo "✨ Starting Pipulate server automatically..."
+echo "✨ Setting up Pipulate environment and starting server..."
 echo "📋 You can stop this process with Ctrl+C and restart later with:"
-echo "   cd ${TARGET_DIR} && nix develop .#quiet --command python server.py"
+echo "   cd ${TARGET_DIR} && nix develop --command python server.py"
 echo
 
-# Run nix develop with the quiet profile and start the server
-# This works in non-interactive shells from curl | sh
-exec nix develop .#quiet --command python server.py
+# First run a regular nix develop to ensure all dependencies are built
+# Then start the server in a non-interactive way
+exec bash -c "cd ${TARGET_DIR} && nix develop --command bash -c 'python server.py'"
