@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pipulate Installer v1.0.3 - Cache-busting version
+# Pipulate Installer v1.0.4 - Cache-busting version
 
 # Strict mode
 set -euo pipefail
@@ -154,5 +154,5 @@ echo "   cd ${TARGET_DIR} && nix develop --command python server.py"
 echo
 
 # First run a regular nix develop to ensure all dependencies are built
-# Then start the server in a non-interactive way
-exec bash -c "cd ${TARGET_DIR} && nix develop --command bash -c 'python server.py'"
+# Then start the server with a small delay before browser launch to ensure it's ready
+exec bash -c "cd ${TARGET_DIR} && nix develop --command bash -c 'export PIPULATE_BROWSER_DELAY=3 && python server.py'"
