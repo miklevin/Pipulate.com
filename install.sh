@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Pipulate Installer v1.0.2 - Cache-busting version
 
 # Strict mode
 set -euo pipefail
@@ -143,10 +144,15 @@ echo "  cd ${TARGET_DIR} && nix develop  "
 print_separator
 echo
 
-# When piping through sh, we need to explicitly create a new interactive shell
-# This is the key fix to make it work properly with curl | sh
+# When piping through sh, interactive shells won't work
+# Instead, provide clear instructions and start the server automatically
 cd "${TARGET_DIR}"
 
-# The important part: exec a new bash that runs nix develop
-# This replaces the current non-interactive sh with an interactive bash running nix develop
-exec bash -c "cd ${TARGET_DIR} && exec nix develop"
+echo "✨ Starting Pipulate server automatically..."
+echo "📋 You can stop this process with Ctrl+C and restart later with:"
+echo "   cd ${TARGET_DIR} && nix develop .#quiet --command python server.py"
+echo
+
+# Run nix develop with the quiet profile and start the server
+# This works in non-interactive shells from curl | sh
+exec nix develop .#quiet --command python server.py
