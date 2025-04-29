@@ -143,10 +143,9 @@ echo "  cd ${TARGET_DIR} && nix develop  "
 print_separator
 echo
 
-# Use exec to replace this script's process with nix develop
-# This ensures we're properly in the directory context
-cd "${TARGET_DIR}" && exec nix develop
-
-# These lines won't be reached due to exec
-echo "❌ If you see this message, something went wrong."
-exit 1
+# When piping to sh, the 'exec' might not work as expected
+# Instead, use this approach which ensures we're in the right directory
+# and starts nix develop properly
+cd "${TARGET_DIR}"
+# Launch nix develop directly
+nix develop
