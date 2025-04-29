@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pipulate Installer v1.0.4 - Cache-busting version
+# Pipulate Installer v1.0.7 - Direct flake.nix approach
 
 # Strict mode
 set -euo pipefail
@@ -144,15 +144,14 @@ echo "  cd ${TARGET_DIR} && nix develop  "
 print_separator
 echo
 
-# When piping through sh, interactive shells won't work
-# Ensure dependencies are installed before starting the server
+# Start Pipulate directly with nix develop
 cd "${TARGET_DIR}"
-
-echo "✨ Setting up Pipulate environment and starting server..."
-echo "📋 You can stop this process with Ctrl+C and restart later with:"
-echo "   cd ${TARGET_DIR} && nix develop --command python server.py"
+echo "✨ Starting Pipulate environment..."
+echo "📋 JupyterLab and Pipulate tabs will open automatically in your browser."
+echo "   The Pipulate tab will open after a 15-second delay."
+echo "   You can stop this process with Ctrl+C and restart later with:"
+echo "   cd ${TARGET_DIR} && nix develop"
 echo
 
-# First run a regular nix develop to ensure all dependencies are built
-# Then start the server with a small delay before browser launch to ensure it's ready
-exec bash -c "cd ${TARGET_DIR} && nix develop --command bash -c 'export PIPULATE_BROWSER_DELAY=3 && python server.py'"
+# Just run nix develop directly - no modifications needed
+exec nix develop
