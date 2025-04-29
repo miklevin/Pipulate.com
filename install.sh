@@ -150,7 +150,7 @@ cd "${TARGET_DIR}"
 
 echo "✨ Setting up Pipulate environment and starting server..."
 echo "📋 JupyterLab and Pipulate tabs will open automatically." 
-echo "   (Pipulate tab will open after a 15-second delay)"
+echo "   (Pipulate tab will open after a 7-second delay)"
 echo "   You can stop this process with Ctrl+C and restart later with:"
 echo "   cd ${TARGET_DIR} && nix develop --command python server.py"
 echo
