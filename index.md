@@ -14,6 +14,42 @@ group: home
 > Workflows are WET (explicit & step-by-step). CRUD is DRY (uses BaseApp).  
 > You do not need the Cloud because *no lock-in need apply!*  
 
+## How to Install Pipulate
+
+This guide shows you how to install Pipulate using two commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu terminal.
+
+1.  **Install Nix:**
+    * Open your Terminal.
+    * Copy and paste this command, then press Enter:
+        ```shell
+        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+        ```
+    * Follow any instructions on the screen (you might need to type "Yes").
+    * **Important:** After the installation finishes, **close your Terminal window completely and open a new one.**
+
+2.  **Install Pipulate:**
+    * In the **new** Terminal window you just opened, copy and paste this command, then press Enter:
+        ```shell
+        curl -L https://pipulate.com/install.sh | sh
+        ```
+    * This command downloads Pipulate, sets it up in a directory (usually `~/pipulate`), configures automatic updates, and starts the necessary services (like JupyterLab and the Pipulate server). This might take some time the first time you run it. It should automatically open browser tabs when ready.
+
+**That's it! Pipulate is installed.**
+
+**How to Run Pipulate After Installation**
+
+1.  Open a Terminal.
+2.  Go to the Pipulate directory. Type:
+    ```shell
+    cd ~/pipulate
+    ```
+    *(If it was installed elsewhere, change `~/pipulate` to the correct path)*
+3.  Start Pipulate by typing:
+    ```shell
+    nix develop
+    ```
+    This command will check for updates automatically, start the Pipulate server and JupyterLab, and should open them in your web browser.
+
 * TOC
 {:toc}
 
@@ -56,42 +92,6 @@ Pipulate integrates a carefully selected set of tools aligned with its philosoph
 ---
 
 Okay, here is a simple installation guide for Pipulate based on the provided text:
-
-## How to Install Pipulate
-
-This guide shows you how to install Pipulate using two commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu terminal.
-
-1.  **Install Nix:**
-    * Open your Terminal.
-    * Copy and paste this command, then press Enter:
-        ```shell
-        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-        ```
-    * Follow any instructions on the screen (you might need to type "Yes").
-    * **Important:** After the installation finishes, **close your Terminal window completely and open a new one.**
-
-2.  **Install Pipulate:**
-    * In the **new** Terminal window you just opened, copy and paste this command, then press Enter:
-        ```shell
-        curl -L https://pipulate.com/install.sh | sh
-        ```
-    * This command downloads Pipulate, sets it up in a directory (usually `~/pipulate`), configures automatic updates, and starts the necessary services (like JupyterLab and the Pipulate server). This might take some time the first time you run it. It should automatically open browser tabs when ready.
-
-**That's it! Pipulate is installed.**
-
-**How to Run Pipulate After Installation**
-
-1.  Open a Terminal.
-2.  Go to the Pipulate directory. Type:
-    ```shell
-    cd ~/pipulate
-    ```
-    *(If it was installed elsewhere, change `~/pipulate` to the correct path)*
-3.  Start Pipulate by typing:
-    ```shell
-    nix develop
-    ```
-    This command will check for updates automatically, start the Pipulate server and JupyterLab, and should open them in your web browser.
 
 ---
 
