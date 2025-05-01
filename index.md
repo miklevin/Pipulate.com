@@ -11,9 +11,6 @@ group: home
   <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs">
 </div>
 
-> Workflows are WET (explicit & step-by-step). CRUD is DRY (uses BaseApp).  
-> You do not need the Cloud because *no lock-in need apply!*  
-
 ## How to Install Pipulate
 
 This guide shows you how to install Pipulate using two commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu terminal.
@@ -52,6 +49,9 @@ This guide shows you how to install Pipulate using two commands in your terminal
 
 * TOC
 {:toc}
+
+> Workflows are WET (explicit & step-by-step). CRUD is DRY (uses BaseApp).  
+> You do not need the Cloud because *no lock-in need apply!*  
 
 ## What is Pipulate?
 
