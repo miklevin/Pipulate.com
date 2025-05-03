@@ -11,11 +11,11 @@ group: about
 
 ## What Is Pipulate?
 
-This is a fascinating project! It takes a deliberate stance against many
-mainstream web development trends, prioritizing local-first operation,
-simplicity, observability, and developer experience within a specific niche
-(Python-centric workflows, potentially ported from notebooks). Here’s an
-analysis based on the provided context:
+Pipulate takes a deliberate stance against many mainstream web development
+trends, prioritizing local-first operation, simplicity, observability, and
+developer experience within a specific niche (Python-centric workflows,
+potentially ported from notebooks). Here’s an analysis based on the provided
+context:
 
 ## Technical Architecture Analysis
 
