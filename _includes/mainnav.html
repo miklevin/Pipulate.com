@@ -1,8 +1,10 @@
 <nav>
 <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
+<a {% if page.group == 'about' or page.category == 'about' %}class="current" {% endif %}href="/about/">About</a>
+<!--
+<a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
 <a {% if page.group == 'nix-mac' or page.category == 'nix-mac' %}class="current" {% endif %}href="/nix-mac/">Nix on macOS</a>
 <a {% if page.group == 'nix-win' or page.category == 'nix-win' %}class="current" {% endif %}href="/nix-win/">Nix on Windows</a>
-<!--
 <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
 <a {% if page.group == 'python' or page.category == 'python' %}class="current" {% endif %}href="/python/">Python</a>
 <a {% if page.group == 'crawler' or page.category == 'crawler' %}class="current" {% endif %}href="/crawler/">Crawler</a>
