@@ -4,13 +4,16 @@
 # Strict mode
 set -euo pipefail
 
+# At the beginning, add argument handling
+CUSTOM_NAME="${1:-pipulate}"  # Default to "pipulate" if no arg provided
+
 # --- Configuration ---
 REPO_USER="miklevin"
 REPO_NAME="pipulate"
 # Stable URL for the main branch ZIP
 ZIP_URL="https://github.com/${REPO_USER}/${REPO_NAME}/archive/refs/heads/main.zip"
 # Target directory name - use absolute path to avoid any confusion
-TARGET_DIR="${HOME}/${REPO_NAME}"
+TARGET_DIR="${HOME}/${CUSTOM_NAME}"
 # Temporary directory for ZIP extraction
 TMP_EXTRACT_DIR="${REPO_NAME}-main"
 # URL for the ROT13 deploy key
@@ -158,3 +161,8 @@ echo
 # First run a regular nix develop to ensure all dependencies are built
 # Then start the server directly with python server.py
 exec bash -c "cd ${TARGET_DIR} && nix develop --command python server.py"
+
+# And later in the run-script section where app_name.txt is created:
+if [ ! -f app_name.txt ]; then
+  echo "$CUSTOM_NAME" > app_name.txt
+fi
