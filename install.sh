@@ -147,22 +147,12 @@ echo "  cd ${TARGET_DIR} && nix develop  "
 print_separator
 echo
 
-# When piping through sh, interactive shells won't work
-# Ensure dependencies are installed before starting the server
-cd "${TARGET_DIR}"
-
-echo "✨ Setting up Pipulate environment and starting server..."
-echo "📋 JupyterLab and Pipulate tabs will open automatically." 
-echo "   (Pipulate tab will open after a 7-second delay)"
-echo "   You can stop this process with Ctrl+C and restart later with:"
-echo "   cd ${TARGET_DIR} && nix develop --command python server.py"
+# Before the exec command, add:
+echo "Setting up app identity as '$CUSTOM_NAME'..."
+echo "$CUSTOM_NAME" > "${TARGET_DIR}/app_name.txt"
+chmod 644 "${TARGET_DIR}/app_name.txt"
+echo "✅ Application identity set."
 echo
 
-# First run a regular nix develop to ensure all dependencies are built
-# Then start the server directly with python server.py
+# Then execute the nix develop command
 exec bash -c "cd ${TARGET_DIR} && nix develop --command python server.py"
-
-# And later in the run-script section where app_name.txt is created:
-if [ ! -f app_name.txt ]; then
-  echo "$CUSTOM_NAME" > app_name.txt
-fi
