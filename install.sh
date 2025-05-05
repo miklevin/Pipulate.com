@@ -63,7 +63,12 @@ if [ -d "${TARGET_DIR}" ]; then
     print_separator
     echo
     # Run nix develop directly (not with exec so our info message is visible)
-    nix develop
+    # Check for macOS and add --impure flag if needed
+    if [[ "$(uname)" == "Darwin" ]]; then
+      nix develop --impure
+    else
+      nix develop
+    fi
     exit 0
   else
     echo "❌ Error: Directory '${TARGET_DIR}' exists but is not a Git repository."
@@ -143,7 +148,11 @@ echo "🚀 Starting Pipulate environment..."
 print_separator
 echo "  All set! Pipulate is installed at: ${TARGET_DIR}  "
 echo "  To use Pipulate in the future, simply run:  "
-echo "  cd ${TARGET_DIR} && nix develop  "
+if [[ "$(uname)" == "Darwin" ]]; then
+  echo "  cd ${TARGET_DIR} && nix develop --impure  "
+else
+  echo "  cd ${TARGET_DIR} && nix develop  "
+fi
 print_separator
 echo
 
@@ -155,4 +164,8 @@ echo "✅ Application identity set."
 echo
 
 # Then execute the nix develop command
-exec bash -c "cd ${TARGET_DIR} && nix develop --command python server.py"
+if [[ "$(uname)" == "Darwin" ]]; then
+  exec bash -c "cd ${TARGET_DIR} && nix develop --impure"
+else
+  exec bash -c "cd ${TARGET_DIR} && nix develop"
+fi
