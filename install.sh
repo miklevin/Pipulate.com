@@ -164,10 +164,27 @@ echo "✅ Application identity set."
 echo
 
 # Then execute the nix develop command
+echo "Creating startup convenience script..."
+cat > "${TARGET_DIR}/start.sh" << 'EOL'
+#!/usr/bin/env bash
+cd "$(dirname "$0")" 
 if [[ "$(uname)" == "Darwin" ]]; then
-  echo "Starting Nix environment with --impure flag for macOS..."
-  cd "${TARGET_DIR}" && exec nix develop --impure
+  exec nix develop --impure
+else
+  exec nix develop
+fi
+EOL
+chmod +x "${TARGET_DIR}/start.sh"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  echo "Starting Nix environment on macOS with --impure flag..."
+  # For piped execution, we need to use a terminal-based solution
+  # This opens a new Terminal window running the nix develop command
+  osascript -e "tell application \"Terminal\" to do script \"cd \\\"${TARGET_DIR}\\\" && nix develop --impure\""
+  echo "A new Terminal window has been opened with Pipulate running."
+  echo "You can close this window."
 else
   echo "Starting Nix environment..."
+  # Direct approach for Linux
   cd "${TARGET_DIR}" && exec nix develop
 fi
