@@ -165,7 +165,9 @@ echo
 
 # Then execute the nix develop command
 if [[ "$(uname)" == "Darwin" ]]; then
-  exec bash -c "cd ${TARGET_DIR} && nix develop --impure"
+  echo "Starting Nix environment with --impure flag for macOS..."
+  cd "${TARGET_DIR}" && exec nix develop --impure
 else
-  exec bash -c "cd ${TARGET_DIR} && nix develop"
+  echo "Starting Nix environment..."
+  cd "${TARGET_DIR}" && exec nix develop
 fi
