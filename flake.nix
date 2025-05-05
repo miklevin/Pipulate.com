@@ -115,6 +115,13 @@
                 return 1
               fi
 
+              # Kill any running Jekyll processes
+              echo "Stopping any existing Jekyll servers..."
+              pkill -f "jekyll serve" || true
+              
+              # Give processes time to terminate
+              sleep 1
+              
               # Change to the site root
               cd "$site_root"
               echo "Serving from $(pwd)..."
@@ -189,6 +196,13 @@
               echo "You can now try running 'jes' again."
             }
 
+            # Function to stop any running Jekyll servers
+            jes-stop() {
+              echo "Stopping all Jekyll servers..."
+              pkill -f "jekyll serve" || echo "No Jekyll servers found running."
+              echo "Done."
+            }
+
             # Check if the Ruby environment is properly set up
             if [ ! -d .gem ] || [ ! -f .gem/bin/bundler ]; then
               echo "Ruby environment not found or incomplete. Setting up..."
@@ -196,11 +210,12 @@
             else
               echo "Jekyll and Rouge environments are ready."
               echo "Instructions:"
-              echo "1. Run: bundle install"
-              echo "2. Run: jes"
-              echo "3. If you encounter library errors, run: rebuild-gems"
-              echo "4. If you still have issues, run: reset-ruby-env"
-              echo "5. Generate Rouge styles: rougify style monokai.sublime > assets/css/syntax.css"
+              echo "1. Run: bundle install (if needed)"
+              echo "2. Run: jes (to start Jekyll server)"
+              echo "3. Run: jes-stop (to stop any running Jekyll servers)"
+              echo "4. If you encounter library errors, run: rebuild-gems"
+              echo "5. If you still have issues, run: reset-ruby-env"
+              echo "6. Generate Rouge styles: rougify style monokai.sublime > assets/css/syntax.css"
               echo ""
               echo "Note: Gems will now install into $GEM_HOME"
             fi
