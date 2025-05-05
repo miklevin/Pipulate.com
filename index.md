@@ -11,42 +11,56 @@ group: home
 
 ## How to Install Pipulate
 
-This guide shows you how to install Pipulate using two commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu terminal.
+This guide shows you how to install Pipulate using two main commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu (or similar Linux) terminal.
 
 1.  **Install Nix:**
+    * Nix manages the underlying software dependencies and ensures a consistent environment.
     * Open your Terminal.
     * Copy and paste this command, then press Enter:
         ```shell
         curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
         ```
     * Follow any instructions on the screen (you might need to type "Yes").
-    * **Important:** After the installation finishes, **close your Terminal window completely and open a new one.**
+    * **Important:** After the installation finishes, **close your Terminal window completely and open a new one.** This ensures Nix is correctly added to your system's PATH.
 
-2.  **Install Pipulate:**
-    * In the **new** Terminal window you just opened, copy and paste this command, then press Enter:
-        ```shell
-        curl -L https://pipulate.com/install.sh | sh
-        ```
-    * This command downloads Pipulate, sets it up in a directory (usually `~/pipulate`), configures automatic updates, and starts the necessary services (like JupyterLab and the Pipulate server). This might take some time the first time you run it. It should automatically open browser tabs when ready.
+2.  **Install Pipulate (or a custom-named version):**
+    * Install with the default name "pipulate":
+      ```shell
+      curl -L https://pipulate.com/install.sh | sh
+      ```
+    * Install with a custom name (e.g., "Botifython"):
+      ```shell
+      curl -L https://pipulate.com/install.sh | sh -s Botifython
+      ```
+    * This will download the code into `~/[custom-name]` and set the application branding accordingly
 
-**That's it! Pipulate is installed.**
+**That's it! Pipulate is installed.** You now have a self-contained, reproducible environment managed by Nix.
 
-**How to Run Pipulate After Installation**
+## How to Run Pipulate After Installation
+
+Pipulate uses Nix Flakes to manage its environment. This means you activate the specific environment defined in the `flake.nix` file to run the application and its tools.
 
 1.  Open a Terminal.
-2.  Go to the Pipulate directory. Type:
+2.  Navigate to the Pipulate directory. If you used the default install script, type:
     ```shell
     cd ~/pipulate
     ```
     *(If it was installed elsewhere, change `~/pipulate` to the correct path)*
-3.  Start Pipulate by typing:
+3.  Activate the Pipulate environment and start the services:
     ```shell
     nix develop
     ```
-    This command will check for updates automatically, start the Pipulate server and JupyterLab, and should open them in your web browser.
-
-* TOC
-{:toc}
+    * **What this command does:**
+        * Checks for updates to the Pipulate code via `git pull`.
+        * Enters the Nix environment defined in `flake.nix`, making all necessary tools (Python, system libraries, etc.) available.
+        * Executes the `shellHook` defined in `flake.nix`, which:
+            * Sets up the Python virtual environment (`.venv`).
+            * Installs/updates Python packages from `requirements.txt` using `pip`.
+            * Starts JupyterLab in the background (via `tmux`).
+            * Starts the Pipulate server (`server.py`) in the foreground.
+    * Your browser should open automatically to `http://localhost:5001` (Pipulate) and `http://localhost:8888` (JupyterLab).
+    * Press `Ctrl+C` in the terminal to stop the Pipulate server (and the `nix develop` session). JupyterLab will continue running in the background.
+    * To stop *all* services (including JupyterLab), you can run `pkill tmux` in a separate terminal.
 
 > Workflows are WET (explicit & step-by-step). CRUD is DRY (uses BaseApp).  
 > You do not need the Cloud because *no lock-in need apply!*  
@@ -85,11 +99,17 @@ Pipulate integrates a carefully selected set of tools aligned with its philosoph
 * **End-Users (e.g., SEO Practitioners):** Individuals who want to use AI-assisted, structured workflows (derived from Python/Jupyter) without needing to write or see the underlying code.
 * **Developers:** Those building these workflows, likely porting them from Jupyter Notebooks into the Pipulate framework. They benefit from the simple architecture, reproducibility, and integrated tooling.
 
----
-*by [Mike Levin](https://mikelev.in/)*
----
+## Developer Setup & Environment Notes
 
-Okay, here is a simple installation guide for Pipulate based on the provided text:
+* **Nix Environment Activation:** Always run `nix develop` from the `~/pipulate` directory *before* running any project commands (`python server.py`, `pip install`, etc.) in a new terminal. This ensures you are using the correct dependencies defined in `flake.nix`.
+* **Interactive vs. Quiet Shell:**
+    * `nix develop` (or `nix develop .#default`): Standard interactive shell, runs the startup script (`run-script` defined in `flake.nix`) with welcome messages and service startup. Ideal for general use.
+    * `nix develop .#quiet`: Activates the Nix environment *without* running the full startup script or launching services automatically. It only sets up paths and installs pip requirements. Use this for:
+        * Running specific commands without starting the servers (e.g., `nix develop .#quiet --command python -c "import pandas"`).
+        * Debugging or interacting with AI assistants where verbose startup output is undesirable.
+        * Manually running `run-server` or `run-jupyter` (scripts placed in `.venv/bin` by the `shellHook`).
+* **Dependencies:** System-level dependencies (Python version, libraries like `gcc`, `zlib`) are managed by `flake.nix`. Python package dependencies are managed by `pip` using `requirements.txt` within the Nix-provided environment.
+* **Source of Truth:** The `flake.nix` file is the definitive source for the development environment setup.
 
 ---
 
@@ -339,6 +359,7 @@ These "speedbumps" reinforce Pipulate's core philosophy:
   * **Workflow Pattern:** Ensure workflows are linear and state is explicitly passed or saved at each step. Avoid complex async task chaining that obscures state.
   * **UI Rendering Pattern:** Generate HTML directly from Python components via FastHTML. Avoid template engines.
   * **WebSocket Pattern:** Use the dedicated `Chat` class for managing LLM interactions. Avoid raw WebSocket handling elsewhere.
+  * **Workflow Progression Pattern:** Workflows use an explicit chain reaction pattern with `hx_trigger="load"` to manage step progression. This pattern must be preserved exactly as implemented. See the workflow documentation for details.
 
 -----
 
@@ -349,7 +370,7 @@ Pipulate uses two main patterns for adding functionality:
 1.  **CRUD Apps (`BaseCrud`):** For standard data management tasks (Create, Read, Update, Delete). Inherit from `BaseCrud` provided by the framework. Examples: `profiles_app.py`, `todo_app.py`.
 2.  **Workflows (No Superclass):** For linear, step-by-step processes, often ported from Jupyter Notebooks. These are plain Python classes following a specific convention (steps list, `step_XX` / `step_XX_submit` methods). Example: `hello_flow.py`, `botify_export.py`.
 
-New apps/workflows placed in the `apps/` or `workflows/` directories are automatically discovered and added to the UI navigation.
+New apps/workflows placed in the `plugins/` directory are automatically discovered and added to the UI navigation.
 
 -----
 
@@ -361,12 +382,97 @@ These are key libraries underpinning Pipulate.
 
 FastHTML is chosen for its radical simplicity in building server-rendered UIs with HTMX, *not* for building high-performance JSON APIs like FastAPI. If your goal is a traditional API, FastAPI is likely a better choice. If your goal is a highly interactive, server-rendered UI with minimal JavaScript, FastHTML excels.
 
-\<details\>
-\<summary\>FastHTML Code Examples (Click to Expand)\</summary\>
+<details>
+<summary>FastHTML Code Examples (Click to Expand)</summary>
 
-*(Include the minimal, HTMX, and MiniDataAPI examples from the original document here)*
+### Minimal Example
 
-\</details\>
+```python
+from fasthtml.common import *
+
+app, rt = fast_app()
+
+@rt('/')
+def get():
+    return HTML(
+        Body(
+            Main(
+                H1("Welcome to FastHTML!"),
+                P("Creating clean web pages with minimal Python code.")
+            )
+        )
+    )
+
+serve()
+```
+
+### HTMX Integration Example
+
+```python
+from fasthtml.common import *
+
+app, rt = fast_app()
+
+@rt('/')
+def get():
+    return HTML(
+        Body(
+            Main(
+                H1("Interactive Example"),
+                Input(
+                    name="username", 
+                    placeholder="Enter your name", 
+                    hx_post="/welcome", 
+                    hx_target="#welcome-msg", 
+                    hx_swap="innerHTML"
+                ),
+                Div(id="welcome-msg")
+            )
+        )
+    )
+
+@rt('/welcome', methods=['POST'])
+def welcome(username: str = ""):
+    return P(f"Welcome {username}!")
+```
+
+### MiniDataAPI Example
+
+```python
+from fasthtml.common import *
+
+# Create app with SQLite database
+app, rt, users, User = fast_app('data.db', users={'username': str})
+
+@rt('/')
+def get():
+    return HTML(
+        Body(
+            Main(
+                H1("User List"),
+                Form(
+                    Input(name="username", placeholder="New user"),
+                    Button("Add", type="submit"),
+                    hx_post="/add-user",
+                    hx_target="#user-list",
+                    hx_swap="innerHTML"
+                ),
+                Ul(
+                    id="user-list",
+                    *[Li(user.username) for user in users()]
+                )
+            )
+        )
+    )
+
+@rt('/add-user', methods=['POST'])
+def add_user(username: str = ""):
+    if username:
+        users.insert(username=username)
+    return Ul(*[Li(user.username) for user in users()])
+```
+
+</details>
 
 ### MiniDataAPI Spec
 
