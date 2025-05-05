@@ -281,8 +281,7 @@ The application interface is organized into distinct areas:
     └─────────────────────────────┘
 ```
 
-<details>
-<summary>UI Component Hierarchy (Click to Expand)</summary>
+### UI Component Hierarchy
 
 ```
 home (Root Component)
@@ -313,7 +312,6 @@ home (Root Component)
         +-- create_poke_button
 ```
 
-</details>
 
 ### Communication Channels
 
@@ -382,8 +380,7 @@ These are key libraries underpinning Pipulate.
 
 FastHTML is chosen for its radical simplicity in building server-rendered UIs with HTMX, *not* for building high-performance JSON APIs like FastAPI. If your goal is a traditional API, FastAPI is likely a better choice. If your goal is a highly interactive, server-rendered UI with minimal JavaScript, FastHTML excels.
 
-<details>
-<summary>FastHTML Code Examples (Click to Expand)</summary>
+### FastHTML Code Examples
 
 ### Minimal Example
 
@@ -471,8 +468,6 @@ def add_user(username: str = ""):
         users.insert(username=username)
     return Ul(*[Li(user.username) for user in users()])
 ```
-
-</details>
 
 ### MiniDataAPI Spec
 
