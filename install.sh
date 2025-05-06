@@ -63,9 +63,8 @@ echo
 echo "📁 Setting up target directory: ${TARGET_DIR}"
 if [ -d "${TARGET_DIR}" ]; then
   echo "Directory '${TARGET_DIR}' already exists."
-  if [ -d "${TARGET_DIR}/.git" ]; then
-    echo "ℹ️ It appears to be a Git repository. Assuming previous install."
-    echo "ℹ️ Entering directory and running nix develop for updates..."
+  if [ -f "${TARGET_DIR}/flake.nix" ]; then
+    echo "ℹ️ It appears to be a Pipulate installation. Entering directory..."
     cd "${TARGET_DIR}"
     echo "🚀 Starting Pipulate environment..."
     print_separator
@@ -78,7 +77,7 @@ if [ -d "${TARGET_DIR}" ]; then
     ${NIX_DEVELOP_CMD}
     exit 0
   else
-    echo "❌ Error: Directory '${TARGET_DIR}' exists but is not a Git repository."
+    echo "❌ Error: Directory '${TARGET_DIR}' exists but doesn't appear to be a Pipulate installation."
     echo "   Please remove or rename it, then run this script again."
     echo "   For example: rm -rf ${TARGET_DIR}"
     exit 1
