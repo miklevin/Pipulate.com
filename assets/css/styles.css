@@ -90,33 +90,33 @@ body > footer {
 
 /* Format headers */
 h1 {
-  font-family: 'Goldman';
+  font-family: var(--sans-font);
   font-size: 3rem;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.1;
 }
 
 h2 {
-  font-family: 'Goldman';
+  font-family: var(--sans-font);
   font-size: 2.6rem;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.1;
   margin-top: 1rem;
 }
 
 h3 {
-  font-family: 'Goldman';
+  font-family: var(--sans-font);
   font-size: 2rem;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.1;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
 
 h4 {
-  font-family: 'Goldman';
+  font-family: var(--sans-font);
   font-size: 1.6rem;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.8rem;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -480,11 +480,13 @@ figcaption {
 }
 
 blockquote {
-  margin: 2rem 0 2rem 2rem;
-  padding: 0.4rem 0.8rem;
+  margin: 0rem 0 0rem 1.5rem;
+  padding: 0rem 0rem 0rem 1rem;
   border-left: 0.35rem solid var(--accent);
   color: var(--text-light);
   font-style: italic;
+  font-family: var(--sans-font);
+  font-size: 1.3rem;
 }
 
 cite {
@@ -657,18 +659,6 @@ progress:indeterminate::-moz-progress-bar {
 .arrow {
     font-size: 1.5rem;
 }
-blockquote {
-    margin: 0rem 0 0rem 1.5rem;
-    padding: 0rem 0rem 0rem 1rem;
-    border-left: 0.35rem solid var(--accent);
-    color: var(--text-light);
-    font-style: italic;
-    font-family: 'Goldman';
-    font-size: 1.3rem;
-}
-body > footer {
-    font-size: 1rem;
-}
 .post-nav {
     display: flex;
     justify-content: flex-end;
@@ -824,16 +814,6 @@ nav a.current {
 
 .arrow {
   font-size: 1.5rem;
-}
-
-/* Override Pico's blockquote with the custom style */
-blockquote {
-  margin: 0 0 0 1.5rem;
-  padding: 0 0 0 1rem;
-  border-left: 0.35rem solid var(--pico-primary);
-  color: var(--pico-muted-color);
-  font-style: italic;
-  font-size: 1.1rem;
 }
 
 /* Navigation styles */
@@ -1004,3 +984,12 @@ footer {
   }
 }
 
+/* Override Pico's blockquote with the custom style */
+blockquote {
+  margin: 0 0 0 1.5rem;
+  padding: 0 0 0 1rem;
+  border-left: 0.35rem solid var(--pico-primary);
+  color: var(--pico-muted-color);
+  font-style: italic;
+  font-size: 1.1rem;
+}
