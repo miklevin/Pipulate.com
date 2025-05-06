@@ -221,7 +221,14 @@ fi
 EOL
 chmod +x "${TARGET_DIR}/start.sh"
 
-echo "Starting Nix environment..."
+# Display version information and transition test point
+VERSION="1.1.1"
+echo "Pipulate Installer v${VERSION} - Test checkpoint reached"
+echo "About to execute: ${NIX_DEVELOP_CMD}"
+echo "If the installer stops here and doesn't enter the Nix environment,"
+echo "please run: cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}"
+echo "============================================================"
+
 # The nix flake will take over from here, handling the git repository setup
 # This is the final step of the "magic cookie" approach - letting the controlled
 # nix environment handle the git operations
