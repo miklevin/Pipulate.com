@@ -1,8 +1,8 @@
 ---
-title: Pipulate
-description: Pipulate Free and Open Source SEO Software
-permalink: /
-group: home
+title: Pipulate README
+description: Details of Pipulate Free and Open Source SEO Software
+permalink: /readme/
+group: readme
 ---
 
 <div style="text-align: center;">
