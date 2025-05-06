@@ -567,10 +567,28 @@ progress:indeterminate::-moz-progress-bar {
 .copyable {
   position: relative;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: 1px solid var(--border);
+  padding-right: 30px; /* Space for the copy icon */
 }
 
 .copyable:hover {
   background-color: #1a1a1a;
+  border-color: var(--accent);
+}
+
+.copyable::before {
+  content: "📋";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.copyable:hover::before {
+  opacity: 1;
 }
 
 .copyable::after {

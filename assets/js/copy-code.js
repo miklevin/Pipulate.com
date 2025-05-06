@@ -1,15 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Add the copyable class to all code blocks that have the copyable class set
+  // These are the exact commands we want to make copyable
+  const targetCommands = [
+    'curl --proto \'=https\' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install',
+    'curl -L https://pipulate.com/install.sh | sh -s Botifython',
+    'cd ~/Botifython && nix develop'
+  ];
+  
+  // Find all bash code blocks
   const codeBlocks = document.querySelectorAll('.language-bash');
   
   codeBlocks.forEach(function(block) {
-    // Only add the class to specific installation command blocks
     const commandText = block.textContent.trim();
-    if (
-      commandText.includes('install.determinate.systems/nix') || 
-      commandText.includes('pipulate.com/install.sh') ||
-      commandText.startsWith('cd ~/') && commandText.includes('nix develop')
-    ) {
+    
+    // Only make the specific commands copyable
+    if (targetCommands.includes(commandText)) {
       block.parentElement.classList.add('copyable');
       
       // Add click event listener
