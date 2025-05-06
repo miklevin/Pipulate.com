@@ -12,7 +12,7 @@
   --text: #ffffff;
   --text-light: #aaaaaa;
   --border: #555555;
-  --accent: #ffb300;
+  --accent: #1a1917;
   --code: #f06292;
   --preformatted: #ccc;
   --marked: #ffdd33;
@@ -25,6 +25,7 @@
 /* Reset box-sizing */
 *, *::before, *::after {
   box-sizing: border-box;
+  /* Remove global padding-bottom that affects all elements */
 }
 
 /* Reset default appearance */
@@ -61,7 +62,7 @@ body > header {
   background-color: #00036a;
   border-bottom: 1px solid var(--border);
   text-align: center;
-  padding: 0 0.5rem 2rem 0.5rem;
+  padding: 0 0.5rem 1rem 0.5rem; /* Reduce bottom padding */
   /* Remove grid column constraint */
 }
 
@@ -75,7 +76,7 @@ body > header p {
 
 /* Add a little padding to ensure spacing is correct between content and header > nav */
 main {
-  padding-top: 1.5rem;
+  padding-top: 1rem; /* Standardize top padding */
   background-color: #000;
 }
 
@@ -92,6 +93,12 @@ body > footer {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--sans-font);
   font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h1:first-child, h2:first-child, h3:first-child {
+  margin-top: 0.5rem; /* Less space for first headings */
 }
 
 h1 {
@@ -102,21 +109,16 @@ h1 {
 h2 {
   font-size: 2.6rem;
   line-height: 1.1;
-  margin-top: 1rem;
 }
 
 h3 {
   font-size: 2rem;
   line-height: 1.1;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
 }
 
 h4 {
   font-size: 1.6rem;
   line-height: 1.8rem;
-  margin-bottom: 0px;
-  margin-top: 0px;
 }
 
 h5 {
@@ -208,7 +210,8 @@ header > nav {
   font-size: 1em;
   font-weight: bold;
   line-height: 1.5;
-  padding: 1rem 0 0 0;
+  padding: 0.5rem 0 0 0; /* Reduce top padding */
+  margin-bottom: 0.5rem; /* Add small bottom margin */
 }
 
 /* Use flexbox to allow items to wrap, as needed */
@@ -506,11 +509,12 @@ kbd {
 }
 
 pre {
-  padding: 1rem 1.4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1.2rem; /* Slightly reduce padding */
   max-width: 100%;
   overflow: auto;
   color: var(--preformatted);
-  margin-bottom: 0;
 }
 
 /* Fix embedded code within pre */
@@ -519,7 +523,7 @@ pre code {
   background: none;
   margin: 0;
   padding: 0;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 
 /* Progress bars */
@@ -558,6 +562,7 @@ progress:indeterminate::-moz-progress-bar {
 .code-block-wrapper {
   position: relative;
   display: block;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -948,8 +953,7 @@ code {
 }
 
 .language-bash, .language-shell, .language-python, .language-plaintext {
-  border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 /* Footer styling */
@@ -989,9 +993,8 @@ blockquote {
   left: 50%;
   transform: translateX(-50%);
   background-color: transparent;
-  padding: 10px 0;
+  padding: 5px 0; /* Reduce padding */
   z-index: 1000;
-  margin-bottom: 10px;
   /* No fixed width - will adjust dynamically based on container width */
 }
 
@@ -1007,7 +1010,7 @@ blockquote {
 
 /* Add space between slider and nav */
 header {
-  padding-top: 20px !important; /* Add space for the slider */
+  padding-top: 30px !important; /* Balanced space for the slider */
 }
 
 /* Disable slider on mobile */
@@ -1018,6 +1021,23 @@ header {
   
   /* Reset header padding on mobile */
   header {
-    padding-top: 1rem !important;
+    padding-top: 0.5rem !important;
   }
+}
+
+.highlight {
+  padding-bottom: 0;
+}
+
+/* List spacing */
+ul, ol {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+/* Paragraph spacing */
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
