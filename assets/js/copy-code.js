@@ -2,21 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // First, clean up any existing wrappers that might have been added incorrectly
   cleanupExistingWrappers();
   
-  // These are the exact commands we want to make copyable
-  const targetCommands = [
-    'curl --proto \'=https\' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install',
-    'curl -L https://pipulate.com/install.sh | sh -s Botifython',
-    'cd ~/Botifython && nix develop',
-    'curl -L https://pipulate.com/install.sh | sh',
-    'cd ~/pipulate'
-  ];
-  
   // Find all code blocks (support various language classes)
   const selectors = [
     'div.language-bash pre.highlight code',
     'div.language-shell pre.highlight code',
     'div.language-plaintext.highlighter-rouge pre.highlight code',
-    'div.language-python pre.highlight code'
+    'div.language-python pre.highlight code',
+    'pre code'
   ];
   
   // Select all code blocks matching our selectors
@@ -25,57 +17,66 @@ document.addEventListener('DOMContentLoaded', function() {
   codeBlocks.forEach(function(block) {
     const commandText = block.textContent.trim();
     
-    // Only make the specific commands copyable
-    if (targetCommands.includes(commandText)) {
-      // Get the parent elements - we need to go up to the div.language-* element
-      const preElement = block.parentElement;
-      const languageDiv = preElement.parentElement;
-      
-      // Check if we've already wrapped this element (prevent duplicate wrappers)
-      if (languageDiv.parentElement.classList.contains('code-block-wrapper')) {
-        return; // Skip if already processed
-      }
-      
-      // Create a wrapper div
-      const wrapper = document.createElement('div');
-      wrapper.className = 'code-block-wrapper';
-      
-      // Insert the wrapper before the language div element
-      languageDiv.parentNode.insertBefore(wrapper, languageDiv);
-      
-      // Move the language div element into the wrapper
-      wrapper.appendChild(languageDiv);
-      
-      // Add the copy button
-      const copyButton = document.createElement('button');
-      copyButton.className = 'copy-button';
-      copyButton.setAttribute('aria-label', 'Copy to clipboard');
-      copyButton.setAttribute('title', 'Copy to clipboard');
-      wrapper.appendChild(copyButton);
-      
-      // Add tooltip for "Copied!" feedback
-      const tooltip = document.createElement('span');
-      tooltip.className = 'copied-tooltip';
-      tooltip.textContent = 'Copied!';
-      wrapper.appendChild(tooltip);
-      
-      // Add click event listener to the button
-      copyButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        copyToClipboard(commandText);
-        
-        // Add copied class temporarily for visual feedback
-        this.classList.add('copied');
-        tooltip.classList.add('show');
-        
-        setTimeout(() => {
-          this.classList.remove('copied');
-          tooltip.classList.remove('show');
-        }, 2000);
-      });
+    // Skip empty blocks
+    if (!commandText) return;
+    
+    // Get the parent elements - we need to go up to the pre element at minimum
+    const preElement = block.closest('pre');
+    if (!preElement) return;
+    
+    // Find the appropriate container to wrap
+    let container = preElement;
+    const languageDiv = preElement.parentElement;
+    
+    if (languageDiv && languageDiv.classList.contains('highlight') || 
+        languageDiv && languageDiv.classList && Array.from(languageDiv.classList).some(c => c.startsWith('language-'))) {
+      container = languageDiv;
     }
+    
+    // Check if we've already wrapped this element (prevent duplicate wrappers)
+    if (container.parentElement.classList.contains('code-block-wrapper')) {
+      return; // Skip if already processed
+    }
+    
+    // Create a wrapper div
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block-wrapper';
+    
+    // Insert the wrapper before the container element
+    container.parentNode.insertBefore(wrapper, container);
+    
+    // Move the container element into the wrapper
+    wrapper.appendChild(container);
+    
+    // Add the copy button
+    const copyButton = document.createElement('button');
+    copyButton.className = 'copy-button';
+    copyButton.setAttribute('aria-label', 'Copy to clipboard');
+    copyButton.setAttribute('title', 'Copy to clipboard');
+    wrapper.appendChild(copyButton);
+    
+    // Add tooltip for "Copied!" feedback
+    const tooltip = document.createElement('span');
+    tooltip.className = 'copied-tooltip';
+    tooltip.textContent = 'Copied!';
+    wrapper.appendChild(tooltip);
+    
+    // Add click event listener to the button
+    copyButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      copyToClipboard(commandText);
+      
+      // Add copied class temporarily for visual feedback
+      this.classList.add('copied');
+      tooltip.classList.add('show');
+      
+      setTimeout(() => {
+        this.classList.remove('copied');
+        tooltip.classList.remove('show');
+      }, 2000);
+    });
   });
   
   // Function to clean up existing wrappers that might have been added incorrectly

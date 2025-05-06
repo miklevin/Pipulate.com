@@ -21,19 +21,17 @@
 <body>
 <header class="container">
     <nav>
-<a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
-<a {% if page.group == 'about' or page.category == 'about' %}class="current" {% endif %}href="/about/">About</a>
-<a {% if page.group == 'readme' or page.category == 'readme' %}class="current" {% endif %}href="/readme/">README</a>
-<!--
-<a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
-<a {% if page.group == 'nix-mac' or page.category == 'nix-mac' %}class="current" {% endif %}href="/nix-mac/">Nix on macOS</a>
-<a {% if page.group == 'nix-win' or page.category == 'nix-win' %}class="current" {% endif %}href="/nix-win/">Nix on Windows</a>
-<a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
-<a {% if page.group == 'python' or page.category == 'python' %}class="current" {% endif %}href="/python/">Python</a>
-<a {% if page.group == 'crawler' or page.category == 'crawler' %}class="current" {% endif %}href="/crawler/">Crawler</a>
-<a {% if page.group == 'keywords' or page.category == 'keywords' %}class="current" {% endif %}href="/keywords/">Keywords</a>
--->
-</nav>
+        <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
+        <a {% if page.group == 'about' or page.category == 'about' %}class="current" {% endif %}href="/about/">About</a>
+        <a {% if page.group == 'readme' or page.category == 'readme' %}class="current" {% endif %}href="/readme/">README</a>
+        <!-- Additional navigation items can be uncommented when needed
+        <a {% if page.group == 'nix-mac' or page.category == 'nix-mac' %}class="current" {% endif %}href="/nix-mac/">Nix on macOS</a>
+        <a {% if page.group == 'nix-win' or page.category == 'nix-win' %}class="current" {% endif %}href="/nix-win/">Nix on Windows</a>
+        <a {% if page.group == 'python' or page.category == 'python' %}class="current" {% endif %}href="/python/">Python</a>
+        <a {% if page.group == 'crawler' or page.category == 'crawler' %}class="current" {% endif %}href="/crawler/">Crawler</a>
+        <a {% if page.group == 'keywords' or page.category == 'keywords' %}class="current" {% endif %}href="/keywords/">Keywords</a>
+        -->
+    </nav>
 </header>
 <main class="container">
 {{ content }}

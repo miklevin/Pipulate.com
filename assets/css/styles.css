@@ -571,7 +571,11 @@ progress:indeterminate::-moz-progress-bar {
 }
 
 /* Ensure we don't add margins to code blocks that already have them */
-.code-block-wrapper > .language-bash {
+.code-block-wrapper > .language-bash,
+.code-block-wrapper > .language-shell,
+.code-block-wrapper > .language-python,
+.code-block-wrapper > .language-plaintext,
+.code-block-wrapper > pre {
   margin-bottom: 0;
 }
 
@@ -583,17 +587,18 @@ progress:indeterminate::-moz-progress-bar {
   color: var(--bg);
   border: none;
   border-radius: 4px;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 10;
   padding: 0;
   margin: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .copy-button:hover {
@@ -616,20 +621,31 @@ progress:indeterminate::-moz-progress-bar {
 
 .copied-tooltip {
   position: absolute;
-  top: -30px;
+  top: -35px;
   right: 0;
   background-color: var(--accent);
   color: var(--bg);
-  padding: 4px 8px;
+  padding: 5px 10px;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: bold;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
+  transform: translateY(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .copied-tooltip.show {
   opacity: 1;
+  transform: translateY(0);
+}
+
+/* Override duplicate copy button styles later in the file */
+.copy-button, .copy-button:hover, .copy-button:active, 
+.copy-button::before, .copy-button.copied::before,
+.copied-tooltip, .copied-tooltip.show {
+  /* Ensure these styles take precedence */
 }
 
 /* Begin Styles */
@@ -798,75 +814,6 @@ nav a.current {
   max-width: 85ch;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* Click to Copy Styles */
-.code-block-wrapper {
-  position: relative;
-  display: block;
-  margin-bottom: 1rem;
-}
-
-/* Ensure we don't add margins to code blocks that already have them */
-.code-block-wrapper > .language-bash {
-  margin-bottom: 0;
-}
-
-.copy-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: var(--pico-primary);
-  color: var(--pico-primary-inverse);
-  border: none;
-  border-radius: 4px;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 10;
-  padding: 0;
-  margin: 0;
-}
-
-.copy-button:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.copy-button:active {
-  transform: scale(0.95);
-}
-
-.copy-button::before {
-  content: "📋";
-  font-size: 1rem;
-}
-
-.copy-button.copied::before {
-  content: "✓";
-}
-
-.copied-tooltip {
-  position: absolute;
-  top: -30px;
-  right: 0;
-  background-color: var(--pico-success);
-  color: var(--pico-background-color);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.copied-tooltip.show {
-  opacity: 1;
 }
 
 /* Custom styles from original */
