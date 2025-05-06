@@ -6,23 +6,33 @@ document.addEventListener('DOMContentLoaded', function() {
   const targetCommands = [
     'curl --proto \'=https\' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install',
     'curl -L https://pipulate.com/install.sh | sh -s Botifython',
-    'cd ~/Botifython && nix develop'
+    'cd ~/Botifython && nix develop',
+    'curl -L https://pipulate.com/install.sh | sh',
+    'cd ~/pipulate'
   ];
   
-  // Find all bash code blocks (more specific selector to target only code blocks)
-  const codeBlocks = document.querySelectorAll('div.language-bash pre.highlight code');
+  // Find all code blocks (support various language classes)
+  const selectors = [
+    'div.language-bash pre.highlight code',
+    'div.language-shell pre.highlight code',
+    'div.language-plaintext.highlighter-rouge pre.highlight code',
+    'div.language-python pre.highlight code'
+  ];
+  
+  // Select all code blocks matching our selectors
+  const codeBlocks = document.querySelectorAll(selectors.join(','));
   
   codeBlocks.forEach(function(block) {
     const commandText = block.textContent.trim();
     
     // Only make the specific commands copyable
     if (targetCommands.includes(commandText)) {
-      // Get the parent elements - we need to go up to the div.language-bash
+      // Get the parent elements - we need to go up to the div.language-* element
       const preElement = block.parentElement;
-      const bashDivElement = preElement.parentElement;
+      const languageDiv = preElement.parentElement;
       
       // Check if we've already wrapped this element (prevent duplicate wrappers)
-      if (bashDivElement.parentElement.classList.contains('code-block-wrapper')) {
+      if (languageDiv.parentElement.classList.contains('code-block-wrapper')) {
         return; // Skip if already processed
       }
       
@@ -30,11 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const wrapper = document.createElement('div');
       wrapper.className = 'code-block-wrapper';
       
-      // Insert the wrapper before the bash div element
-      bashDivElement.parentNode.insertBefore(wrapper, bashDivElement);
+      // Insert the wrapper before the language div element
+      languageDiv.parentNode.insertBefore(wrapper, languageDiv);
       
-      // Move the bash div element into the wrapper
-      wrapper.appendChild(bashDivElement);
+      // Move the language div element into the wrapper
+      wrapper.appendChild(languageDiv);
       
       // Add the copy button
       const copyButton = document.createElement('button');
