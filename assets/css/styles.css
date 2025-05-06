@@ -564,54 +564,63 @@ progress:indeterminate::-moz-progress-bar {
 }
 
 /* Click to Copy Styles */
-.copyable {
+.code-block-wrapper {
   position: relative;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border: 1px solid var(--border);
-  padding-right: 30px; /* Space for the copy icon */
 }
 
-.copyable:hover {
-  background-color: #1a1a1a;
-  border-color: var(--accent);
-}
-
-.copyable::before {
-  content: "📋";
+.copy-button {
   position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  opacity: 0.7;
-}
-
-.copyable:hover::before {
-  opacity: 1;
-}
-
-.copyable::after {
-  content: "Click to copy";
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 4px 8px;
-  font-size: 0.8rem;
+  top: 0.5rem;
+  right: 0.5rem;
   background-color: var(--accent);
-  color: #000;
-  border-radius: 0 5px 0 5px;
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.copy-button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+.copy-button::before {
+  content: "📋";
+  font-size: 1rem;
+}
+
+.copy-button.copied::before {
+  content: "✓";
+}
+
+.copied-tooltip {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background-color: #4CAF50;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.copyable:hover::after {
+.copied-tooltip.show {
   opacity: 1;
-}
-
-.copyable.copied::after {
-  content: "Copied!";
-  background-color: #4CAF50;
 }
 
 /* Begin Styles */

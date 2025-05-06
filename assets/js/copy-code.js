@@ -14,16 +14,46 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Only make the specific commands copyable
     if (targetCommands.includes(commandText)) {
-      block.parentElement.classList.add('copyable');
+      // Get the parent (pre) element
+      const preElement = block.parentElement;
       
-      // Add click event listener
-      block.parentElement.addEventListener('click', function() {
+      // Create a wrapper div
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      
+      // Insert the wrapper before the pre element
+      preElement.parentNode.insertBefore(wrapper, preElement);
+      
+      // Move the pre element into the wrapper
+      wrapper.appendChild(preElement);
+      
+      // Add the copy button
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.setAttribute('aria-label', 'Copy to clipboard');
+      copyButton.setAttribute('title', 'Copy to clipboard');
+      wrapper.appendChild(copyButton);
+      
+      // Add tooltip for "Copied!" feedback
+      const tooltip = document.createElement('span');
+      tooltip.className = 'copied-tooltip';
+      tooltip.textContent = 'Copied!';
+      wrapper.appendChild(tooltip);
+      
+      // Add click event listener to the button
+      copyButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         copyToClipboard(commandText);
         
         // Add copied class temporarily for visual feedback
         this.classList.add('copied');
+        tooltip.classList.add('show');
+        
         setTimeout(() => {
           this.classList.remove('copied');
+          tooltip.classList.remove('show');
         }, 2000);
       });
     }
@@ -31,7 +61,20 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Function to copy text to clipboard
   function copyToClipboard(text) {
-    // Create a temporary textarea element
+    // Try to use the newer Clipboard API if available
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .catch(err => {
+          console.error('Failed to copy text: ', err);
+          fallbackCopyToClipboard(text);
+        });
+    } else {
+      fallbackCopyToClipboard(text);
+    }
+  }
+  
+  // Fallback copy method for older browsers
+  function fallbackCopyToClipboard(text) {
     const textarea = document.createElement('textarea');
     textarea.value = text;
     textarea.setAttribute('readonly', '');
@@ -39,11 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
     textarea.style.left = '-9999px';
     document.body.appendChild(textarea);
     
-    // Select and copy the text
+    // Check if there's any text selection currently
+    const selected = document.getSelection().rangeCount > 0 
+      ? document.getSelection().getRangeAt(0)
+      : false;
+    
     textarea.select();
     document.execCommand('copy');
-    
-    // Clean up
     document.body.removeChild(textarea);
+    
+    // Restore the original selection if there was one
+    if (selected) {
+      document.getSelection().removeAllRanges();
+      document.getSelection().addRange(selected);
+    }
   }
 }); 
