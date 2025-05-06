@@ -44,7 +44,7 @@ html {
 body {
   color: var(--text);
   background-color: var(--bg);
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   line-height: 1.5;
   display: grid;
   grid-template-columns: 1fr min(65rem, 90%) 1fr;
@@ -76,6 +76,7 @@ body > header p {
 /* Add a little padding to ensure spacing is correct between content and header > nav */
 main {
   padding-top: 1.5rem;
+  background-color: #000;
 }
 
 body > footer {
@@ -504,6 +505,7 @@ kbd,
 samp {
   font-family: var(--mono-font);
   color: var(--code);
+  font-size: 1.2rem;
 }
 
 kbd {
@@ -561,16 +563,49 @@ progress:indeterminate::-moz-progress-bar {
   background-color: var(--accent-bg);
 }
 
+/* Click to Copy Styles */
+.copyable {
+  position: relative;
+  cursor: pointer;
+}
+
+.copyable:hover {
+  background-color: #1a1a1a;
+}
+
+.copyable::after {
+  content: "Click to copy";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  background-color: var(--accent);
+  color: #000;
+  border-radius: 0 5px 0 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copyable:hover::after {
+  opacity: 1;
+}
+
+.copyable.copied::after {
+  content: "Copied!";
+  background-color: #4CAF50;
+}
+
 /* Begin Styles */
 
 .center {
     text-align: center;
-    width=100%;
+    width: 100%;
 }
- .arrow {
+.arrow {
     font-size: 1.5rem;
 }
- blockquote {
+blockquote {
     margin: 0rem 0 0rem 1.5rem;
     padding: 0rem 0rem 0rem 1rem;
     border-left: 0.35rem solid var(--accent);
@@ -579,55 +614,55 @@ progress:indeterminate::-moz-progress-bar {
     font-family: 'Goldman';
     font-size: 1.3rem;
 }
- body > footer {
+body > footer {
     font-size: 1rem;
 }
- .post-nav {
+.post-nav {
     display: flex;
     justify-content: flex-end;
-    // justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
 }
- .post-nav-prev {
+.post-nav-prev {
     margin-right: auto;
-    // text-align: left;
+    /* text-align: left; */
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
- .post-nav-next {
+.post-nav-next {
     text-align: right;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
- .post-link {
+.post-link {
     font-size: 1.6rem;
     font-weight: bold;
 }
- .meta {
+.meta {
     color: var(--text-light);
     font-size: 1rem;
 }
- .blog-item {
+.blog-item {
     margin-bottom: 4rem;
 }
- nav a.current {
+nav a.current {
     color: var(--accent) !important;
     border-color: var(--accent) !important;
 }
- .notice {
+.notice {
     background: var(--accent-bg);
     border: 2px solid var(--border);
     border-radius: 5px;
     padding: 1.5rem;
     margin: 2rem 0;
 }
- .medium {
+.medium {
     font-size: 1.4rem;
 }
- .small {
-    font-size: 1.125rem;
+.small {
+    font-size: 1.2rem;
 }
- .button {
+.button {
     border: none;
     border-radius: 5px;
     background: var(--accent);
@@ -636,11 +671,11 @@ progress:indeterminate::-moz-progress-bar {
     padding: 0.7rem 0.9rem;
     margin: 0.5rem 0;
 }
- .button:hover, .button:focus {
+.button:hover, .button:focus {
     filter: brightness(1.4);
     cursor: pointer;
 }
- .icon {
+.icon {
     vertical-align: sub;
     padding-right: .25rem;
     display: inline-block;

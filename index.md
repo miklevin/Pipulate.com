@@ -31,19 +31,19 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 With Nix installed, run this command to install Pipulate:
 
 ```bash
-curl -L https://pipulate.com/install.sh | sh -s YourAppName
+curl -L https://pipulate.com/install.sh | sh -s Botifython
 ```
 
-* Replace `YourAppName` with your preferred name (or omit for default "pipulate")
+* Replace `Botifython` with your preferred name (or omit for default "pipulate")
 * The installer downloads and configures everything automatically
-* First-time installation creates a directory at `~/YourAppName`
+* First-time installation creates a directory at `~/Botifython`
 
 ### 3. Starting Pipulate
 
 After initial installation, you can start Pipulate anytime with:
 
 ```bash
-cd ~/YourAppName && nix develop
+cd ~/Botifython && nix develop
 ```
 
 This command:
@@ -59,10 +59,10 @@ If you need to start fresh:
 
 ```bash
 # Remove the existing installation
-rm -rf ~/YourAppName
+rm -rf ~/Botifython
 
 # Reinstall
-curl -L https://pipulate.com/install.sh | sh -s YourAppName
+curl -L https://pipulate.com/install.sh | sh -s Botifython
 ```
 
 ### Uninstalling the Nix Package Manager
