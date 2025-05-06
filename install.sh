@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pipulate Installer v1.0.8 - Cache-busting version
+# Pipulate Installer v1.0.9 - Cache-busting version
 
 # Strict mode
 set -euo pipefail
@@ -31,6 +31,17 @@ print_separator() {
   echo "--------------------------------------------------------------"
 }
 
+# --- Setup Nix Develop Command ---
+# Function to get the appropriate nix develop command based on OS
+get_nix_develop_cmd() {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    echo "nix develop --impure"
+  else
+    echo "nix develop"
+  fi
+}
+NIX_DEVELOP_CMD=$(get_nix_develop_cmd)
+
 # --- Display Banner ---
 echo
 print_separator
@@ -59,16 +70,12 @@ if [ -d "${TARGET_DIR}" ]; then
     echo "🚀 Starting Pipulate environment..."
     print_separator
     echo "  To use Pipulate in the future, simply run:  "
-    echo "  cd ${TARGET_DIR} && nix develop  "
+    echo "  cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}  "
     print_separator
     echo
     # Run nix develop directly (not with exec so our info message is visible)
-    # Check for macOS and add --impure flag if needed
-    if [[ "$(uname)" == "Darwin" ]]; then
-      nix develop --impure
-    else
-      nix develop
-    fi
+    # Use the appropriate command based on OS
+    ${NIX_DEVELOP_CMD}
     exit 0
   else
     echo "❌ Error: Directory '${TARGET_DIR}' exists but is not a Git repository."
@@ -148,11 +155,7 @@ echo "🚀 Starting Pipulate environment..."
 print_separator
 echo "  All set! Pipulate is installed at: ${TARGET_DIR}  "
 echo "  To use Pipulate in the future, simply run:  "
-if [[ "$(uname)" == "Darwin" ]]; then
-  echo "  cd ${TARGET_DIR} && nix develop --impure  "
-else
-  echo "  cd ${TARGET_DIR} && nix develop  "
-fi
+echo "  cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}  "
 print_separator
 echo
 
@@ -176,10 +179,5 @@ fi
 EOL
 chmod +x "${TARGET_DIR}/start.sh"
 
-if [[ "$(uname)" == "Darwin" ]]; then
-  echo "Starting Nix environment on macOS with --impure flag..."
-  exec nix develop --impure
-else
-  echo "Starting Nix environment..."
-  exec nix develop
-fi
+echo "Starting Nix environment..."
+exec ${NIX_DEVELOP_CMD}
