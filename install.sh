@@ -70,7 +70,8 @@ print_separator() {
 # This is one of the few OS-specific adaptations we need to make
 get_nix_develop_cmd() {
   if [[ "$(uname)" == "Darwin" ]]; then
-    echo "nix develop --impure"
+    # echo "nix develop --impure"  # Commented out for now
+    echo "nix develop"
   else
     echo "nix develop"
   fi
