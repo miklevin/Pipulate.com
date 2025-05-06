@@ -1,5 +1,39 @@
 #!/usr/bin/env bash
-# Pipulate Installer v1.0.9 - Cache-busting version
+# Pipulate Installer v1.1.0
+# =========================
+# 
+# This installer uses a "magic cookie" approach to setup a git-based nix flake without 
+# requiring git to be available on the host system initially.
+#
+# === WHY THIS APPROACH WORKS ===
+# We want effectively the same path whether it's macOS or Linux (which might include Windows WSL)
+# because the value proposition of nix is deterministic behavior solving the "not on my machine" 
+# problem. The nix flake provides a normalized version of Linux that runs things identically 
+# across all host OSes. The exceptions are exactly that, tiny edge-case areas where we need 
+# to insert special handling logic for radical differences in the host OS or hardware, such 
+# as taking advantage of CUDA on non-Windows environments and the `--impure` flag needed on macOS.
+# We go out of our way to re-unite the paths in all other locations so there is no special 
+# host OS handling on core script functionality.
+#
+# === THE "MAGIC COOKIE" APPROACH ===
+# Nix flakes require a git repository to function properly. However, requiring users to have 
+# git pre-installed creates a dependency we want to avoid. So instead:
+#
+# 1. This install.sh script is distributed via curl (highly reliable across systems)
+# 2. We download a zip of the repo (more reliable than git clone on diverse systems)
+# 3. We extract the zip and place a ROT13-encoded SSH key in the .ssh folder
+# 4. We run `nix develop` which activates the flake
+# 5. The flake itself handles converting the directory into a proper git repo
+#
+# This is called a "magic cookie" approach because we provide the initial "cookie" 
+# (SSH key + zip contents) that the nix flake later uses to transform itself into 
+# a proper git repository with auto-update capabilities.
+#
+# === IMPORTANT ===
+# DO NOT MOVE GIT FUNCTIONALITY INTO THIS SCRIPT. This approach deliberately avoids
+# requiring git during the initial setup phase for maximum compatibility across systems.
+# The more robust approach is to let nix ensure git is available before attempting any
+# git operations in the controlled nix environment.
 
 # Strict mode
 set -euo pipefail
@@ -33,6 +67,7 @@ print_separator() {
 
 # --- Setup Nix Develop Command ---
 # Function to get the appropriate nix develop command based on OS
+# This is one of the few OS-specific adaptations we need to make
 get_nix_develop_cmd() {
   if [[ "$(uname)" == "Darwin" ]]; then
     echo "nix develop --impure"
@@ -51,15 +86,17 @@ print_separator
 echo
 
 # --- Dependency Checks ---
+# Note: We check for minimal dependencies that are needed for this phase
+# Git is NOT required at this stage - the flake will handle git operations later
 echo "🔍 Checking prerequisites..."
 check_command "curl"
-check_command "git"
 check_command "unzip"
-check_command "nix" # Should be present after Command 1 + terminal restart
+check_command "nix" # Should be present after initial nix installation
 echo "✅ All required tools found."
 echo
 
 # --- Target Directory Handling ---
+# We only care if flake.nix exists, not if it's a git repo yet
 echo "📁 Setting up target directory: ${TARGET_DIR}"
 if [ -d "${TARGET_DIR}" ]; then
   echo "Directory '${TARGET_DIR}' already exists."
@@ -88,6 +125,8 @@ else
 fi
 
 # --- Download and Extract ---
+# The "magic cookie" approach begins here - downloading the ZIP archive
+# This is more reliable across systems than using git directly
 echo "📥 Downloading Pipulate source code..."
 # Download to a temporary file
 TMP_ZIP_FILE=$(mktemp)
@@ -125,6 +164,8 @@ echo "📍 Now in directory: $(pwd)"
 echo
 
 # --- Deploy Key Setup ("Magic Cookie") ---
+# Part of the "magic cookie" is the SSH key that will allow the flake
+# to perform git operations without password prompts
 echo "🔑 Setting up deployment key..."
 mkdir -p .ssh
 echo "Fetching deployment key from ${KEY_URL}..."
@@ -150,6 +191,8 @@ echo "🔒 Deployment key file saved and secured."
 echo
 
 # --- Trigger Initial Nix Build & Git Conversion ---
+# Now we hand over to nix develop, which will activate the flake
+# The flake will handle converting this to a proper git repository
 echo "🚀 Starting Pipulate environment..."
 print_separator
 echo "  All set! Pipulate is installed at: ${TARGET_DIR}  "
@@ -165,7 +208,7 @@ chmod 644 "${TARGET_DIR}/app_name.txt"
 echo "✅ Application identity set."
 echo
 
-# Then execute the nix develop command
+# Creating a convenience startup script
 echo "Creating startup convenience script..."
 cat > "${TARGET_DIR}/start.sh" << 'EOL'
 #!/usr/bin/env bash
@@ -179,4 +222,7 @@ EOL
 chmod +x "${TARGET_DIR}/start.sh"
 
 echo "Starting Nix environment..."
+# The nix flake will take over from here, handling the git repository setup
+# This is the final step of the "magic cookie" approach - letting the controlled
+# nix environment handle the git operations
 exec ${NIX_DEVELOP_CMD}
