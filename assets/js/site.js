@@ -22,22 +22,58 @@ function isMobile() {
     return window.innerWidth <= 768;
 }
 
-// Initialize width immediately before DOM content loads
-const storedWidth = getCookie('containerWidth') || '850';
-document.documentElement.style.setProperty('--slider-width', storedWidth + 'px');
+// CRITICAL: Initialize width IMMEDIATELY (no waiting for DOM) to prevent slider 'pop'
+(function() {
+    // Absolute min/max constraints that cannot be violated
+    const ABSOLUTE_MIN_WIDTH = 850;
+    
+    // Get the stored width with proper constraints
+    let storedWidth = parseInt(getCookie('containerWidth') || ABSOLUTE_MIN_WIDTH);
+    
+    // Enforce minimum width
+    storedWidth = Math.max(storedWidth, ABSOLUTE_MIN_WIDTH);
+    
+    // Set the CSS variable for other calculations
+    document.documentElement.style.setProperty('--slider-width', storedWidth + 'px');
+    
+    // Inject a style tag to immediately set container width
+    const style = document.createElement('style');
+    style.textContent = `.container { max-width: ${storedWidth}px !important; width: ${storedWidth}px !important; }`;
+    document.head.appendChild(style);
+    
+    // Set up an onload handler to immediately set the slider value as soon as it exists
+    window.addEventListener('load', function() {
+        const slider = document.getElementById('widthSlider');
+        if (slider) {
+            slider.value = storedWidth;
+            slider.min = ABSOLUTE_MIN_WIDTH;
+            slider.max = window.innerWidth;
+        }
+    });
+})();
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Constants for constraints
+    const MIN_WIDTH = 850; // Absolute minimum width
+    
     const widthSlider = document.getElementById('widthSlider');
     const containers = document.querySelectorAll('.container');
     const sliderContainer = document.getElementById('widthSliderContainer');
     
-    // Set initial values immediately
+    // Get the stored width with proper constraints
+    let storedWidth = parseInt(getCookie('containerWidth') || MIN_WIDTH);
+    storedWidth = Math.max(storedWidth, MIN_WIDTH);
+    
+    // Set slider attributes and value
     if (widthSlider) {
-        widthSlider.value = storedWidth;
-        // Set width by directly overriding CSS with !important to prevent other rules from interfering
-        containers.forEach(container => {
-            container.style.cssText = `max-width: ${storedWidth}px !important; width: ${storedWidth}px !important;`;
-        });
+        // Hard-code the min attribute
+        widthSlider.min = MIN_WIDTH;
+        
+        // Set the max to current viewport width
+        widthSlider.max = window.innerWidth;
+        
+        // Set the value with constraints
+        widthSlider.value = Math.min(Math.max(storedWidth, MIN_WIDTH), window.innerWidth);
     }
     
     function updateSliderMaxWidth() {
@@ -47,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 sliderContainer.style.display = 'none';
             }
             containers.forEach(container => {
-                container.style.cssText = 'max-width: 100% !important; width: 100% !important;';
+                container.style.maxWidth = '100%';
+                container.style.width = '100%';
             });
             return;
         }
@@ -59,54 +96,112 @@ document.addEventListener('DOMContentLoaded', function() {
             sliderContainer.style.width = containers[0].offsetWidth + 'px';
         }
 
-        // Use viewport width as maximum (no artificial constraints)
+        // Always use full viewport width as maximum
         const maxWidth = window.innerWidth;
         
         // Set slider's max value
         if (widthSlider) {
+            // Always update max to current viewport width
             widthSlider.max = maxWidth;
-            // If current value is greater than new max, update it
-            if (parseInt(widthSlider.value) > maxWidth) {
+            
+            // Ensure value is within min/max bounds
+            const currentValue = parseInt(widthSlider.value);
+            if (currentValue > maxWidth) {
                 widthSlider.value = maxWidth;
-                containers.forEach(container => {
-                    container.style.cssText = `max-width: ${maxWidth}px !important; width: ${maxWidth}px !important;`;
-                });
+                updateContainersWidth(maxWidth);
+                setCookie('containerWidth', maxWidth, 30);
+            } else if (currentValue < MIN_WIDTH) {
+                widthSlider.value = MIN_WIDTH;
+                updateContainersWidth(MIN_WIDTH);
+                setCookie('containerWidth', MIN_WIDTH, 30);
             }
         }
+    }
+    
+    // Function to update all container widths in real-time
+    function updateContainersWidth(width) {
+        // Enforce constraints
+        width = Math.min(Math.max(parseInt(width), MIN_WIDTH), window.innerWidth);
+        
+        // Apply width to all containers with !important to force immediate update
+        containers.forEach(container => {
+            container.style.cssText = `max-width: ${width}px !important; width: ${width}px !important;`;
+        });
+        
+        // Update slider container width to match content
+        if (sliderContainer && containers[0]) {
+            sliderContainer.style.width = containers[0].offsetWidth + 'px';
+        }
+        
+        // Update CSS variable for width calculations
+        document.documentElement.style.setProperty('--slider-width', width + 'px');
     }
 
     // Update on page load
     updateSliderMaxWidth();
 
-    // Update when window is resized
+    // Update when window is resized - CRITICAL for maintaining proper max width
     let resizeTimer;
     window.addEventListener('resize', function() {
+        // Clear any pending timer
         clearTimeout(resizeTimer);
+        
+        // Immediately update the slider's max attribute to new viewport width
+        if (widthSlider) {
+            widthSlider.max = window.innerWidth;
+            
+            // If current value exceeds new max, constrain it
+            if (parseInt(widthSlider.value) > window.innerWidth) {
+                widthSlider.value = window.innerWidth;
+                updateContainersWidth(window.innerWidth);
+                setCookie('containerWidth', window.innerWidth, 30);
+            }
+        }
+        
+        // Delayed full update
         resizeTimer = setTimeout(function() {
             updateSliderMaxWidth();
         }, 250);
     });
 
-    // Handle slider changes
+    // CRITICAL: Handle slider changes with immediate feedback
     if (widthSlider) {
-        widthSlider.addEventListener('input', function() {
+        // Real-time updates for 'input' events (while dragging)
+        widthSlider.addEventListener('input', function(e) {
             if (!isMobile()) {
-                // Set width directly with !important to override any other styles
-                const newWidth = this.value + 'px';
-                containers.forEach(container => {
-                    container.style.cssText = `max-width: ${newWidth} !important; width: ${newWidth} !important;`;
-                });
+                // Get the current slider value with constraints
+                const newWidth = Math.min(
+                    Math.max(parseInt(this.value), MIN_WIDTH), 
+                    window.innerWidth
+                );
                 
-                // Update slider container width to match content
+                // Force immediate DOM update for real-time resizing
+                updateContainersWidth(newWidth);
+                
+                // Also update slider container immediately to match
                 if (sliderContainer && containers[0]) {
                     sliderContainer.style.width = containers[0].offsetWidth + 'px';
                 }
+            }
+        });
+        
+        // Save cookie on 'change' event (when slider is released)
+        widthSlider.addEventListener('change', function() {
+            if (!isMobile()) {
+                // Get the final value with constraints
+                const finalWidth = Math.min(
+                    Math.max(parseInt(this.value), MIN_WIDTH), 
+                    window.innerWidth
+                );
                 
-                // Update CSS variable for width calculations
-                document.documentElement.style.setProperty('--slider-width', this.value + 'px');
+                // Ensure the slider value reflects any constraints
+                this.value = finalWidth;
                 
-                // Save the width to a cookie
-                setCookie('containerWidth', this.value, 30);
+                // Save the new width value to the cookie when slider is released
+                setCookie('containerWidth', finalWidth, 30);
+                
+                // Ensure containers have the final value
+                updateContainersWidth(finalWidth);
             }
         });
     }

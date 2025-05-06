@@ -792,6 +792,7 @@ nav a.current {
 .container {
   margin: 0 auto;
   padding: 0 1rem;
+  transition: max-width 0.2s ease;
   /* No max-width - this will be controlled by the slider */
 }
 
