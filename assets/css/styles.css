@@ -566,18 +566,25 @@ progress:indeterminate::-moz-progress-bar {
 /* Click to Copy Styles */
 .code-block-wrapper {
   position: relative;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Ensure we don't add margins to code blocks that already have them */
+.code-block-wrapper > .language-bash {
+  margin-bottom: 0;
 }
 
 .copy-button {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 8px;
+  right: 8px;
   background-color: var(--accent);
   color: var(--bg);
   border: none;
   border-radius: 4px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
