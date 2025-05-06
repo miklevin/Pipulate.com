@@ -205,9 +205,9 @@ label[type="button"]:hover {
 
 /* Format navigation */
 header > nav {
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
-  line-height: 2;
+  line-height: 1.5;
   padding: 1rem 0 0 0;
 }
 
@@ -991,6 +991,7 @@ blockquote {
   background-color: transparent;
   padding: 10px 0;
   z-index: 1000;
+  margin-bottom: 10px;
   /* No fixed width - will adjust dynamically based on container width */
 }
 
@@ -1004,9 +1005,19 @@ blockquote {
   opacity: 1;
 }
 
+/* Add space between slider and nav */
+header {
+  padding-top: 20px !important; /* Add space for the slider */
+}
+
 /* Disable slider on mobile */
 @media (max-width: 768px) {
   #widthSliderContainer {
     display: none;
+  }
+  
+  /* Reset header padding on mobile */
+  header {
+    padding-top: 1rem !important;
   }
 }
