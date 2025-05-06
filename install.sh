@@ -178,13 +178,8 @@ chmod +x "${TARGET_DIR}/start.sh"
 
 if [[ "$(uname)" == "Darwin" ]]; then
   echo "Starting Nix environment on macOS with --impure flag..."
-  # For piped execution, we need to use a terminal-based solution
-  # This opens a new Terminal window running the nix develop command
-  osascript -e "tell application \"Terminal\" to do script \"cd \\\"${TARGET_DIR}\\\" && nix develop --impure\""
-  echo "A new Terminal window has been opened with Pipulate running."
-  echo "You can close this window."
+  exec nix develop --impure
 else
   echo "Starting Nix environment..."
-  # Direct approach for Linux
-  cd "${TARGET_DIR}" && exec nix develop
+  exec nix develop
 fi
