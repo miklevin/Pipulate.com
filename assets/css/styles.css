@@ -89,34 +89,31 @@ body > footer {
 }
 
 /* Format headers */
-h1 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--sans-font);
-  font-size: 3rem;
   font-weight: bold;
+}
+
+h1 {
+  font-size: 3rem;
   line-height: 1.1;
 }
 
 h2 {
-  font-family: var(--sans-font);
   font-size: 2.6rem;
-  font-weight: bold;
   line-height: 1.1;
   margin-top: 1rem;
 }
 
 h3 {
-  font-family: var(--sans-font);
   font-size: 2rem;
-  font-weight: bold;
   line-height: 1.1;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
 
 h4 {
-  font-family: var(--sans-font);
   font-size: 1.6rem;
-  font-weight: bold;
   line-height: 1.8rem;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -479,16 +476,6 @@ figcaption {
   margin-bottom: 1rem;
 }
 
-blockquote {
-  margin: 0rem 0 0rem 1.5rem;
-  padding: 0rem 0rem 0rem 1rem;
-  border-left: 0.35rem solid var(--accent);
-  color: var(--text-light);
-  font-style: italic;
-  font-family: var(--sans-font);
-  font-size: 1.3rem;
-}
-
 cite {
   font-size: 0.9rem;
   color: var(--text-light);
@@ -826,9 +813,9 @@ header > nav {
 
 /* Keep the current nav style */
 nav a.current {
-  color: var(--pico-primary) !important;
-  border-color: var(--pico-primary) !important;
-  background-color: var(--pico-background-color);
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  background-color: var(--accent-bg);
   font-weight: bold;
 }
 
@@ -836,24 +823,24 @@ nav a.current {
 header > nav a, 
 header > nav a:visited {
   margin: 0 0.5rem;
-  border: 2px solid var(--pico-muted-border-color);
+  border: 2px solid var(--border);
   border-radius: 0.5rem;
-  color: var(--pico-color);
+  color: var(--text);
   display: inline-block;
   padding: 0.25rem 1rem;
   text-decoration: none;
 }
 
 header > nav a:hover {
-  border-color: var(--pico-primary);
-  color: var(--pico-primary);
+  border-color: var(--accent);
+  color: var(--accent);
   cursor: pointer;
 }
 
 /* Preserve the notice style */
 .notice {
-  background: var(--pico-muted-background);
-  border: 2px solid var(--pico-muted-border-color);
+  background: var(--accent-bg);
+  border: 2px solid var(--border);
   border-radius: 5px;
   padding: 1.5rem;
   margin: 2rem 0;
@@ -872,9 +859,9 @@ header > nav a:hover {
 .button {
   border: none;
   border-radius: 5px;
-  background: var(--pico-primary);
+  background: var(--accent);
   font-size: 1.2rem;
-  color: var(--pico-primary-inverse);
+  color: var(--bg);
   padding: 0.7rem 0.9rem;
   margin: 0.5rem 0;
 }
@@ -922,7 +909,7 @@ header > nav a:hover {
 }
 
 .meta {
-  color: var(--pico-muted-color);
+  color: var(--text-light);
   font-size: 0.875rem;
 }
 
@@ -948,27 +935,27 @@ pre {
   padding: 1rem 1.4rem;
   overflow: auto;
   white-space: pre;
-  background-color: var(--pico-code-background-color);
-  border-radius: var(--pico-border-radius);
+  background-color: var(--accent-bg);
+  border-radius: 5px;
 }
 
 code {
-  color: var(--pico-code-color);
-  background-color: var(--pico-code-background-color);
+  color: var(--code);
+  background-color: var(--accent-bg);
   padding: 0.2rem 0.4rem;
-  border-radius: var(--pico-border-radius);
+  border-radius: 5px;
 }
 
 .language-bash, .language-shell, .language-python, .language-plaintext {
-  border: 1px solid var(--pico-muted-border-color);
-  border-radius: var(--pico-border-radius);
+  border: 1px solid var(--border);
+  border-radius: 5px;
 }
 
 /* Footer styling */
 footer {
   margin-top: 4rem;
   padding: 2rem 1rem 1.5rem 1rem;
-  border-top: 1px solid var(--pico-muted-border-color);
+  border-top: 1px solid var(--border);
 }
 
 /* Mobile styles for nav */
@@ -988,8 +975,8 @@ footer {
 blockquote {
   margin: 0 0 0 1.5rem;
   padding: 0 0 0 1rem;
-  border-left: 0.35rem solid var(--pico-primary);
-  color: var(--pico-muted-color);
+  border-left: 0.35rem solid var(--accent);
+  color: var(--text-light);
   font-style: italic;
   font-size: 1.1rem;
 }
