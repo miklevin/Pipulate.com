@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% if page.type == "post" %}{{ post.title }}{% else %}{{ page.title }}{% endif %} | {{ site.title }}</title>
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/assets/css/pico.css" />
 <link rel="stylesheet" href="/assets/css/styles.css" />
 <link rel="stylesheet" href="/assets/css/syntax.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Goldman">
@@ -19,7 +20,7 @@
 </script>
 </head>
 <body>
-<header>
+<header class="container">
     <nav>
 <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
 <a {% if page.group == 'about' or page.category == 'about' %}class="current" {% endif %}href="/about/">About</a>
@@ -35,10 +36,10 @@
 -->
 </nav>
 </header>
-<main>
+<main class="container">
 {{ content }}
 </main>
-<footer>
+<footer class="container">
 {% include footernav.html %}
 </footer>
 <!-- Script for copy-to-clipboard functionality -->

@@ -579,8 +579,8 @@ progress:indeterminate::-moz-progress-bar {
   position: absolute;
   top: 8px;
   right: 8px;
-  background-color: var(--accent);
-  color: var(--bg);
+  background-color: var(--pico-primary-background);
+  color: var(--pico-primary-inverse);
   border: none;
   border-radius: 4px;
   width: 28px;
@@ -592,6 +592,8 @@ progress:indeterminate::-moz-progress-bar {
   opacity: 0.7;
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 10;
+  padding: 0;
+  margin: 0;
 }
 
 .copy-button:hover {
@@ -616,8 +618,8 @@ progress:indeterminate::-moz-progress-bar {
   position: absolute;
   top: -30px;
   right: 0;
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--pico-form-element-valid-border-color);
+  color: var(--pico-background-color);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -642,8 +644,8 @@ progress:indeterminate::-moz-progress-bar {
 blockquote {
     margin: 0rem 0 0rem 1.5rem;
     padding: 0rem 0rem 0rem 1rem;
-    border-left: 0.35rem solid var(--accent);
-    color: var(--text-light);
+    border-left: 0.35rem solid var(--pico-primary);
+    color: var(--pico-muted-color);
     font-style: italic;
     font-family: 'Goldman';
     font-size: 1.3rem;
@@ -673,19 +675,21 @@ body > footer {
     font-weight: bold;
 }
 .meta {
-    color: var(--text-light);
+    color: var(--pico-muted-color);
     font-size: 1rem;
 }
 .blog-item {
     margin-bottom: 4rem;
 }
 nav a.current {
-    color: var(--accent) !important;
-    border-color: var(--accent) !important;
+    color: var(--pico-primary) !important;
+    border-color: var(--pico-primary) !important;
+    background-color: var(--pico-background-color);
+    font-weight: bold;
 }
 .notice {
-    background: var(--accent-bg);
-    border: 2px solid var(--border);
+    background: var(--pico-accent-bg);
+    border: 2px solid var(--pico-muted-border-color);
     border-radius: 5px;
     padding: 1.5rem;
     margin: 2rem 0;
@@ -699,9 +703,9 @@ nav a.current {
 .button {
     border: none;
     border-radius: 5px;
-    background: var(--accent);
+    background: var(--pico-primary);
     font-size: 1.5rem;
-    color: var(--bg);
+    color: var(--pico-primary-inverse);
     padding: 0.7rem 0.9rem;
     margin: 0.5rem 0;
 }
@@ -784,6 +788,279 @@ nav a.current {
   select,
   input {
     width: 100%;
+  }
+}
+
+/* Custom styles to complement Pico CSS */
+
+/* Container width adjustments */
+.container {
+  max-width: 85ch;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Click to Copy Styles */
+.code-block-wrapper {
+  position: relative;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Ensure we don't add margins to code blocks that already have them */
+.code-block-wrapper > .language-bash {
+  margin-bottom: 0;
+}
+
+.copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: var(--pico-primary-background);
+  color: var(--pico-primary-inverse);
+  border: none;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+}
+
+.copy-button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+.copy-button::before {
+  content: "📋";
+  font-size: 1rem;
+}
+
+.copy-button.copied::before {
+  content: "✓";
+}
+
+.copied-tooltip {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background-color: var(--pico-form-element-valid-border-color);
+  color: var(--pico-background-color);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.copied-tooltip.show {
+  opacity: 1;
+}
+
+/* Custom styles from original */
+.center {
+  text-align: center;
+  width: 100%;
+}
+
+.arrow {
+  font-size: 1.5rem;
+}
+
+/* Override Pico's blockquote with the custom style */
+blockquote {
+  margin: 0 0 0 1.5rem;
+  padding: 0 0 0 1rem;
+  border-left: 0.35rem solid var(--pico-primary);
+  color: var(--pico-muted-color);
+  font-style: italic;
+  font-family: 'Goldman';
+  font-size: 1.3rem;
+}
+
+/* Navigation styles */
+header > nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* Keep the current nav style */
+nav a.current {
+  color: var(--pico-primary) !important;
+  border-color: var(--pico-primary) !important;
+  background-color: var(--pico-background-color);
+  font-weight: bold;
+}
+
+/* Links in navigation */
+header > nav a, 
+header > nav a:visited {
+  margin: 0 0.5rem;
+  border: 2px solid var(--pico-muted-border-color);
+  border-radius: 0.5rem;
+  color: var(--pico-color);
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
+}
+
+header > nav a:hover {
+  border-color: var(--pico-primary);
+  color: var(--pico-primary);
+  cursor: pointer;
+}
+
+/* Preserve the notice style */
+.notice {
+  background: var(--pico-card-background-color);
+  border: 2px solid var(--pico-muted-border-color);
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Typography helpers */
+.medium {
+  font-size: 1.4rem;
+}
+
+.small {
+  font-size: 1.2rem;
+}
+
+/* Button style to match the original */
+.button {
+  border: none;
+  border-radius: 5px;
+  background: var(--pico-primary);
+  font-size: 1.5rem;
+  color: var(--pico-primary-inverse);
+  padding: 0.7rem 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.button:hover, .button:focus {
+  filter: brightness(1.4);
+  cursor: pointer;
+}
+
+/* Icon style */
+.icon {
+  vertical-align: sub;
+  padding-right: .25rem;
+  display: inline-block;
+  width: 1em;
+  height: 1.3em;
+  margin-right: 0.2rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* Custom styles for headings to maintain the Goldman font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Goldman', var(--pico-font-family);
+  font-weight: normal;
+}
+
+/* Override blog-related styles to maintain compatibility */
+.post-nav {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.post-nav-prev {
+  margin-right: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.post-nav-next {
+  text-align: right;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.post-link {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.meta {
+  color: var(--pico-muted-color);
+  font-size: 1rem;
+}
+
+.blog-item {
+  margin-bottom: 4rem;
+}
+
+/* Main logo styles */
+body > header img {
+  max-width: 80%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+@media (min-width: 768px) {
+  body > header img {
+    max-width: 500px;
+  }
+}
+
+/* Code block styling */
+pre {
+  padding: 1rem 1.4rem;
+  overflow: auto;
+  white-space: pre;
+  background-color: var(--pico-code-background-color);
+  border-radius: var(--pico-border-radius);
+}
+
+code {
+  color: var(--pico-code-color);
+  background-color: var(--pico-code-background-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--pico-border-radius);
+}
+
+.language-bash, .language-shell, .language-python, .language-plaintext {
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+}
+
+/* Footer styling */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem 1.5rem 1rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+
+/* Mobile styles for nav */
+@media (max-width: 576px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header > nav a, header > nav a:visited {
+    font-size: 1rem;
+    margin: 0.25rem;
   }
 }
 
