@@ -20,6 +20,9 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 ```
 
 * Follow the on-screen prompts (type "Yes" when asked)
+  * You will be prompted for your (Apple) hardware login.
+  * You will ***not be able to see yourself type*** in the password.
+  * There will be 2 "Yes" to confirm messages.
 * **Important:** After installation completes, close your terminal and open a new one
 
 ### 2. Install Pipulate

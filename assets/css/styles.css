@@ -274,7 +274,7 @@ label[type="button"]:hover {
 /* Navigation link styling with class selectors */
 .nav-link,
 .nav-link:visited {
-  margin: 0.3rem 0.4rem 0.3rem 0;
+  margin: 0.5rem 1.5rem 0.5rem 0;
   border: 2px solid var(--border);
   border-radius: 5px;
   color: var(--text);
