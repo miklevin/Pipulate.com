@@ -70,7 +70,7 @@ We believe software should be:
 - **Private by Default**: Not a data collection tool
 - **Powerful Yet Simple**: Not complex for complexity's sake
 
-This is why Pipulate exists - to give SEO professionals the tools they need, in a way that respects their autonomy and privacy.
+This is why Pipulate exists — to give SEO professionals the tools they need, in a way that respects their autonomy and privacy.
 
 ## Key Features That Make Pipulate Different
 
