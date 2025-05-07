@@ -145,4 +145,115 @@ When contributing to Pipulate, please adhere to these principles:
 * Maintain Local-First Simplicity (No multi-tenant patterns, complex ORMs, heavy client-side state)
 * Respect Server-Side State (Use DictLikeDB/JSON for workflows, MiniDataAPI for CRUD)
 * Preserve the Workflow Pipeline Pattern (Keep steps linear, state explicit)
-* Honor Integrated Features (Don't disrupt core LLM/Jupyter integration) 
+* Honor Integrated Features (Don't disrupt core LLM/Jupyter integration)
+
+## The Magic Cookie System
+
+Pipulate uses a "Magic Cookie" system for seamless installation and updates. This approach enables:
+
+- **Git-less Installation**: Users don't need git installed
+- **Automatic Updates**: Software stays current without manual intervention
+- **Cross-Platform**: Works identically on macOS, Linux, and Windows (WSL)
+- **White-Label Ready**: Easy to rebrand for different organizations
+
+### How It Works
+
+1. **Initial Installation**:
+```bash
+curl -L https://pipulate.com/install.sh | sh -s AppName
+```
+
+This downloads a ZIP archive containing:
+- The application code
+- A ROT13-encoded SSH key (the "magic cookie")
+- Configuration files
+
+2. **First Run Transformation**:
+When `nix develop` runs for the first time:
+- Detects non-git directory
+- Clones the repository
+- Preserves app identity and credentials
+- Sets up the environment
+
+3. **Automatic Updates**:
+The system performs git pulls:
+- On shell entry
+- Before server startup
+- During application runs
+
+### White-Labeling Process
+
+To create a white-labeled version of Pipulate:
+
+1. **Custom Branding**:
+```bash
+# Install with custom name
+curl -L https://pipulate.com/install.sh | sh -s YourBrandName
+```
+
+2. **Configuration Files**:
+- `app_name.txt`: Contains the application identity
+- `.ssh/rot`: ROT13-encoded deployment key
+- `flake.nix`: Environment configuration
+
+3. **Customization Points**:
+- Application name and branding
+- Default workflows and plugins
+- Environment variables
+- Database schema
+
+4. **Deployment Options**:
+- Direct installation from pipulate.com
+- Self-hosted installation script
+- Custom domain deployment
+
+### Best Practices for White-Labeling
+
+1. **Branding Consistency**:
+- Use consistent naming across all files
+- Update all UI elements and documentation
+- Maintain version tracking
+
+2. **Security Considerations**:
+- Keep deployment keys secure
+- Use ROT13 encoding for SSH keys
+- Maintain proper file permissions
+
+3. **Update Management**:
+- Test updates in development first
+- Maintain separate deployment keys
+- Monitor update logs
+
+4. **User Experience**:
+- Provide clear installation instructions
+- Document customization options
+- Include troubleshooting guides
+
+## Development Workflow
+
+When developing white-labeled versions:
+
+1. **Local Development**:
+```bash
+# Start with a copy
+cp 20_hello_workflow.py 20_hello_workflow (Copy).py
+
+# Develop and test
+# Rename to xx_ for testing
+mv "20_hello_workflow (Copy).py" xx_my_workflow.py
+
+# Deploy when ready
+mv xx_my_workflow.py 30_my_workflow.py
+```
+
+2. **Testing Updates**:
+- Use `xx_` prefix for development versions
+- Test in isolated environments
+- Verify update mechanisms
+
+3. **Deployment**:
+- Use numbered prefixes for menu order
+- Maintain consistent naming
+- Document all customizations
+
+This approach ensures smooth development and deployment of white-labeled versions while maintaining the benefits of automatic updates and cross-platform compatibility. 
