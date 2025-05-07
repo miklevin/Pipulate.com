@@ -13,7 +13,7 @@ Welcome to the Pipulate blog, where we share insights about local-first software
 ## Latest Posts
 
 <div class="blog-grid">
-{% for post in site.posts %}
+{% for post in site.posts reversed %}
     <article class="blog-card">
         <header>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
@@ -50,6 +50,14 @@ Welcome to the Pipulate blog, where we share insights about local-first software
 .blog-card h3 {
     margin: 0;
     font-size: 1.25rem;
+}
+
+.blog-card h3 a {
+    text-decoration: none;
+}
+
+.blog-card h3 a:hover {
+    text-decoration: underline;
 }
 
 .blog-card time {
