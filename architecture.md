@@ -126,7 +126,7 @@ app, rt, (store, Store), (tasks, Task) = fast_app(
 tasks.insert(name="New task", done=False)
 all_tasks = tasks()  # Fetch all
 one_task = tasks(1)  # Fetch by ID
-done_tasks = tasks.xtra("WHERE done = ?", True)
+done_tasks = tasks.xtra(name='Charlie')
 ```
 
 ### Ollama for Local LLMs
