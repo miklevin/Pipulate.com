@@ -21,7 +21,10 @@
 </head>
 <body>
 <div id="widthSliderContainer"><input type="range" id="widthSlider" min="850"></div>
-<header class="container">
+<header class="container sticky">
+    <div class="logo-top">
+        <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs" height="60">
+    </div>
     <nav>
         <a {% if page.group == 'home' or page.url == "/" %}class="current" {% endif %}href="/">Home</a>
         <a {% if page.group == 'about' or page.category == 'about' %}class="current" {% endif %}href="/about/">About</a>
@@ -43,5 +46,22 @@
 </footer>
 <!-- Script for copy-to-clipboard functionality -->
 <script src="/assets/js/copy-code.js"></script>
+<script>
+  // Sticky header enhancement
+  document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header.sticky');
+    if (header) {
+      const originalBg = getComputedStyle(header).backgroundColor;
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          header.style.backgroundColor = 'rgba(0, 3, 106, 0.95)';
+        } else {
+          header.style.backgroundColor = originalBg;
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>

@@ -57,6 +57,26 @@ body > * {
   /* Remove grid column constraint */
 }
 
+/* Header layout with flexbox for logo positioning */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logo-container img {
+  height: 45px;
+  width: auto;
+}
+
 /* Make the header bg full width, but the content inline with body */
 body > header {
   background-color: #00036a;
@@ -64,6 +84,15 @@ body > header {
   text-align: center;
   padding: 0 0.5rem 1rem 0.5rem; /* Reduce bottom padding */
   /* Remove grid column constraint */
+}
+
+/* Sticky header styles */
+body > header.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  transition: background-color 0.3s ease;
 }
 
 body > header h1 {
@@ -74,9 +103,20 @@ body > header p {
   margin: 1rem auto;
 }
 
-/* Add a little padding to ensure spacing is correct between content and header > nav */
+/* Logo styling */
+.logo-top {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.logo-top img {
+  height: 60px;
+  width: auto;
+}
+
+/* Adjust main content to account for sticky header */
 main {
-  padding-top: 1rem; /* Standardize top padding */
+  padding-top: 1rem;
   background-color: #000;
 }
 
@@ -210,8 +250,10 @@ header > nav {
   font-size: 1em;
   font-weight: bold;
   line-height: 1.5;
-  padding: 0.5rem 0 0 0; /* Reduce top padding */
-  margin-bottom: 0.5rem; /* Add small bottom margin */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* Use flexbox to allow items to wrap, as needed */
@@ -222,7 +264,7 @@ header > nav ol {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -236,7 +278,7 @@ header > nav ol li {
 
 header > nav a,
 header > nav a:visited {
-  margin: 0 0.5rem 1rem 0.5rem;
+  margin: 0.3rem 0.4rem 0.3rem 0;
   border: 2px solid var(--border);
   border-radius: 2vw;
   color: var(--text);
@@ -974,6 +1016,11 @@ footer {
     font-size: 1rem;
     margin: 0.25rem;
   }
+  
+  /* Mobile sticky header adjustments */
+  body > header.sticky {
+    padding-bottom: 0.5rem;
+  }
 }
 
 /* Override Pico's blockquote with the custom style */
@@ -994,7 +1041,7 @@ blockquote {
   transform: translateX(-50%);
   background-color: transparent;
   padding: 5px 0; /* Reduce padding */
-  z-index: 1000;
+  z-index: 1001; /* Higher than sticky header */
   /* No fixed width - will adjust dynamically based on container width */
 }
 
@@ -1010,7 +1057,7 @@ blockquote {
 
 /* Add space between slider and nav */
 header {
-  padding-top: 30px !important; /* Balanced space for the slider */
+  padding-top: 40px !important; /* Increased space for the slider */
 }
 
 /* Disable slider on mobile */
@@ -1040,4 +1087,21 @@ ul, ol {
 p {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 576px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-container {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  .logo-container img {
+    height: 35px;
+  }
 }

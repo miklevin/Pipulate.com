@@ -5,10 +5,6 @@ permalink: /readme/
 group: readme
 ---
 
-<div style="text-align: center;">
-  <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs">
-</div>
-
 ## How to Install Pipulate
 
 This guide shows you how to install Pipulate using two main commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu (or similar Linux) terminal.
