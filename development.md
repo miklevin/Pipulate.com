@@ -9,6 +9,26 @@ group: development
 
 This guide provides essential patterns and workflows for developing with Pipulate. These patterns are designed to help you navigate the codebase and maintain consistency in your development work.
 
+## Getting Started
+
+### 1. Installation
+- Nix Flakes setup
+- Python environment
+- Dependencies
+- GPU support
+
+### 2. Project Structure
+- Plugin organization
+- Workflow structure
+- State management
+- Testing setup
+
+### 3. Development Environment
+- IDE setup
+- Debugging tools
+- Testing tools
+- Documentation
+
 ## Core Development Patterns
 
 ### 1. Workflow Development Pattern
@@ -121,14 +141,125 @@ return Div(
 )
 ```
 
-## Development Environment
+## Workflow Development
 
-The Pipulate development experience includes:
+### 1. Basic Workflow
+- Step definition
+- State management
+- Route registration
+- Error handling
 
-- **Automatic Reloading**: File system watchdog detects changes and restarts the server
-- **Integrated Jupyter**: JupyterLab runs alongside the application for experimentation
-- **Shared Environment**: Both Jupyter and the server share the same `.venv` for package access
-- **Enhanced Debugging**: Server-side state and simple architecture make debugging straightforward
+### 2. Widget Implementation
+- Chain reaction pattern
+- State preservation
+- Error recovery
+- Mobile support
+
+### 3. Testing
+- Unit tests
+- Integration tests
+- State validation
+- Error scenarios
+
+## CRUD Development
+
+### 1. MiniDataAPI Usage
+- Table definition
+- CRUD operations
+- Type safety
+- Error handling
+
+### 2. UI Components
+- Form handling
+- Data display
+- State management
+- Validation
+
+### 3. Testing
+- Data operations
+- UI interactions
+- Error handling
+- State validation
+
+## Plugin Development
+
+### 1. Plugin Structure
+- Directory organization
+- File naming
+- Documentation
+- Testing
+
+### 2. Development Workflow
+- Local development
+- Testing
+- Deployment
+- Version control
+
+### 3. Best Practices
+- Code organization
+- Error handling
+- State management
+- Documentation
+
+## Common Patterns
+
+### 1. State Management
+- DictLikeDB usage
+- State preservation
+- Error recovery
+- Data validation
+
+### 2. Error Handling
+- Input validation
+- API errors
+- State recovery
+- User feedback
+
+### 3. UI Patterns
+- Form handling
+- Data display
+- Loading states
+- Error messages
+
+## Testing Guidelines
+
+### 1. Unit Testing
+- Function testing
+- State validation
+- Error handling
+- Edge cases
+
+### 2. Integration Testing
+- Workflow testing
+- State management
+- Error recovery
+- UI interactions
+
+### 3. Performance Testing
+- Resource usage
+- Response times
+- Memory usage
+- Load testing
+
+## Deployment
+
+### 1. Local Deployment
+- Environment setup
+- Configuration
+- Testing
+- Monitoring
+
+### 2. Production Deployment
+- Environment setup
+- Configuration
+- Testing
+- Monitoring
+
+### 3. Maintenance
+- Updates
+- Backups
+- Monitoring
+- Troubleshooting
 
 ## Best Practices
 
