@@ -198,7 +198,9 @@ This pattern:
 2. The `hx_get` attribute requests the next step from the server
 3. **CRITICALLY**: `hx_trigger="load"` makes this happen automatically when current step renders
 
-**Important:** Never remove `hx_trigger="load"` - it's essential for reliable step progression.
+**Important:** Never remove `hx_trigger="load"` — it's essential for reliable step progression.
+
+Why? It simulates Notebook *Run All Cells!*
 
 ### Workflow Implementation Pattern
 
