@@ -158,4 +158,4 @@ At its core, Pipulate embraces simplicity — not by sacrificing power, but by c
 
 Instead, Pipulate focuses on making SEO workflows explicit, observable, and understandable. Everything is designed to be transparent and straightforward, following our belief that the best tools get out of your way and let you focus on what matters: doing great SEO work.
 
-Join us in building a more open, accessible approach to SEO tools - where your data stays yours, and technology serves your needs instead of locking you in.
+Join us in building a more open, accessible approach to SEO tools — where your data stays yours, and technology serves your needs instead of locking you in.
