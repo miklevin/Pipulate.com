@@ -48,7 +48,7 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
     <div class="previous-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Previous Post</span>
       <a href="{{ custom_prev.url }}" itemprop="item">
-        <span itemprop="name">{{ custom_prev.title }}</span>
+        <span itemprop="name">◂ {{ custom_prev.title }}</span>
       </a>
       <meta itemprop="position" content="1" />
     </div>
@@ -70,7 +70,7 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
     <div class="next-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Next Post</span>
       <a href="{{ custom_next.url }}" itemprop="item">
-        <span itemprop="name">{{ custom_next.title }}</span>
+        <span itemprop="name">{{ custom_next.title }} ▸</span>
       </a>
       <meta itemprop="position" content="3" />
     </div>
@@ -96,7 +96,7 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
   {%- if custom_prev -%}
     <div class="previous-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Previous Post</span>
-      <a href="{{ custom_prev.url }}" itemprop="item">{{ custom_prev.title }}</a>
+      <a href="{{ custom_prev.url }}" itemprop="item">◂ {{ custom_prev.title }}</a>
       <meta itemprop="name" content="{{ custom_prev.title }}">
       <meta itemprop="position" content="1" />
     </div>
@@ -117,7 +117,7 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
   {%- if custom_next -%}
     <div class="next-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Next Post</span>
-      <a href="{{ custom_next.url }}" itemprop="item">{{ custom_next.title }}</a>
+      <a href="{{ custom_next.url }}" itemprop="item">{{ custom_next.title }} ▸</a>
       <meta itemprop="name" content="{{ custom_next.title }}">
       <meta itemprop="position" content="3" />
     </div>
