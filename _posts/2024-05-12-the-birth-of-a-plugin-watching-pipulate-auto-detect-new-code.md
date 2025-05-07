@@ -6,8 +6,6 @@ author: Mike Levin
 group: blog
 ---
 
-# The Birth of a Plugin: Watching Pipulate Auto-Detect New Code
-
 Remember that URL opener plugin we started creating? Well, I just deployed it to the menu system, and I want to share something fascinating about how it happened. This isn't just about renaming a file - it's about watching a sophisticated development system at work.
 
 ## The Magic Moment

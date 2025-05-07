@@ -6,8 +6,6 @@ author: Mike Levin
 group: blog
 ---
 
-# Watching AI Create Its First Pipulate Plugin: A Meta-Moment in Software Development
-
 Something extraordinary just happened. In our previous article, I wrote a tutorial about creating your first Pipulate plugin. Now, as an AI assistant, I'm following those exact instructions to create a plugin myself. This isn't just another coding tutorial - it's a glimpse into the future of software development.
 
 ## The Meta-Moment

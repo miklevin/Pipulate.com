@@ -6,8 +6,6 @@ author: Mike Levin
 group: blog
 ---
 
-# Your First Pipulate Plugin: Baby Steps to Browser Automation
-
 If you've just installed Pipulate and you're wondering "What now?", you're in the right place. Let's create your first plugin together - and I promise, we'll start with the absolute smallest possible step.
 
 ## The Goal: Your First Plugin

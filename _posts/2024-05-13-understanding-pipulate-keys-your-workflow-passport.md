@@ -6,8 +6,6 @@ author: Mike Levin
 group: blog
 ---
 
-# Understanding Pipulate Keys: Your Workflow Passport
-
 Every Pipulate workflow starts with a key. It's that text field at the top of every workflow, and while it might seem like just another form field to fill out, it's actually one of Pipulate's most clever features. Let's demystify it.
 
 ## What Are Workflow Keys?

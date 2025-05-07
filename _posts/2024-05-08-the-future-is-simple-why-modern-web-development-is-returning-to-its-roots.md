@@ -1,43 +1,14 @@
 ---
-title: The Future is Simple
-permalink: /blog/the-future-is-simple/
-description: Why Modern Web Development is Returning to its Roots, and Why That's a Good Thing
-layout: post
-sort_order: 2
+title: "The Future is Simple: Why Modern Web Development is Returning to its Roots"
+description: "Discover how the pendulum is swinging back to simpler, more maintainable web development practices, and why this matters for the future of software."
+date: 2024-05-08
+author: Mike Levin
 group: blog
 ---
 
-# The Future is Simple: Why Modern Web Development is Returning to its Roots
+In the ever-evolving landscape of web development, a surprising trend is emerging: a return to simplicity. After decades of increasing complexity, developers are rediscovering the power of straightforward, maintainable code. This isn't a step backward—it's a leap forward into a more sustainable future.
 
-In the world of web development, we're witnessing something remarkable: a renaissance of simplicity. Not the simplicity of limitations, but the simplicity of clarity. Not the simplicity of the past, but the simplicity of the future. This isn't about going backward - it's about moving forward with wisdom.
-
-## The Beauty of Python + HTMX
-
-Let's start with something beautiful:
-
-```python
-from fasthtml.common import *
-
-@rt('/search')
-def search():
-    return HTML(
-        Body(
-            Main(
-                Form(
-                    Input(name="query", placeholder="Search..."),
-                    Button("Go", type="submit"),
-                    hx_post="/search",
-                    hx_target="#results"
-                ),
-                Div(id="results")
-            )
-        )
-    )
-```
-
-This isn't just code - it's poetry. It's the kind of code that makes you smile because it's both powerful and understandable. No complex state management. No virtual DOM. No build steps. Just clean, server-rendered HTML with a dash of HTMX for interactivity.
-
-## The Full-Stack Paradox
+## The Complexity Trap
 
 The term "full-stack developer" has become synonymous with "jack of all trades, master of none." We've created a world where developers are expected to know:
 

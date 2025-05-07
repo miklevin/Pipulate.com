@@ -1,13 +1,14 @@
 ---
-title: The Local-First Revolution
-permalink: /blog/local-first-revolution/
-description: How Pipulate is Redefining Modern Software Development in the Age of AI
-layout: post
-sort_order: 1
+title: "The Local-First Revolution: How Pipulate is Redefining Modern Software Development"
+description: "Discover how Pipulate's local-first approach is revolutionizing software development, bringing back control, privacy, and simplicity to developers."
+date: 2024-05-07
+author: Mike Levin
 group: blog
 ---
 
-# The Local-First Revolution: How Pipulate is Redefining Modern Software Development in the Age of AI
+Something extraordinary is happening in software development. As the world rushes toward cloud-everything, a counter-revolution is brewing. It's about bringing computation back home, about rediscovering the power of your own hardware, and about taking control of your development environment. This is the local-first revolution, and Pipulate is at its forefront.
+
+## The Cloud Paradox
 
 In an era dominated by cloud subscriptions, vendor lock-in, and increasingly complex software stacks, a quiet revolution is taking place. It's a return to simplicity, but with a modern twist. At the forefront of this movement is Pipulate, an open-source SEO platform that's challenging conventional wisdom about how software should be built and used.
 
