@@ -152,7 +152,7 @@ body > * {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Changed from flex-end since position switched */
+  justify-content: flex-start;
 }
 
 /* Make the header bg full width, but the content inline with body */
@@ -1120,7 +1120,7 @@ p {
 /* Mobile adjustments for header layout */
 @media (max-width: 768px) {
   .header-flex-container {
-    flex-direction: column-reverse; /* Reversed to keep logo on top on mobile */
+    flex-direction: column-reverse;
     align-items: center;
   }
   
@@ -1130,23 +1130,30 @@ p {
   }
   
   .logo-top img {
-    height: 120px; /* Slightly smaller on mobile but still larger than original */
+    height: 120px;
   }
   
   .nav-container {
     margin-top: 0;
     margin-bottom: 0.5rem;
+    width: 100%;
   }
   
   .nav-container nav {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    gap: 0.5rem;
   }
   
   .nav-link, 
   .nav-link:visited {
     font-size: 1rem;
     margin: 0.25rem;
+    text-align: center;
   }
   
   /* Mobile sticky header adjustments */

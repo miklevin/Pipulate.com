@@ -38,7 +38,9 @@ function isMobile() {
     
     // Inject a style tag to immediately set container width
     const style = document.createElement('style');
-    style.textContent = `.container { max-width: ${storedWidth}px !important; width: ${storedWidth}px !important; }`;
+    style.textContent = isMobile() 
+        ? `.container { max-width: 100% !important; width: 100% !important; }`
+        : `.container { max-width: ${storedWidth}px !important; width: ${storedWidth}px !important; }`;
     document.head.appendChild(style);
     
     // Set up an onload handler to immediately set the slider value as soon as it exists
@@ -48,6 +50,10 @@ function isMobile() {
             slider.value = storedWidth;
             slider.min = ABSOLUTE_MIN_WIDTH;
             slider.max = window.innerWidth;
+            // Hide slider on mobile
+            if (isMobile()) {
+                slider.parentElement.style.display = 'none';
+            }
         }
     });
 })();
@@ -74,17 +80,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Set the value with constraints
         widthSlider.value = Math.min(Math.max(storedWidth, MIN_WIDTH), window.innerWidth);
+        
+        // Hide slider on mobile
+        if (isMobile()) {
+            sliderContainer.style.display = 'none';
+        }
     }
     
     function updateSliderMaxWidth() {
-        // Only run this on desktop
+        // Only run this on mobile
         if (isMobile()) {
             if (sliderContainer) {
                 sliderContainer.style.display = 'none';
             }
             containers.forEach(container => {
-                container.style.maxWidth = '100%';
-                container.style.width = '100%';
+                container.style.cssText = 'max-width: 100% !important; width: 100% !important;';
             });
             return;
         }
@@ -120,7 +130,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to update all container widths in real-time
     function updateContainersWidth(width) {
-        // Enforce constraints
+        if (isMobile()) {
+            // On mobile, always use 100% width
+            containers.forEach(container => {
+                container.style.cssText = 'max-width: 100% !important; width: 100% !important;';
+            });
+            return;
+        }
+        
+        // Enforce constraints for desktop
         width = Math.min(Math.max(parseInt(width), MIN_WIDTH), window.innerWidth);
         
         // Apply width to all containers with !important to force immediate update
@@ -146,15 +164,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear any pending timer
         clearTimeout(resizeTimer);
         
-        // Immediately update the slider's max attribute to new viewport width
-        if (widthSlider) {
-            widthSlider.max = window.innerWidth;
-            
-            // If current value exceeds new max, constrain it
-            if (parseInt(widthSlider.value) > window.innerWidth) {
-                widthSlider.value = window.innerWidth;
-                updateContainersWidth(window.innerWidth);
-                setCookie('containerWidth', window.innerWidth, 30);
+        // Immediately update based on mobile/desktop
+        if (isMobile()) {
+            updateSliderMaxWidth();
+        } else {
+            // Update the slider's max attribute to new viewport width
+            if (widthSlider) {
+                widthSlider.max = window.innerWidth;
+                
+                // If current value exceeds new max, constrain it
+                if (parseInt(widthSlider.value) > window.innerWidth) {
+                    widthSlider.value = window.innerWidth;
+                    updateContainersWidth(window.innerWidth);
+                    setCookie('containerWidth', window.innerWidth, 30);
+                }
             }
         }
         
