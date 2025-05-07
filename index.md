@@ -81,3 +81,20 @@ This removes the Nix package manager from your system (but preserves any Pipulat
 * Windows: WSL2 with Ubuntu 20.04+
 * 8GB RAM recommended
 * 2GB free disk space
+
+## About Nix
+
+Pipulate uses Nix to ensure a consistent, reproducible environment across all operating systems. This means:
+
+- **Identical Environments**: The same Python version, packages, and system libraries on every machine
+- **No Conflicts**: Isolated from your system's Python installation
+- **Easy Updates**: One command to update everything
+- **Cross-Platform**: Works identically on macOS, Linux, and Windows (via WSL)
+
+The Nix environment includes:
+- Python 3.x with all required packages
+- JupyterLab for development and experimentation
+- Local LLM support via Ollama
+- All necessary system libraries
+
+This approach eliminates the "works on my machine" problem and ensures Pipulate runs reliably everywhere.

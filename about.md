@@ -5,7 +5,7 @@ permalink: /about/
 group: about
 ---
 
-## What Is Pipulate?
+# What Is Pipulate?
 
 Pipulate is a free, open-source SEO desktop application built specifically for SEO professionals who want more control over their data, workflows, and tools. Unlike cloud-based SEO platforms, Pipulate runs entirely on your computer, ensuring your data never leaves your machine unless you explicitly share it.
 
@@ -13,39 +13,64 @@ Think of Pipulate as having the power of complex SEO scripts and Jupyter noteboo
 
 ## The Pipulate Philosophy
 
-### Your Data, Your Machine, Your Control
+Pipulate isn't just another SEO tool - it's a statement of values about how software should work. Here's what drives our design decisions:
 
-In an era where most SEO tools require subscriptions and store your data in the cloud, Pipulate takes a different approach:
+### Local-First Revolution
 
-- **100% Local-First**: Everything runs on your computer - no cloud dependencies
-- **Complete Privacy**: Your data never leaves your machine unless you choose to share it
-- **Zero Subscription Costs**: Use your own hardware resources instead of paying for cloud compute
-- **No Vendor Lock-In**: You own your entire SEO workflow and all your data
+In an era of cloud subscriptions and vendor lock-in, Pipulate takes a different path:
 
-### AI-Assisted SEO Workflows
+- **Your Data Stays Yours**: No cloud storage means complete privacy and control
+- **No Subscription Costs**: Use hardware you already own
+- **Eliminates Vendor Lock-in**: Freedom from proprietary platforms
+- **Full Resource Access**: Run intensive tasks 24/7 without usage limits
 
-SEO often involves repetitive, multi-step processes. Pipulate transforms these into guided workflows:
+### WET Over DRY: Clarity Over Conciseness
 
-- **Step-by-Step Guidance**: Complex SEO tasks broken down into manageable steps
-- **Built-In AI Assistant**: Get help and explanations at every stage
-- **Local LLM Integration**: Uses your computer's resources for AI capabilities, not expensive API calls
-- **Resume Where You Left Off**: Workflows save progress automatically, so you can always continue later
+While most software emphasizes "Don't Repeat Yourself" (DRY), Pipulate embraces "Write Everything Twice" (WET) for workflows:
 
-### Designed for Non-Programmers (But Loved by Developers)
+- **Immediate Understanding**: What you see is what you get
+- **Radical Customization**: Each step can be completely unique
+- **Notebook-Like Flow**: Familiar paradigm for data scientists
+- **Reduced Complexity**: No framework abstractions to learn
 
-Pipulate serves two distinct audiences:
+### Reproducible Environments
 
-For SEO Practitioners:
-- No coding required to use pre-built workflows
-- Clear, guided interface with helpful explanations
-- AI assistance when you're not sure what to do next
-- Professional-grade SEO capabilities without programming skills
+Pipulate uses Nix to ensure perfect consistency across all platforms:
 
-For Developers & Technical SEOs:
-- Easy workflow creation using Python
-- Simple way to convert Jupyter notebooks into guided workflows
-- Extensible plugin system for custom tools
-- Perfect environment for experimenting with SEO automation
+- **No "Works on My Machine"**: Identical environments everywhere
+- **Full Reproducibility**: Exact system libraries and Python versions
+- **Optional GPU Support**: CUDA acceleration when available
+- **Simple Updates**: One command to update everything
+
+### Server-Side State: "Know EVERYTHING!"
+
+Unlike modern web apps with complex client-side state, Pipulate keeps everything server-side:
+
+- **Transparent State**: All changes visible in server logs
+- **Simple Debugging**: No hidden state to track down
+- **Predictable Flow**: State changes are explicit and observable
+- **Python-Powered**: Full power of Python for state management
+
+### Local AI Integration
+
+Pipulate brings AI capabilities directly to your machine:
+
+- **Complete Privacy**: No API calls, no data leaving your computer
+- **Zero Token Costs**: Run AI continuously without per-query fees
+- **Full Control**: Choose your models and parameters
+- **Integrated Experience**: AI assistance throughout workflows
+
+## Why These Choices Matter
+
+These design decisions aren't just technical choices - they're about giving you back control of your software and data. In an era of increasing cloud dependency and subscription fatigue, Pipulate represents a return to an earlier, more empowering vision of computing, updated with modern advancements like AI, reproducible environments, and elegant UI patterns.
+
+We believe software should be:
+- **Yours to Control**: Not something you rent
+- **Easy to Understand**: Not a black box
+- **Private by Default**: Not a data collection tool
+- **Powerful Yet Simple**: Not complex for complexity's sake
+
+This is why Pipulate exists - to give SEO professionals the tools they need, in a way that respects their autonomy and privacy.
 
 ## Key Features That Make Pipulate Different
 
