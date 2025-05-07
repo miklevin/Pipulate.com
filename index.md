@@ -5,10 +5,6 @@ permalink: /
 group: home
 ---
 
-<div style="text-align: center;">
-  <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs">
-</div>
-
 # Pipulate Installation Guide
 
 Pipulate is free and open source SEO software that can be installed in just a few steps on macOS or Linux (including Windows via WSL).

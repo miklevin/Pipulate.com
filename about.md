@@ -5,10 +5,6 @@ permalink: /about/
 group: about
 ---
 
-<div style="text-align: center;">
-  <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs">
-</div>
-
 ## What Is Pipulate?
 
 Pipulate takes a deliberate stance against many mainstream web development

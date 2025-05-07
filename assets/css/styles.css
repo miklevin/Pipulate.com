@@ -58,23 +58,40 @@ body > * {
 }
 
 /* Header layout with flexbox for logo positioning */
-.header-container {
+.header-flex-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0.5rem 0;
 }
 
-.logo-container {
+/* Logo styling */
+.logo-top {
+  text-align: right;
+  margin: 0 0;
+}
+
+.logo-top img {
+  height: 140px; /* Increased from 60px (2.5x) */
+  width: auto;
+}
+
+/* Navigation container */
+.nav-container {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
 }
 
-.logo-container img {
-  height: 45px;
-  width: auto;
+/* Format navigation */
+.nav-container nav {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Changed from flex-end since position switched */
 }
 
 /* Make the header bg full width, but the content inline with body */
@@ -101,17 +118,6 @@ body > header h1 {
 
 body > header p {
   margin: 1rem auto;
-}
-
-/* Logo styling */
-.logo-top {
-  text-align: center;
-  margin: 0.5rem 0;
-}
-
-.logo-top img {
-  height: 60px;
-  width: auto;
 }
 
 /* Adjust main content to account for sticky header */
@@ -245,20 +251,9 @@ label[type="button"]:hover {
   cursor: pointer;
 }
 
-/* Format navigation */
-header > nav {
-  font-size: 1em;
-  font-weight: bold;
-  line-height: 1.5;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 /* Use flexbox to allow items to wrap, as needed */
-header > nav ul,
-header > nav ol {
+.nav-container nav ul,
+.nav-container nav ol {
   align-content: space-around;
   align-items: center;
   display: flex;
@@ -271,26 +266,82 @@ header > nav ol {
 }
 
 /* List items are inline elements, make them behave more like blocks */
-header > nav ul li,
-header > nav ol li {
+.nav-container nav ul li,
+.nav-container nav ol li {
   display: inline-block;
 }
 
-header > nav a,
-header > nav a:visited {
+/* Navigation link styling with class selectors */
+.nav-link,
+.nav-link:visited {
   margin: 0.3rem 0.4rem 0.3rem 0;
   border: 2px solid var(--border);
-  border-radius: 2vw;
+  border-radius: 5px;
   color: var(--text);
   display: inline-block;
   padding: 0.1rem 1rem;
   text-decoration: none;
 }
 
-header > nav a:hover {
+.nav-link:hover {
   border-color: var(--accent);
   color: var(--accent);
   cursor: pointer;
+}
+
+/* Style for current/active navigation link */
+.nav-link.current {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  background-color: var(--accent-bg);
+  font-weight: bold;
+}
+
+/* Reduce header size on mobile */
+@media only screen and (max-width: 720px) {
+  .nav-link, 
+  .nav-link:visited {
+    font-size: 3.8vw;
+    margin: 0 0 0 5px;
+  }
+  
+  body > header > div > svg {
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2.1rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Make aside full-width on mobile */
+@media only screen and (max-width: 720px) {
+  aside {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+  }
+}
+
+/* Makes input fields wider on smaller screens */
+@media only screen and (max-width: 720px) {
+  textarea,
+  select,
+  input {
+    width: 100%;
+  }
 }
 
 /* Consolidate box styling */
@@ -723,12 +774,6 @@ progress:indeterminate::-moz-progress-bar {
 .blog-item {
     margin-bottom: 4rem;
 }
-nav a.current {
-    color: var(--accent) !important;
-    border-color: var(--accent) !important;
-    background-color: var(--accent-bg);
-    font-weight: bold;
-}
 .notice {
     background: var(--accent-bg);
     border: 2px solid var(--border);
@@ -789,56 +834,15 @@ nav a.current {
   }
 }
 
-/* Reduce header size on mobile */
-@media only screen and (max-width: 720px) {
-  header > nav a, header > nav a:visited {
-    font-size: 3.8vw;
-    margin: 0 0 0 5px;
-  }
-  body > header > div > svg {
-    width: 100%;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2.1rem;
-  }
-
-  h3 {
-    font-size: 1.75rem;
-  }
-
-  h4 {
-    font-size: 1.25rem;
-  }
-}
-
-/* Make aside full-width on mobile */
-@media only screen and (max-width: 720px) {
-  aside {
-    width: 100%;
-    float: none;
-    margin-left: 0;
-  }
-}
-
-/* Makes input fields wider on smaller screens */
-@media only screen and (max-width: 720px) {
-  textarea,
-  select,
-  input {
-    width: 100%;
-  }
-}
-
 /* Custom styles to complement Pico CSS */
 
 /* Container width adjustments */
 .container {
   margin: 0 auto;
-  padding: 0 1rem;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
   transition: max-width 0.2s ease;
   /* No max-width - this will be controlled by the slider */
 }
@@ -853,39 +857,13 @@ nav a.current {
   font-size: 1.5rem;
 }
 
-/* Navigation styles */
-header > nav {
+/* Remove this duplicated navigation style */
+/* header > nav {
   display: flex;
   justify-content: center;
   width: 100%;
   margin: 1rem 0;
-}
-
-/* Keep the current nav style */
-nav a.current {
-  color: var(--accent) !important;
-  border-color: var(--accent) !important;
-  background-color: var(--accent-bg);
-  font-weight: bold;
-}
-
-/* Links in navigation */
-header > nav a, 
-header > nav a:visited {
-  margin: 0 0.5rem;
-  border: 2px solid var(--border);
-  border-radius: 0.5rem;
-  color: var(--text);
-  display: inline-block;
-  padding: 0.25rem 1rem;
-  text-decoration: none;
-}
-
-header > nav a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  cursor: pointer;
-}
+} */
 
 /* Preserve the notice style */
 .notice {
@@ -970,7 +948,7 @@ header > nav a:hover {
 /* Main logo styles */
 body > header img {
   height: auto;
-  margin: 1rem 0;
+  margin: 0 0;
 }
 
 @media (min-width: 768px) {
@@ -1005,22 +983,10 @@ footer {
   border-top: 1px solid var(--border);
 }
 
-/* Mobile styles for nav */
-@media (max-width: 576px) {
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  header > nav a, header > nav a:visited {
-    font-size: 1rem;
-    margin: 0.25rem;
-  }
-  
-  /* Mobile sticky header adjustments */
-  body > header.sticky {
-    padding-bottom: 0.5rem;
-  }
+/* Mobile sticky header adjustments */
+body > header.sticky {
+  padding-top: 2vh;
+  padding-bottom: 1vh;
 }
 
 /* Override Pico's blockquote with the custom style */
@@ -1089,19 +1055,40 @@ p {
   margin-bottom: 1rem;
 }
 
-/* Responsive adjustments for mobile */
-@media (max-width: 576px) {
-  .header-container {
+/* Mobile adjustments for header layout */
+@media (max-width: 768px) {
+  .header-flex-container {
+    flex-direction: column-reverse; /* Reversed to keep logo on top on mobile */
+    align-items: center;
+  }
+  
+  .logo-top {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .logo-top img {
+    height: 120px; /* Slightly smaller on mobile but still larger than original */
+  }
+  
+  .nav-container {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .nav-container nav {
     flex-direction: column;
     align-items: center;
   }
   
-  .logo-container {
-    margin-top: 1rem;
-    justify-content: center;
+  .nav-link, 
+  .nav-link:visited {
+    font-size: 1rem;
+    margin: 0.25rem;
   }
   
-  .logo-container img {
-    height: 35px;
+  /* Mobile sticky header adjustments */
+  body > header.sticky {
+    padding-bottom: 0.5rem;
   }
 }
