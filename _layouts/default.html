@@ -23,15 +23,15 @@
 <div id="widthSliderContainer"><input type="range" id="widthSlider" min="850"></div>
 <header class="container sticky">
     <div class="header-flex-container">
-        <div class="logo-top">
-            <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs" height="60">
-        </div>
         <div class="nav-container">
             <nav>
                 <a class="nav-link {% if page.group == 'home' or page.url == "/" %}current{% endif %}" href="/">Home</a>
                 <a class="nav-link {% if page.group == 'about' or page.category == 'about' %}current{% endif %}" href="/about/">About</a>
                 <a class="nav-link {% if page.group == 'readme' or page.category == 'readme' %}current{% endif %}" href="/readme/">README</a>
             </nav>
+        </div>
+        <div class="logo-top">
+            <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs" height="60">
         </div>
     </div>
 </header>
