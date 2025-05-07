@@ -20,6 +20,7 @@
 
   /* New slider width CSS variable */
   --slider-width: 850px;
+  --mobile-padding: 4vw;
 }
 
 /* Reset box-sizing */
@@ -42,6 +43,8 @@ html {
   /* Set the font globally */
   font-family: var(--sans-font);
   scroll-behavior: smooth;
+  /* Base font size for desktop */
+  font-size: 16px;
 }
 
 /* Make the body a nice central block */
@@ -55,6 +58,64 @@ body {
 }
 body > * {
   /* Remove grid column constraint */
+}
+
+/* Mobile viewport-based font sizing */
+@media (max-width: 768px) {
+  html {
+    font-size: calc(16px + 0.390625vw);
+  }
+  
+  body {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 100% !important;
+    padding-left: var(--mobile-padding);
+    padding-right: var(--mobile-padding);
+    width: 100%;
+  }
+  
+  /* Ensure all content is responsive */
+  main, article, section, div {
+    max-width: 100% !important;
+    width: 100%;
+  }
+  
+  /* Adjust code blocks for mobile */
+  pre, code {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  h4 {
+    font-size: 1.3rem;
+  }
+  
+  p, li, dt, dd {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  code, pre {
+    font-size: 0.9rem;
+  }
 }
 
 /* Header layout with flexbox for logo positioning */
@@ -844,7 +905,8 @@ progress:indeterminate::-moz-progress-bar {
   padding-left: 1vw;
   padding-right: 1vw;
   transition: max-width 0.2s ease;
-  /* No max-width - this will be controlled by the slider */
+  max-width: var(--slider-width, 850px);
+  width: 100%;
 }
 
 /* Custom styles from original */
