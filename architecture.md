@@ -458,5 +458,5 @@ Contributions are welcome! Please adhere to the project's core philosophy:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/miklevin/pipulate/blob/main/LICENSE) file for details.
 
