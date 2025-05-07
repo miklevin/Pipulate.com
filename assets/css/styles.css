@@ -1192,13 +1192,14 @@ p {
 }
 
 .post-navigation a {
-  color: var(--primary);
+  color: var(--text);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
 .post-navigation a:hover {
-  color: var(--primary-hover);
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .post-navigation .placeholder {
