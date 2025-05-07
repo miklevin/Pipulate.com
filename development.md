@@ -59,6 +59,7 @@ Important:
 - Never remove `hx_trigger="load"`
 - Each step must include the next step's container
 - The chain reaction enables automatic progression
+- This gives that Notebook *Run All Cells* feel
 
 ### 3. State Management Pattern
 
