@@ -1,0 +1,460 @@
+---
+title: Pipulate Architecture
+description: Architecture of Pipulate Free and Open Source SEO Software
+permalink: /architecture/
+group: architecture
+---
+
+# Pipulate Technical Architecture
+
+Pipulate represents a distinctive approach to building SEO applications - one that deliberately prioritizes simplicity, observability, and user control over conventional enterprise patterns. This document explores Pipulate's architecture for developers and technical SEOs interested in porting Jupyter notebooks to user-friendly web applications.
+
+## Architecture Overview
+
+Pipulate was designed based on several key architectural decisions and principles:
+
+```
+                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 │   Browser   │ in a folder for macOS and Windows (WSL)
+                 └─────┬───────┘
+                       │ HTTP/WS
+                       ▼
+    ┌───────────────────────────────────────┐
+    │           Nix Flake Shell             │ - In-app LLM (where it belongs)
+    │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
+    │  │   FastHTML    │  │    Ollama    │  │ - 100% local
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  └───────┬───────┘  └──────────────┘  │
+    │          │                            │
+    │    ┌─────▼─────┐     ┌────────────┐   │
+    │    │MiniDataAPI│◄───►│ SQLite DB  │   │
+    │    └───────────┘     └────────────┘   │
+    └───────────────────────────────────────┘
+```
+
+### Core Tenets
+
+1. **Local-First & Single-Tenant**: Your data, your code, your hardware. This guarantees privacy, performance, and eliminates cloud costs or vendor lock-in.
+
+2. **Simplicity & Observability ("Know EVERYTHING!")**: We deliberately avoid complex enterprise patterns (heavy ORMs, message queues, client-side state management, build steps) in favor of transparent server-side state management.
+
+3. **Reproducibility**: Nix Flakes guarantee identical development and runtime environments across macOS, Linux, and Windows (WSL), solving the "works on my machine" problem.
+
+4. **Future-Proofing**: We rely on durable technologies: standard HTTP/HTML (via HTMX), Python (supercharged by AI), Nix (for universal environments), and local AI (Ollama).
+
+5. **WET Workflows, DRY CRUD**: Workflows are intentionally explicit and step-by-step (Write Everything Twice/Explicit), making them easy to port from notebooks and debug. Standard CRUD operations leverage a reusable `BaseCrud` class (Don't Repeat Yourself).
+
+## Technology Stack
+
+### FastHTML
+
+FastHTML is a Python web framework that prioritizes simplicity. It generates HTML directly from Python objects (no template language like Jinja2) and minimizes JavaScript by design.
+
+```python
+from fasthtml.common import *
+
+# Create app with SQLite database
+app, rt, users, User = fast_app('data.db', users={'username': str})
+
+@rt('/')
+def get():
+    return HTML(
+        Body(
+            Main(
+                H1("User List"),
+                Form(
+                    Input(name="username", placeholder="New user"),
+                    Button("Add", type="submit"),
+                    hx_post="/add-user",
+                    hx_target="#user-list",
+                    hx_swap="innerHTML"
+                ),
+                Ul(
+                    id="user-list",
+                    *[Li(user.username) for user in users()]
+                )
+            )
+        )
+    )
+
+@rt('/add-user', methods=['POST'])
+def add_user(username: str = ""):
+    if username:
+        users.insert(username=username)
+    return Ul(*[Li(user.username) for user in users()])
+```
+
+### HTMX Integration
+
+HTMX enables dynamic, interactive UIs directly in HTML via attributes, minimizing the need for custom JavaScript. Pipulate uses it for server-rendered HTML updates. This approach:
+
+- Drastically reduces JavaScript complexity
+- Allows developers to stay in Python
+- Makes state changes observable
+- Eliminates complex build tooling
+
+```
+                    HTMX+Python enables a world-class
+                   Python front-end Web Development environment.
+                             ┌─────────────────────┐
+                             │    Navigation Bar   │  - No template language (like Jinja2)
+                             ├─────────┬───────────┤  - HTML elements are Python functions
+  Simple Python back-end     │  Main   │   Chat    │  - Minimal custom JavaScript
+  HTMX "paints" HTML into    │  Area   │ Interface │  - No React/Vue/Angular overhead
+  the DOM on demand──────►   │         │           │  - No virtual DOM, JSX, Redux, etc.
+                             └─────────┴───────────┘
+```
+
+### MiniDataAPI
+
+MiniDataAPI provides simple, dictionary-based interaction with SQLite tables:
+
+- **Philosophy:** Avoids ORM complexity
+- **Operations:** `insert()`, `update()`, `delete()`, `.xtra()` (filtering/ordering), `()` (fetching)
+- **Type Safety:** Uses paired dataclasses generated by `fast_app`
+
+```python
+# Example unpacking from server.py
+app, rt, (store, Store), (tasks, Task) = fast_app(
+    "data/data.db",  
+    # Schema definitions as keyword arguments:
+    store={'key': str, 'value': str, 'pk': 'key'},
+    task={'id': int, 'name': str, 'done': bool, 'pk': 'id'}
+)
+
+# To use:
+tasks.insert(name="New task", done=False)
+all_tasks = tasks()  # Fetch all
+one_task = tasks(1)  # Fetch by ID
+done_tasks = tasks.xtra("WHERE done = ?", True)
+```
+
+### Ollama for Local LLMs
+
+Ollama allows running AI models locally, providing:
+- Complete privacy (no API calls)
+- Zero per-token costs
+- WebSocket streaming for UI responsiveness
+- Bounded context management
+
+```
+                   ┌──────────────────┐
+                   │   Local Ollama   │ - No API keys needed
+                   │      Server      │ - Completely private processing
+                   └────────┬─────────┘
+                            │ Streaming via WebSocket
+                            ▼
+                   ┌──────────────────┐
+                   │   Pipulate App   │ - Monitors WS for JSON/commands
+                   │(WebSocket Client)│ - Parses responses in real-time
+                   └────────┬─────────┘
+                            │ In-memory or DB backed
+                            ▼
+                   ┌──────────────────┐
+                   │     Bounded      │ - Manages context window (~128k)
+                   │   Chat History   │ - Enables RAG / tool integration
+                   └──────────────────┘
+```
+
+### Nix for Environment Reproducibility
+
+Nix Flakes guarantee identical development and runtime environments across operating systems. This ensures:
+
+- Consistent, reproducible environments (Python version, system libraries, tools)
+- Cross-platform compatibility (macOS, Linux, Windows via WSL)
+- Optional CUDA support for GPU acceleration
+- True "works on my machine" elimination
+
+## Workflow System Architecture
+
+Pipulate's primary feature is its step-based workflow system, designed specifically for porting Jupyter Notebook concepts into guided, end-user-friendly interfaces.
+
+### Step-Based Pipeline Flow
+
+```
+  ┌─────────┐        ┌─────────┐        ┌─────────┐   - Fully customizable steps
+  │ Step 01 │─piped─►│ Step 02 │─piped─►│ Step 03 │   - Interruption-safe & resumable
+  └─────────┘        └─────────┘        └─────────┘   - Easily ported from Notebooks
+       │                  │                  │        - One DB record per workflow run
+       ▼                  ▼                  ▼
+    State Saved        State Saved        Finalized?
+```
+
+### The Chain Reaction Pattern
+
+The heart of Pipulate's workflow system is the "chain reaction" pattern - a critical HTMX mechanism that enables automatic progression between steps. The key elements:
+
+```python
+return Div(
+    Card(...),  # Current step content
+    # CRITICAL: This inner Div triggers loading of the next step
+    Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+    id=step_id
+)
+```
+
+This pattern:
+1. Uses the inner `Div` with `id=next_step_id` as a container for the next step
+2. The `hx_get` attribute requests the next step from the server
+3. **CRITICALLY**: `hx_trigger="load"` makes this happen automatically when current step renders
+
+**Important:** Never remove `hx_trigger="load"` - it's essential for reliable step progression.
+
+### Workflow Implementation Pattern
+
+Creating workflows follows a consistent pattern:
+
+```python
+class MyWorkflow:
+    APP_NAME = "unique_name"        # Unique identifier
+    DISPLAY_NAME = "User-Facing Name"  # UI display name
+    
+    def __init__(self, pipulate, db, pipeline, rt):
+        self.pipulate, self.db = pipulate, db
+        self.pipeline = pipeline
+        
+        # Define steps
+        Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'])
+        self.steps = [
+            Step(id='step_01', done='first_field', show='First Step', refill=True),
+            Step(id='step_02', done='second_field', show='Second Step', refill=True),
+            # More steps...
+        ]
+        
+        # Register routes
+        self.register_routes(rt)
+    
+    # Handler methods for each step
+    async def step_01(self, request):
+        """Handler for step 01 display"""
+        # ... implementation
+    
+    async def step_01_submit(self, request):
+        """Handler for step 01 form submission"""
+        # ... implementation
+```
+
+### Porting from Jupyter Notebooks
+
+Pipulate is specifically designed to convert Jupyter notebook cells into guided workflow steps:
+
+```
+      ┌──────────────────┐    ┌──────────────────┐
+      │   Jupyter Lab    │    │    FastHTML      │
+      │   Notebooks      │    │     Server       │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 1   │     │    │  │ Step 1   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 2   │     │    │  │ Step 2   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │  localhost:8888  │    │  localhost:5001  │
+      └──────────────────┘    └──────────────────┘
+```
+
+#### Best Practices for Notebook → Workflow Conversion
+
+1. **Split Cell Logic**: Split complex notebook cells into smaller, more focused steps
+2. **Identify User Input Points**: Each form input becomes a distinct workflow step
+3. **Use WET Code**: Embrace explicit, self-contained step implementations
+4. **Preserve State Flow**: Ensure data flows properly between steps via the `transform` function
+5. **Add User Guidance**: Provide clear instructions for each step
+6. **Implement Validation**: Add form validation for better user experience
+
+## Plugin System Architecture
+
+Pipulate supports two main types of plugins:
+
+1. **CRUD Apps**: Standard data management interfaces inheriting from `BaseCrud`
+2. **Workflows**: Step-by-step processes implemented as plain Python classes
+
+The plugin discovery system:
+
+- Scans the `plugins/` directory for Python files matching specific naming patterns
+- Skips files with `xx_` prefix or containing parentheses (useful during development)
+- Dynamically imports modules and instantiates classes
+- Registers routes with the FastHTML application
+
+```
+# Naming conventions for plugins
+workflows/10_hello_flow.py         # Registered as "hello_flow" in menu position 10
+workflows/xx_experimental_flow.py  # Skipped (development version)
+workflows/hello_flow (Copy).py     # Skipped (temporary copy)
+```
+
+### Workflow for Creating New Plugins
+
+1. **Copy a Template**: Start with a template (e.g., `starter_flow.py`) → `my_flow (Copy).py`
+2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
+3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
+4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `30_my_flow.py`) to assign menu order and activate
+
+## State Management
+
+Pipulate uses two complementary approaches to state management:
+
+### 1. DictLikeDB for Workflow State
+
+Workflows store their entire state as JSON blobs in the `pipeline` table, enabling:
+- Complete workflow state snapshots
+- Easy resumption after interruptions
+- Simple debugging and state inspection
+- Conceptually similar to server-side cookies
+
+```python
+# Reading workflow state
+pipeline_id = db.get("pipeline_id", "unknown")
+state = pip.read_state(pipeline_id)
+
+# Updating workflow state
+state[step.done] = value
+pip.write_state(pipeline_id, state)
+```
+
+### 2. MiniDataAPI for CRUD Operations
+
+Standard database operations use MiniDataAPI's table objects:
+```python
+# Insert a new profile
+profiles.insert(name="New Profile")
+
+# Update a profile
+profiles.update(1, name="Updated Profile")
+
+# Delete a profile
+profiles.delete(1)
+
+# Query profiles
+all_profiles = profiles()
+specific_profile = profiles(1)
+```
+
+## Communication Channels
+
+Pipulate uses three primary communication methods:
+
+1. **HTTP**: Standard request/response for most page loads and form submissions
+2. **WebSockets**: Bidirectional communication for LLM streaming and chat
+3. **Server-Sent Events (SSE)**: Unidirectional server-to-client updates for live reloading and progress notifications
+
+## Development Environment
+
+The Pipulate development experience leverages:
+
+- **Automatic Reloading**: File system watchdog detects changes and restarts the server
+- **Integrated Jupyter**: JupyterLab runs alongside the application for experimentation
+- **Shared Environment**: Both Jupyter and the server share the same `.venv` for package access
+- **Enhanced Debugging**: Server-side state and simple architecture make debugging straightforward
+
+```
+        ┌─────────────┐         ┌──────────────┐
+        │ File System │ Changes │  AST Syntax  │ Checks Code
+        │  Watchdog   │ Detects │   Checker    │ Validity
+        └──────┬──────┘         └───────┬──────┘
+               │ Valid Change           │
+               ▼                        ▼
+ ┌───────────────────────────┐     ┌──────────┐
+ │    Uvicorn Server         │◄─── │  Reload  │ Triggers Restart
+ │ (Handles HTTP, WS, SSE)   │     │ Process  │
+ └───────────────────────────┘     └──────────┘
+```
+
+## Advanced Patterns
+
+### Placeholder Steps Pattern
+
+For planning workflow structure before implementing detailed functionality:
+
+```python
+Step(
+    id='step_XX',            # Use proper sequential numbering
+    done='placeholder',      # Simple state field name
+    show='Placeholder Step', # Descriptive UI text
+    refill=True,             # Usually True for consistency
+)
+```
+
+### Breaking the Chain (Cautionary Pattern)
+
+The `no-chain-reaction` class should only be used in specific scenarios:
+
+```python
+# For polling operations (continuous status checking):
+return Div(
+    progress_indicator,
+    cls="polling-status no-chain-reaction",
+    hx_get=f"/{app_name}/check_status",
+    hx_trigger="load, every 2s",
+    hx_target=f"#{step_id}",
+    id=step_id
+)
+```
+
+### Data Visualization Integration
+
+Pipulate supports embedding visualization components:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
+# Generate plot
+fig, ax = plt.subplots(figsize=(10, 6))
+df.plot(ax=ax)
+plt.tight_layout()
+
+# Convert to base64 for embedding
+buffer = BytesIO()
+plt.savefig(buffer, format='png')
+buffer.seek(0)
+image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+
+# Return in HTML
+return Div(
+    Card(
+        H4("Data Visualization"),
+        Img(src=f"data:image/png;base64,{image_base64}",
+            style="width:100%;max-width:800px"),
+    ),
+    Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+    id=step_id
+)
+```
+
+## For Technical SEOs: Bringing Python SEO to the Masses
+
+If you're a technical SEO who uses Python for SEO tasks, Pipulate offers a unique opportunity to make your tools accessible to non-technical team members:
+
+1. **Convert Existing Notebooks**: Turn your current SEO data processing notebooks into guided workflows
+2. **Standardize Data Collection**: Create consistent interfaces for gathering API credentials and configuration
+3. **Visualize Results**: Present complex SEO data with clear visualizations
+4. **Share Your Expertise**: Guide users through your SEO methodology step-by-step
+5. **Maintain Privacy**: Keep sensitive SEO data and API keys local and secure
+
+## Core Principles for Developers
+
+Remember these guiding principles when working with Pipulate:
+
+1. **Keep it simple.** Avoid complex patterns when simple ones will work.
+2. **Stay local and single-user.** Embrace the benefits of local-first design.
+3. **Be explicit over implicit.** WET code that's clear is better than DRY code that's obscure.
+4. **Preserve the chain reaction.** Maintain the core progression mechanism in workflows.
+5. **Embrace observability.** Make state changes visible and debuggable.
+
+## Contributing to Pipulate
+
+Contributions are welcome! Please adhere to the project's core philosophy:
+
+* Maintain Local-First Simplicity (No multi-tenant patterns, complex ORMs, heavy client-side state)
+* Respect Server-Side State (Use DictLikeDB/JSON for workflows, MiniDataAPI for CRUD)
+* Preserve the Workflow Pipeline Pattern (Keep steps linear, state explicit)
+* Honor Integrated Features (Don't disrupt core LLM/Jupyter integration)
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
