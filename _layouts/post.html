@@ -3,33 +3,162 @@ layout: default
 group: blog
 ---
 
-<h1>{{ page.title }}</h1>
-<h3>by {{ page.author | default: site.author }}</h3>
-{{ page.date | date: "%A, %B %d, %Y" }}
+{%- comment -%}
+Create a flat index of all posts in the correct sort order
+{%- endcomment -%}
+{%- assign sorted_posts = site.posts | sort: 'date' -%}
+{%- assign grouped_posts = sorted_posts | group_by_exp: "post", "post.date | date: '%Y-%m-%d'" | reverse -%}
+{%- assign flat_index = "" | split: "" -%}
+{%- for day in grouped_posts -%}
+  {%- assign day_posts = day.items | sort: 'sort_order' | reverse -%}
+  {%- for post in day_posts -%}
+    {%- assign flat_index = flat_index | push: post -%}
+  {%- endfor -%}
+{%- endfor -%}
 
-{{content}}
+{%- comment -%}
+Find current post's position in the flat index
+{%- endcomment -%}
+{%- assign current_position = -1 -%}
+{%- for idx_post in flat_index -%}
+  {%- if idx_post.url == page.url -%}
+    {%- assign current_position = forloop.index0 -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
 
-{% for category in page.categories %}
-<div class="spacer">
-  <div class="post-nav">
-    <div class="post-nav-prev">
-    {% assign posts = site.categories[category] | sort:"weight" %}
-    {% for post in posts %}
-      {% if post.url == page.url %}
-        {% assign last_inx = forloop.index0 | minus:1 %}
-        {% if forloop.last == false %}
-          {% assign next_inx = forloop.index0 | plus:1 %}
-          <span class="arrow">&larr;&nbsp;</span><a href="{{ BASE_PATH }}{{ posts[next_inx].url }}">{{ posts[next_inx].title }}</a>
-        {% endif %}
-        </div>
-        <div class="post-nav-next">
-        {% if forloop.first == false %}
-          <a href="{{ BASE_PATH }}{{ posts[last_inx].url }}">{{ posts[last_inx].title }}</a><span class="arrow">&nbsp;&rarr;</span>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
+{%- comment -%}
+Determine prev and next posts in the flat index
+But flip the direction - "previous" is newer (lower index), "next" is older (higher index)
+{%- endcomment -%}
+{%- assign custom_prev = nil -%}
+{%- assign custom_next = nil -%}
+{%- assign max_index = flat_index.size | minus: 1 -%}
+{%- if current_position < max_index -%}
+  {%- assign prev_position = current_position | plus: 1 -%}
+  {%- assign custom_prev = flat_index[prev_position] -%}
+{%- endif -%}
+{%- if current_position > 0 -%}
+  {%- assign next_position = current_position | minus: 1 -%}
+  {%- assign custom_next = flat_index[next_position] -%}
+{%- endif -%}
+
+<nav class="post-navigation top-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
+  {%- if custom_prev -%}
+    <div class="previous-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span class="nav-label">Previous Post</span>
+      <a href="{{ custom_prev.url }}" itemprop="item">
+        <span itemprop="name">{{ custom_prev.title }}</span>
+      </a>
+      <meta itemprop="position" content="1" />
     </div>
+  {%- else -%}
+    <div class="previous-post placeholder"></div>
+  {%- endif -%}
+  
+  <div class="home-link" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <a href="/blog/" itemprop="item" class="home-link-container">
+      <span class="home-text" itemprop="name">
+        <span class="nav-label">Blog Index</span>
+        <span class="home-word">Home</span>
+      </span>
+    </a>
+    <meta itemprop="position" content="2" />
   </div>
+  
+  {%- if custom_next -%}
+    <div class="next-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span class="nav-label">Next Post</span>
+      <a href="{{ custom_next.url }}" itemprop="item">
+        <span itemprop="name">{{ custom_next.title }}</span>
+      </a>
+      <meta itemprop="position" content="3" />
+    </div>
+  {%- else -%}
+    <div class="next-post placeholder"></div>
+  {%- endif -%}
+</nav>
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 itemprop="headline">{{- page.title -}}</h1>
+  <blockquote itemprop="description">{{- page.description | markdownify -}}</blockquote>
+  <h4>
+    <time itemprop="datePublished" datetime="{{- page.date | date_to_xmlschema -}}">
+      {{- page.date | date: '%A, %B %-d, %Y' -}}
+    </time>
+  </h4>
+  <div itemprop="articleBody">
+    {{- content -}}
+  </div>
+</article>
+
+<nav class="post-navigation bottom-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
+  {%- if custom_prev -%}
+    <div class="previous-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span class="nav-label">Previous Post</span>
+      <a href="{{ custom_prev.url }}" itemprop="item">{{ custom_prev.title }}</a>
+      <meta itemprop="name" content="{{ custom_prev.title }}">
+      <meta itemprop="position" content="1" />
+    </div>
+  {%- else -%}
+    <div class="previous-post placeholder"></div>
+  {%- endif -%}
+  
+  <div class="home-link" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <a href="/blog/" itemprop="item" class="home-link-container">
+      <span class="home-text" itemprop="name">
+        <span class="nav-label">Blog Index</span>
+        <span class="home-word">Home</span>
+      </span>
+    </a>
+    <meta itemprop="position" content="2" />
+  </div>
+  
+  {%- if custom_next -%}
+    <div class="next-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span class="nav-label">Next Post</span>
+      <a href="{{ custom_next.url }}" itemprop="item">{{ custom_next.title }}</a>
+      <meta itemprop="name" content="{{ custom_next.title }}">
+      <meta itemprop="position" content="3" />
+    </div>
+  {%- else -%}
+    <div class="next-post placeholder"></div>
+  {%- endif -%}
+</nav>
+
+{%- comment -%}
+Calculate post number using the flat index position
+Reverse the numbering so newest posts (position 0) show as highest number
+{%- endcomment -%}
+{%- assign total_posts = flat_index.size -%}
+{%- assign post_number = total_posts | minus: current_position -%}
+<div class="post-counter" style="text-align: center; margin: 20px 0; font-style: italic;">
+  <span>Post #{{ post_number }} of {{ total_posts }} - {{ page.date | date: '%B %-d, %Y' }}</span>
 </div>
-<h4>Category: <a href="/{{ category | slugify }}/">{{ category }}</a></h4>
-{% endfor %}
+
+{%- comment -%}
+Schema.org metadata for SEO
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "description": {{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
+  "url": "{{ site.url }}{{ page.url }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}{{ page.url }}"
+  },
+  "publisher": {
+    "@type": "Organization", 
+    "name": {{ site.title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}/pipulate.svg"
+    }
+  }
+}
+</script>

@@ -1161,3 +1161,73 @@ p {
     padding-bottom: 0.5rem;
   }
 }
+
+/* Post Navigation */
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  border-top: 1px solid var(--primary);
+  border-bottom: 1px solid var(--primary);
+}
+
+.post-navigation .previous-post,
+.post-navigation .next-post {
+  flex: 1;
+  text-align: center;
+}
+
+.post-navigation .home-link {
+  flex: 1;
+  text-align: center;
+}
+
+.post-navigation .nav-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.post-navigation a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-navigation a:hover {
+  color: var(--primary-hover);
+}
+
+.post-navigation .placeholder {
+  visibility: hidden;
+}
+
+/* Post Counter */
+.post-counter {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Article Styles */
+article {
+  margin: 2rem 0;
+}
+
+article h1 {
+  margin-bottom: 1rem;
+}
+
+article blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+article time {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
