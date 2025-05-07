@@ -177,7 +177,7 @@ Pipulate's primary feature is its step-based workflow system, designed specifica
   └─────────┘        └─────────┘        └─────────┘   - Easily ported from Notebooks
        │                  │                  │        - One DB record per workflow run
        ▼                  ▼                  ▼
-    State Saved        State Saved        Finalized?
+  State Saved        State Saved         Finalized?
 ```
 
 ### The Chain Reaction Pattern
