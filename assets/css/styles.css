@@ -1006,9 +1006,9 @@ blockquote {
   left: 50%;
   transform: translateX(-50%);
   background-color: transparent;
-  padding: 5px 0; /* Reduce padding */
-  z-index: 1001; /* Higher than sticky header */
-  /* No fixed width - will adjust dynamically based on container width */
+  padding: 5px 0;
+  z-index: 1001;
+  display: block; /* Default to visible on desktop */
 }
 
 #widthSlider {
@@ -1023,13 +1023,13 @@ blockquote {
 
 /* Add space between slider and nav */
 header {
-  padding-top: 40px !important; /* Increased space for the slider */
+  padding-top: 40px !important;
 }
 
-/* Disable slider on mobile */
+/* Hide slider on mobile */
 @media (max-width: 768px) {
   #widthSliderContainer {
-    display: none;
+    display: none !important; /* Force hide on mobile */
   }
   
   /* Reset header padding on mobile */
