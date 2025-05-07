@@ -7,7 +7,7 @@ group: architecture
 
 # Pipulate Technical Architecture
 
-Pipulate represents a distinctive approach to building SEO applications - one that deliberately prioritizes simplicity, observability, and user control over conventional enterprise patterns. This document explores Pipulate's architecture for developers and technical SEOs interested in porting Jupyter notebooks to user-friendly web applications.
+Pipulate represents a distinctive approach to building SEO applications — one that deliberately prioritizes simplicity, observability, and user control over conventional enterprise patterns. This document explores Pipulate's architecture for developers and technical SEOs interested in porting Jupyter notebooks to user-friendly web applications.
 
 ## Architecture Overview
 
