@@ -234,6 +234,7 @@ curl -L https://pipulate.com/install.sh | sh -s YourBrandName
 When developing white-labeled versions:
 
 1. **Local Development**:
+
 ```bash
 # Start with a copy
 cp 20_hello_workflow.py 20_hello_workflow (Copy).py
@@ -246,11 +247,13 @@ mv "20_hello_workflow (Copy).py" xx_my_workflow.py
 mv xx_my_workflow.py 30_my_workflow.py
 ```
 
+{:start="2"}
 2. **Testing Updates**:
 - Use `xx_` prefix for development versions
 - Test in isolated environments
 - Verify update mechanisms
 
+{:start="3"}
 3. **Deployment**:
 - Use numbered prefixes for menu order
 - Maintain consistent naming
