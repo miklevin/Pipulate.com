@@ -94,8 +94,8 @@ HTMX enables dynamic, interactive UIs directly in HTML via attributes, minimizin
 - Eliminates complex build tooling
 
 ```
-                    HTMX+Python enables a world-class
-                   Python front-end Web Development environment.
+                        HTMX+Python enables a world-class
+                 Python front-end Web Development environment.
                              ┌─────────────────────┐
                              │    Navigation Bar   │  - No template language (like Jinja2)
                              ├─────────┬───────────┤  - HTML elements are Python functions
