@@ -13,7 +13,7 @@ Think of Pipulate as having the power of complex SEO scripts and Jupyter noteboo
 
 ## The Pipulate Philosophy
 
-Pipulate isn't just another SEO tool - it's a statement of values about how software should work. Here's what drives our design decisions:
+Pipulate isn't just another SEO tool — it's a statement of values about how software should work. Here's what drives our design decisions:
 
 ### Local-First Revolution
 
