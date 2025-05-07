@@ -146,7 +146,7 @@ Pipulate creates a standardized, guided approach to SEO processes.
 
 Pipulate is designed to be simple to install with just two commands - one to set up the Nix environment system, and one to install Pipulate itself. There's no complex configuration, and it works consistently across macOS, Linux, and Windows (via WSL).
 
-Ready to try Pipulate? Check out our [installation guide](/install/) to get started in just a few minutes.
+Ready to try Pipulate? Check out our [installation guide](/) to get started in just a few minutes.
 
 ## A Philosophy of Simplicity
 
