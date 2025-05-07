@@ -4,6 +4,7 @@ permalink: /blog/local-first-revolution/
 description: How Pipulate is Redefining Modern Software Development in the Age of AI
 layout: post
 sort_order: 1
+group: blog
 ---
 
 # The Local-First Revolution: How Pipulate is Redefining Modern Software Development in the Age of AI

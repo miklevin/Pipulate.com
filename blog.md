@@ -3,6 +3,7 @@ title: Blog
 description: Latest news and insights from the Pipulate team
 permalink: /blog/
 layout: page
+group: blog
 ---
 
 # Pipulate Blog
