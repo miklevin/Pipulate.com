@@ -269,6 +269,8 @@ return Div(
 4. **Preserve the chain reaction.** Maintain the core progression mechanism in workflows.
 5. **Embrace observability.** Make state changes visible and debuggable.
 
+[Read more about our development philosophy and best practices on our blog →](/blog/)
+
 ## Contributing
 
 When contributing to Pipulate, please adhere to these principles:

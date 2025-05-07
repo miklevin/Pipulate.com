@@ -44,6 +44,8 @@ Pipulate was designed based on several key architectural decisions and principle
 
 5. **WET Workflows, DRY CRUD**: Workflows are intentionally explicit and step-by-step (Write Everything Twice/Explicit), making them easy to port from notebooks and debug. Standard CRUD operations leverage a reusable `BaseCrud` class (Don't Repeat Yourself).
 
+[Explore our architectural philosophy in depth on our blog →](/blog/)
+
 ## Technology Stack
 
 ### FastHTML
