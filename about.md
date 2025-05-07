@@ -150,7 +150,7 @@ Ready to try Pipulate? Check out our [installation guide](/) to get started in j
 
 ## A Philosophy of Simplicity
 
-At its core, Pipulate embraces simplicity - not by sacrificing power, but by carefully choosing technologies that work together elegantly:
+At its core, Pipulate embraces simplicity — not by sacrificing power, but by carefully choosing technologies that work together elegantly:
 
 - No complex JavaScript frameworks or build systems
 - No complicated deployment or cloud infrastructure
