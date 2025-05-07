@@ -91,6 +91,28 @@ This design means you can:
 
 If they match, it creates a navigation collision because the system needs these two identities to remain distinct - one for public interaction, one for internal stability.
 
+## Key Generation Behavior
+
+There are two distinct ways new keys are generated in Pipulate:
+
+1. **New Endpoint Access**:
+   - When you first access a plugin through the dropdown menu
+   - When you navigate directly to a plugin's URL
+   - When you use a redirect to a new plugin
+   - In these cases, a new key is automatically generated without any user action
+
+2. **Mid-Workflow New Instance**:
+   - When you're already in a workflow and want to start fresh
+   - Use the "x" to clear the current key
+   - Press Enter twice to generate a new key
+   - This is only needed when you want to start over within the same session
+
+This dual behavior means:
+- New plugin access is always fresh and clean
+- Mid-workflow resets are explicit and intentional
+- No accidental key generation when you don't want it
+- Clear separation between new sessions and resets
+
 ## The Development Dance
 
 This creates a natural development workflow:

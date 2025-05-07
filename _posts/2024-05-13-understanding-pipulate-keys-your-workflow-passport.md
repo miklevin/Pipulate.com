@@ -28,8 +28,18 @@ This is actually a composite key containing three parts:
 
 ## The Magic of Auto-Generation
 
-Here's the beautiful part: you never have to think about creating these keys. Pipulate handles it all for you. When you want to start a new workflow:
+Here's the beautiful part: you never have to think about creating these keys. Pipulate handles it all for you in two different ways:
 
+### New Workflow Access
+When you first access a workflow through:
+- The dropdown menu
+- Direct URL navigation
+- A redirect from another workflow
+
+Pipulate automatically generates a fresh key for you. No user action required - it just works!
+
+### Mid-Workflow Reset
+If you're already in a workflow and want to start fresh:
 1. Click the "x" in the key field to clear it
 2. Hit Enter
 3. Pipulate generates the next available key
@@ -82,6 +92,13 @@ Because of how the key system works:
 - You can close your browser anytime
 - Come back later and hit Enter
 - You're right back where you were
+
+### Key Generation Strategy
+Remember:
+- New endpoint access = automatic fresh key
+- Mid-workflow reset = manual "x" + double Enter
+- This dual behavior prevents accidental resets
+- Keeps your workflow state predictable
 
 ## Behind the Scenes
 
