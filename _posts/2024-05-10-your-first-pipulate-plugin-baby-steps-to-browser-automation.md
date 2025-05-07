@@ -13,7 +13,7 @@ If you've just installed Pipulate and you're wondering "What now?", you're in th
 ## The Goal: Your First Plugin
 
 Today, we're going to do just ONE thing:
-1. Copy an existing plugin template and see it appear in Pipulate's menu
+1. Create a new plugin and see it appear in Pipulate's menu
 
 That's it! No coding, no complexity - just a simple copy/paste to get you started. This will be the foundation for something cool we'll build together: a plugin that helps you automate browser tasks.
 
@@ -26,7 +26,7 @@ Because every journey begins with a single step. In our next articles, we'll tra
 
 But today, we're just getting our feet wet.
 
-## The One-Minute Plugin
+## The Three-Step Plugin
 
 Here's all you need to do:
 
@@ -35,28 +35,41 @@ Here's all you need to do:
 cd ~/Botifython/plugins  # (or whatever name you chose during installation)
 ```
 
-2. Copy the blank workflow template:
+2. Copy the blank workflow template with the `xx_` prefix (this prevents auto-loading while we edit):
 ```bash
-cp 500_blank_workflow.py 040_my_first_workflow.py
+cp 500_blank_workflow.py xx_my_first_workflow.py
 ```
 
-3. Open `040_my_first_workflow.py` in your favorite text editor and change just these two lines:
+3. Open `xx_my_first_workflow.py` in your favorite text editor and change just these two lines:
 ```python
 APP_NAME = "myflow"           # Change this to your unique identifier
 DISPLAY_NAME = "My Workflow"  # Change this to your display name
 ```
 
-That's it! The next time you start Pipulate, you'll see "My Workflow" in the dropdown menu.
+4. Once you've made your changes, rename the file to deploy it:
+```bash
+mv xx_my_first_workflow.py 040_my_first_workflow.py
+```
+
+That's it! The moment you rename the file, Pipulate's watchdog system will detect the change and automatically load your new plugin. You'll see "My Workflow" appear in the dropdown menu instantly - no restart needed!
 
 ## What Just Happened?
 
-By copying `500_blank_workflow.py`, you've created a new plugin that:
-- Has a complete workflow structure ready to use
-- Appears in Pipulate's menu system
-- Can be selected and run
-- Maintains its own state and data
+Let's break down what we did:
+- Used the `xx_` prefix to safely edit the file without conflicts
+- Changed the basic configuration values
+- Renamed the file to deploy it
+- Let Pipulate's watchdog system automatically detect and load the changes
 
 The number at the start of the filename (040) determines where it appears in the menu - lower numbers appear higher in the list.
+
+## Development Tips
+
+Pipulate has some helpful patterns for plugin development:
+- Files starting with `xx_` are ignored by the auto-loader
+- Files with parentheses (like `(Copy)`) are also ignored
+- The watchdog system automatically detects and loads changes when you rename files
+- No server restart is needed - changes are picked up instantly
 
 ## What's Next?
 
@@ -68,4 +81,4 @@ This is just the beginning of what's possible with Pipulate's workflow system. W
 
 Many SEO tools require complex API setups, token management, and expensive subscriptions. But sometimes, the simplest solution is to use your existing browser setup - your saved logins, your cookies, your bookmarks. That's the path we're starting down today.
 
-Stay tuned for the next article, where we'll add our first piece of real functionality to this template. For now, just enjoy seeing your very first Pipulate plugin appear in the menu! 
+Stay tuned for the next article, where we'll add our first piece of real functionality to this template. For now, just enjoy seeing your very first Pipulate plugin appear in the menu the moment you rename it! 
