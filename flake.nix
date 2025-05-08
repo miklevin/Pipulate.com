@@ -115,6 +115,99 @@
                 return 1
               fi
 
+              # Read port from .port file or use default
+              if [ -f "$site_root/.port" ]; then
+                port=$(cat "$site_root/.port")
+                echo "Using port $port from .port file"
+              else
+                port=4000
+                echo "No .port file found, using default port $port"
+              fi
+
+              # Function to check for Ruby version mismatch
+              check_ruby_version() {
+                # First check if jekyll binary exists and works
+                if [ -f "$site_root/.gem/ruby/3.3.0/bin/jekyll" ]; then
+                  if ! "$site_root/.gem/ruby/3.3.0/bin/jekyll" --version > /dev/null 2>&1; then
+                    echo "Jekyll binary not working. Rebuilding gems..."
+                    rm -rf "$site_root/.gem"
+                    return 1
+                  fi
+                fi
+
+                # Check for specific Ruby version mismatch in ffi_c.so
+                if [ -f "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1/lib/ffi_c.so" ]; then
+                  if ldd "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1/lib/ffi_c.so" | grep -q "libruby-3.3.7"; then
+                    echo "Detected Ruby 3.3.7 vs 3.3.8 mismatch in ffi_c.so. Rebuilding ffi gem..."
+                    # Only remove the ffi gem directory
+                    rm -rf "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1"
+                    rm -rf "$site_root/.gem/ruby/3.3.0/specifications/ffi-1.17.1.gemspec"
+                    return 1
+                  fi
+                fi
+
+                # Check if bundle check passes
+                if ! bundle check > /dev/null 2>&1; then
+                  echo "Bundle check failed. Rebuilding gems..."
+                  rm -rf "$site_root/.gem"
+                  return 1
+                fi
+
+                return 0
+              }
+
+              # Function to ensure gems are installed
+              ensure_gems_installed() {
+                cd "$site_root"
+                if ! bundle check > /dev/null 2>&1; then
+                  echo "Missing gems detected. Installing..."
+                  export GEM_HOME=$PWD/.gem
+                  export GEM_PATH=$GEM_HOME
+                  export PATH=$GEM_HOME/bin:$PATH
+                  
+                  echo "Installing bundler..."
+                  gem install bundler --no-document
+                  
+                  echo "Setting bundler config..."
+                  bundle config set --local path "$GEM_HOME"
+                  bundle config build.nokogiri --use-system-libraries
+                  bundle config build.ffi --enable-system-libffi
+                  bundle config build.eventmachine --with-cflags="-I${pkgs.openssl.dev}/include"
+                  bundle config set force_ruby_platform true
+                  
+                  echo "Installing gems (this may take a while)..."
+                  BUNDLE_FORCE_RUBY_PLATFORM=1 RUBYOPT="-W0" bundle install
+                fi
+                cd "$current_dir"
+              }
+
+              # Check for Ruby version mismatch and rebuild if needed
+              if ! check_ruby_version; then
+                echo "Rebuilding Ruby environment..."
+                cd "$site_root"
+                export GEM_HOME=$PWD/.gem
+                export GEM_PATH=$GEM_HOME
+                export PATH=$GEM_HOME/bin:$PATH
+                
+                echo "Installing bundler..."
+                gem install bundler --no-document
+                
+                echo "Setting bundler config..."
+                bundle config set --local path "$GEM_HOME"
+                bundle config build.nokogiri --use-system-libraries
+                bundle config build.ffi --enable-system-libffi
+                bundle config build.eventmachine --with-cflags="-I${pkgs.openssl.dev}/include"
+                bundle config set force_ruby_platform true
+                
+                echo "Installing gems (this may take a while)..."
+                BUNDLE_FORCE_RUBY_PLATFORM=1 RUBYOPT="-W0" bundle install
+                
+                cd "$current_dir"
+              fi
+
+              # Ensure all required gems are installed
+              ensure_gems_installed
+
               # Kill any running Jekyll processes
               echo "Stopping any existing Jekyll servers..."
               pkill -f "jekyll serve" || true
@@ -124,8 +217,8 @@
               
               # Change to the site root
               cd "$site_root"
-              echo "Serving from $(pwd)..."
-              RUBYOPT="-W0" bundle exec jekyll serve --verbose --incremental
+              echo "Serving from $(pwd) on port $port..."
+              RUBYOPT="-W0" bundle exec jekyll serve --verbose --incremental --port $port
               
               # Return to the original directory
               cd "$current_dir"
