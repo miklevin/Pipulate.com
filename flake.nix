@@ -1,3 +1,73 @@
+# Jekyll Environment Setup for Nix
+# ==============================
+# This flake provides a complete development environment for Jekyll sites with:
+# - Ruby and Jekyll with all necessary dependencies
+# - Rouge for syntax highlighting
+# - Python environment for additional tools
+# - Neovim for text editing
+# - Git for version control
+#
+# Environment Variables
+# -------------------
+# The environment is configured with the following key variables:
+# - GEM_HOME: Local gem installation directory (.gem)
+# - GEM_PATH: Path to find gems
+# - BUNDLE_FORCE_RUBY_PLATFORM: Forces native gem compilation
+# - LD_LIBRARY_PATH: Paths to required system libraries
+# - PKG_CONFIG_PATH: Paths for pkg-config to find build dependencies
+#
+# Available Commands
+# ----------------
+# 1. jes: Start Jekyll server with automatic environment checks
+#    - Checks Ruby version compatibility
+#    - Ensures all gems are installed
+#    - Handles port configuration
+#    - Provides verbose output and incremental builds
+#
+# 2. jes-stop: Stop any running Jekyll servers
+#
+# 3. rebuild-gems: Clean and rebuild native gem extensions
+#    - Targets problematic gems (json, ffi, nokogiri)
+#    - Rebuilds with correct library paths
+#
+# 4. reset-ruby-env: Complete Ruby environment reset
+#    - Backs up Gemfile and Gemfile.lock
+#    - Removes .gem directory
+#    - Reinstalls bundler and all gems
+#
+# Common Issues and Solutions
+# -------------------------
+# 1. Ruby Version Mismatch:
+#    - Detected by check_ruby_version function
+#    - Automatically rebuilds affected gems
+#    - Specifically handles ffi_c.so version mismatches
+#
+# 2. Missing Gems:
+#    - Detected by bundle check
+#    - Automatically installs missing gems
+#    - Configures bundler for local installation
+#
+# 3. Native Extension Issues:
+#    - Use rebuild-gems to rebuild problematic extensions
+#    - System libraries are properly linked via LD_LIBRARY_PATH
+#    - Build options configured for common problematic gems
+#
+# Best Practices
+# -------------
+# 1. Always run jes from the Jekyll site root
+# 2. Use .port file to configure custom ports
+# 3. Keep Gemfile and Gemfile.lock in version control
+# 4. Run reset-ruby-env for major environment issues
+# 5. Use rebuild-gems for specific gem issues
+#
+# Version History
+# --------------
+# v1.0.5: Added bundle exec for Jekyll checks
+# v1.0.4: Improved error handling and diagnostics
+# v1.0.3: Fixed environment variable handling
+# v1.0.2: Added version number and improved checks
+# v1.0.1: Initial version with basic functionality
+
 {
   description = "Nix flake for Jekyll environment with Rouge for syntax highlighting and Bundler support";
 
@@ -12,6 +82,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        # Python environment with required packages
         pythonEnv = pkgs.python3.withPackages (ps: with ps; [
           requests
           simplenote
@@ -19,7 +90,7 @@
         ]);
       in
       {
-        # Define the development shell
+        # Define the development shell with all necessary dependencies
         devShells.default = pkgs.mkShell {
           # Include necessary packages in the PATH
           buildInputs = [
@@ -38,51 +109,49 @@
             pkgs.libxslt                    # Add libxslt for nokogiri
           ];
 
-          # Set environment variables for native gem compilation
+          # Set environment variables and define helper functions
           shellHook = ''
+            # Set up Ruby environment variables
             export GEM_HOME=$PWD/.gem
             export GEM_PATH=$GEM_HOME
             export PATH=$GEM_HOME/bin:$PATH
             
-            # Set Ruby-related environment variables
+            # Force native gem compilation
             export BUNDLE_FORCE_RUBY_PLATFORM=1
             
-            # Add Ruby library path to LD_LIBRARY_PATH
+            # Set up library paths for native extensions
             export LD_LIBRARY_PATH="${pkgs.ruby}/lib:${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
-            
-            # Add all necessary libraries to LD_LIBRARY_PATH
             export LD_LIBRARY_PATH="${pkgs.libffi}/lib:$LD_LIBRARY_PATH"
             export LD_LIBRARY_PATH="${pkgs.zlib}/lib:$LD_LIBRARY_PATH"
             export LD_LIBRARY_PATH="${pkgs.libxml2}/lib:$LD_LIBRARY_PATH"
             export LD_LIBRARY_PATH="${pkgs.libxslt}/lib:$LD_LIBRARY_PATH"
             
-            # Set up pkg-config path
+            # Configure pkg-config paths for build dependencies
             export PKG_CONFIG_PATH="${pkgs.zlib.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
             export PKG_CONFIG_PATH="${pkgs.libffi.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
             export PKG_CONFIG_PATH="${pkgs.libxml2.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
             export PKG_CONFIG_PATH="${pkgs.libxslt.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
             
-            # Install a compatible version of bundler if not present
+            # Install bundler if not present
             if ! gem list -i bundler > /dev/null 2>&1; then
               echo "Installing bundler..."
               gem install bundler --no-document
             fi
 
-            # Configure bundler to install gems locally to .gem directory
+            # Configure bundler for local gem installation
             bundle config set --local path "$GEM_HOME"
             
-            # Configure build options for native extensions
+            # Set build options for problematic native extensions
             bundle config build.nokogiri --use-system-libraries
             bundle config build.ffi --enable-system-libffi
             bundle config build.eventmachine --with-cflags="-I${pkgs.openssl.dev}/include"
-            
-            # Force rebuilding native extensions
             bundle config set force_ruby_platform true
 
+            # Additional build configuration
             export BUNDLE_BUILD__EVENTMACHINE="--with-cflags=-I${pkgs.openssl.dev}/include"
             export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
             
-            # macOS-specific symlink setup for Neovim
+            # macOS-specific Neovim configuration
             if [ "$(uname)" = "Darwin" ]; then
               echo "Detected macOS. Setting up Neovim configuration."
               CONFIG_DIR="$HOME/Library/Application Support/nvim"
@@ -99,8 +168,10 @@
             # Alias vim to nvim
             alias vim=nvim
 
-            # Jekyll serve function with verbose output and livereload
+            # Jekyll serve function with automatic environment checks
             jes() {
+              echo "Jekyll Environment Script v1.0.6"
+              
               # Store the current directory
               current_dir=$(pwd)
               
@@ -126,20 +197,54 @@
 
               # Function to check for Ruby version mismatch
               check_ruby_version() {
-                # First check if jekyll binary exists and works
-                if [ -f "$site_root/.gem/ruby/3.3.0/bin/jekyll" ]; then
-                  if ! "$site_root/.gem/ruby/3.3.0/bin/jekyll" --version > /dev/null 2>&1; then
-                    echo "Jekyll binary not working. Rebuilding gems..."
+                echo "Checking Ruby environment..."
+                
+                # Save current environment
+                local old_gem_home="$GEM_HOME"
+                local old_gem_path="$GEM_PATH"
+                local old_path="$PATH"
+                local old_bundle_gemfile="$BUNDLE_GEMFILE"
+                local old_bundle_path="$BUNDLE_PATH"
+                
+                # Set environment for checks
+                export GEM_HOME="$site_root/.gem"
+                export GEM_PATH="$GEM_HOME"
+                export PATH="$GEM_HOME/bin:$PATH"
+                export BUNDLE_GEMFILE="$site_root/Gemfile"
+                export BUNDLE_PATH="$GEM_HOME"
+                
+                # First check if jekyll binary exists
+                if [ ! -f "$site_root/.gem/ruby/3.3.0/bin/jekyll" ]; then
+                  echo "Jekyll binary not found. Will need to install gems."
+                  return 1
+                fi
+                
+                # Try to run jekyll with --version and capture both stdout and stderr
+                local jekyll_output
+                jekyll_output=$(cd "$site_root" && bundle exec jekyll --version 2>&1)
+                local jekyll_status=$?
+                
+                if [ $jekyll_status -ne 0 ]; then
+                  echo "Jekyll binary check failed with status $jekyll_status"
+                  echo "Error output: $jekyll_output"
+                  
+                  if echo "$jekyll_output" | grep -q "incompatible library version"; then
+                    echo "Detected Ruby version mismatch. Rebuilding gems..."
+                    rm -rf "$site_root/.gem"
+                    return 1
+                  else
+                    echo "Unknown Jekyll error. Rebuilding gems..."
                     rm -rf "$site_root/.gem"
                     return 1
                   fi
                 fi
-
+                
                 # Check for specific Ruby version mismatch in ffi_c.so
                 if [ -f "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1/lib/ffi_c.so" ]; then
-                  if ldd "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1/lib/ffi_c.so" | grep -q "libruby-3.3.7"; then
+                  local ffi_libs
+                  ffi_libs=$(ldd "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1/lib/ffi_c.so" 2>&1)
+                  if echo "$ffi_libs" | grep -q "libruby-3.3.7"; then
                     echo "Detected Ruby 3.3.7 vs 3.3.8 mismatch in ffi_c.so. Rebuilding ffi gem..."
-                    # Only remove the ffi gem directory
                     rm -rf "$site_root/.gem/ruby/3.3.0/gems/ffi-1.17.1"
                     rm -rf "$site_root/.gem/ruby/3.3.0/specifications/ffi-1.17.1.gemspec"
                     return 1
@@ -147,23 +252,54 @@
                 fi
 
                 # Check if bundle check passes
-                if ! bundle check > /dev/null 2>&1; then
-                  echo "Bundle check failed. Rebuilding gems..."
+                local bundle_output
+                bundle_output=$(cd "$site_root" && bundle check 2>&1)
+                local bundle_status=$?
+                
+                if [ $bundle_status -ne 0 ]; then
+                  echo "Bundle check failed with status $bundle_status"
+                  echo "Error output: $bundle_output"
+                  echo "Rebuilding gems..."
                   rm -rf "$site_root/.gem"
                   return 1
                 fi
 
+                # Restore environment
+                export GEM_HOME="$old_gem_home"
+                export GEM_PATH="$old_gem_path"
+                export PATH="$old_path"
+                export BUNDLE_GEMFILE="$old_bundle_gemfile"
+                export BUNDLE_PATH="$old_bundle_path"
+                
+                echo "Ruby environment check passed."
                 return 0
               }
 
               # Function to ensure gems are installed
               ensure_gems_installed() {
                 cd "$site_root"
-                if ! bundle check > /dev/null 2>&1; then
+                
+                # Save current environment
+                local old_gem_home="$GEM_HOME"
+                local old_gem_path="$GEM_PATH"
+                local old_path="$PATH"
+                local old_bundle_gemfile="$BUNDLE_GEMFILE"
+                local old_bundle_path="$BUNDLE_PATH"
+                
+                # Set environment for bundle
+                export GEM_HOME="$PWD/.gem"
+                export GEM_PATH="$GEM_HOME"
+                export PATH="$GEM_HOME/bin:$PATH"
+                export BUNDLE_GEMFILE="$PWD/Gemfile"
+                export BUNDLE_PATH="$GEM_HOME"
+                
+                local bundle_output
+                bundle_output=$(bundle check 2>&1)
+                local bundle_status=$?
+                
+                if [ $bundle_status -ne 0 ]; then
                   echo "Missing gems detected. Installing..."
-                  export GEM_HOME=$PWD/.gem
-                  export GEM_PATH=$GEM_HOME
-                  export PATH=$GEM_HOME/bin:$PATH
+                  echo "Error output: $bundle_output"
                   
                   echo "Installing bundler..."
                   gem install bundler --no-document
@@ -177,7 +313,17 @@
                   
                   echo "Installing gems (this may take a while)..."
                   BUNDLE_FORCE_RUBY_PLATFORM=1 RUBYOPT="-W0" bundle install
+                else
+                  echo "All gems are already installed."
                 fi
+                
+                # Restore environment
+                export GEM_HOME="$old_gem_home"
+                export GEM_PATH="$old_gem_path"
+                export PATH="$old_path"
+                export BUNDLE_GEMFILE="$old_bundle_gemfile"
+                export BUNDLE_PATH="$old_bundle_path"
+                
                 cd "$current_dir"
               }
 
@@ -185,9 +331,20 @@
               if ! check_ruby_version; then
                 echo "Rebuilding Ruby environment..."
                 cd "$site_root"
-                export GEM_HOME=$PWD/.gem
-                export GEM_PATH=$GEM_HOME
-                export PATH=$GEM_HOME/bin:$PATH
+                
+                # Save current environment
+                local old_gem_home="$GEM_HOME"
+                local old_gem_path="$GEM_PATH"
+                local old_path="$PATH"
+                local old_bundle_gemfile="$BUNDLE_GEMFILE"
+                local old_bundle_path="$BUNDLE_PATH"
+                
+                # Set environment for rebuild
+                export GEM_HOME="$PWD/.gem"
+                export GEM_PATH="$GEM_HOME"
+                export PATH="$GEM_HOME/bin:$PATH"
+                export BUNDLE_GEMFILE="$PWD/Gemfile"
+                export BUNDLE_PATH="$GEM_HOME"
                 
                 echo "Installing bundler..."
                 gem install bundler --no-document
@@ -202,15 +359,22 @@
                 echo "Installing gems (this may take a while)..."
                 BUNDLE_FORCE_RUBY_PLATFORM=1 RUBYOPT="-W0" bundle install
                 
+                # Restore environment
+                export GEM_HOME="$old_gem_home"
+                export GEM_PATH="$old_gem_path"
+                export PATH="$old_path"
+                export BUNDLE_GEMFILE="$old_bundle_gemfile"
+                export BUNDLE_PATH="$old_bundle_path"
+                
                 cd "$current_dir"
+              else
+                # Only ensure gems are installed if version check passed
+                ensure_gems_installed
               fi
 
-              # Ensure all required gems are installed
-              ensure_gems_installed
-
-              # Kill any running Jekyll processes
-              echo "Stopping any existing Jekyll servers..."
-              pkill -f "jekyll serve" || true
+              # Kill any running Jekyll processes in this directory only
+              echo "Stopping any existing Jekyll servers in $(basename "$site_root")..."
+              pkill -f "jekyll serve.*$site_root" || true
               
               # Give processes time to terminate
               sleep 1

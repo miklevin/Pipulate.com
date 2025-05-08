@@ -1,7 +1,6 @@
 ---
 title: "From Placeholder to Powerhouse: The Art of Atomic Workflow Steps"
 description: "Watch a simple placeholder transform into a full-featured URL opener as we explore the art of evolving Pipulate workflow steps and discover the power of atomic design."
-date: 2024-05-15
 author: Mike Levin
 group: blog
 ---

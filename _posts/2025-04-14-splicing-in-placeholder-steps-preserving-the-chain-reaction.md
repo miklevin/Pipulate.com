@@ -1,7 +1,6 @@
 ---
 title: "Splicing in Placeholder Steps: Preserving the Chain Reaction"
 description: "Learn how to safely add new steps to your Pipulate workflows while maintaining the crucial HTMX chain reaction pattern that keeps everything flowing smoothly."
-date: 2024-05-14
 author: Mike Levin
 group: blog
 ---

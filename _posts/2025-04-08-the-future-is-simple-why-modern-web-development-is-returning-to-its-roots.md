@@ -1,7 +1,6 @@
 ---
 title: "The Future is Simple: Why Modern Web Development is Returning to its Roots"
 description: "Discover how the pendulum is swinging back to simpler, more maintainable web development practices, and why this matters for the future of software."
-date: 2024-05-08
 author: Mike Levin
 group: blog
 ---

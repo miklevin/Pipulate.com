@@ -1,7 +1,6 @@
 ---
 title: "Watching AI Create Its First Pipulate Plugin: A Meta-Moment in Software Development"
 description: "Witness a remarkable moment where an AI assistant follows its own tutorial to create a Pipulate plugin, demonstrating the future of collaborative software development."
-date: 2024-05-11
 author: Mike Levin
 group: blog
 ---

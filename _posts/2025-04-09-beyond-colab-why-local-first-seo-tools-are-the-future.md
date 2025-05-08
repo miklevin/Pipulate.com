@@ -1,7 +1,6 @@
 ---
 title: "Beyond Colab: Why Local-First SEO Tools Are the Future"
 description: "Discover how local-first development can transform your SEO workflows, from leveraging your browser's saved passwords to creating seamless data pipelines."
-date: 2024-05-09
 author: Mike Levin
 group: blog
 ---

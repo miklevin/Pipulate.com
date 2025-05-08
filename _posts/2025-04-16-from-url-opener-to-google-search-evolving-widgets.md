@@ -1,10 +1,7 @@
 ---
 layout: post
 title: "From URL Opener to Google Search: Evolving Widgets with Querystrings"
-description: "Learn how to evolve a basic URL opener into a powerful Google Search widget while maintaining atomic steps and leveraging browser profiles."
-date: 2024-05-16
-categories: [Workflows, Widgets]
-tags: [python, webbrowser, querystrings, browser-profiles, atomic-steps]
+group: blog
 ---
 
 In our journey of building Pipulate workflows, we've reached an exciting milestone: evolving our URL opener into a specialized Google Search widget. This transformation showcases how to handle querystrings while maintaining our commitment to atomic steps and leveraging browser capabilities.

@@ -1,7 +1,6 @@
 ---
 title: "The Birth of a Plugin: Watching Pipulate Auto-Detect New Code"
 description: "Experience the magic moment when a new plugin comes alive in Pipulate, complete with real-time code detection and deployment - all through the eyes of an AI assistant."
-date: 2024-05-12
 author: Mike Levin
 group: blog
 ---

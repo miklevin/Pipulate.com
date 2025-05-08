@@ -1,7 +1,6 @@
 ---
 title: "Your First Pipulate Plugin: Baby Steps to Browser Automation"
 description: "Start your journey with Pipulate by creating your first plugin - a simple copy/paste exercise that sets the foundation for powerful browser automation."
-date: 2024-05-10
 author: Mike Levin
 group: blog
 ---

@@ -1,7 +1,6 @@
 ---
 title: "Understanding Pipulate Keys: Your Workflow Passport"
 description: "Master Pipulate's clever key system - the invisible thread that ties your workflows together, making them interruptible, resumable, and always ready to pick up exactly where you left off."
-date: 2024-05-13
 author: Mike Levin
 group: blog
 ---

@@ -1,7 +1,6 @@
 ---
 title: "The Local-First Revolution: How Pipulate is Redefining Modern Software Development"
 description: "Discover how Pipulate's local-first approach is revolutionizing software development, bringing back control, privacy, and simplicity to developers."
-date: 2024-05-07
 author: Mike Levin
 group: blog
 ---
