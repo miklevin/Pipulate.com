@@ -1,6 +1,7 @@
 ---
-layout: post
 title: "From URL Opener to Google Search: Evolving Widgets with Querystrings"
+description: "Discover how to transform a basic URL opener into a powerful Google Search widget while maintaining atomic design principles and leveraging browser capabilities for seamless integration."
+author: Mike Levin
 group: blog
 ---
 
