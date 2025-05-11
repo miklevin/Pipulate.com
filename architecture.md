@@ -244,16 +244,16 @@ Pipulate is specifically designed to convert Jupyter notebook cells into guided 
 
 ```
       ┌──────────────────┐    ┌──────────────────┐
-      │  Jupyter Lab     │    │    FastHTML      │
-      │   Notebooks      │    │     Server       │
-      │ ┌──────────┐     │    │  ┌──────────┐    │
-      │ │ Cell 1   │     │    │  │ Step 1   │    │
-      │ │          │     │--->│  │          │    │
-      │ └──────────┘     │    │  └──────────┘    │
-      │ ┌──────────┐     │    │  ┌──────────┐    │
-      │ │ Cell 2   │     │    │  │ Step 2   │    │
-      │ │          │     │--->│  │          │    │
-      │ └──────────┘     │    │  └──────────┘    │
+      │   Jupyter Lab    │    │    FastHTML      │
+      │    Notebooks     │    │     Server       │
+      │  ┌──────────┐    │    │  ┌──────────┐    │
+      │  │ Cell 1   │    │    │  │ Step 1   │    │
+      │  │          │    │--->│  │          │    │
+      │  └──────────┘    │    │  └──────────┘    │
+      │  ┌──────────┐    │    │  ┌──────────┐    │
+      │  │ Cell 2   │    │    │  │ Step 2   │    │
+      │  │          │    │--->│  │          │    │
+      │  └──────────┘    │    │  └──────────┘    │
       │  localhost:8888  │    │  localhost:5001  │
       └──────────────────┘    └──────────────────┘
 ```
@@ -277,7 +277,7 @@ Pipulate supports two main types of plugins:
 The plugin discovery system:
 
 - Scans the `plugins/` directory for Python files matching specific naming patterns
-- Skips files with `xx_` prefix or containing parentheses (useful during development)
+- Skips files with `xx_` prefix or containing parentheses or " Copy" (useful during development)
 - Dynamically imports modules and instantiates classes
 - Registers routes with the FastHTML application
 
@@ -286,6 +286,7 @@ The plugin discovery system:
 workflows/10_hello_flow.py         # Registered as "hello_flow" in menu position 10
 workflows/xx_experimental_flow.py  # Skipped (development version)
 workflows/hello_flow (Copy).py     # Skipped (temporary copy)
+workflows/hello_flow Copy.py       # Skipped (temporary copy)
 ```
 
 ### Workflow for Creating New Plugins
