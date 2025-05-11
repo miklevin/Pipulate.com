@@ -362,6 +362,30 @@ curl -L https://pipulate.com/install.sh | sh -s YourBrandName
 - Document customization options
 - Include troubleshooting guides
 
+### Magic Cookie System: Installation & Transformation Flow
+
+The following diagram illustrates how the magic cookie system works to bootstrap, transform, and update a Pipulate installation without requiring git at the start:
+
+```
+User runs install.sh (via curl)           Nix Flake Activation & Transformation
+┌──────────────────────────────┐         ┌────────────────────────────────────────────┐
+│ 1. Download install.sh       │         │ 5. User runs 'nix develop'                 │
+│ 2. Download ZIP from GitHub  │         │ 6. Flake detects non-git directory         │
+│ 3. Extract ZIP to ~/AppName  │         │ 7. Flake clones repo to temp dir           │
+│ 4. Download ROT13 SSH key    │         │ 8. Preserves app_name.txt, .ssh, .venv     │
+│    to .ssh/rot               │         │ 9. Moves git repo into place               │
+└─────────────┬────────────────┘         │10. Sets up SSH key for git                 │
+              │                          │11. Transforms into git repo                │
+              ▼                          │12. Enables auto-update via git pull        │
+      ┌─────────────────────────────────────────────────────────────────────────────┐
+      │ Result: Fully functional, auto-updating, git-based Pipulate installation    │
+      └─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Legend:**
+- Steps 1–4: Performed by the install.sh script (no git required)
+- Steps 5–12: Performed by the flake.nix logic on first nix develop
+
 ## Development Workflow
 
 When developing white-labeled versions:
