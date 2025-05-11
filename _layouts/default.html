@@ -26,6 +26,7 @@
         <div class="nav-container">
             <nav>
                 <a class="nav-link {% if page.group == 'home' or page.url == "/" %}current{% endif %}" href="/">Home</a>
+                <a class="nav-link {% if page.group == 'documentation' or page.category == 'documentation' %}current{% endif %}" href="/documentation/">Docs</a>
                 <a class="nav-link {% if page.group == 'about' or page.category == 'about' %}current{% endif %}" href="/about/">About</a>
                 <a class="nav-link {% if page.group == 'blog' or page.category == 'blog' %}current{% endif %}" href="/blog/">Blog</a>
                 <a class="nav-link {% if page.group == 'architecture' or page.category == 'architecture' %}current{% endif %}" href="/architecture/">Architecture</a>
