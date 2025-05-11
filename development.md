@@ -285,7 +285,7 @@ When contributing to Pipulate, please adhere to these principles:
 Pipulate uses a "Magic Cookie" system for seamless installation and updates. This approach enables:
 
 - **Git-less Installation**: Users don't need git installed
-- **Automatic Updates**: Software stays current without manual intervention
+- **Automatic Updates**: Software stays current without manual intervention (using git)
 - **Cross-Platform**: Works identically on macOS, Linux, and Windows (WSL)
 - **White-Label Ready**: Easy to rebrand for different organizations
 
