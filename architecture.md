@@ -375,9 +375,9 @@ For planning workflow structure before implementing detailed functionality:
 ```python
 Step(
     id='step_XX',            # Use proper sequential numbering
-    done='placeholder',      # Simple state field name
-    show='Placeholder Step', # Descriptive UI text
-    refill=True,             # Usually True for consistency
+    done='placeholder',      # Field that must aquire data before step proceeds
+    show='Placeholder Step', # What the user sees as that field's label
+    refill=True,             # Whether that field refills on revert-to-step
 )
 ```
 
