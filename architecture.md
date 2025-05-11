@@ -244,7 +244,7 @@ Pipulate is specifically designed to convert Jupyter notebook cells into guided 
 
 ```
       ┌──────────────────┐    ┌──────────────────┐
-      │   Jupyter Lab    │    │    FastHTML      │
+      │  Jupyter Lab     │    │    FastHTML      │
       │   Notebooks      │    │     Server       │
       │ ┌──────────┐     │    │  ┌──────────┐    │
       │ │ Cell 1   │     │    │  │ Step 1   │    │
