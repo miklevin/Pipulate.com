@@ -263,8 +263,8 @@ AI Code Assistants can help enormously here and may go something like:
     You may also update comments, documentation and docstrings regarding the
     anticipated intent of this new workflow, but in all other regards concerning
     program execution, logic flow and most importantly the element construction
-    that controls the critical @patterns/workflow_patterns.mdc  you must
-    stay identical to the @700_widget_shim.py patterns you are deriving from.
+    that controls the critical @patterns/workflow_patterns.mdc you must stay
+    identical to the @700_widget_shim.py patterns you are deriving from.
 
 That should usually give you a good fresh new Pipulate Workflow starting point.
 
