@@ -234,34 +234,37 @@ Creating new plugins follows a specific workflow:
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
 
+## AI Assistance Making a Workflow
+
 AI Code Assistants can help enormously here and may go something like:
 
-Create a copy of @700_widget_shim.py and name it 035_my_workflow.py abiding
-by @implementation/workflow.mdc meaning you will have to give it a new class
-name and set values for:
+    Create a copy of @700_widget_shim.py and name it 035_my_workflow.py abiding
+    by @implementation/workflow.mdc meaning you will have to give it a new class
+    name and set values for:
 
-```python
-    APP_NAME = "unique_identifier"    # Unique ID used in database, different from filename
-    DISPLAY_NAME = "User-Facing Name" # Shown in navigation menu
-    ENDPOINT_MESSAGE = "Description"  # User guidance
-    TRAINING_PROMPT = "Instructions for local LLM"
-```
+    ```python
+        APP_NAME = "unique_identifier"    # Unique ID used in database, different from filename
+        DISPLAY_NAME = "User-Facing Name" # Shown in navigation menu
+        ENDPOINT_MESSAGE = "Description"  # User guidance
+        TRAINING_PROMPT = "Instructions for local LLM"
+    ```
 
-The value you set for `APP_NAME` cannot be identical to the `checkboxes` part of
-`035_my_workflow.py` because that controls the public-facing endpoint and is
-subject to being changed, while `APP_NAME` controls private endpoints and
-foreign keys in databases and will not be changed. They therefore cannot be the
-same value. If the file is named `035_my_workflow.py` then the value for
-`APP_NAME` can for example be `myworkflow` or `my_flow` but not `my_workflow`. 
+    The value you set for `APP_NAME` cannot be identical to the `my_workflow`
+    part of `035_my_workflow.py` because that controls the public-facing
+    endpoint and is subject to being changed, while `APP_NAME` controls private
+    endpoints and foreign keys in databases and will not be changed. They
+    therefore cannot be the same value. If the file is named
+    `035_my_workflow.py` then the value for `APP_NAME` can for example be
+    `myworkflow` or `my_flow` but not `my_workflow`. 
 
-`DISPLAY_NAME` has no such limitations and can be the same as either the
-filename or `APP_NAME` and should be whatever is best for the user experience.
+    `DISPLAY_NAME` has no such limitations and can be the same as either the
+    filename or `APP_NAME` and should be whatever is best for the user experience.
 
-You may also update comments, documentation and docstrings regarded the
-anticipated intent of this new workflow, but in all other regards concerning
-program execution, logic flow and most importantly the element construction
-that controls the critical @patterns/workflow_patterns.mdc  you must
-stay identical to the @700_widget_shim.py patterns you are deriving from.
+    You may also update comments, documentation and docstrings regarded the
+    anticipated intent of this new workflow, but in all other regards concerning
+    program execution, logic flow and most importantly the element construction
+    that controls the critical @patterns/workflow_patterns.mdc  you must
+    stay identical to the @700_widget_shim.py patterns you are deriving from.
 
 That should usually give you a good fresh new Pipulate Workflow starting point.
 
