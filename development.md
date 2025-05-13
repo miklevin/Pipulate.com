@@ -7,6 +7,8 @@ group: development
 
 # Development Guide
 
+## Introduction
+
 Pipulate is designed as a *simpler alternative* to using Jupyter Notebooks — so
 ***you don't have to be a developer to use.*** Most people know Jupyter
 Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
@@ -15,7 +17,9 @@ upping their game in the age of AI. So if you're a technical SEO but a
 non-programmer, just install and use Pipulate. For people who want to actually
 participate in *making* those next-gen SEO tools, this page is for you!
 
-## Something Different
+## Core Concepts
+
+### Something Different
 
 Pipulate will at first look like a familiar (to many) Flask/FastAPI—style Python
 web route programming web framework, but on closer inspection will look
@@ -35,6 +39,8 @@ installed with spell-checking and JupyterAI. On the Pipulate tab you can start
 experimenting around setting up profiles, playing with the tasks app, and trying
 the workflows that don't require Botify. More general SEO workflows will be
 forthcoming. 
+
+## Development Patterns
 
 ### The Plugin System
 
@@ -61,22 +67,6 @@ Jupyter Notebook they have to be much more flexible than your traditional "on
 rails" web app framework — and it's gonna look weird. Figuring out how to create
 and modify Pipulate Workflows will be challenging and take some time, but AI
 Coding Assistance helps A LOT.
-
-## Running, Interrupting & Re-running
-
-Pipulate is a FastHTML app, which means it is much like a Flask or FastAPI app.
-It's being started with the familiar `python server.py` command, but
-automatically by `nix develop` which sets up the `nix` environment. When you
-`Ctrl`+`c` out of it you may have some question whether you are still in nix or
-not, which determines which command you use to get it re-started:
-
-- `nix develop`
-- `python server.py`
-
-...and it's based on whether you see: `(nix)` in the prompt or not. If you do
-see it there, then use `python server.py`. If you don't, then use `nix develop`.
-
-## Core Development Patterns
 
 ### 1. Workflow Development Pattern
 
@@ -225,7 +215,7 @@ all_profiles = profiles()
 
 Creating new plugins follows a specific workflow:
 
-1. **Copy a Template**: Start with a template (e.g., `700_widget_designer.py`) → `700_widget_designer.py`)
+1. **Copy a Template**: Start with a template (e.g., `700_widget_designer.py`) → `xx_my_workflow.py`)
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
@@ -261,26 +251,23 @@ stay identical to the @700_widget_designer.py patterns you are deriving from.
 
 That should usually give you a good fresh new Pipulate Workflow starting point.
 
-## Best Practices
+## Running and Maintenance
 
-1. **Keep it simple.** Avoid complex patterns when simple ones will work.
-2. **Stay local and single-user.** Embrace the benefits of local-first design.
-3. **Be explicit over implicit.** WET code that's clear is better than DRY code that's obscure.
-4. **Preserve the chain reaction.** Maintain the core progression mechanism in workflows.
-5. **Embrace observability.** Make state changes visible and debuggable.
+### Running, Interrupting & Re-running
 
-[Read more about our development philosophy and best practices on our blog →](/blog/)
+Pipulate is a FastHTML app, which means it is much like a Flask or FastAPI app.
+It's being started with the familiar `python server.py` command, but
+automatically by `nix develop` which sets up the `nix` environment. When you
+`Ctrl`+`c` out of it you may have some question whether you are still in nix or
+not, which determines which command you use to get it re-started:
 
-## Contributing
+- `nix develop`
+- `python server.py`
 
-When contributing to Pipulate, please adhere to these principles:
+...and it's based on whether you see: `(nix)` in the prompt or not. If you do
+see it there, then use `python server.py`. If you don't, then use `nix develop`.
 
-* Maintain Local-First Simplicity (No multi-tenant patterns, complex ORMs, heavy client-side state)
-* Respect Server-Side State (Use DictLikeDB/JSON for workflows, MiniDataAPI for CRUD)
-* Preserve the Workflow Pipeline Pattern (Keep steps linear, state explicit)
-* Honor Integrated Features (Don't disrupt core LLM/Jupyter integration)
-
-## The Magic Cookie System
+## Magic Cookie System
 
 Pipulate uses a "Magic Cookie" system for seamless installation and updates. This approach enables:
 
@@ -416,4 +403,21 @@ mv xx_my_workflow.py 30_my_workflow.py
 - Maintain consistent naming
 - Document all customizations
 
-This approach ensures smooth development and deployment of white-labeled versions while maintaining the benefits of automatic updates and cross-platform compatibility. 
+## Best Practices
+
+1. **Keep it simple.** Avoid complex patterns when simple ones will work.
+2. **Stay local and single-user.** Embrace the benefits of local-first design.
+3. **Be explicit over implicit.** WET code that's clear is better than DRY code that's obscure.
+4. **Preserve the chain reaction.** Maintain the core progression mechanism in workflows.
+5. **Embrace observability.** Make state changes visible and debuggable.
+
+[Read more about our development philosophy and best practices on our blog →](/blog/)
+
+## Contributing
+
+When contributing to Pipulate, please adhere to these principles:
+
+* Maintain Local-First Simplicity (No multi-tenant patterns, complex ORMs, heavy client-side state)
+* Respect Server-Side State (Use DictLikeDB/JSON for workflows, MiniDataAPI for CRUD)
+* Preserve the Workflow Pipeline Pattern (Keep steps linear, state explicit)
+* Honor Integrated Features (Don't disrupt core LLM/Jupyter integration)
