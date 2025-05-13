@@ -7,6 +7,8 @@ group: development
 
 # Development Guide
 
+> **Before You Begin**: Make sure you've completed the [installation process](/). This guide assumes you have Pipulate running locally with `nix develop`.
+
 ## Introduction
 
 Pipulate is designed as a *simpler alternative* to using Jupyter Notebooks — so
