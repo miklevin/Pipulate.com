@@ -7,27 +7,74 @@ group: development
 
 # Development Guide
 
-This guide provides essential patterns and workflows for developing with Pipulate. These patterns are designed to help you navigate the codebase and maintain consistency in your development work.
+Pipulate is designed as a *simpler alternative* to using Jupyter Notebooks — so
+***you don't have to be a developer to use.*** Most people know Jupyter
+Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
+notebooks but without the Python code. The main audience is SEO practitioners
+upping their game in the age of AI. So if you're a technical SEO but a
+non-programmer, just install and use Pipulate. For people who want to actually
+participate in *making* those next-gen SEO tools, this page is for you!
 
-## Getting Started
+## Something Different
 
-### 1. Installation
-- Nix Flakes setup
-- Python environment
-- Dependencies
-- GPU support
+Pipulate will at first look like a familiar (to many) Flask/FastAPI—style Python
+web route programming web framework, but on closer inspection will look
+different because HTMX. Pipulate lets you paint linear workflows in HTMX as if
+sheet-music that plays back automations on your local machine. The installer
+sets it all up. After that, you just open a Terminal and `cd` into the directory
+where it's been installed and type `nix develop`. Both JupyterLabs and Pipulate
+will pop up in your browser like websites but running local.
 
-### 2. Project Structure
-- Plugin organization
-- Workflow structure
-- State management
-- Testing setup
+### JupyterLab Included
 
-### 3. Development Environment
-- IDE setup
-- Debugging tools
-- Testing tools
-- Documentation
+Pipulate doesn't replace notebooks, but rather packages up those notebooks into
+workflows for people who don't want to deal with the code, and so I install them
+side-by-side. JupyterLab works as a place to mock-up things to port over to
+Pipulate.In fact, Pipulate is a great way to get a general purpose JupyterLab
+installed with spell-checking and JupyterAI. On the Pipulate tab you can start
+experimenting around setting up profiles, playing with the tasks app, and trying
+the workflows that don't require Botify. More general SEO workflows will be
+forthcoming. 
+
+### The Plugin System
+
+#### Copy/Paste CRUD `010_tasks.py`
+
+There's an automatic plugin registration system that uses the `plugins` folder.
+If you want an immediate positive experience without coding or AI assistance, I
+recommend you just copy/paste the `010_tasks.py` and rename it to something like
+`015_competitors.py` and it will just auto-register the new plugin app and you
+can keep a list of competitors *per user profile*. This CRUD (Create, Read,
+Update, Delete) todo app is based on DRY principles (Don't Repeat Yourself), and
+so there's not much coding for customizations like this. If you want to know
+more about it, it closely resembles the standard TODO app tutorial from
+FastHTML. You can't do any harm. Just stay in Dev-mode and use the `Clear DB`
+mode as much as you like while you get used to it.
+
+#### Weird Wild WET Workflows
+
+The tasks app is the only DRY thing there. Everything else in there are
+`Workflows` and workflows are WET (Write Everything Twice/We Enjoy Typing) — and
+therefore more involved to figure out, but is where the Pipulate's power and
+uniqueness reside. Because Workflows basically let you do anything you can in a
+Jupyter Notebook they have to be much more flexible than your traditional "on
+rails" web app framework — and it's gonna look weird. Figuring out how to create
+and modify Pipulate Workflows will be challenging and take some time, but AI
+Coding Assistance helps A LOT.
+
+## Running, Interrupting & Re-running
+
+Pipulate is a FastHTML app, which means it is much like a Flask or FastAPI app.
+It's being started with the familiar `python server.py` command, but
+automatically by `nix develop` which sets up the `nix` environment. When you
+`Ctrl`+`c` out of it you may have some question whether you are still in nix or
+not, which determines which command you use to get it re-started:
+
+- `nix develop`
+- `python server.py`
+
+...and it's based on whether you see: `(nix)` in the prompt or not. If you do
+see it there, then use `python server.py`. If you don't, then use `nix develop`.
 
 ## Core Development Patterns
 
@@ -37,7 +84,7 @@ When creating new workflows in Pipulate, follow this pattern:
 
 ```python
 class MyWorkflow:
-    APP_NAME = "unique_name"        # Unique identifier
+    APP_NAME = "unique_name"           # Unique identifier, different from filename
     DISPLAY_NAME = "User-Facing Name"  # UI display name
     
     def __init__(self, pipulate, db, pipeline, rt):
@@ -62,9 +109,84 @@ Key points:
 - Routes are registered in the constructor
 - State is managed through the pipeline object
 
+### Anatomy of a Step
+
+To understand Pipulate Workflows is to understand a Step. A Step is modeled
+after a single Cell in a Jupyter Notebook, but because there is a ***visible***
+part and an ***invisible*** part after you press submit or "Run" the Cell, each
+step really has 2 parts:
+
+1. step_xx
+2. step_xx_submit
+
+The first part, `step_xx` builds the user interface for the user. The later
+submit part is mostly invisible to the user but does have to reconstruct the
+`elif` condition to produce the revert-stage view. It's usually very little code
+— so little that it's not worth "externalizing" or building into a function for
+reuse. This is the WET part of Workflows. The 3 stages of a `step_xx` are:
+
+```python
+if "finalized" in finalize_data and placeholder_value:
+    # STEP STAGE: FINALIZED
+elif placeholder_value and state.get("_revert_target") != step_id:
+    # STEP STAGE: REVERT
+else:
+    # STEP STAGE: DATA COLLECTION
+```
+
+A lot of the other scaffolding that goes around this is very standard but still
+not externalized to keep everything highly customizable. If we zoom out a bit
+the overall schematic of a Pipulate Workflow is:
+
+```python
+import  # Do all imports
+
+# Model for a workflow step
+Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'], defaults=(None,))
+
+class WorkflowName:
+    APP_NAME            # Private endpoints & foreign key, must be different from filename
+    DISPLAY_NAME        # Show the user
+    ENDPOINT_MESSAGE    # Sent to chat UI when user visits
+    TRAINING_PROMPT     # Local LLM trained on when user visits
+
+    # --- Initialization ---
+    def __init__(self, app, pipulate, pipeline, db, app_name=APP_NAME):
+        steps   # define steps
+        routes  # register routes
+
+    # --- Core Workflow Engine Methods ---
+    async def landing(self):  # Builds initial UI that presents key
+    async def init(self, request):  # Handles landing key submit
+        # hx_trigger="load" (chain reaction)
+    async def finalize(self, request):  # Puts workflow in locked state
+    async def unfinalize(self, request):  # Takes workflow out of locked state
+    async def get_suggestion(self, step_id, state):  # Pipes data from step to step
+    async def handle_revert(self, request):  # Handles revert buttons
+
+    # --- Step Methods ---
+
+    async def step_01(self, request):
+        if "finalized" in finalize_data and placeholder_value:
+            # hx_trigger="load" (chain reaction)
+        elif placeholder_value and state.get("_revert_target") != step_id:
+            # hx_trigger="load" (chain reaction)
+        else:
+            # Collects data (don't chain react over)
+
+    async def step_01_submit(self, request):
+        # hx_trigger="load" (chain reaction)
+```
+
 ### 2. Chain Reaction Pattern
 
-The chain reaction pattern is crucial for workflow progression:
+If everything has been filled-in on a particular Workflow instance, it will
+always chain react to the end when you enter its key, as if selecting *Run All
+Cells* in a Notebook. This is by design and gives Pipulate it's signature feel,
+constantly reinforcing the top-down linear workflow model. 
+
+Keeping the chain reaction pattern in place in each of its standard positions is
+crucial for workflow progression:
 
 ```python
 return Div(
@@ -103,163 +225,41 @@ all_profiles = profiles()
 
 Creating new plugins follows a specific workflow:
 
-1. **Copy a Template**: Start with a template (e.g., `20_hello_workflow.py`) → `20_hello_workflow (Copy).py`
+1. **Copy a Template**: Start with a template (e.g., `700_widget_designer.py`) → `700_widget_designer.py`)
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
-4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `30_my_flow.py`) to assign menu order and activate
+4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
 
-### 5. Data Visualization Pattern
+AI Code Assistants can help enormously here and may go something like:
 
-For embedding visualizations in workflows:
+Create a copy of @700_widget_designer.py and name it 035_my_workflow.py abiding
+by @implementation/workflow.mdc meaning you will have to give it a new class
+name and set values for:
 
 ```python
-import pandas as pd
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
-
-# Generate plot
-fig, ax = plt.subplots(figsize=(10, 6))
-df.plot(ax=ax)
-plt.tight_layout()
-
-# Convert to base64 for embedding
-buffer = BytesIO()
-plt.savefig(buffer, format='png')
-buffer.seek(0)
-image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
-
-# Return in HTML
-return Div(
-    Card(
-        H4("Data Visualization"),
-        Img(src=f"data:image/png;base64,{image_base64}",
-            style="width:100%;max-width:800px"),
-    ),
-    Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
-    id=step_id
-)
+    APP_NAME = "unique_identifier"    # Unique ID used in database, different from filename
+    DISPLAY_NAME = "User-Facing Name" # Shown in navigation menu
+    ENDPOINT_MESSAGE = "Description"  # User guidance
+    TRAINING_PROMPT = "Instructions for local LLM"
 ```
 
-## Workflow Development
+The value you set for `APP_NAME` cannot be identical to the `checkboxes` part of
+`035_my_workflow.py` because that controls the public-facing endpoint and is
+subject to being changed, while `APP_NAME` controls private endpoints and
+foreign keys in databases and will not be changed. They therefore cannot be the
+same value. If the file is named `035_my_workflow.py` then the value for
+`APP_NAME` can for example be `myworkflow` or `my_flow` but not `my_workflow`. 
 
-### 1. Basic Workflow
-- Step definition
-- State management
-- Route registration
-- Error handling
+`DISPLAY_NAME` has no such limitations and can be the same as either the
+filename or `APP_NAME` and should be whatever is best for the user experience.
 
-### 2. Widget Implementation
-- Chain reaction pattern
-- State preservation
-- Error recovery
-- Mobile support
+You may also update comments, documentation and docstrings regarded the
+anticipated intent of this new workflow, but in all other regards concerning
+program execution, logic flow and most importantly the element construction
+that controls the critical @patterns/workflow_patterns.mdc  you must
+stay identical to the @700_widget_designer.py patterns you are deriving from.
 
-### 3. Testing
-- Unit tests
-- Integration tests
-- State validation
-- Error scenarios
-
-## CRUD Development
-
-### 1. MiniDataAPI Usage
-- Table definition
-- CRUD operations
-- Type safety
-- Error handling
-
-### 2. UI Components
-- Form handling
-- Data display
-- State management
-- Validation
-
-### 3. Testing
-- Data operations
-- UI interactions
-- Error handling
-- State validation
-
-## Plugin Development
-
-### 1. Plugin Structure
-- Directory organization
-- File naming
-- Documentation
-- Testing
-
-### 2. Development Workflow
-- Local development
-- Testing
-- Deployment
-- Version control
-
-### 3. Best Practices
-- Code organization
-- Error handling
-- State management
-- Documentation
-
-## Common Patterns
-
-### 1. State Management
-- DictLikeDB usage
-- State preservation
-- Error recovery
-- Data validation
-
-### 2. Error Handling
-- Input validation
-- API errors
-- State recovery
-- User feedback
-
-### 3. UI Patterns
-- Form handling
-- Data display
-- Loading states
-- Error messages
-
-## Testing Guidelines
-
-### 1. Unit Testing
-- Function testing
-- State validation
-- Error handling
-- Edge cases
-
-### 2. Integration Testing
-- Workflow testing
-- State management
-- Error recovery
-- UI interactions
-
-### 3. Performance Testing
-- Resource usage
-- Response times
-- Memory usage
-- Load testing
-
-## Deployment
-
-### 1. Local Deployment
-- Environment setup
-- Configuration
-- Testing
-- Monitoring
-
-### 2. Production Deployment
-- Environment setup
-- Configuration
-- Testing
-- Monitoring
-
-### 3. Maintenance
-- Updates
-- Backups
-- Monitoring
-- Troubleshooting
+That should usually give you a good fresh new Pipulate Workflow starting point.
 
 ## Best Practices
 
