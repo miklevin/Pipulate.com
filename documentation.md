@@ -40,6 +40,17 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
   - Check the [Troubleshooting & FAQ](/#troubleshooting-management) section on the homepage.
   - Visit the [blog](/blog/) for tips and updates.
 
+## Repository Resources
+
+- **[Main Repository](https://github.com/miklevin/pipulate)**  
+  The core Pipulate codebase and documentation.
+
+- **[Development Rules](https://github.com/miklevin/pipulate/tree/main/.cursor/rules)**  
+  Guidelines and patterns for contributing to Pipulate.
+
+- **[README](https://github.com/miklevin/pipulate/blob/main/README.md)**  
+  Project overview and quick start information.
+
 ## About This Documentation
 
 - **Install instructions** are always up to date on the [homepage](/).
