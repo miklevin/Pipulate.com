@@ -260,7 +260,7 @@ AI Code Assistants can help enormously here and may go something like:
     `DISPLAY_NAME` has no such limitations and can be the same as either the
     filename or `APP_NAME` and should be whatever is best for the user experience.
 
-    You may also update comments, documentation and docstrings regarded the
+    You may also update comments, documentation and docstrings regarding the
     anticipated intent of this new workflow, but in all other regards concerning
     program execution, logic flow and most importantly the element construction
     that controls the critical @patterns/workflow_patterns.mdc  you must
