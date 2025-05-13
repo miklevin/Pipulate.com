@@ -24,9 +24,6 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 - **[Development Guide](/development/)**  
   Patterns, best practices, and how to create your own workflows and plugins.
 
-- **[Workflow Implementation Guide](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/workflow_implementation_guide.md)**  
-  In-depth reference for building and modifying Pipulate workflows, including critical patterns and real-world examples.
-
 - **[Troubleshooting & FAQ](/#troubleshooting-management)**  
   Common issues, solutions, and how to get help.
 
@@ -38,12 +35,6 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 - **New to Pipulate?**
   - Begin with the [Installation Guide](/) to get Pipulate running on your system.
   - Read the [Architecture Overview](/architecture/) for a high-level understanding.
-
-- **Want to build workflows?**
-  - Dive into the [Development Guide](/development/) and the [Workflow Implementation Guide](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/workflow_implementation_guide.md).
-
-- **Looking for examples?**
-  - See the reference plugins and workflow templates in the [Workflow Implementation Guide](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/workflow_implementation_guide.md).
 
 - **Need help?**
   - Check the [Troubleshooting & FAQ](/#troubleshooting-management) section on the homepage.
