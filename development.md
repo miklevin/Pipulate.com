@@ -215,14 +215,14 @@ all_profiles = profiles()
 
 Creating new plugins follows a specific workflow:
 
-1. **Copy a Template**: Start with a template (e.g., `700_widget_designer.py`) → `xx_my_workflow.py`)
+1. **Copy a Template**: Start with a template (e.g., `700_widget_shim.py`) → `xx_my_workflow.py`)
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
 
 AI Code Assistants can help enormously here and may go something like:
 
-Create a copy of @700_widget_designer.py and name it 035_my_workflow.py abiding
+Create a copy of @700_widget_shim.py and name it 035_my_workflow.py abiding
 by @implementation/workflow.mdc meaning you will have to give it a new class
 name and set values for:
 
@@ -247,7 +247,7 @@ You may also update comments, documentation and docstrings regarded the
 anticipated intent of this new workflow, but in all other regards concerning
 program execution, logic flow and most importantly the element construction
 that controls the critical @patterns/workflow_patterns.mdc  you must
-stay identical to the @700_widget_designer.py patterns you are deriving from.
+stay identical to the @700_widget_shim.py patterns you are deriving from.
 
 That should usually give you a good fresh new Pipulate Workflow starting point.
 
