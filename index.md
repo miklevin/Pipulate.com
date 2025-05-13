@@ -7,7 +7,7 @@ group: home
 
 # Pipulate Installation Guide
 
-Pipulate is free and open source SEO software that can be installed in just a few steps on macOS or Linux (including Windows via WSL).
+Pipulate is free and open source SEO software that can be installed in just a few steps on macOS or Linux (including Windows via WSL). Many features in its current state rely on the Botify API.
 
 ## Complete Installation Process
 
