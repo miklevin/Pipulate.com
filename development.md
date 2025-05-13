@@ -21,13 +21,21 @@ participate in *making* those next-gen SEO tools, this page is for you!
 
 ### Something Different
 
-Pipulate will at first look like a familiar (to many) Flask/FastAPI—style Python
-web route programming web framework, but on closer inspection will look
-different because HTMX. Pipulate lets you paint linear workflows in HTMX as if
-sheet-music that plays back automations on your local machine. The installer
-sets it all up. After that, you just open a Terminal and `cd` into the directory
-where it's been installed and type `nix develop`. Both JupyterLabs and Pipulate
-will pop up in your browser like websites but running local.
+Pipulate is built on familiar web development foundations but takes a unique approach:
+
+1. **Framework Similarity**: It uses Python web routing patterns similar to Flask/FastAPI
+2. **HTMX Integration**: The key difference is its use of HTMX for dynamic interactions
+3. **Workflow Creation**: You create step-by-step automation sequences using HTMX components
+4. **Local Execution**: All workflows run on your local machine, not in the cloud
+5. **Easy Setup**: The installer handles all configuration automatically
+
+To get started:
+1. Open Terminal
+2. Navigate to your Pipulate installation directory using `cd`
+3. Run `nix develop`
+4. Access both JupyterLab and Pipulate through your web browser - they run locally but appear as web applications
+
+> **Note on Nix**: If you're new to Nix, check out [Nix Pills](https://nixos.org/guides/nix-pills/) for a gentle introduction. For now, just know that `nix develop` sets up your development environment automatically.
 
 ### JupyterLab Included
 
@@ -39,6 +47,8 @@ installed with spell-checking and JupyterAI. On the Pipulate tab you can start
 experimenting around setting up profiles, playing with the tasks app, and trying
 the workflows that don't require Botify. More general SEO workflows will be
 forthcoming. 
+
+> **Porting from JupyterLab**: While porting is currently manual, the workflow structure closely mirrors notebook cells, making the transition intuitive. Future versions may include automated porting tools.
 
 ## Development Patterns
 
@@ -57,16 +67,18 @@ more about it, it closely resembles the standard TODO app tutorial from
 FastHTML. You can't do any harm. Just stay in Dev-mode and use the `Clear DB`
 mode as much as you like while you get used to it.
 
-#### Weird Wild WET Workflows
+#### Flexible Workflow System
 
 The tasks app is the only DRY thing there. Everything else in there are
 `Workflows` and workflows are WET (Write Everything Twice/We Enjoy Typing) — and
 therefore more involved to figure out, but is where the Pipulate's power and
 uniqueness reside. Because Workflows basically let you do anything you can in a
 Jupyter Notebook they have to be much more flexible than your traditional "on
-rails" web app framework — and it's gonna look weird. Figuring out how to create
+rails" web app framework — and it's gonna look different. Figuring out how to create
 and modify Pipulate Workflows will be challenging and take some time, but AI
 Coding Assistance helps A LOT.
+
+> **Debugging Workflows**: Pipulate includes built-in logging and state inspection tools. Use the `pip.read_state()` function to inspect workflow state at any point, and check the browser's developer console for HTMX events and responses.
 
 ### 1. Workflow Development Pattern
 
@@ -98,6 +110,8 @@ Key points:
 - Steps are defined as named tuples
 - Routes are registered in the constructor
 - State is managed through the pipeline object
+
+> **Important**: The `APP_NAME` must be different from both the filename and any public endpoints. For example, if your file is `035_my_workflow.py`, use `myworkflow` or `my_flow` as the `APP_NAME`, not `my_workflow`.
 
 ### Anatomy of a Step
 
@@ -301,6 +315,8 @@ The system performs git pulls:
 - Before server startup
 - During application runs
 
+> **Security Note**: The ROT13-encoded SSH key is used as a read-only deploy key with restricted repository access. The security of this system relies on proper repository permissions rather than the encoding itself.
+
 ### White-Labeling Process
 
 To create a white-labeled version of Pipulate:
@@ -421,3 +437,5 @@ When contributing to Pipulate, please adhere to these principles:
 * Respect Server-Side State (Use DictLikeDB/JSON for workflows, MiniDataAPI for CRUD)
 * Preserve the Workflow Pipeline Pattern (Keep steps linear, state explicit)
 * Honor Integrated Features (Don't disrupt core LLM/Jupyter integration)
+
+> **Note on LLM Integration**: The `TRAINING_PROMPT` field enables local LLM training for workflow-specific assistance. Future documentation will cover advanced LLM integration techniques.
