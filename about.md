@@ -24,7 +24,7 @@ In an era of cloud subscriptions and vendor lock-in, Pipulate takes a different 
 - **Eliminates Vendor Lock-in**: Freedom from proprietary platforms
 - **Full Resource Access**: Run intensive tasks 24/7 without usage limits
 
-[Read our latest thoughts on the local-first revolution →](/blog/)
+[Read the detialed guide →](/guide/)
 
 ### WET Over DRY: Clarity Over Conciseness
 

@@ -24,11 +24,8 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 - **[Development Guide](/development/)**  
   Patterns, best practices, and how to create your own workflows and plugins.
 
-- **[Troubleshooting & FAQ](/#troubleshooting-management)**  
-  Common issues, solutions, and how to get help.
-
-- **[Blog](/blog/)**  
-  Articles on philosophy, updates, and advanced usage.
+- **[Guide](/guide/)**  
+  Detailed developer guide.
 
 ## Where to Start
 
@@ -36,9 +33,47 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
   - Begin with the [Installation Guide](/) to get Pipulate running on your system.
   - Read the [Architecture Overview](/architecture/) for a high-level understanding.
 
-- **Need help?**
-  - Check the [Troubleshooting & FAQ](/#troubleshooting-management) section on the homepage.
-  - Visit the [blog](/blog/) for tips and updates.
+## Architecture
+
+The Architecture section provides a deep dive into how Pipulate is built and how it works:
+
+- **Core Components**
+  - Workflow Engine
+  - Local-First Architecture
+  - Plugin System
+  - Data Management
+
+- **Design Principles**
+  - Local-First Philosophy
+  - Open Source Approach
+  - Extensibility
+  - Security Model
+
+For detailed information, visit the [Architecture Overview](/architecture/).
+
+## Development
+
+The Development section covers everything you need to know about building with Pipulate:
+
+- **Creating Workflows**
+  - Workflow Structure
+  - Step Types
+  - Data Flow
+  - Error Handling
+
+- **Plugin Development**
+  - Plugin Architecture
+  - Creating Custom Steps
+  - Integration Patterns
+  - Testing
+
+- **Best Practices**
+  - Code Organization
+  - Performance Optimization
+  - Security Considerations
+  - Documentation Standards
+
+For detailed information, visit the [Development Guide](/development/).
 
 ## Repository Resources
 
@@ -57,7 +92,7 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 - **Architecture and development docs** are maintained for both new and advanced users.
 - **Workflow patterns and plugin examples** are available in the guides and the main [pipulate](https://github.com/miklevin/pipulate) repository.
 
-If you can't find what you need, please open an issue on [GitHub](https://github.com/miklevin/pipulate) or check the blog for the latest updates.
+If you can't find what you need, please open an issue on [GitHub](https://github.com/miklevin/pipulate) or check the guide for the latest updates.
 
 ---
 

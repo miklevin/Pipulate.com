@@ -7,6 +7,8 @@ group: development
 
 # Development Guide
 
+> **Note**: This is a condensed reference guide. For detailed, step-by-step tutorials and in-depth explanations, see the [Pipulate Guide](/guide/).
+
 > **Before You Begin**: Make sure you've completed the [installation process](/). This guide assumes you have Pipulate running locally with `nix develop`.
 
 ## Introduction
@@ -246,62 +248,6 @@ Creating new plugins follows a specific workflow:
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
-
-## AI Assistance Making a Workflow
-
-AI Code Assistants can help enormously with workflow development. Here's a templated approach:
-
-1. **Initial Setup Prompt**:
-```
-Create a new workflow based on the widget shim template that:
-- Has a unique APP_NAME different from the filename
-- Includes a clear DISPLAY_NAME for the UI
-- Provides an informative ENDPOINT_MESSAGE
-- Uses a training prompt file for AI context
-- Follows the standard workflow pattern
-```
-
-2. **Step Definition Prompt**:
-```
-Define the steps for this workflow:
-- Each step should have a clear purpose
-- Include appropriate refill settings
-- Add transforms where needed
-- End with a finalize step
-```
-
-3. **Implementation Prompt**:
-```
-Implement the workflow methods:
-- Landing page with key input
-- Step handlers with proper state management
-- Submit handlers with chain reactions
-- Finalize/unfinalize functionality
-```
-
-4. **Testing Prompt**:
-```
-Test the workflow by:
-- Verifying state management
-- Checking chain reactions
-- Testing revert functionality
-- Validating finalization
-```
-
-The AI assistant will help you:
-1. Create the initial workflow structure
-2. Define appropriate steps
-3. Implement the required methods
-4. Test and debug the workflow
-5. Add proper error handling
-6. Ensure state management works correctly
-
-Remember to:
-- Keep the workflow focused on a single purpose
-- Use clear, descriptive names
-- Include proper error handling
-- Test thoroughly before deployment
-- Document any special requirements
 
 ## Running and Maintenance
 
