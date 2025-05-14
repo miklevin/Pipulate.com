@@ -83,13 +83,11 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
   <h1 itemprop="headline">{{- page.title -}}</h1>
   <blockquote itemprop="description">{{- page.description | markdownify -}}</blockquote>
   <h4>
-    <time itemprop="datePublished" datetime="{{- page.date | date_to_xmlschema -}}">
-      {{- page.date | date: '%A, %B %-d, %Y' -}}
-    </time>
+    <span class="post-number">Post #{{ post_number }} of {{ total_posts }}</span>
   </h4>
   <div itemprop="articleBody">
     {{- content -}}
-        </div>
+  </div>
 </article>
 
 <nav class="post-navigation bottom-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -133,7 +131,7 @@ Reverse the numbering so newest posts (position 0) show as highest number
 {%- assign total_posts = flat_index.size -%}
 {%- assign post_number = total_posts | minus: current_position -%}
 <div class="post-counter" style="text-align: center; margin: 20px 0; font-style: italic;">
-  <span>Post #{{ post_number }} of {{ total_posts }} - {{ page.date | date: '%B %-d, %Y' }}</span>
+  <span>Post #{{ post_number }} of {{ total_posts }}</span>
 </div>
 
 {%- comment -%}

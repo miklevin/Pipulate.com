@@ -17,7 +17,7 @@ Welcome to the Pipulate blog, where we share insights about local-first software
     <article class="blog-card">
         <header>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+            <span class="post-number">Post #{{ forloop.index }} of {{ site.posts.size }}</span>
         </header>
         <p>{{ post.description }}</p>
     </article>
@@ -60,7 +60,7 @@ Welcome to the Pipulate blog, where we share insights about local-first software
     text-decoration: underline;
 }
 
-.blog-card time {
+.post-number {
     display: block;
     color: var(--muted-color);
     font-size: 0.9rem;
