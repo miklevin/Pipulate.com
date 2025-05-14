@@ -88,19 +88,29 @@ When creating new workflows in Pipulate, follow this pattern:
 
 ```python
 class MyWorkflow:
+    # --- Core Configuration ---
     APP_NAME = "unique_name"           # Unique identifier, different from filename
     DISPLAY_NAME = "User-Facing Name"  # UI display name
+    ENDPOINT_MESSAGE = (               # Shown when user visits workflow
+        "This workflow helps you [purpose]. "
+        "Enter an ID to start or resume your workflow."
+    )
+    TRAINING_PROMPT = "workflow_name.md"  # Training context for AI assistance
+    PRESERVE_REFILL = True             # Whether to preserve refill values on revert
     
-    def __init__(self, pipulate, db, pipeline, rt):
-        self.pipulate, self.db = pipulate, db
+    def __init__(self, app, pipulate, pipeline, db, app_name=APP_NAME):
+        self.app = app
+        self.pipulate = pipulate
         self.pipeline = pipeline
+        self.db = db
+        self.app_name = app_name
         
-        # Define steps
+        # Define workflow steps
         Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'])
         self.steps = [
             Step(id='step_01', done='first_field', show='First Step', refill=True),
             Step(id='step_02', done='second_field', show='Second Step', refill=True),
-            # More steps...
+            Step(id='finalize', done='finalized', show='Finalize', refill=False)
         ]
         
         # Register routes
@@ -108,10 +118,11 @@ class MyWorkflow:
 ```
 
 Key points:
-- Each workflow is a Python class
-- Steps are defined as named tuples
+- Each workflow is a Python class with standardized configuration
+- Steps are defined as named tuples with clear purposes
 - Routes are registered in the constructor
 - State is managed through the pipeline object
+- Training prompts help AI assistants understand the workflow
 
 > **Important**: The `APP_NAME` must be different from both the filename and any public endpoints. For example, if your file is `035_my_workflow.py`, use `myworkflow` or `my_flow` as the `APP_NAME`, not `my_workflow`.
 
@@ -238,37 +249,59 @@ Creating new plugins follows a specific workflow:
 
 ## AI Assistance Making a Workflow
 
-AI Code Assistants can help enormously here and may go something like:
+AI Code Assistants can help enormously with workflow development. Here's a templated approach:
 
-    Create a copy of @700_widget_shim.py and name it 035_my_workflow.py abiding
-    by @implementation/workflow.mdc meaning you will have to give it a new class
-    name and set values for:
+1. **Initial Setup Prompt**:
+```
+Create a new workflow based on the widget shim template that:
+- Has a unique APP_NAME different from the filename
+- Includes a clear DISPLAY_NAME for the UI
+- Provides an informative ENDPOINT_MESSAGE
+- Uses a training prompt file for AI context
+- Follows the standard workflow pattern
+```
 
-    ```python
-        APP_NAME = "unique_identifier"    # Unique ID used in database, different from filename
-        DISPLAY_NAME = "User-Facing Name" # Shown in navigation menu
-        ENDPOINT_MESSAGE = "Description"  # User guidance
-        TRAINING_PROMPT = "Instructions for local LLM"
-    ```
+2. **Step Definition Prompt**:
+```
+Define the steps for this workflow:
+- Each step should have a clear purpose
+- Include appropriate refill settings
+- Add transforms where needed
+- End with a finalize step
+```
 
-    The value you set for `APP_NAME` cannot be identical to the `my_workflow`
-    part of `035_my_workflow.py` because that controls the public-facing
-    endpoint and is subject to being changed, while `APP_NAME` controls private
-    endpoints and foreign keys in databases and will not be changed. They
-    therefore cannot be the same value. If the file is named
-    `035_my_workflow.py` then the value for `APP_NAME` can for example be
-    `myworkflow` or `my_flow` but not `my_workflow`. 
+3. **Implementation Prompt**:
+```
+Implement the workflow methods:
+- Landing page with key input
+- Step handlers with proper state management
+- Submit handlers with chain reactions
+- Finalize/unfinalize functionality
+```
 
-    `DISPLAY_NAME` has no such limitations and can be the same as either the
-    filename or `APP_NAME` and should be whatever is best for the user experience.
+4. **Testing Prompt**:
+```
+Test the workflow by:
+- Verifying state management
+- Checking chain reactions
+- Testing revert functionality
+- Validating finalization
+```
 
-    You may also update comments, documentation and docstrings regarding the
-    anticipated intent of this new workflow, but in all other regards concerning
-    program execution, logic flow and most importantly the element construction
-    that controls the critical @patterns/workflow_patterns.mdc you must stay
-    identical to the @700_widget_shim.py patterns you are deriving from.
+The AI assistant will help you:
+1. Create the initial workflow structure
+2. Define appropriate steps
+3. Implement the required methods
+4. Test and debug the workflow
+5. Add proper error handling
+6. Ensure state management works correctly
 
-That should usually give you a good fresh new Pipulate Workflow starting point.
+Remember to:
+- Keep the workflow focused on a single purpose
+- Use clear, descriptive names
+- Include proper error handling
+- Test thoroughly before deployment
+- Document any special requirements
 
 ## Running and Maintenance
 
