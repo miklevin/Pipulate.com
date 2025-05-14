@@ -7,48 +7,21 @@ group: blog
 Create a flat index of all posts in the correct sort order
 {%- endcomment -%}
 {%- assign sorted_posts = site.posts | sort: 'date' -%}
-{%- assign grouped_posts = sorted_posts | group_by_exp: "post", "post.date | date: '%Y-%m-%d'" | reverse -%}
-{%- assign flat_index = "" | split: "" -%}
-{%- for day in grouped_posts -%}
-  {%- assign day_posts = day.items | sort: 'sort_order' | reverse -%}
-  {%- for post in day_posts -%}
-    {%- assign flat_index = flat_index | push: post -%}
-  {%- endfor -%}
-{%- endfor -%}
-
-{%- comment -%}
-Find current post's position in the flat index
-{%- endcomment -%}
-{%- assign current_position = -1 -%}
-{%- for idx_post in flat_index -%}
-  {%- if idx_post.url == page.url -%}
-    {%- assign current_position = forloop.index0 -%}
+{%- assign total_posts = sorted_posts.size -%}
+{%- assign current_post_index = 0 -%}
+{%- for post in sorted_posts -%}
+  {%- if post.url == page.url -%}
+    {%- assign current_post_index = forloop.index -%}
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
 
-{%- comment -%}
-Determine prev and next posts in the flat index
-But flip the direction - "previous" is newer (lower index), "next" is older (higher index)
-{%- endcomment -%}
-{%- assign custom_prev = nil -%}
-{%- assign custom_next = nil -%}
-{%- assign max_index = flat_index.size | minus: 1 -%}
-{%- if current_position < max_index -%}
-  {%- assign prev_position = current_position | plus: 1 -%}
-  {%- assign custom_prev = flat_index[prev_position] -%}
-{%- endif -%}
-{%- if current_position > 0 -%}
-  {%- assign next_position = current_position | minus: 1 -%}
-  {%- assign custom_next = flat_index[next_position] -%}
-{%- endif -%}
-
 <nav class="post-navigation top-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
-  {%- if custom_prev -%}
+  {%- if page.previous -%}
     <div class="previous-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Previous Post</span>
-      <a href="{{ custom_prev.url }}" itemprop="item">
-        <span itemprop="name">◂ {{ custom_prev.title }}</span>
+      <a href="{{ page.previous.url }}" itemprop="item">
+        <span itemprop="name">◂ {{ page.previous.title }}</span>
       </a>
       <meta itemprop="position" content="1" />
     </div>
@@ -66,11 +39,11 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
     <meta itemprop="position" content="2" />
   </div>
   
-  {%- if custom_next -%}
+  {%- if page.next -%}
     <div class="next-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Next Post</span>
-      <a href="{{ custom_next.url }}" itemprop="item">
-        <span itemprop="name">{{ custom_next.title }} ▸</span>
+      <a href="{{ page.next.url }}" itemprop="item">
+        <span itemprop="name">{{ page.next.title }} ▸</span>
       </a>
       <meta itemprop="position" content="3" />
     </div>
@@ -83,7 +56,7 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
   <h1 itemprop="headline">{{- page.title -}}</h1>
   <blockquote itemprop="description">{{- page.description | markdownify -}}</blockquote>
   <h4>
-    <span class="post-number">Post #{{ post_number }} of {{ total_posts }}</span>
+    <span class="post-number">Post #{{ current_post_index }} of {{ total_posts }}</span>
   </h4>
   <div itemprop="articleBody">
     {{- content -}}
@@ -91,11 +64,11 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
 </article>
 
 <nav class="post-navigation bottom-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
-  {%- if custom_prev -%}
+  {%- if page.previous -%}
     <div class="previous-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Previous Post</span>
-      <a href="{{ custom_prev.url }}" itemprop="item">◂ {{ custom_prev.title }}</a>
-      <meta itemprop="name" content="{{ custom_prev.title }}">
+      <a href="{{ page.previous.url }}" itemprop="item">◂ {{ page.previous.title }}</a>
+      <meta itemprop="name" content="{{ page.previous.title }}">
       <meta itemprop="position" content="1" />
     </div>
   {%- else -%}
@@ -112,11 +85,11 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
     <meta itemprop="position" content="2" />
   </div>
   
-  {%- if custom_next -%}
+  {%- if page.next -%}
     <div class="next-post" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <span class="nav-label">Next Post</span>
-      <a href="{{ custom_next.url }}" itemprop="item">{{ custom_next.title }} ▸</a>
-      <meta itemprop="name" content="{{ custom_next.title }}">
+      <a href="{{ page.next.url }}" itemprop="item">{{ page.next.title }} ▸</a>
+      <meta itemprop="name" content="{{ page.next.title }}">
       <meta itemprop="position" content="3" />
     </div>
   {%- else -%}
@@ -124,14 +97,8 @@ But flip the direction - "previous" is newer (lower index), "next" is older (hig
   {%- endif -%}
 </nav>
 
-{%- comment -%}
-Calculate post number using the flat index position
-Reverse the numbering so newest posts (position 0) show as highest number
-{%- endcomment -%}
-{%- assign total_posts = flat_index.size -%}
-{%- assign post_number = total_posts | minus: current_position -%}
 <div class="post-counter" style="text-align: center; margin: 20px 0; font-style: italic;">
-  <span>Post #{{ post_number }} of {{ total_posts }}</span>
+  <span>Post #{{ current_post_index }} of {{ total_posts }}</span>
 </div>
 
 {%- comment -%}
