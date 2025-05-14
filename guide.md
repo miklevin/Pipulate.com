@@ -1,6 +1,6 @@
 ---
 title: Guide
-description: Latest news and insights from the Pipulate team
+description: Pipulate Developer Guide
 permalink: /guide/
 layout: page
 group: guide
@@ -12,8 +12,6 @@ Welcome to the Pipulate guide, where we introduce you to local-first software
 development, Python, HTMX, FastHTML, modern SEO tools, and the future of
 AI-assisted development. Follow the sequence of posts to build up the full story
 and jump on the Pipulate Workflow Development bandwagon.
-
-## Latest Posts
 
 <div class="blog-grid">
 {% for post in site.posts reversed %}
