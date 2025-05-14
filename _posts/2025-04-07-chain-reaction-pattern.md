@@ -2,7 +2,7 @@
 layout: post
 title: "The Chain Reaction Pattern: Pipulate's Secret Sauce"
 description: "Deep dive into how Pipulate uses HTMX chain reactions to create robust, maintainable workflows"
-group: blog
+group: guide
 ---
 
 When building workflow systems, one of the trickiest challenges is managing state and progression between steps. Many systems use complex state machines, event buses, or reactive frameworks. Pipulate takes a different approach: the Chain Reaction Pattern.

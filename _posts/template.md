@@ -2,6 +2,6 @@
 layout: post
 title: Changeme
 description: Changeme
-group: blog
+group: guide
 ---
 

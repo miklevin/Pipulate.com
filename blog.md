@@ -1,14 +1,17 @@
 ---
-title: Blog
+title: Guide
 description: Latest news and insights from the Pipulate team
-permalink: /blog/
+permalink: /guide/
 layout: page
-group: blog
+group: guide
 ---
 
-# Pipulate Blog
+# Pipulate Guide
 
-Welcome to the Pipulate blog, where we share insights about local-first software development, modern SEO tools, and the future of AI-assisted development.
+Welcome to the Pipulate guide, where we introduce you to local-first software
+development, Python, HTMX, FastHTML, modern SEO tools, and the future of
+AI-assisted development. Follow the sequence of posts to build up the full story
+and jump on the Pipulate Workflow Development bandwagon.
 
 ## Latest Posts
 

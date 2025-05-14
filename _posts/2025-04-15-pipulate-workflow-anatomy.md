@@ -2,7 +2,7 @@
 layout: post
 title: Anatomy of a Minimal Pipulate Workflow
 description: "Pipulate Dev Guide (Ch. 1): Anatomy of a minimal workflow. Deep dive into the 'shim' template's class structure, step logic, core methods, & HTMX patterns."
-group: blog
+group: guide
 ---
 
 Here's the first "chapter" of the guide, focusing on the foundational anatomy of a minimal Pipulate workflow, using the "widget shim" (`700_widget_shim.py`) as the primary example. This lays the groundwork for understanding how more complex widgets are built upon this core structure.

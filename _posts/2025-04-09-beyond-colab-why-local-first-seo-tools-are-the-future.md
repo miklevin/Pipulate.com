@@ -2,7 +2,7 @@
 title: "Beyond Colab: Why Local-First SEO Tools Are the Future"
 description: "Discover how local-first development can transform your SEO workflows, from leveraging your browser's saved passwords to creating seamless data pipelines."
 author: Mike Levin
-group: blog
+group: guide
 ---
 
 If you're a technical SEO who's been using Python and notebooks, chances are you've spent a lot of time in Google Colab. It's a great tool for experimentation and sharing code, but what if I told you there's a better way? A way that gives you more control, better privacy, and the ability to create powerful, reusable tools that work with your existing browser setup?

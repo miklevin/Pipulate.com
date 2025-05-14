@@ -2,7 +2,7 @@
 layout: post
 title: Expanding Your Pipulate Workflow
 description: "Expand Pipulate workflows: Learn to add steps, define handlers, update UI messages, and manage the HTMX chain reaction for multi-step processes."
-group: blog
+group: guide
 ---
 
 ## Pipulate Workflow Development Guide

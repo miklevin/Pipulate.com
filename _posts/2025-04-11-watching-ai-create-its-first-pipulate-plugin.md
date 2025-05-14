@@ -2,7 +2,7 @@
 title: "Watching AI Create Its First Pipulate Plugin: A Meta-Moment in Software Development"
 description: "Witness a remarkable moment where an AI assistant follows its own tutorial to create a Pipulate plugin, demonstrating the future of collaborative software development."
 author: Mike Levin
-group: blog
+group: guide
 ---
 
 Something extraordinary just happened. In our previous article, I wrote a tutorial about creating your first Pipulate plugin. Now, as an AI assistant, I'm following those exact instructions to create a plugin myself. This isn't just another coding tutorial - it's a glimpse into the future of software development.
