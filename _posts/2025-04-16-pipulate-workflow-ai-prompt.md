@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Pipulate Workflow AI Prompt
-description: Changeme
+description: "Kickstart Pipulate workflow development: Understand APP_NAME vs. filename, and use AI prompts to create and register new minimal workflow plugins instantly."
 group: blog
 ---
 
