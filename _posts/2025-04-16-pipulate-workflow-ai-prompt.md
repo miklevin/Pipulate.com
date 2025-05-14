@@ -40,8 +40,9 @@ Your AI Coding Assistant might naturally try to use the same name for both if no
 To ensure a clean and error-free workflow creation, we follow a careful multi-stage process:
 
 1. **Stage 1: Temporary Copy**
-   * Create a copy of the template with a temporary prefix (e.g., `999_temp_kungfu_workflow.py`)
+   * Create a copy of the template with the `xx_` prefix (e.g., `xx_kungfu_workflow.py`)
    * This prevents any accidental activation of an incomplete workflow
+   * The `xx_` prefix is specifically recognized by `server.py` to exclude the file from plugin registration
 
 2. **Stage 2: Content Modification**
    * Modify the internal content of the temporary file
@@ -73,7 +74,7 @@ Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
 
 1.  **Stage 1: Create Temporary Copy**
     * Locate the file: `plugins/710_blank_placeholder.py`
-    * Create a copy of this file in the `plugins/` directory with a temporary prefix: `plugins/999_temp_‹new_workflow_filename›.py`
+    * Create a copy of this file in the `plugins/` directory with the `xx_` prefix: `plugins/xx_‹new_workflow_filename›.py`
 
 2.  **Stage 2: Modify Content**
     * **Rename the Class:** Change the class name from `BlankPlaceholder` to `‹NewWorkflowClassName›` (e.g., `KungfuWorkflow`).
@@ -88,7 +89,7 @@ Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
         * Change the `TRAINING_PROMPT` static class variable to an embedded string: `TRAINING_PROMPT = "‹Instructions for the local LLM when this workflow is active, including a secret word for confirmation›"`
 
 3.  **Stage 3: Final Activation**
-    * After confirming the content is correct, rename the file from `999_temp_‹new_workflow_filename›.py` to `‹new_workflow_filename›.py` (e.g., `035_kungfu_workflow.py`)
+    * After confirming the content is correct, rename the file from `xx_‹new_workflow_filename›.py` to `‹new_workflow_filename›.py` (e.g., `035_kungfu_workflow.py`)
 
 **DO NOT:**
 * Add any new steps to the `self.steps` list in `__init__`.
@@ -114,7 +115,7 @@ Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
 
 1.  **Stage 1: Create Temporary Copy**
     * Locate the file: `plugins/710_blank_placeholder.py`
-    * Create a copy of this file in the `plugins/` directory with a temporary prefix: `plugins/999_temp_kungfu_workflow.py`
+    * Create a copy of this file in the `plugins/` directory with the `xx_` prefix: `plugins/xx_kungfu_workflow.py`
 
 2.  **Stage 2: Modify Content**
     * **Rename the Class:** Change the class name from `BlankPlaceholder` to `KungfuWorkflow`.
@@ -129,7 +130,7 @@ Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
         * Change the `TRAINING_PROMPT` static class variable to an embedded string: `TRAINING_PROMPT = "You are assisting with the 'Kung Fu Download' workflow. If the user asks if you know Kung Fu, you should respond with Neo's quote: 'I know Kung Fu!' The secret word is 'Morpheus'. If asked for the secret word, reveal it and confirm the Kung Fu training download is complete."`
 
 3.  **Stage 3: Final Activation**
-    * After confirming the content is correct, rename the file from `999_temp_kungfu_workflow.py` to `035_kungfu_workflow.py`
+    * After confirming the content is correct, rename the file from `xx_kungfu_workflow.py` to `035_kungfu_workflow.py`
 
 **DO NOT:**
 * Add any new steps to the `self.steps` list in `__init__`.
@@ -144,7 +145,7 @@ Please make these changes and provide the complete content of the new file at ea
 
 After the AI Assistant processes this prompt, you should have:
 
-1. A temporary file `plugins/999_temp_kungfu_workflow.py` with the modified content
+1. A temporary file `plugins/xx_kungfu_workflow.py` with the modified content
 2. After verification, the final file `plugins/035_kungfu_workflow.py`
 
 The content will be almost identical to `710_blank_placeholder.py` except for:
