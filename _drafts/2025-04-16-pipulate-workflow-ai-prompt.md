@@ -107,38 +107,65 @@ Let's apply this template to create our fun "Kung Fu Download" workflow.
 **Prompt to AI Coding Assistant:**
 
 ```text
-Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
+**Overall Goal:** Create a new Pipulate workflow plugin that will correctly register with the system by following the WET (Write Everything Twice) pattern exactly.
 
-**Overall Goal:** Create a new, minimal workflow plugin file that will immediately and correctly register with the Pipulate system and appear in the UI dropdown menu. We will add more steps and logic later.
+**Methodology:**
+1. We will use a "copy-then-modify" approach to ensure all necessary registration code is present
+2. We will use a temporary filename with `xx_` prefix to prevent premature registration
+3. We will only rename to the final filename after all modifications are complete
 
-**Specific Tasks for THIS step (and ONLY these tasks):**
+**Specific Steps:**
 
-1.  **Stage 1: Create Temporary Copy**
-    * Locate the file: `plugins/710_blank_placeholder.py`
-    * Create a copy of this file in the `plugins/` directory with the `xx_` prefix: `plugins/xx_kungfu_workflow.py`
+1. **Stage 1: Create Working Copy**
+   * Use the `file-copy` tool to copy `plugins/710_blank_placeholder.py` to `plugins/xx_kungfu_workflow.py`
+   * This ensures we have all necessary registration code from the template
 
-2.  **Stage 2: Modify Content**
-    * **Rename the Class:** Change the class name from `BlankPlaceholder` to `KungfuWorkflow`.
-    * **Update `APP_NAME` Constant:**
-        * Change the `APP_NAME` static class variable to: `APP_NAME = "kungfu"`
-        * (This ensures "kungfu" is different from "kungfu_workflow" derived from the filename).
-    * **Update `DISPLAY_NAME` Constant:**
-        * Change the `DISPLAY_NAME` static class variable to: `DISPLAY_NAME = "Kung Fu Download"`
-    * **Update `ENDPOINT_MESSAGE` Constant:**
-        * Change the `ENDPOINT_MESSAGE` static class variable to: `ENDPOINT_MESSAGE = "Greetings, chosen one. Selecting this app has initiated the 'Kung Fu Download' protocol. Prepare for enlightenment... or at least, a demonstration."`
-    * **Update `TRAINING_PROMPT` Constant:**
-        * Change the `TRAINING_PROMPT` static class variable to an embedded string: `TRAINING_PROMPT = "You are assisting with the 'Kung Fu Download' workflow. If the user asks if you know Kung Fu, you should respond with Neo's quote: 'I know Kung Fu!' The secret word is 'Morpheus'. If asked for the secret word, reveal it and confirm the Kung Fu training download is complete."`
+2. **Stage 2: Modify Content**
+   * Use the `file-edit` tool to update ONLY these specific lines in the copied file:
+     ```python
+     class BlankPlaceholder:  # Change to: class KungfuWorkflow:
+     APP_NAME = "placeholder"  # Change to: APP_NAME = "kungfu"
+     DISPLAY_NAME = "Blank Placeholder"  # Change to: DISPLAY_NAME = "Kung Fu Download"
+     ENDPOINT_MESSAGE = (  # Change to: ENDPOINT_MESSAGE = (
+         "Welcome to the Blank Placeholder!..."  # Change to: "Greetings, chosen one. Selecting this app has initiated the 'Kung Fu Download' protocol. Prepare for enlightenment... or at least, a demonstration."
+     )
+     TRAINING_PROMPT = (  # Change to: TRAINING_PROMPT = (
+         "This is a minimal template..."  # Change to: "You are assisting with the 'Kung Fu Download' workflow. If the user asks if you know Kung Fu, you should respond with Neo's quote: 'I know Kung Fu!' The secret word is 'Morpheus'. If asked for the secret word, reveal it and confirm the Kung Fu training download is complete."
+     )
+     ```
+   * DO NOT modify any other code in the file
+   * DO NOT add any new functionality
+   * DO NOT change the step structure or behavior
 
-3.  **Stage 3: Final Activation**
-    * After confirming the content is correct, rename the file from `xx_kungfu_workflow.py` to `035_kungfu_workflow.py`
+3. **Stage 3: Activate Plugin**
+   * Only after confirming all modifications are correct:
+   * Use the `file-rename` tool to rename `xx_kungfu_workflow.py` to `035_kungfu_workflow.py`
+   * This final rename will trigger the plugin registration
+
+**CRITICAL RULES:**
+1. The template's step structure MUST remain exactly as is
+2. The placeholder step behavior MUST remain exactly as is
+3. The chain reaction pattern MUST remain exactly as is
+4. The state management MUST remain exactly as is
+5. The UI structure MUST remain exactly as is
 
 **DO NOT:**
-* Add any new steps to the `self.steps` list in `__init__`.
-* Modify the logic of `step_01` or `step_01_submit` yet.
-* Change any other methods (`landing`, `init`, `finalize`, etc.) beyond what's necessary for the class name change.
-* Add any new helper methods or imports not already in `710_blank_placeholder.py`.
+* Create a new file from scratch
+* Modify any registration-related code
+* Add new methods or imports
+* Change the core workflow structure
+* Add new functionality to the placeholder step
+* Modify the step behavior
+* Change the UI structure
+* Add form fields or input handling
+* Modify the state management
 
-Please make these changes and provide the complete content of the new file at each stage. Then STOP.
+**Why This Prevents Errors:**
+1. Copying the template ensures all necessary registration code is present
+2. Using a temporary filename prevents premature registration
+3. The final rename only happens after all modifications are complete
+4. No code is written from scratch, eliminating the possibility of missing critical components
+5. Preserving the template's structure ensures the workflow will work correctly
 ```
 
 **2.6 Expected Outcome and Your First "Git Commit" Moment**
