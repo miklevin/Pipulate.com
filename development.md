@@ -249,7 +249,7 @@ all_profiles = profiles()
 
 Creating new plugins follows a specific workflow:
 
-1. **Copy a Template**: Start with a template (e.g., `700_widget_shim.py`) → `xx_my_workflow.py`)
+1. **Copy a Template**: Start with a template (e.g., `710_blank_placeholder.py`) → `xx_my_workflow.py`)
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
