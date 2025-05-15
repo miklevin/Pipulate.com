@@ -52,16 +52,16 @@ You'll run the script from your project's root directory (`pipulate/`) via the c
 
 **Example Usage: Bootstrapping the "Kung Fu Download" Workflow**
 
-Let's create our "Kung Fu Download" example. From your `pipulate/` project root, you would run:
+Let's create our "Kung Fu Download" example. From your `pipulate/precursors` folder, you would run:
 
 ```bash
-python precursors/create_workflow.py \
-    035_kungfu_workflow.py \
-    KungfuWorkflow \
-    kungfu \
-    "Kung Fu Download" \
-    'Greetings, chosen one. Selecting this app has initiated the "Kung Fu Download" protocol. Prepare for enlightenment... or at least, a demonstration.' \
-    'You are assisting with the "Kung Fu Download" workflow. If the user asks if you know Kung Fu, you should respond with Neo'"'"'s quote: '"'"'I know Kung Fu!'"'"' The secret word is '"'"'Morpheus'"'"'. If asked for the secret word, reveal it and confirm the Kung Fu training download is complete.'
+python create_workflow.py \
+035_kungfu_workflow.py \
+KungfuWorkflow \
+kungfu \
+"Kung Fu Download" \
+"Greetings, chosen one. Selecting this app has initiated the 'Kung Fu Download' protocol. Prepare for enlightenment... or at least, a demonstration." \
+'You are assisting with the "Kung Fu Download" workflow. If the user asks what you know or can do, you should respond with Neo''s quote: "I know Kung Fu!" The secret word is "Morpheus". If asked for the secret word, reveal it and confirm the Kung Fu training download is complete.'
 ```
 
 **2.5 The "Kung Fu Download" Example: Understanding the Generated File**
