@@ -7,7 +7,7 @@ group: home
 
 # Pipulate Installation Guide
 
-Pipulate is a *simpler alternative* to using Jupyter Notebooks for SEO automation. It lets you create step-by-step workflows that run locally on your machine, without needing to write Python code. Think of it as Jupyter Notebooks, but designed specifically for SEO practitioners who want to automate their work without becoming developers.
+Pipulate is a *simpler alternative* to using Jupyter Notebooks for SEO automation. It lets you create step-by-step workflows that run locally on your machine, without needing to write Python code. Think of it as Jupyter Notebooks, but designed specifically for SEO practitioners who want to automate their work without becoming developers. It runs like a website on your local machine. Follow instructions to install...
 
 ## Process
 
@@ -23,7 +23,7 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
   * You will be prompted for your (Apple) hardware login.
   * You will ***not be able to see yourself type*** in the password.
   * There will be 2 "Yes" to confirm messages.
-* **Important:** After installation completes, close your terminal and open a new one
+* **Important:** After installation completes, close your terminal and open a new one.
 
 ### 2. Install Pipulate
 
