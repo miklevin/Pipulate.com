@@ -46,7 +46,7 @@ To get started:
 Pipulate doesn't replace notebooks, but rather packages up those notebooks into
 workflows for people who don't want to deal with the code, and so I install them
 side-by-side. JupyterLab works as a place to mock-up things to port over to
-Pipulate.In fact, Pipulate is a great way to get a general purpose JupyterLab
+Pipulate. In fact, Pipulate is a great way to get a general purpose JupyterLab
 installed with spell-checking and JupyterAI. On the Pipulate tab you can start
 experimenting around setting up profiles, playing with the tasks app, and trying
 the workflows that don't require Botify. More general SEO workflows will be
