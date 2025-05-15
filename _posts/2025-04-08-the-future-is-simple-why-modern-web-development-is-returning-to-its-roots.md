@@ -74,9 +74,9 @@ This approach gives us:
 When you combine Python, HTMX, and local-first development, you get something powerful:
 
 ```bash
-# Start a new project
-pipulate new my-project
-cd my-project
+# Perform the install branding it however you like
+curl -L https://pipulate.com/install.sh | sh -s SEOChatBot
+cd SEOChatBot
 nix develop
 ```
 
