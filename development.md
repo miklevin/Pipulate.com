@@ -186,13 +186,17 @@ class WorkflowName:
 
     async def step_01(self, request):
         if "finalized" in finalize_data and placeholder_value:
+            # STEP PHASE: Finalize
             # hx_trigger="load" (chain reaction)
         elif placeholder_value and state.get("_revert_target") != step_id:
+            # STEP PHASE: Revert
             # hx_trigger="load" (chain reaction)
         else:
+            # STEP PHASE: Get Input
             # Collects data (don't chain react - data has to be collected!)
 
     async def step_01_submit(self, request):
+        # SAME AS: Revert
         # hx_trigger="load" (chain reaction)
 ```
 
