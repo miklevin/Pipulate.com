@@ -99,4 +99,4 @@ The Nix environment includes:
 
 This approach eliminates the "works on my machine" problem and ensures Pipulate runs reliably everywhere.
 
-[Learn more about our local-first approach in our blog →](/blog/)
+[Learn more about our local-first approach in our Guide →](/guide/)
