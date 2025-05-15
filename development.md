@@ -139,17 +139,17 @@ step really has 2 parts:
 
 The first part, `step_xx` builds the user interface for the user. The later
 submit part is mostly invisible to the user but does have to reconstruct the
-`elif` condition to produce the revert-stage view. It's usually very little code
+`elif` condition to produce the revert-phase view. It's usually very little code
 — so little that it's not worth "externalizing" or building into a function for
-reuse. This is the WET part of Workflows. The 3 stages of a `step_xx` are:
+reuse. This is the WET part of Workflows. The 3 phases of a `step_xx` are:
 
 ```python
 if "finalized" in finalize_data and placeholder_value:
-    # STEP STAGE: FINALIZED
+    # STEP PHASE: Finalize
 elif placeholder_value and state.get("_revert_target") != step_id:
-    # STEP STAGE: REVERT
+    # STEP PHASE: Revert
 else:
-    # STEP STAGE: DATA COLLECTION
+    # STEP PHASE: Get Input
 ```
 
 A lot of the other scaffolding that goes around this is very standard but still
