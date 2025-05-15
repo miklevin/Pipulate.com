@@ -190,7 +190,7 @@ class WorkflowName:
         elif placeholder_value and state.get("_revert_target") != step_id:
             # hx_trigger="load" (chain reaction)
         else:
-            # Collects data (don't chain react over)
+            # Collects data (don't chain react - data has to be collected!)
 
     async def step_01_submit(self, request):
         # hx_trigger="load" (chain reaction)
