@@ -202,13 +202,15 @@ class WorkflowName:
 
 ### 2. Chain Reaction Pattern
 
-If everything has been filled-in on a particular Workflow instance, it will
-always chain react to the end when you enter its key, as if selecting *Run All
-Cells* in a Notebook. This is by design and gives Pipulate it's signature feel,
-constantly reinforcing the top-down linear workflow model. 
+Pipulate Workflows always chain-react as far as they can when you plug-in a Key!
+This is their secret to non-interruptability. The truth is Pipulate Workflows
+are always interrupted all the time, just going as far as they can until
+encountering a step with no data — therefore providing perfect resumability.
 
-Keeping the chain reaction pattern in place in each of its standard positions is
-crucial for workflow progression:
+This chain reaction gives Pipulate its signature feel, constantly reinforcing
+the top-down linear workflow model that mimics Notebooks *Run All Cells.* This
+is going to be weird to you until it isn't. Keeping the chain reaction pattern
+in place in each of its standard positions is crucial for workflow progression:
 
 ```python
 return Div(
