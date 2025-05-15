@@ -87,3 +87,4 @@ Artificial Intelligence is integrated thoughtfully into the Pipulate ecosystem:
 
 Pipulate is a living project. While specific implementation details may evolve as the technological landscape shifts and new best practices emerge, our core philosophical commitments—to local-first operation, simplicity, reproducibility, user empowerment, and pragmatic design—will remain our steadfast guides. We are committed to learning, adapting, and refining Pipulate, always in service of its users and these foundational principles.
 
+Visit the [Pipulate Guide](/guide/) to learn more.
