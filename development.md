@@ -98,7 +98,6 @@ class MyWorkflow:
         "Enter an ID to start or resume your workflow."
     )
     TRAINING_PROMPT = "workflow_name.md"  # Training context for AI assistance
-    PRESERVE_REFILL = True             # Whether to preserve refill values on revert
     
     def __init__(self, app, pipulate, pipeline, db, app_name=APP_NAME):
         self.app = app
