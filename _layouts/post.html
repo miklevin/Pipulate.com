@@ -1,6 +1,6 @@
 ---
 layout: default
-group: blog
+group: guide
 ---
 
 {%- comment -%}
@@ -30,9 +30,9 @@ Create a flat index of all posts in the correct sort order
   {%- endif -%}
   
   <div class="home-link" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-    <a href="/blog/" itemprop="item" class="home-link-container">
+    <a href="/guide/" itemprop="item" class="home-link-container">
       <span class="home-text" itemprop="name">
-        <span class="nav-label">Blog Index</span>
+        <span class="nav-label">guide Index</span>
         <span class="home-word">Home</span>
       </span>
     </a>
@@ -52,7 +52,7 @@ Create a flat index of all posts in the correct sort order
   {%- endif -%}
 </nav>
 
-<article itemscope itemtype="http://schema.org/BlogPosting">
+<article itemscope itemtype="http://schema.org/guidePosting">
   <h1 itemprop="headline">{{- page.title -}}</h1>
   <blockquote itemprop="description">{{- page.description | markdownify -}}</blockquote>
   <h4>
@@ -76,9 +76,9 @@ Create a flat index of all posts in the correct sort order
   {%- endif -%}
   
   <div class="home-link" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-    <a href="/blog/" itemprop="item" class="home-link-container">
+    <a href="/guide/" itemprop="item" class="home-link-container">
       <span class="home-text" itemprop="name">
-        <span class="nav-label">Blog Index</span>
+        <span class="nav-label">guide Index</span>
         <span class="home-word">Home</span>
       </span>
     </a>
@@ -107,7 +107,7 @@ Schema.org metadata for SEO
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@type": "guidePosting",
   "headline": {{ page.title | jsonify }},
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
