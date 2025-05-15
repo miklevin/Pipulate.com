@@ -2,7 +2,7 @@
 title: Pipulate Architecture
 description: Architecture of Pipulate Free and Open Source SEO Software
 permalink: /architecture/
-group: architecture
+group: documentation
 ---
 
 # Pipulate Technical Architecture
