@@ -21,7 +21,7 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 - **[Architecture Overview](/architecture/)**  
   Learn how Pipulate is built, its core design principles, and how the workflow engine works.
 
-- **[Development Guide](/development/)**  
+- **[1-Page Development Guide](/development/)**  
   Single-source page for patterns, best practices, and how to create your own workflows and plugins.
 
 - **[In-depth Guide](/guide/)**  
