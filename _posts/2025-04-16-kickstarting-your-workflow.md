@@ -33,7 +33,7 @@ Before we dive into the script, it's crucial to reiterate the most important rul
 This script is your new best friend for starting Pipulate workflows.
 
   * **Purpose:** To reliably and deterministically create a new, minimal, and correctly configured workflow plugin file by copying `plugins/710_blank_placeholder.py` and replacing its placeholder values with your specifications.
-  * **Location:** You should save this script as `pipulate/precursors/create_workflow.py`.
+  * **Location:** You should save this script as `pipulate/helpers/create_workflow.py`.
   * **Benefit:** It ensures your new workflow registers correctly with Pipulate's plugin system from the moment it's created, giving you an immediate "win" and a stable foundation.
 
 **2.4 Using `create_workflow.py`**
@@ -52,7 +52,7 @@ You'll run the script from your project's root directory (`pipulate/`) via the c
 
 **Example Usage: Bootstrapping the "Kung Fu Download" Workflow**
 
-Let's create our "Kung Fu Download" example. From your `pipulate/precursors` folder, you would run:
+Let's create our "Kung Fu Download" example. From your `pipulate/helpers` folder, you would run:
 
 ```bash
 python create_workflow.py \
