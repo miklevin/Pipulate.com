@@ -17,6 +17,70 @@ cat data.txt | grep "pattern" | sort | uniq -c
 
 Each command does one thing well, and data flows naturally through the pipeline. Pipulate's Chain Reaction Pattern brings this same elegance to web workflows.
 
+## The Three Phases of a Step
+
+Every step in a Pipulate workflow has three distinct phases, each with its own role in the chain reaction:
+
+```python
+async def step_XX(self, request):
+    # ... setup code ...
+    
+    if "finalized" in finalize_data and step_value:
+        # PHASE 1: Finalize
+        # Shows locked view of completed step
+        return Div(
+            Card(H3(f"🔒 {step.show}: {step_value}")),
+            Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+            id=step_id
+        )
+    elif step_value and state.get("_revert_target") != step_id:
+        # PHASE 2: Revert
+        # Shows completed step with revert option
+        return Div(
+            Card(H3(f"{step.show}: {step_value}")),
+            Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+            id=step_id
+        )
+    else:
+        # PHASE 3: Get Input
+        # Shows input form for new data
+        return Div(
+            Card(
+                H3(f"{step.show}"),
+                Form(...)  # Input form here
+            ),
+            Div(id=next_step_id),  # No hx_trigger here - wait for form submission
+            id=step_id
+        )
+```
+
+The chain reaction flows differently in each phase:
+
+1. **Finalize Phase**: Shows locked view, chains to next step
+2. **Revert Phase**: Shows completed view with revert option, chains to next step
+3. **Get Input Phase**: Shows input form, waits for submission
+
+## The Submit Handler: Revert Phase Revisited
+
+The submit handler (`step_XX_submit`) is essentially a specialized version of the Revert Phase:
+
+```python
+async def step_XX_submit(self, request):
+    # ... process form data ...
+    
+    # Store the new value
+    await pip.update_step_state(pipeline_id, step_id, new_value, steps)
+    
+    # Return the Revert Phase view
+    return Div(
+        Card(H3(f"{step.show}: {new_value}")),
+        Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+        id=step_id
+    )
+```
+
+This is why the submit handler looks similar to the Revert Phase - it's showing the same completed state view, just with newly submitted data.
+
 ## The Golden Pattern
 
 At its core, the pattern is deceptively simple:
@@ -179,30 +243,62 @@ async def step_XX(self, request):
     next_step_id = steps[step_index + 1].id if step_index < len(steps) - 1 else 'finalize'
     pipeline_id = db.get("pipeline_id", "unknown")
     state = pip.read_state(pipeline_id)
+    step_value = state.get(step.done, "")
     
-    try:
-        # Process step
-        result = await process_data()
-        
-        # Store state
-        await pip.update_step_state(pipeline_id, step_id, result, steps)
-        
-        # Return with chain reaction
+    # Finalize Phase
+    if "finalized" in state.get("finalize", {}) and step_value:
+        return Div(
+            Card(H3(f"🔒 {step.show}: {step_value}")),
+            Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+            id=step_id
+        )
+    
+    # Revert Phase
+    elif step_value and state.get("_revert_target") != step_id:
+        return Div(
+            Card(H3(f"{step.show}: {step_value}")),
+            Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+            id=step_id
+        )
+    
+    # Get Input Phase
+    else:
         return Div(
             Card(
-                H3("Processing Complete"),
-                result_display
+                H3(f"{step.show}"),
+                Form(
+                    Input(name=step.done, value=step_value),
+                    Button("Submit", type="submit"),
+                    hx_post=f"/{app_name}/{step_id}_submit",
+                    hx_target=f"#{step_id}"
+                )
             ),
-            Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+            Div(id=next_step_id),  # No hx_trigger - wait for form submission
             id=step_id
         )
-    except Exception as e:
-        # Error handling with chain reaction
-        return Div(
-            P(f"Error: {str(e)}", style=pip.get_style("error")),
-            Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
-            id=step_id
-        )
+
+async def step_XX_submit(self, request):
+    """POST handler for step XX submission"""
+    pip, db, steps, app_name = self.pipulate, self.db, self.steps, self.app_name
+    step_id = "step_XX"
+    step_index = self.steps_indices[step_id]
+    step = steps[step_index]
+    next_step_id = steps[step_index + 1].id if step_index < len(steps) - 1 else 'finalize'
+    pipeline_id = db.get("pipeline_id", "unknown")
+    
+    # Process form data
+    form = await request.form()
+    new_value = form.get(step.done, "").strip()
+    
+    # Store the new value
+    await pip.update_step_state(pipeline_id, step_id, new_value, steps)
+    
+    # Return the Revert Phase view
+    return Div(
+        Card(H3(f"{step.show}: {new_value}")),
+        Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
+        id=step_id
+    )
 ```
 
 ## Conclusion
