@@ -250,7 +250,11 @@ all_profiles = profiles()
 Creating new plugins follows a specific workflow:
 
 1. **Copy a Template**: Start with a template (e.g., `710_blank_placeholder.py`) → `xx_my_workflow.py`)
+   > **Tip**: Use the `create_workflow.py` helper script in the `helpers/` directory to automatically generate a new workflow from the template. This script handles all the boilerplate setup and ensures consistent naming conventions.
+
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)
+   > **Tip**: Use the `splice_workflow_step.py` helper script to automatically add new steps to your workflow. It handles step numbering, method generation, and maintains the chain reaction pattern. Just run it with your workflow filename as an argument.
+
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
 
