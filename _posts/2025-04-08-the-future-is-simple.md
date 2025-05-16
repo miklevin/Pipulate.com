@@ -86,6 +86,32 @@ Now you have:
 - No cloud dependencies
 - Complete control over your data
 
+## Simplicity by Design: FastHTML, HTMX, and Explicit State
+
+Pipulate's stack is built for clarity and maintainability:
+- **FastHTML**: Write HTML in Python, keeping logic and UI together
+- **HTMX**: Use server-driven UI updates for robust, accessible interactivity ([07_ui_and_htmx.mdc])
+- **Explicit State**: Every workflow step is explicit, observable, and testable ([03_workflow_core.mdc], [04_chain_reaction_pattern.mdc])
+- **WET Principle**: Prefer explicitness over abstraction for workflows ([03_workflow_core.mdc])
+
+This means:
+- No hidden magic or leaky abstractions
+- UI and state are always in sync
+- Debugging and testing are straightforward
+
+## The Chain Reaction Pattern: Robust, Predictable Workflows
+
+Pipulate's chain reaction pattern ensures that each step in a workflow explicitly triggers the next, making state transitions reliable and observable. This is the secret to building tools that are both powerful and maintainable ([04_chain_reaction_pattern.mdc]).
+
+## Developer Experience: Reproducibility, Testability, and Joy
+
+> **Callout: Why Developers Love Pipulate**
+> - **Reproducibility**: Nix ensures every developer gets the same environment ([02_environment_and_installation.mdc])
+> - **Testability**: Each workflow step is a function you can test in isolation ([13_testing_and_debugging.mdc])
+> - **Observability**: State is stored in SQLite and visible at every step
+> - **Explicitness**: The WET principle makes code easy to read, debug, and extend
+> - **Simplicity**: No complex build steps, no fragile client-side state
+
 ## The Future is Bright
 
 The future of web development isn't about more complexity - it's about better simplicity. It's about:

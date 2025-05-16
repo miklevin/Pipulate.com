@@ -99,6 +99,14 @@ return Div(
 
 That `hx_trigger="load"` is Pipulate's pipe operator. Just as removing a `|` breaks a Unix pipeline, removing `hx_trigger="load"` breaks the chain reaction.
 
+## Never Break the Chain: Checklist
+
+- [x] Every step's output must include a Div for the next step with `hx_trigger="load"` (except when waiting for user input)
+- [x] The input form phase must include a placeholder Div for the next step (without `hx_trigger`)
+- [x] All error paths must preserve the chain (include the next step Div)
+- [x] The chain reaction must be explicit in every step's GET and POST handler ([04_chain_reaction_pattern.mdc])
+- [x] Test normal, error, and edge-case flows ([13_testing_and_debugging.mdc])
+
 ## Why It Works
 
 The pattern succeeds because it:
@@ -108,6 +116,12 @@ The pattern succeeds because it:
 3. **Enables Reversibility**: Steps can be reverted without breaking the chain
 4. **Simplifies Testing**: Each step can be tested in isolation
 5. **Follows HTMX Principles**: Uses HTMX's natural request/response cycle
+
+## The WET Principle: Why Not DRY?
+
+Pipulate intentionally follows the WET (Write Everything Twice) principle rather than DRY (Don't Repeat Yourself). Why? Because workflows often need subtle variations that DRY abstractions would make harder to implement. This explicitness makes each step observable, testable, and easy to debug ([03_workflow_core.mdc]).
+
+This is similar to how Unix commands have overlapping functionality (`cat` vs `less`, `find` vs `locate`). The overlap gives users flexibility without sacrificing reliability.
 
 ## Common Pitfalls
 
@@ -211,15 +225,16 @@ return Div(
 )
 ```
 
-## The WET Philosophy
+## The Chain Reaction Pattern in the Plugin System
 
-Pipulate intentionally follows the WET (Write Everything Twice) principle rather than DRY (Don't Repeat Yourself). Why? Because workflows often need subtle variations that DRY abstractions would make harder to implement.
+Pipulate's plugin system ([11_plugin_development_guidelines.mdc]) and state management rules ([05_state_management.mdc]) are designed to support the chain reaction pattern:
+- Each plugin defines explicit step handlers
+- State is managed in SQLite and keyed by workflow keys ([06_key_system.mdc])
+- The UI and state are always in sync, making workflows robust and observable
 
-This is similar to how Unix commands have overlapping functionality (`cat` vs `less`, `find` vs `locate`). The overlap gives users flexibility without sacrificing reliability.
+## Testing Your Chain Reaction
 
-## Testing Chain Reactions
-
-Always test these scenarios:
+To ensure your workflow is robust, always test:
 
 1. Normal progression through steps
 2. Error handling in each step
@@ -228,6 +243,8 @@ Always test these scenarios:
 5. State preservation between steps
 6. Revert functionality
 7. Edge cases specific to your workflow
+
+See [13_testing_and_debugging.mdc] for more on best practices for testing Pipulate workflows.
 
 ## Real-World Example
 

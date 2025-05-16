@@ -9,6 +9,15 @@ group: guide
 
 Google Colab opened doors for many SEOs into Python automation. Its free, zero-setup environment was a great launchpad. But for professional, repeatable, and private SEO workflows, Colab quickly becomes a walled garden, fraught with limitations that hinder true productivity and control. It's time to graduate from the cloud notebook and embrace the local-first revolution, transforming how you build and use SEO tools.
 
+> **Sidebar: The Chain Reaction Pattern**
+> 
+> Pipulate replaces the "run cell by cell" model of Colab with the [chain reaction pattern](04_chain_reaction_pattern.mdc):
+> - Each workflow step is explicit and server-driven
+> - State is saved in SQLite after every step
+> - The UI updates via HTMX, always reflecting the true server-side state
+> - You can interrupt, resume, or revert any workflow at any step
+> - This makes Pipulate workflows observable, testable, and robust
+
 ### The Colab Ceiling: Why Cloud Notebooks Fall Short for Serious SEO
 
 While Colab democratized Python access, its inherent structure imposes critical limitations once your SEO automation needs mature:
@@ -30,7 +39,7 @@ While Colab democratized Python access, its inherent structure imposes critical 
     * **The Impact:** Inability to run comprehensive tasks, forcing you to break down workflows unnaturally or abandon ambitious automation projects. "Set it and forget it" is rarely an option.
 
 5.  **Internet Dependency:**
-    * **The Problem:** No internet, no Colab. It’s entirely cloud-based.
+    * **The Problem:** No internet, no Colab. It's entirely cloud-based.
     * **The Impact:** You can't work on your SEO scripts during a commute, on a plane, or if your internet connection is unstable.
 
 6.  **Authentication Hurdles & Browser Disconnect:**
@@ -55,7 +64,7 @@ A local-first approach directly counters these Colab limitations, putting you fi
 
 1.  **True Persistence & Full System Access:**
     * **The Benefit:** Your data, scripts, and outputs live on *your* machine. Files are truly local and persistent. You have full access to your operating system, all installed libraries, and system resources without arbitrary cloud limits.
-    * **Pipulate Example:** Pipulate runs entirely locally, using SQLite for persistent data storage within your project folder. Nix ensures the environment is perfectly reproducible.
+    * **Pipulate Example:** Pipulate runs entirely locally, using SQLite for persistent data storage within your project folder. Nix ensures the environment is perfectly reproducible. See [02_environment_and_installation.mdc] and [05_state_management.mdc].
 
 2.  **Unhindered Environment & Library Mastery:**
     * **The Benefit:** Install any library, any version, any system dependency you need. You control the entire stack.
@@ -67,7 +76,7 @@ A local-first approach directly counters these Colab limitations, putting you fi
 
 4.  **Unrestricted Long-Running Tasks & Resource Utilization:**
     * **The Benefit:** Run scripts for as long as your hardware allows. Utilize your full CPU, RAM, and GPU (if available and configured, like with Ollama/CUDA support in Pipulate) without cloud-imposed restrictions or unexpected shutdowns.
-    * **Pipulate Example:** Designed for potentially long-running workflows, with state saved at each step, allowing resumable and interrupt-safe operations.
+    * **Pipulate Example:** Designed for potentially long-running workflows, with state saved at each step, allowing resumable and interrupt-safe operations. See [04_chain_reaction_pattern.mdc].
 
 5.  **Offline Capability & Seamless Browser Integration:**
     * **The Benefit:** Work on your tools and run many workflows offline. More importantly, **leverage your existing browser sessions and saved credentials.** A local tool can interact with your default browser, using cookies and logins you've already established.
@@ -75,11 +84,11 @@ A local-first approach directly counters these Colab limitations, putting you fi
 
 6.  **Integrated Data Pipelines & Direct File System Access:**
     * **The Benefit:** Read from and write to your local file system directly. Download files to preferred locations, process them with other local scripts, and integrate seamlessly into your existing data organization.
-    * **Pipulate Example:** Workflows can easily read local files and save outputs (e.g., CSVs) to a local `downloads/` directory.
+    * **Pipulate Example:** Workflows can easily read local files and save outputs (e.g., CSVs) to a local `downloads/` directory. See [09_data_and_file_operations.mdc].
 
 7.  **Robust Tool Creation & Version Control:**
     * **The Benefit:** Develop actual applications and command-line tools using standard development practices, full IDE support, and robust Git version control. Share these tools with your team with reproducible environments.
-    * **Pipulate Example:** It's a framework for building these local applications, moving beyond one-off scripts to create structured, maintainable SEO tools.
+    * **Pipulate Example:** It's a framework for building these local applications, moving beyond one-off scripts to create structured, maintainable SEO tools. See [11_plugin_development_guidelines.mdc].
 
 8.  **Freedom from Vendor Lock-in:**
     * **The Benefit:** You own and control your tools. They are built on open standards (Python, HTML, SQLite) and run on your hardware.
@@ -88,9 +97,17 @@ A local-first approach directly counters these Colab limitations, putting you fi
 ### The Power of Explicit, Observable Local Workflows (The "WET" Advantage)
 
 Local-first development encourages a "Write Everything Twice/Explicit" (WET) approach for workflows, diverging from the "Don't Repeat Yourself" (DRY) dogma where it makes sense.
-* **Explicit Steps:** Each part of your automation is clearly defined, not hidden behind layers of abstraction or cloud magic. This makes porting from manual processes or exploratory notebooks to automated workflows far more straightforward.
-* **Understandable & Debuggable:** When something breaks, you can trace the state and logic directly on your machine. Pipulate's server-side state and step-by-step JSON-based workflow data make debugging intuitive.
+* **Explicit Steps:** Each part of your automation is clearly defined, not hidden behind layers of abstraction or cloud magic. This makes porting from manual processes or exploratory notebooks to automated workflows far more straightforward. See [03_workflow_core.mdc].
+* **Understandable & Debuggable:** When something breaks, you can trace the state and logic directly on your machine. Pipulate's server-side state and step-by-step JSON-based workflow data make debugging intuitive. See [13_testing_and_debugging.mdc].
 * **Chain Reactions, Not Complex APIs:** Automate sequences by having local scripts trigger browser actions, file operations, and further script executions directly, often leveraging your browser's existing authenticated state. This can be far simpler and more resilient than managing numerous fragile API integrations for every tool.
+
+### Best Practices: Migrating from Colab to Pipulate
+
+- **Use Workflow Keys:** Every workflow instance in Pipulate is tracked by a unique key (see [06_key_system.mdc]). This makes your automations resumable, interruptible, and easy to manage.
+- **Embrace the Chain Reaction Pattern:** Structure your automations as explicit steps, each triggering the next. This makes your workflows robust and observable ([04_chain_reaction_pattern.mdc]).
+- **Leverage Plugin Modularity:** Build reusable, testable plugins for each major automation or data pipeline ([11_plugin_development_guidelines.mdc]).
+- **Test and Debug Locally:** Use Pipulate's local-first, SQLite-backed state and logs to debug and iterate quickly ([13_testing_and_debugging.mdc]).
+- **Keep Data Local:** Store sensitive data and API keys on your machine, not in the cloud.
 
 ### The Future is Local: Build SEO Tools That Truly Work *for You*
 

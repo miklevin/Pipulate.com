@@ -54,9 +54,9 @@ Pipulate introduces a modern equivalent:
 
 This stack isn't just simpler - it's more powerful. It gives you:
 
-- Complete environment reproducibility
+- Complete environment reproducibility (thanks to Nix, see [02_environment_and_installation.mdc])
 - Local AI integration
-- Server-side state management
+- Server-side state management (with SQLite, see [05_state_management.mdc])
 - Future-proofed database skills
 
 ## The Local-First Advantage
@@ -74,10 +74,11 @@ This approach means:
 - No API rate limits or costs
 - Run intensive tasks 24/7
 - Complete privacy and control
+- **Reproducibility**: Every developer gets the same environment, every time
 
-## The WET Revolution
+## The WET Revolution: Explicit Workflows for Observability
 
-While most software emphasizes "Don't Repeat Yourself" (DRY), Pipulate embraces "Write Everything Twice" (WET) for workflows. This isn't about being inefficient - it's about being explicit and understandable:
+While most software emphasizes "Don't Repeat Yourself" (DRY), Pipulate embraces "Write Everything Twice" (WET) for workflows. This isn't about being inefficient—it's about being explicit and understandable:
 
 ```python
 class MyWorkflow:
@@ -88,6 +89,23 @@ class MyWorkflow:
             # Each step is explicit and self-contained
         ]
 ```
+
+This WET approach, as described in [03_workflow_core.mdc], makes every step in your workflow observable, testable, and easy to debug. Each step is a clear, atomic unit—no hidden magic, no leaky abstractions.
+
+## The Chain Reaction Pattern: Reliable State Progression
+
+Pipulate's workflows are powered by the **chain reaction pattern** ([04_chain_reaction_pattern.mdc]). Each step explicitly triggers the next using HTMX, ensuring that state transitions are reliable and observable:
+
+- Every step's output is saved in SQLite, keyed by a unique workflow key
+- The UI updates in response to server-side state, not client-side guesswork
+- You can interrupt, resume, or revert any workflow at any step—perfect for real-world, long-running tasks
+
+## Testing, Debugging, and Observability
+
+Because Pipulate is local-first and WET by design, you get:
+- **Full observability**: Inspect SQLite state, logs, and UI at every step ([13_testing_and_debugging.mdc])
+- **Easy debugging**: Each workflow step is a function you can test in isolation
+- **Deterministic behavior**: No cloud-induced surprises or race conditions
 
 ## The Future is Local
 
@@ -116,7 +134,7 @@ The future of software development is looking more like the past, but with moder
 - Privacy is the default
 - Users have control
 
-Pipulate isn't just a tool - it's a statement about how software should work. It's a return to simplicity, but with modern capabilities that make it even better than the "good old days."
+Pipulate isn't just a tool—it's a statement about how software should work. It's a return to simplicity, but with modern capabilities that make it even better than the "good old days."
 
 ## Join the Revolution
 
