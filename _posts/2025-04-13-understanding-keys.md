@@ -128,6 +128,31 @@ The key system is deeply integrated with Pipulate's HTMX-driven "chain reaction"
 3. Use the key field and its dropdown to easily find and resume previous workflow runs.
 4. Trust the system to maintain your state based on the active key. The key is king!
 
+## Managing Your Workflow History
+While Pipulate's key system makes it easy to resume workflows, it's important to understand that workflows are designed to be temporary. Think of them like a scratch pad - they're perfect for getting work done, but you don't need to keep every single one forever.
+
+### Cleaning Up Individual Workflows
+If you want to remove a specific workflow run:
+1. Look for the "🗑️" (trash can) icon in the workflow interface
+2. Click it to delete just that specific workflow instance
+3. All data associated with that key will be removed
+4. The workflow will be ready for a fresh start
+
+### Cleaning Up All Workflows of a Type
+If you want to start fresh with a particular workflow type:
+1. Look for the "Clear All" option in the workflow interface
+2. This will remove all instances of that specific workflow type
+3. You can then start fresh with new workflow runs
+4. This is great for when you want to clean up old test runs or start over
+
+### Why Clean Up?
+- Keeps your workflow list clean and manageable
+- Frees up space in your local database
+- Makes it easier to find recent, relevant workflows
+- Prevents confusion from old test runs
+
+Remember: Workflows are meant to be temporary tools for getting work done. Don't worry about deleting old ones - you can always start fresh with a new workflow run when you need it!
+
 ## Why This Matters
 This key system is a perfect example of Pipulate's core philosophy:
 - Make complex things simple for the user.
