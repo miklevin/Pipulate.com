@@ -30,7 +30,7 @@ Looking at the plugins directory structure:
 ```
 plugins/
 ├── 010_tasks.py
-├── 020_hello_workflow.py
+├── 500_hello_workflow.py
 ├── 030_connect_with_botify.py
 ├── 040_parameter_buster.py
 ├── 500_blank_workflow.py          # Our template

@@ -386,7 +386,7 @@ When developing white-labeled versions:
 
 ```bash
 # Start with a copy
-cp 20_hello_workflow.py 20_hello_workflow (Copy).py
+cp 500_hello_workflow.py 20_hello_workflow (Copy).py
 
 # Develop and test
 # Rename to xx_ for testing
