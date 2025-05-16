@@ -14,26 +14,26 @@ Think of a workflow key as a passport for your workflow instance. It's a unique 
 - Groups related data together
 - Makes workflows interruptible and resumable
 
-A typical key looks something like this: `default-url_opener-01`. In the application, you'll find it as an input field with an "Enter" button, typically displayed in a card-like section on the workflow's landing page.
+A typical key looks something like this: `Default_Profile-Hello_Workflow-04`. In the application, you'll find it as an input field with an "Enter" button, typically displayed in a card-like section on the workflow's landing page.
 
 <article style="padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--pico-muted-border-color, #202632); border-radius: var(--pico-border-radius, 0.25rem); background-color: var(--pico-card-background-color, #181c25);">
   <p style="margin-top:0; margin-bottom: 0.75rem; font-size: 0.9em; color: var(--pico-muted-color, #7b8495);">Example of the key input field:</p>
   <form onsubmit="event.preventDefault(); return false;" style="margin-bottom: 0;">
     <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <input type="search" name="pipeline_id_example_in_article" class="contrast" placeholder="Existing or new 🗝 here (Enter for auto)" value="default-url_opener-01" list="pipeline-ids-example-in-article" style="flex-grow: 1; margin-bottom: 0;">
+      <input type="search" name="pipeline_id_example_in_article" class="contrast" placeholder="Existing or new 🗝 here (Enter for auto)" value="Default_Profile-Hello_Workflow-04" list="pipeline-ids-example-in-article" style="flex-grow: 1; margin-bottom: 0;">
       <button type="submit" class="secondary" style="display: inline-block; cursor: pointer; width: auto !important; white-space: nowrap; flex-shrink: 0; margin-bottom: 0;">Enter 🔑</button>
     </div>
     <datalist id="pipeline-ids-example-in-article">
-      <option value="default-url_opener-01"></option>
-      <option value="another_profile-some_workflow-12"></option>
+      <option value="Default_Profile-Hello_Workflow-04"></option>
+      <option value="Another_Profile-Some_Workflow-12"></option>
     </datalist>
   </form>
 </article>
 
 This key is actually a composite, typically containing three parts:
-1. Your current profile (e.g., `default`)
-2. The workflow type (e.g., `url_opener`)
-3. A run number (e.g., `01`)
+1. Your current profile (e.g., `Default_Profile`)
+2. The workflow type (e.g., `Hello_Workflow`)
+3. A run number (e.g., `04`)
 
 ## The Magic of Auto-Generation
 Here's the beautiful part: you often don't have to manually create these keys. Pipulate handles it for you in a couple of ways:
