@@ -283,7 +283,7 @@ The plugin discovery system:
 
 ```
 # Naming conventions for plugins
-workflows/500_hello_workflow.py         # Registered as "hello_flow" in menu position 10
+workflows/10_hello_workflow.py     # Registered as "hello_flow" in menu position 10
 workflows/xx_experimental_flow.py  # Skipped (development version)
 workflows/hello_flow (Copy).py     # Skipped (temporary copy)
 workflows/hello_flow Copy.py       # Skipped (temporary copy)
