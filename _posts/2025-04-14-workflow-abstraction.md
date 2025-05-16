@@ -20,6 +20,7 @@ Before diving into the code, remember:
   * **Local First:** Everything runs on your machine.
   * **Nix Environment:** `nix develop` is your entry point, setting up both Pipulate and an integrated JupyterLab environment.
   * **JupyterLab for Prototyping:** JupyterLab is included side-by-side, serving as an excellent scratchpad for mocking up logic before porting it into a structured Pipulate workflow.
+  * **Chain Reaction Pattern:** Each step explicitly triggers the next, creating a reliable and predictable flow of execution.
 
 **0.2 The Pipulate Plugin System**
 
@@ -150,7 +151,55 @@ This is achieved through a carefully orchestrated **chain reaction** pattern usi
 
 This explicit, step-by-step triggering ensures reliable progression and makes the workflow's flow easy to follow in the HTMX requests and responses. The `pipulate.rebuild(app_name, steps)` method is a related utility that reconstructs the entire UI container for a workflow, typically used after major state changes like `finalize`, `unfinalize`, or `handle_revert`, effectively restarting the chain reaction from the current state.
 
-**0.6 Preparing for the Deep Dive**
+**0.6 State Management and Data Flow**
+
+The workflow's state is managed through several key components:
+
+1. **Pipeline Table:**
+   * Stores workflow instance data in a JSON blob
+   * Keyed by `pipeline_id` (e.g., "MyProfile-MyWorkflow-01")
+   * Each step's data is stored under its `step.id` key
+   * The `app_name` field links the data to the correct workflow class
+
+2. **Store Table:**
+   * Global application state via `DictLikeDB`
+   * Tracks current `pipeline_id` and `profile`
+   * Persists user preferences and settings
+
+3. **LLM Context:**
+   * Managed through `message_queue` and `append_to_history`
+   * Ensures the LLM has context for each step
+   * Helps maintain conversation continuity
+
+**0.7 Best Practices for Workflow Development**
+
+1. **State Management:**
+   * Use descriptive keys in `step.done`
+   * Keep state updates atomic
+   * Use `pipulate` helper methods
+   * Consider data dependencies
+
+2. **UI/UX:**
+   * Maintain consistent styling
+   * Provide clear feedback
+   * Use appropriate validation
+   * Consider accessibility
+
+3. **Error Handling:**
+   * Validate inputs before state updates
+   * Handle edge cases gracefully
+   * Provide meaningful error messages
+   * Log issues for debugging
+
+4. **Code Organization:**
+   * Keep step logic focused
+   * Document complex transformations
+   * Use consistent naming
+   * Extract common patterns
+
+**0.8 Preparing for the Deep Dive**
 
 With this high-level understanding of workflow structure, the dual nature of steps, and the chain reaction pattern, you are now better prepared to delve into the detailed anatomy of a workflow. The next chapter will dissect the `700_widget_shim.py` file, line by line, to solidify these concepts and show how they are implemented in the most basic Pipulate workflow. This foundation will be essential as we then explore how to build upon this shim to create complex, interactive widgets.
+
+Remember to follow the chain reaction pattern consistently, ensuring each step explicitly triggers the next one only after successful completion. This creates a reliable and predictable flow of execution through your workflow.
 

@@ -9,12 +9,12 @@ Every Pipulate workflow starts with a key. It's that text field at the top of ev
 
 ## What Are Workflow Keys?
 Think of a workflow key as a passport for your workflow instance. It's a unique identifier that:
-- Tracks your workflow's state
+- Tracks your workflow's state in the `pipeline` table
 - Lets you resume exactly where you left off
 - Groups related data together
 - Makes workflows interruptible and resumable
 
-A typical key looks something like this: `Default_Profile-Hello_Workflow-04`. In the application, you'll find it as an input field with an "Enter" button, typically displayed in a card-like section on the workflow's landing page.
+A typical key follows this format: `{ProfileName}-{WorkflowAppName}-{RunNumber}`. For example: `Default_Profile-Hello_Workflow-04`. In the application, you'll find it as an input field with an "Enter" button, typically displayed in a card-like section on the workflow's landing page.
 
 <article style="padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--pico-muted-border-color, #202632); border-radius: var(--pico-border-radius, 0.25rem); background-color: var(--pico-card-background-color, #181c25);">
   <p style="margin-top:0; margin-bottom: 0.75rem; font-size: 0.9em; color: var(--pico-muted-color, #7b8495);">Example of the key input field:</p>
@@ -30,13 +30,13 @@ A typical key looks something like this: `Default_Profile-Hello_Workflow-04`. In
   </form>
 </article>
 
-This key is actually a composite, typically containing three parts:
-1. Your current profile (e.g., `Default_Profile`)
-2. The workflow type (e.g., `Hello_Workflow`)
-3. A run number (e.g., `04`)
+This key is actually a composite, containing three parts:
+1. Your current profile (e.g., `Default_Profile`) - stored in `db["last_profile_id"]`
+2. The workflow type (e.g., `Hello_Workflow`) - matches the workflow's `APP_NAME` constant
+3. A run number (e.g., `04`) - auto-incremented based on existing runs
 
 ## The Magic of Auto-Generation
-Here's the beautiful part: you often don't have to manually create these keys. Pipulate handles it for you in a couple of ways:
+Here's the beautiful part: you often don't have to manually create these keys. Pipulate handles it for you through the `generate_pipeline_key` function in two ways:
 
 ### New Workflow Access
 When you first access a workflow through:
@@ -61,7 +61,7 @@ The real power of the key system shows when you're in the middle of a workflow:
 4. No data lost, no state confusion.
 5. Perfect for long-running workflows or when you need to switch contexts.
 
-This is possible because Pipulate is designed to be "interrupted" – each step is a discrete operation, and the state of your progress is tied to that unique workflow key.
+This is possible because Pipulate is designed to be "interrupted" – each step is a discrete operation, and the state of your progress is stored in the `pipeline` table under that unique workflow key.
 
 ## Finding Past Workflows
 Need to pull up a previous workflow? The key field (and its associated dropdown) doubles as a smart search:
@@ -90,7 +90,7 @@ Instead of clearing the field to get the next sequential key:
 
 ### Always Interruptible
 Because of how the key system works:
-- Every workflow step saves its state against the current key.
+- Every workflow step saves its state against the current key in the `pipeline` table.
 - You can close your browser or navigate away at any time.
 - Come back later, enter or select the same key, and hit Enter.
 - You're right back where you were.
@@ -103,7 +103,7 @@ Remember:
 - This behavior keeps your workflow state predictable and tied to explicit keys.
 
 ## Behind the Scenes
-While the keys look like structured identifiers (and they are, by convention: `profilename-workflowname-runnumber`), they are stored and treated by the core system as simple unique strings. This design choice means:
+While the keys look like structured identifiers (and they are, by convention: `profilename-workflowname-runnumber`), they are stored and treated by the core system as simple unique strings in the `pipeline` table. This design choice means:
 - No complex database relationships are strictly enforced by the key format itself.
 - The system is flexible and relatively simple to debug.
 - It's easy to extend for special cases if needed.
@@ -118,7 +118,7 @@ However, these are edge cases. Generally, it's best to let Pipulate's default ke
 ## The Chain Reaction Connection
 The key system is deeply integrated with Pipulate's HTMX-driven "chain reaction" pattern for step progression:
 - Each step transition within a workflow inherently knows its parent key.
-- This key is used to fetch the current state and determine what to render or process next.
+- This key is used to fetch the current state from the `pipeline` table and determine what to render or process next.
 - This enables the "Run All Cells" behavior (similar to Jupyter notebooks) where completed steps show their output and the next incomplete step presents its input form, all under the umbrella of the active workflow key.
 - And crucially, it allows for perfect interruptibility and resumability.
 
@@ -135,19 +135,19 @@ While Pipulate's key system makes it easy to resume workflows, it's important to
 If you want to remove a specific workflow run:
 1. Look for the "🗑️" (trash can) icon in the workflow interface
 2. Click it to delete just that specific workflow instance
-3. All data associated with that key will be removed
+3. All data associated with that key will be removed from the `pipeline` table
 4. The workflow will be ready for a fresh start
 
 ### Cleaning Up All Workflows of a Type
 If you want to start fresh with a particular workflow type:
 1. Look for the "Clear All" option in the workflow interface
-2. This will remove all instances of that specific workflow type
+2. This will remove all instances of that specific workflow type from the `pipeline` table
 3. You can then start fresh with new workflow runs
 4. This is great for when you want to clean up old test runs or start over
 
 ### Why Clean Up?
 - Keeps your workflow list clean and manageable
-- Frees up space in your local database
+- Frees up space in your local SQLite database
 - Makes it easier to find recent, relevant workflows
 - Prevents confusion from old test runs
 
@@ -156,7 +156,7 @@ Remember: Workflows are meant to be temporary tools for getting work done. Don't
 ## Why This Matters
 This key system is a perfect example of Pipulate's core philosophy:
 - Make complex things simple for the user.
-- Preserve state naturally and reliably.
+- Preserve state naturally and reliably in SQLite.
 - Create consistent and predictable behaviors.
 - Reduce the user's cognitive load.
 

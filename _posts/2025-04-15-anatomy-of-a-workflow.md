@@ -19,6 +19,7 @@ Pipulate workflows are designed as linear, step-by-step processes, often intende
   * **Server-Side State:** All workflow state is managed on the server, simplifying the client-side and making state changes observable.
   * **FastHTML & HTMX:** The user interface is built using FastHTML for Python-centric HTML generation and HTMX for dynamic, server-rendered updates with minimal client-side JavaScript.
   * **Explicit Processes:** Workflows are "WET" (Write Everything Twice/Explicit), making them easy to understand, debug, and port from experimental scripts or Jupyter Notebooks.
+  * **Chain Reaction Pattern:** Each step explicitly triggers the next, creating a reliable and predictable flow of execution.
 
 The `plugins/700_widget_shim.py` file serves as the most basic template—a "blank canvas"—for creating new workflows. Understanding its structure is key to developing any Pipulate widget or multi-step process.
 
@@ -40,6 +41,7 @@ Every workflow is encapsulated within a Python class. This class contains severa
       * This is the **internal identifier** for the workflow.
       * It's crucial for constructing URL routes (`/{APP_NAME}/...`) and for namespacing data in the `pipeline` database table.
       * **Convention:** This should match the filename after stripping the numeric prefix and `.py` extension.
+      * **Important:** The `APP_NAME` must be different from the public endpoint derived from the filename to avoid conflicts.
   * `DISPLAY_NAME` (e.g., `"Widget Shim"`):
       * The **user-friendly name** displayed in the Pipulate UI (e.g., in the "App" dropdown menu).
   * `ENDPOINT_MESSAGE` (e.g., `"Welcome to the Widget Shim! ..."`):
@@ -248,22 +250,45 @@ The **explicit inclusion of the next step's loading `Div` with `hx_trigger="load
       "step_02": {
         "another_field": 123 // 'another_field' is step_02.done
       },
-      "finalize": { // Added when finalized
-        "finalized": true
+      "finalize": {
+        "finalized": true // Set by finalize_workflow
       }
-      // "_revert_target": "step_01" // Temporary, if reverting
     }
     ```
-  * **Global Application State:** Stored in the `store` table (via `DictLikeDB`), like `db['last_profile_id']`.
-  * The `pipulate` instance in `server.py` provides all methods for interacting with these state stores (e.g., `pip.read_state`, `pip.update_step_state`, `pip.get_step_data`).
 
-**1.6 Simplicity and Observability**
+  * **Global Application State:** Stored in the `store` table via the `DictLikeDB` instance (`self.db`). This includes:
+      * `pipeline_id`: The currently active workflow instance.
+      * `profile`: The currently selected profile.
+      * Other global settings.
 
-The "shim" workflow is intentionally minimal. It establishes the structural and behavioral contract required for any Pipulate workflow. Its simplicity allows developers to focus on the specific logic of their new widget or process without getting bogged down in boilerplate. By setting `STATE_TABLES = True` in `server.py`, developers can observe all state changes directly in the console logs, enhancing debuggability.
+  * **LLM Context:** Managed through the `message_queue` and `append_to_history` methods, ensuring the LLM has the necessary context for each step of the workflow.
 
-This chapter covers the foundational anatomy of a Pipulate workflow. The principles and patterns described here are built upon when creating more complex, interactive widgets. The next chapter will explore adding simple data inputs and displaying that data, taking the first step beyond the bare shim.
+**1.6 Best Practices for Workflow Development**
 
------
+1. **State Management:**
+   * Always use `pip.update_step_state` to modify workflow state.
+   * Use `pip.get_step_data` to read state, providing a default empty dict.
+   * Keep state updates atomic and predictable.
+
+2. **UI/UX:**
+   * Use `pip.revert_control` for consistent "completed step" views.
+   * Include clear messages via `self.message_queue`.
+   * Follow the chain reaction pattern for reliable step progression.
+
+3. **Error Handling:**
+   * Validate inputs using `pip.validate_step_input`.
+   * Use `pip.logger` for debugging and error tracking.
+   * Handle edge cases gracefully (e.g., missing state, invalid inputs).
+
+4. **Code Organization:**
+   * Keep step logic focused and single-purpose.
+   * Use descriptive names for `step.done` keys.
+   * Document complex transformations or state dependencies.
+
+5. **Testing:**
+   * Test each step's GET and POST handlers independently.
+   * Verify state updates and UI updates match expectations.
+   * Test the revert and finalize flows thoroughly.
 
 This concludes the first "chapter." I've tried to be detailed and reference the existing codebase conventions. Please let me know if this is the right level of detail and if you'd like to proceed to the next part, which would likely cover adding actual input fields to the shim and displaying their values, forming the basis of a very simple custom widget. We can then iterate towards more complex examples like the Markdown widget, incorporating its specific helper methods and client-side JS triggering.
 

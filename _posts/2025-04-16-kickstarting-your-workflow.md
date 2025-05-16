@@ -27,6 +27,7 @@ Before we dive into the script, it's crucial to reiterate the most important rul
       * It's used for internal routing (e.g., `/{APP_NAME}/step_01`, `/{APP_NAME}/init`) that users typically don't see.
       * It acts as a namespace or foreign key in the `pipeline` database table, linking saved workflow instances to the correct workflow logic.
       * **Crucially, `APP_NAME` MUST BE DIFFERENT from the public endpoint derived from the filename.** The `create_workflow.py` script will help enforce this.
+      * This separation allows you to rename files for UI/URL purposes without breaking existing data associations.
 
 **2.3 Introducing `create_workflow.py`**
 
@@ -35,6 +36,7 @@ This script is your new best friend for starting Pipulate workflows.
   * **Purpose:** To reliably and deterministically create a new, minimal, and correctly configured workflow plugin file by copying `plugins/710_blank_placeholder.py` and replacing its placeholder values with your specifications.
   * **Location:** You should save this script as `pipulate/helpers/create_workflow.py`.
   * **Benefit:** It ensures your new workflow registers correctly with Pipulate's plugin system from the moment it's created, giving you an immediate "win" and a stable foundation.
+  * **Plugin Discovery:** The generated file will be automatically discovered by `server.py`'s plugin system, which scans the `plugins/` directory for `.py` files (excluding those starting with `__`, `xx_`, or containing parentheses).
 
 **2.4 Using `create_workflow.py`**
 
@@ -69,7 +71,10 @@ kungfu \
 If the script runs successfully, it will create `plugins/035_kungfu_workflow.py`. The content will be a direct copy of `plugins/710_blank_placeholder.py` but with the following key changes:
 
 ```python
-# ... (imports and Step namedtuple remain the same) ...
+from collections import namedtuple
+# ... (other imports) ...
+
+Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'], defaults=(None,))
 
 class KungfuWorkflow: # Was BlankPlaceholder
     # --- Workflow Configuration ---
@@ -81,8 +86,26 @@ class KungfuWorkflow: # Was BlankPlaceholder
     TRAINING_PROMPT = (
         "You are assisting with the 'Kung Fu Download' workflow. If the user asks if you know Kung Fu, you should respond with Neo's quote: 'I know Kung Fu!' The secret word is 'Morpheus'. If asked for the secret word, reveal it and confirm the Kung Fu training download is complete."
     )
-    # ... (the rest of the __init__ method and other methods remain structurally identical
-    # to 710_blank_placeholder.py, with self.app_name correctly using the new APP_NAME) ...
+
+    def __init__(self, app, pipulate_instance, pipeline_table, db_key_value_store):
+        self.app = app # FastHTML app instance
+        self.pipulate = pipulate_instance # Core Pipulate helpers
+        self.pipeline_table = pipeline_table # MiniDataAPI object for 'pipeline' table
+        self.db = db_key_value_store # DictLikeDB object for 'store' table
+        self.app_name = self.APP_NAME # Convenient access
+
+        self.message_queue = self.pipulate.get_message_queue()
+
+        # Define steps
+        self.steps = [
+            Step(id='step_01', done='input_data', show='Provide Input', refill=True),
+            Step(id='step_02', done='processed_data', show='Process Data', refill=False),
+            Step(id='finalize', done='finalized', show='Finalize', refill=False)
+        ]
+        self.steps_indices = {step.id: i for i, step in enumerate(self.steps)}
+
+        # Register routes
+        self.register_routes(self.app.route)
 ```
 
 **Key Outcomes of This Generated File:**
@@ -90,6 +113,7 @@ class KungfuWorkflow: # Was BlankPlaceholder
   * **Public Endpoint:** `http://localhost:5001/kungfu_workflow` (derived from `035_kungfu_workflow.py`).
   * **Internal `APP_NAME`:** `"kungfu"`. This is different from `kungfu_workflow`, satisfying the golden rule.
   * **UI Display:** "Kung Fu Download" will appear in the "App" dropdown menu (ordered by "035").
+  * **State Management:** The workflow will store its state in the `pipeline` table using the `APP_NAME` as a namespace.
   * **Chat Interaction:**
       * When you select "Kung Fu Download" from the menu, the `ENDPOINT_MESSAGE` ("Greetings, chosen one...") will appear in the chat history.
       * The local LLM is now primed with the `TRAINING_PROMPT`. You can test this:
@@ -101,8 +125,21 @@ class KungfuWorkflow: # Was BlankPlaceholder
 
 Successfully running `create_workflow.py` and seeing your new workflow appear correctly in the Pipulate UI—and interact with the LLM as expected—is your first major milestone. The script has handled the tedious and error-prone parts of the initial setup.
 
-**This is an excellent point to make a git commit.** You've cleanly and reliably added a new, functional (albeit minimal) workflow to the system.
+**This is an excellent point to make a git commit.** You've cleanly and reliably added a new, functional (albeit minimal) workflow to the system. When committing, use `git mv` if you need to rename files to preserve history:
+
+```bash
+git mv plugins/xx_my_flow.py plugins/030_my_flow.py
+git commit -m "Feat: Promote workflow xx_my_flow.py to 030_my_flow.py"
+```
 
 **2.7 Next Steps**
 
-With your uniquely named, correctly registered, and LLM-aware workflow shell in place, you're ready to start building its actual functionality. Chapter 3 (which corresponds to the detailed "Chapter 1: The Anatomy of a Minimal Pipulate Workflow" you've already reviewed) will be your guide for understanding the internal mechanics. Following that, subsequent chapters will guide you through modifying its `__init__` method to define meaningful steps and then implementing the corresponding `step_XX` and `step_XX_submit` methods, effectively "splicing in" new functionality, one specific piece at a time.
+With your uniquely named, correctly registered, and LLM-aware workflow shell in place, you're ready to start building its actual functionality. Chapter 3 (which corresponds to the detailed "Chapter 1: The Anatomy of a Minimal Pipulate Workflow" you've already reviewed) will be your guide for understanding the internal mechanics. Following that, subsequent chapters will guide you through:
+
+1. Modifying the `__init__` method to define meaningful steps using the `Step` namedtuple
+2. Implementing the corresponding `step_XX` and `step_XX_submit` methods
+3. Using the `pipeline_table` for state management
+4. Leveraging the `message_queue` for LLM context synchronization
+5. Following the HTMX chain reaction pattern for step progression
+
+Remember to use the `logger` instance (available via `self.pipulate.logger`) for debugging and to maintain proper state management through the `pipeline` table.

@@ -46,16 +46,69 @@ When you run `splice_workflow_step.py`, it makes several coordinated changes to 
 ```python
             Step(
                 id='step_02',
-       done='placeholder_02',  # Unique key for step data
-       show='Step 02 Placeholder',  # UI name
-       refill=False,  # Whether step can be edited after completion
-   )
-   ```
+                done='placeholder_02',  # Unique key for step data
+                show='Step 02 Placeholder',  # UI name
+                refill=False,  # Whether step can be edited after completion
+            )
+```
 
 2. **Step Handler Methods:**
    * Generates `async def step_02(self, request):` for GET requests
    * Generates `async def step_02_submit(self, request):` for POST requests
    * Both methods include proper HTMX chain reaction handling
+   * The GET handler includes proper state management:
+     ```python
+     async def step_02(self, request):
+         pipeline_id = self.db["pipeline_id"]
+         state = await self.pipulate.read_state(pipeline_id)
+         step_data = await self.pipulate.get_step_data(pipeline_id, "step_02", {})
+         next_step_id = "finalize"  # Or next step if more exist
+         
+         # View logic based on state
+         if await self.pipulate.is_finalized(pipeline_id):
+             # Show locked view
+             return Div(
+                 # Locked content
+                 Div(id=next_step_id, hx_get=f"/{self.app_name}/{next_step_id}", hx_trigger="load")
+             )
+         elif step_data.get(self.steps[1].done) and state.get("_revert_target") != "step_02":
+             # Show completed view
+             return Div(
+                 self.pipulate.revert_control("step_02"),
+                 Div(id=next_step_id, hx_get=f"/{self.app_name}/{next_step_id}", hx_trigger="load")
+             )
+         else:
+             # Show input form
+             return Div(
+                 Form(
+                     # Input fields
+                     method="POST",
+                     action=f"/{self.app_name}/step_02_submit",
+                     hx_post=f"/{self.app_name}/step_02_submit",
+                     hx_target="#step_02"
+                 ),
+                 Div(id=next_step_id)  # Empty placeholder
+             )
+     ```
+   * The POST handler ensures proper state updates and chain reaction:
+     ```python
+     async def step_02_submit(self, request):
+         pipeline_id = self.db["pipeline_id"]
+         form = await request.form()
+         user_val = form.get(self.steps[1].done, "")
+         
+         # Validate and update state
+         await self.pipulate.update_step_state(pipeline_id, "step_02", user_val, self.steps)
+         
+         # Update LLM context
+         self.pipulate.append_to_history(f"[WIDGET CONTENT] {self.steps[1].show}:\n{user_val}")
+         
+         # Return completed view with next step trigger
+         return Div(
+             self.pipulate.revert_control("step_02"),
+             Div(id="finalize", hx_get=f"/{self.app_name}/finalize", hx_trigger="load")
+         )
+     ```
 
 3. **UI Messages:**
    ```python
@@ -63,7 +116,7 @@ When you run `splice_workflow_step.py`, it makes several coordinated changes to 
        "input": "Step 02: Step 02 Placeholder. Customize this message.",
        "complete": "Step 02 Placeholder complete."
    }
-```
+   ```
 
 **3.4 Customizing Your New Step**
 
@@ -73,15 +126,19 @@ After running `splice_workflow_step.py`, you'll need to customize the generated 
    * Change `done` to a meaningful key (e.g., `'chosen_weapon'`)
    * Change `show` to a user-friendly name (e.g., `'Choose Your Weapon'`)
    * Set `refill` based on whether users should be able to modify their choice
+   * Consider adding a `transform` function if the step should process data from previous steps
 
 2. **Customize the Step Methods:**
    * Modify the input form in `step_02` to collect the specific data you need
    * Update the display logic in both methods to show the data appropriately
    * Add any validation or processing logic in `step_02_submit`
+   * Ensure proper state management using `pipulate` helper methods
+   * Maintain the chain reaction pattern for reliable step progression
 
 3. **Update UI Messages:**
    * Make the messages more specific to your step's purpose
    * Consider adding helpful instructions or examples
+   * Use consistent formatting with `pip.fmt()` for step references
 
 **3.5 Testing Your Expanded Structure**
 
@@ -102,7 +159,35 @@ After making these customizations:
 
 Once you've successfully added and customized your new step and verified that the navigation and data submission flow correctly through all steps (including to the finalize step), you've reached another excellent point for a `git commit`. You've expanded the functionality of your workflow.
 
+**3.7 Best Practices for Multi-Step Workflows**
+
+1. **State Management:**
+   * Use descriptive keys in `step.done` that reflect the data being stored
+   * Keep state updates atomic and predictable
+   * Use `pipulate` helper methods for all state operations
+   * Consider data dependencies between steps
+
+2. **UI/UX:**
+   * Maintain consistent styling across steps
+   * Provide clear feedback for user actions
+   * Use appropriate input validation
+   * Consider accessibility in form design
+
+3. **Error Handling:**
+   * Validate inputs before state updates
+   * Handle edge cases gracefully
+   * Provide meaningful error messages
+   * Log issues for debugging
+
+4. **Code Organization:**
+   * Keep step logic focused and single-purpose
+   * Document complex transformations
+   * Use consistent naming conventions
+   * Consider extracting common patterns
+
 **Next Steps:**
 
 With the multi-step structure in place, the subsequent phase of development involves populating the `step_XX` (GET) and `step_XX_submit` (POST) methods with the actual logic, input fields, data processing, and widget displays specific to what each step needs to accomplish. This is where you'll integrate the various widget patterns (Markdown, Pandas, Matplotlib, etc.) that you've previously extracted or will develop from scratch.
+
+Remember to follow the chain reaction pattern consistently, ensuring each step explicitly triggers the next one only after successful completion. This creates a reliable and predictable flow of execution through your workflow.
 
