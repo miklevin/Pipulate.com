@@ -510,7 +510,7 @@ table caption {
 /* Format forms */
 textarea,
 select,
-input {
+input:not([type="search"]) {
   font-size: inherit;
   font-family: inherit;
   padding: 0.5rem;
@@ -523,6 +523,38 @@ input {
   max-width: 100%;
   display: inline-block;
 }
+
+/* Ensure search inputs use PicoCSS styling */
+input[type="search"] {
+  border-radius: 5rem; /* Pico's default pill shape */
+  padding: 0.5rem 1rem;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Ensure contrast class works properly for search inputs */
+input[type="search"].contrast {
+  background-color: var(--accent-bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Ensure secondary button styling matches Pico */
+button.secondary {
+  background-color: var(--accent-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: normal;
+}
+
+button.secondary:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
 label {
   display: block;
 }

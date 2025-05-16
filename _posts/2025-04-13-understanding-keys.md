@@ -8,136 +8,133 @@ group: guide
 Every Pipulate workflow starts with a key. It's that text field at the top of every workflow, and while it might seem like just another form field to fill out, it's actually one of Pipulate's most clever features. Let's demystify it.
 
 ## What Are Workflow Keys?
-
 Think of a workflow key as a passport for your workflow instance. It's a unique identifier that:
 - Tracks your workflow's state
 - Lets you resume exactly where you left off
 - Groups related data together
 - Makes workflows interruptible and resumable
 
-A typical key looks something like this:
-```
-default-url_opener-01
-```
+A typical key looks something like this: `default-url_opener-01`. In the application, you'll find it as an input field with an "Enter" button, typically displayed in a card-like section on the workflow's landing page.
 
-This is actually a composite key containing three parts:
-1. Your current profile (`default`)
-2. The workflow type (`url_opener`)
-3. A run number (`01`)
+<article style="padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--pico-muted-border-color, #202632); border-radius: var(--pico-border-radius, 0.25rem); background-color: var(--pico-card-background-color, #181c25);">
+  <p style="margin-top:0; margin-bottom: 0.75rem; font-size: 0.9em; color: var(--pico-muted-color, #7b8495);">Example of the key input field:</p>
+  <form onsubmit="event.preventDefault(); return false;" style="margin-bottom: 0;">
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <input type="search" name="pipeline_id_example_in_article" class="contrast" placeholder="Existing or new 🗝 here (Enter for auto)" value="default-url_opener-01" list="pipeline-ids-example-in-article" style="flex-grow: 1; margin-bottom: 0;">
+      <button type="submit" class="secondary" style="display: inline-block; cursor: pointer; width: auto !important; white-space: nowrap; flex-shrink: 0; margin-bottom: 0;">Enter 🔑</button>
+    </div>
+    <datalist id="pipeline-ids-example-in-article">
+      <option value="default-url_opener-01"></option>
+      <option value="another_profile-some_workflow-12"></option>
+    </datalist>
+  </form>
+</article>
+
+This key is actually a composite, typically containing three parts:
+1. Your current profile (e.g., `default`)
+2. The workflow type (e.g., `url_opener`)
+3. A run number (e.g., `01`)
 
 ## The Magic of Auto-Generation
-
-Here's the beautiful part: you never have to think about creating these keys. Pipulate handles it all for you in two different ways:
+Here's the beautiful part: you often don't have to manually create these keys. Pipulate handles it for you in a couple of ways:
 
 ### New Workflow Access
 When you first access a workflow through:
 - The dropdown menu
 - Direct URL navigation
 - A redirect from another workflow
+Pipulate automatically generates a fresh key for you, usually incorporating the current profile, the app name, and the next available sequential number. For instance, if `Default_Profile-Kung_Fu_Download-03` was the last key for the "Kung Fu Download" app under the "Default Profile", the next auto-generated key upon accessing this workflow anew would be `Default_Profile-Kung_Fu_Download-04`. No user action is required for this initial generation – it just works!
 
-Pipulate automatically generates a fresh key for you. No user action required - it just works!
+### Mid-Workflow Reset or New Instance with Same Prefix
+If you're already in a workflow and want to start a new instance or explicitly type a new key:
+1. Click the "x" in the key field (if your browser shows one for search inputs) or manually clear it.
+2. Type your desired key or leave it blank and hit Enter. If left blank, Pipulate generates the next available key for that workflow and profile.
+3. Hit Enter again (if you left it blank and Pipulate filled it) to initialize the workflow with that key.
 
-### Mid-Workflow Reset
-If you're already in a workflow and want to start fresh:
-1. Click the "x" in the key field to clear it
-2. Hit Enter
-3. Pipulate generates the next available key
-4. Hit Enter again to start your workflow
-
-That's it! Two Enter keypresses and you're running a new workflow instance.
+That's it! A couple of Enter keypresses, and you're running a new workflow instance or the one you specified.
 
 ## Resuming Where You Left Off
-
 The real power of the key system shows when you're in the middle of a workflow:
+1. Simply ensure the desired workflow key is in the input field.
+2. Hit Enter.
+3. You're instantly back where you left off in that specific workflow run.
+4. No data lost, no state confusion.
+5. Perfect for long-running workflows or when you need to switch contexts.
 
-1. Hit Enter on the key field anytime
-2. You're instantly back where you left off
-3. No data lost, no state confusion
-4. Perfect for long-running workflows
-
-This is possible because Pipulate is always in an "interrupted" state - each step is a discrete operation, tied together by your workflow key.
+This is possible because Pipulate is designed to be "interrupted" – each step is a discrete operation, and the state of your progress is tied to that unique workflow key.
 
 ## Finding Past Workflows
+Need to pull up a previous workflow? The key field (and its associated dropdown) doubles as a smart search:
+1. Clear the key field (click the "x" or select the text and delete).
+2. Start typing any part of a key (e.g., the profile name, workflow type, or run number).
+3. Alternatively, click the small downward arrow (if your browser renders one for inputs with datalists) or simply focus the empty field.
+4. A dropdown appears showing all your past workflow keys that match what you've typed (or all keys if the field is empty and a datalist is populated).
+5. Select any one to populate the field, then hit Enter to resume exactly where you left that workflow.
 
-Need to pull up a previous workflow? The key field doubles as a smart search:
-
-1. Clear the key field (click the "x")
-2. Start typing - or click the "▾"
-3. A dropdown appears showing all your past workflows
-4. Select any one to resume exactly where you left it
-
-The key field acts as a filter - type any part of a key to find matching workflows.
+The key field acts as a filter – the more you type, the more refined the list of suggestions becomes.
 
 ## Power User Tips
-
 Once you're comfortable with the basics, here are some pro moves:
 
-### Quick New Instance
-Instead of clearing the field:
-1. Backspace the last digit of the current key
-2. Type the next number in sequence
-3. Hit Enter once
-4. You've created a new workflow instance!
+### Quick New Instance by Incrementing
+Instead of clearing the field to get the next sequential key:
+1. Observe the current key, for example, `MyClient-DataAnalysis-03`.
+2. Manually change the run number: backspace the `03` and type `04`.
+3. Hit Enter once.
+4. You've initiated a new workflow instance: `MyClient-DataAnalysis-04`!
 
 ### Smart Filtering
-- The dropdown only appears when the key field isn't an exact match
-- Use this to your advantage when searching
-- Type partial keys to see all matching workflows
-- Perfect for finding all runs of a specific workflow type
+- The dropdown suggestions are dynamically filtered as you type.
+- If the text in the input field is an exact match for an existing key, the dropdown might not automatically appear until you alter the text (e.g., by backspacing).
+- Use this to your advantage: type partial keys to see all matching workflows, which is perfect for finding all runs of a specific workflow type or for a particular profile.
 
 ### Always Interruptible
 Because of how the key system works:
-- Every workflow step saves state
-- You can close your browser anytime
-- Come back later and hit Enter
-- You're right back where you were
+- Every workflow step saves its state against the current key.
+- You can close your browser or navigate away at any time.
+- Come back later, enter or select the same key, and hit Enter.
+- You're right back where you were.
 
 ### Key Generation Strategy
 Remember:
-- Workflow stays *locked* on current key until you want a new one
-- New key mid-workflow = forced page reload or "x" + double Enter
-- Forced page reload (`Ctrl`+`r` or `F5`) = automatic fresh key
-- Keeps your workflow state predictable
+- The workflow, once initiated with a key, stays *locked* on that current key until you explicitly change it to start or resume a different one.
+- To start a *new, auto-numbered* instance of the *current* workflow type: clear the key field by clicking the "x" (if available) or deleting the text, then hit Enter. Pipulate will populate the field with the next available sequential key. Hit Enter again to load this new workflow.
+- A forced page reload (e.g., `Ctrl`+`R` or `F5`) while on a workflow's landing page (before a key is submitted) will typically result in the input field being pre-populated with the next auto-generated key, ready for you to hit Enter.
+- This behavior keeps your workflow state predictable and tied to explicit keys.
 
 ## Behind the Scenes
-
-While the keys look like composite database keys (and work similarly), they're actually simple text fields. This design choice means:
-- No complex database relationships needed
-- Easy to understand and debug
-- Simple to extend for special cases
-- Perfect for workflow state management
+While the keys look like structured identifiers (and they are, by convention: `profilename-workflowname-runnumber`), they are stored and treated by the core system as simple unique strings. This design choice means:
+- No complex database relationships are strictly enforced by the key format itself.
+- The system is flexible and relatively simple to debug.
+- It's easy to extend for special cases if needed.
+- It's well-suited for the primary goal: workflow state management.
 
 ## Special Cases
-
-While most workflows use the auto-generated keys, some special workflows might use meaningful keys:
-- API connection workflows might use API keys
-- Integration workflows might use external IDs
-- But these are edge cases - generally, let Pipulate handle keys for you
+While most workflows will use the auto-generated `profile-workflow-number` key format, some special-purpose workflows *could* be designed to use other meaningful strings as keys, such as:
+- API connection workflows might use an API key or part of it.
+- Integration workflows might use an external system's ID.
+However, these are edge cases. Generally, it's best to let Pipulate's default key generation and selection mechanism handle the keys for you.
 
 ## The Chain Reaction Connection
-
-The key system is deeply integrated with Pipulate's HTMX chain reaction pattern:
-- Each step transition preserves the key
-- The key is used to maintain state
-- This creates the "Run All Cells" behavior
-- But with perfect interruptibility
+The key system is deeply integrated with Pipulate's HTMX-driven "chain reaction" pattern for step progression:
+- Each step transition within a workflow inherently knows its parent key.
+- This key is used to fetch the current state and determine what to render or process next.
+- This enables the "Run All Cells" behavior (similar to Jupyter notebooks) where completed steps show their output and the next incomplete step presents its input form, all under the umbrella of the active workflow key.
+- And crucially, it allows for perfect interruptibility and resumability.
 
 ## Best Practices
-
-1. Let Pipulate generate keys for you
-2. Use the "x" and Enter method for new workflows
-3. Keep the key field handy for quick resumption
-4. Use partial key search to find past workflows
-5. Trust the system to maintain your state
+1. Generally, let Pipulate auto-generate keys when you first navigate to a workflow.
+2. To start a new instance of the *same* workflow, clear the key field and hit Enter (twice if it auto-fills).
+3. Use the key field and its dropdown to easily find and resume previous workflow runs.
+4. Trust the system to maintain your state based on the active key. The key is king!
 
 ## Why This Matters
+This key system is a perfect example of Pipulate's core philosophy:
+- Make complex things simple for the user.
+- Preserve state naturally and reliably.
+- Create consistent and predictable behaviors.
+- Reduce the user's cognitive load.
 
-This key system is a perfect example of Pipulate's philosophy:
-- Make complex things simple
-- Preserve state naturally
-- Create consistent behaviors
-- Reduce cognitive load
+You generally don't have to meticulously save your progress or remember complex identifiers. The key system, combined with Pipulate's architecture, handles the state management, letting you focus on executing your SEO tasks and leveraging the AI-assisted workflows.
 
-You never have to think about saving state, managing workflow instances, or tracking progress. The key system handles it all, letting you focus on your actual work.
-
-Stay tuned for our next article, where we'll start adding real functionality to our URL opener plugin. For now, practice working with keys - they're your passport to mastering Pipulate workflows! 
+Stay tuned for our next article, where we'll start adding real functionality to our URL opener plugin. For now, practice working with keys - they're your passport to mastering Pipulate workflows!

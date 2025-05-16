@@ -43,9 +43,9 @@ The script will:
 When you run `splice_workflow_step.py`, it makes several coordinated changes to your workflow file:
 
 1. **Step Definition:**
-   ```python
-   Step(
-       id='step_02',
+```python
+            Step(
+                id='step_02',
        done='placeholder_02',  # Unique key for step data
        show='Step 02 Placeholder',  # UI name
        refill=False,  # Whether step can be edited after completion
@@ -63,7 +63,7 @@ When you run `splice_workflow_step.py`, it makes several coordinated changes to 
        "input": "Step 02: Step 02 Placeholder. Customize this message.",
        "complete": "Step 02 Placeholder complete."
    }
-   ```
+```
 
 **3.4 Customizing Your New Step**
 
