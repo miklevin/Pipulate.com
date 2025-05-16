@@ -60,7 +60,7 @@ This isn't just easier—it's more reliable and maintainable than complex API in
 
 ## The Future of SEO Tools
 
-In the next article, we'll build this exact workflow together. We'll create a plugin that:
+Over the next few articles, we'll build-up this exact workflow together. We'll create a plugin that:
 1. Opens a browser window to your favorite SEO tool
 2. Lets you download data using your existing login
 3. Processes the downloaded file automatically
@@ -79,8 +79,6 @@ This local-first approach offers several key advantages:
 
 ## Join Us on the Journey
 
-In our next article, we'll build this workflow together. We'll start with a simple plugin that demonstrates the power of local browser integration, and then expand it into a full-featured tool for your SEO arsenal.
-
-This is just the beginning of what's possible with local-first SEO tools. By leveraging your existing browser setup and local environment, we can create powerful, flexible tools that make your SEO work more efficient and enjoyable.
+In our next article, we'll begin to build this workflow together. We'll start with understanding *keys* which are present at the top of every workflow. Keys are used to create new workflows or retrieve old ones.
 
 Stay tuned for the next article, where we'll turn these concepts into reality with a practical, hands-on tutorial. Together, we'll build something that will change how you think about SEO tools. 

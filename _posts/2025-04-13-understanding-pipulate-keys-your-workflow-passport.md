@@ -17,13 +17,13 @@ Think of a workflow key as a passport for your workflow instance. It's a unique 
 
 A typical key looks something like this:
 ```
-default-url_opener-001
+default-url_opener-01
 ```
 
 This is actually a composite key containing three parts:
 1. Your current profile (`default`)
 2. The workflow type (`url_opener`)
-3. A run number (`001`)
+3. A run number (`01`)
 
 ## The Magic of Auto-Generation
 
@@ -62,7 +62,7 @@ This is possible because Pipulate is always in an "interrupted" state - each ste
 Need to pull up a previous workflow? The key field doubles as a smart search:
 
 1. Clear the key field (click the "x")
-2. Start typing - or just wait
+2. Start typing - or click the "▾"
 3. A dropdown appears showing all your past workflows
 4. Select any one to resume exactly where you left it
 
@@ -94,9 +94,9 @@ Because of how the key system works:
 
 ### Key Generation Strategy
 Remember:
-- New endpoint access = automatic fresh key
-- Mid-workflow reset = manual "x" + double Enter
-- This dual behavior prevents accidental resets
+- Workflow stays *locked* on current key until you want a new one
+- New key mid-workflow = forced page reload or "x" + double Enter
+- Forced page reload (`Ctrl`+`r` or `F5`) = automatic fresh key
 - Keeps your workflow state predictable
 
 ## Behind the Scenes
