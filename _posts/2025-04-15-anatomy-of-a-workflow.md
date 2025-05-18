@@ -184,8 +184,8 @@ These asynchronous methods define the behavior of the workflow.
       * It updates the workflow's state: `await pip.update_step_state(pipeline_id, step_id, user_val, self.steps)`. This saves `user_val` into the JSON blob in the `pipeline` table, associated with `pipeline_id`, under the key `step_id`, and within that, under the key defined by `step.done`.
       * It updates the LLM's context with the submitted data: `pip.append_to_history(f"[WIDGET CONTENT] {step.show}:\n{user_val}")`.
       * It sends a confirmation message to the user via `self.message_queue.add(...)`.
-      * **Continues the Chain Reaction:** This is a critical part. The method returns an HTML response that typically includes:
-          * The "completed" view of the current step (often using `pip.chain_reverter()`).
+      * **Continues the Chain Reaction:** This is a critical part. The method returns an HTML response using `pip.chain_reverter()` that typically includes:
+          * The "completed" view of the current step
           * **The explicit trigger for the next step:** `Div(id=next_step_id, hx_get=f"/{self.app_name}/{next_step_id}", hx_trigger="load")`.
           * The entire response is wrapped in a `Div` with `id=step_id`, which matches the `hx-target` of the form, causing this new content to replace the input form.
 
@@ -289,6 +289,46 @@ The **explicit inclusion of the next step's loading `Div` with `hx_trigger="load
    * Test each step's GET and POST handlers independently.
    * Verify state updates and UI updates match expectations.
    * Test the revert and finalize flows thoroughly.
+
+**Helper Methods for Chain Reaction:**
+
+1. **`display_revert_header`**: Creates the standard UI element showing a step's outcome (e.g., `Step Name: Value`) along with a "Revert" button.
+   ```python
+   header = pip.display_revert_header(
+       step_id=step_id,
+       app_name=app_name,
+       message=f'{step.show}: {value}',
+       steps=steps
+   )
+   ```
+
+2. **`display_revert_widget`**: Used when the step's outcome is a richer visual component (table, diagram, etc.). It renders the same kind of revertible header as `display_revert_header` but also includes a styled container for the passed `widget` content.
+   ```python
+   widget_display = pip.display_revert_widget(
+       step_id=step_id,
+       app_name=app_name,
+       message='Widget Title',
+       widget=my_widget,
+       steps=steps
+   )
+   ```
+
+3. **`chain_reverter`**: A convenience method that combines `display_revert_header` with the next-step trigger `Div`. This is the recommended approach for simple step completions.
+   ```python
+   return pip.chain_reverter(
+       step_id=step_id,
+       step_index=step_index,
+       steps=steps,
+       app_name=app_name,
+       processed_val=value
+   )
+   ```
+
+**When to Use Which Method:**
+
+- Use `chain_reverter` for simple step completions where the output is a string value
+- Use `display_revert_widget` when you need to show complex visual components
+- Use `display_revert_header` when you need custom layout around the standard revert header
 
 This concludes the first "chapter." I've tried to be detailed and reference the existing codebase conventions. Please let me know if this is the right level of detail and if you'd like to proceed to the next part, which would likely cover adding actual input fields to the shim and displaying their values, forming the basis of a very simple custom widget. We can then iterate towards more complex examples like the Markdown widget, incorporating its specific helper methods and client-side JS triggering.
 

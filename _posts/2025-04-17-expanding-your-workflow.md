@@ -107,6 +107,46 @@ When you run `splice_workflow_step.py`, it makes several coordinated changes to 
          return self.pipulate.chain_reverter("step_02", 1, self.steps, self.app_name, user_val)
      ```
 
+**Helper Methods for Chain Reaction:**
+
+1. **`display_revert_header`**: Creates the standard UI element showing a step's outcome (e.g., `Step Name: Value`) along with a "Revert" button.
+   ```python
+   header = pip.display_revert_header(
+       step_id=step_id,
+       app_name=app_name,
+       message=f'{step.show}: {value}',
+       steps=steps
+   )
+   ```
+
+2. **`display_revert_widget`**: Used when the step's outcome is a richer visual component (table, diagram, etc.). It renders the same kind of revertible header as `display_revert_header` but also includes a styled container for the passed `widget` content.
+   ```python
+   widget_display = pip.display_revert_widget(
+       step_id=step_id,
+       app_name=app_name,
+       message='Widget Title',
+       widget=my_widget,
+       steps=steps
+   )
+   ```
+
+3. **`chain_reverter`**: A convenience method that combines `display_revert_header` with the next-step trigger `Div`. This is the recommended approach for simple step completions.
+   ```python
+   return pip.chain_reverter(
+       step_id=step_id,
+       step_index=step_index,
+       steps=steps,
+       app_name=app_name,
+       processed_val=value
+   )
+   ```
+
+**When to Use Which Method:**
+
+- Use `chain_reverter` for simple step completions where the output is a string value
+- Use `display_revert_widget` when you need to show complex visual components
+- Use `display_revert_header` when you need custom layout around the standard revert header
+
 3. **UI Messages:**
    ```python
    "step_02": {

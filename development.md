@@ -210,45 +210,100 @@ encountering a step with no data — therefore providing perfect resumability.
 This chain reaction gives Pipulate its signature feel, constantly reinforcing
 the top-down linear workflow model that mimics Notebooks *Run All Cells.* This
 is going to be weird to you until it isn't. Keeping the chain reaction pattern
-in place in each of its standard positions is crucial for workflow progression:
+in place in each of its standard positions is crucial for workflow progression.
+
+The core purpose of any `step_XX_submit` handler, or the "Revert Phase" of a `step_XX` GET handler, is to:
+1. Display the outcome/summary of the current step in a way that allows the user to revert it
+2. Trigger the loading of the next step to continue the chain reaction
+
+There are two main ways to achieve this:
+
+**Method 1: Manual Construction (More Verbose, More Control)**
+
+This is what you'd do if you needed to insert custom HTML around the revert header or if the "next step" logic was conditional:
 
 ```python
+# In a step_XX_submit handler or step_XX (Revert Phase)
+# processed_val would be the result of the current step's operation
+
+# 1. Create the display for the current completed step
+revert_header_content = pip.display_revert_header(
+    step_id=current_step_id, 
+    app_name=app_name, 
+    message=f'{current_step.show}: {processed_val}', 
+    steps=steps
+)
+
+# 2. Create the trigger for the next step
+next_step_trigger_div = Div(
+    id=next_step_id, 
+    hx_get=f'/{app_name}/{next_step_id}', 
+    hx_trigger='load'
+)
+
+# 3. Combine them into the standard structure that replaces the current step's div
 return Div(
-    Card(...),  # Current step content
-    # This inner Div triggers loading of the next step
-    Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
-    id=step_id
+    revert_header_content,  # Or a Card containing this, or pip.display_revert_widget(...)
+    next_step_trigger_div,
+    id=current_step_id
 )
 ```
 
-Important:
-- Never remove `hx_trigger="load"`
-- Each step must include the next step's container
-- The chain reaction enables automatic progression
-- This gives that Notebook *Run All Cells* feel
+**Method 2: Using `chain_reverter` (Concise Shortcut)**
 
-For standard steps, use `display_revert_header` to show the step's outcome and revert button:
+The `chain_reverter` method encapsulates the common pattern shown above:
+
 ```python
-return Div(
-    pip.display_revert_header(step_id=step_id, app_name=app_name, message=f'{step.show}: Complete', steps=steps),
-    Div(id=next_step_id, hx_get=f'/{app_name}/{next_step_id}', hx_trigger='load'),
-    id=step_id
+# In a step_XX_submit handler or step_XX (Revert Phase)
+# processed_val is the result of the current step's operation
+
+return pip.chain_reverter(
+    step_id=current_step_id, 
+    step_index=current_step_index,  # Note: chain_reverter needs the index
+    steps=steps, 
+    app_name=app_name, 
+    processed_val=processed_val
 )
 ```
 
-For steps with visualizations or widgets, use `display_revert_widget`:
+**When to Use Which Method:**
+
+1. Use `pip.chain_reverter(...)` when:
+   - The step completes with a simple string result
+   - You want to display that result next to the "Revert" button
+   - You want to immediately trigger the next step
+   - This is the most common scenario for simple data collection steps
+
+2. Use manual construction with `pip.display_revert_widget(...)` + next-step-Div when:
+   - The step completes and needs to display a complex widget (table, chart, custom HTML)
+   - You need to show the widget below the revertible header
+   - You still want to trigger the next step
+
+3. Use manual construction with `pip.display_revert_header(...)` + next-step-Div when:
+   - You need custom layout around the standard revert header
+   - You have conditional next-step logic
+   - You need to add additional UI elements between the header and next step
+
+**Example: Complex Widget Display**
+
 ```python
-return Div(
-    pip.display_revert_widget(step_id=step_id, app_name=app_name, message=f'{step.show} Configured', widget=widget, steps=steps),
-    Div(id=next_step_id, hx_get=f'/{app_name}/{next_step_id}', hx_trigger='load'),
-    id=step_id
+# For steps with visualizations or widgets
+my_widget = CustomTableWidget(data=result_data)
+widget_display = pip.display_revert_widget(
+    step_id=step_id, 
+    app_name=app_name, 
+    message='Data Table', 
+    widget=my_widget
 )
+next_step_trigger = Div(
+    id=next_step_id, 
+    hx_get=f'/{app_name}/{next_step_id}', 
+    hx_trigger='load'
+)
+return Div(widget_display, next_step_trigger, id=step_id)
 ```
 
-For simple, standard steps, you can use the convenience method `chain_reverter` which combines displaying the step's outcome and triggering the next step:
-```python
-return pip.chain_reverter(step_id, step_index, steps, app_name, processed_val)
-```
+Remember, the crucial part is always including that `Div` for the `next_step_id` with `hx_trigger="load"` to keep the chain reaction going. Whether you use `chain_reverter` or manual construction, this trigger is what enables the automatic progression through your workflow.
 
 ### 3. State Management Pattern
 
