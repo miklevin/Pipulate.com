@@ -472,10 +472,10 @@ cp 500_hello_workflow.py 20_hello_workflow (Copy).py
 
 # Develop and test
 # Rename to xx_ for testing
-mv "20_hello_workflow (Copy).py" xx_my_workflow.py
+mv "500_hello_workflow (Copy).py" xx_my_workflow.py
 
 # Deploy when ready
-mv xx_my_workflow.py 30_my_workflow.py
+mv xx_my_workflow.py 25_my_workflow.py
 ```
 
 {:start="2"}
