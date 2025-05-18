@@ -74,7 +74,7 @@ When you run `splice_workflow_step.py`, it makes several coordinated changes to 
          elif step_data.get(self.steps[1].done) and state.get("_revert_target") != "step_02":
              # Show completed view
              return Div(
-                 self.pipulate.revert_control("step_02"),
+                 self.pipulate.display_revert_header("step_02"),
                  Div(id=next_step_id, hx_get=f"/{self.app_name}/{next_step_id}", hx_trigger="load")
              )
          else:
@@ -103,11 +103,8 @@ When you run `splice_workflow_step.py`, it makes several coordinated changes to 
          # Update LLM context
          self.pipulate.append_to_history(f"[WIDGET CONTENT] {self.steps[1].show}:\n{user_val}")
          
-         # Return completed view with next step trigger
-         return Div(
-             self.pipulate.revert_control("step_02"),
-             Div(id="finalize", hx_get=f"/{self.app_name}/finalize", hx_trigger="load")
-         )
+         # Return completed view with next step trigger using chain_reverter
+         return self.pipulate.chain_reverter("step_02", 1, self.steps, self.app_name, user_val)
      ```
 
 3. **UI Messages:**

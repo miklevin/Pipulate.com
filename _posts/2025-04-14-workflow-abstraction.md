@@ -124,7 +124,7 @@ Because of the web UI, each step typically involves two key methods in your work
     This method is responsible for *rendering the UI* for a specific step. It checks the current state of the workflow and the step to decide what to display. There are generally three main UI states a step can be in:
 
       * **Finalized State:** If the entire workflow has been marked as "finalized" (locked) and this step has completed data, it shows a read-only view of the step's output or result. Even in this state, it includes an HTMX trigger to load the *next* finalized step, ensuring the "Run All Cells" feel is maintained.
-      * **Completed/Revertable State:** If the step has been completed (data is saved for it) but the workflow is not yet finalized (or the user is not trying to revert to this step's input form), it typically displays the step's result along with a "Revert" button. This button allows the user to go back and change the input for this step. This view also includes an HTMX trigger to load the *next* step.
+      * **Completed/Revertable State:** If the step has been completed (data is saved for it) but the workflow is not yet finalized (or the user is not trying to revert to this step's input form), it typically displays the step's result along with a "Revert" button using `display_revert_header`. This button allows the user to go back and change the input for this step. This view also includes an HTMX trigger to load the *next* step.
       * **Data Collection State (Input Form):** If the step has not yet been completed, or if the user has explicitly reverted to this step, this method renders the input form for the user. This form will POST to the `step_XX_submit` method. Crucially, when rendering the input form, the placeholder for the next step *does not* yet have the `hx_trigger="load"` attribute.
 
 2.  **`async def step_XX_submit(self, request)` (POST request):**
@@ -134,7 +134,7 @@ Because of the web UI, each step typically involves two key methods in your work
       * Updating the workflow's persistent state with the new data (using `self.pipulate.update_step_state()`).
       * Performing any actions associated with the step (e.g., opening a URL, generating an image, calling an API).
       * Informing the user and the LLM about the outcome.
-      * **Returning an HTML response that shows the "Completed State" UI for the current step AND explicitly includes the HTMX trigger (`hx_trigger="load"`) for the *next* step.** This is what propels the workflow forward.
+      * **Returning an HTML response using `chain_reverter` that shows the "Completed State" UI for the current step AND explicitly includes the HTMX trigger (`hx_trigger="load"`) for the *next* step.** This is what propels the workflow forward.
 
 **0.5 The Chain Reaction: Seamless Workflow Progression**
 

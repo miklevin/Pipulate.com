@@ -140,6 +140,6 @@ With your uniquely named, correctly registered, and LLM-aware workflow shell in 
 2. Implementing the corresponding `step_XX` and `step_XX_submit` methods
 3. Using the `pipeline_table` for state management
 4. Leveraging the `message_queue` for LLM context synchronization
-5. Following the HTMX chain reaction pattern for step progression
+5. Following the HTMX chain reaction pattern for step progression, using `display_revert_header` for completed steps and `chain_reverter` for step transitions
 
 Remember to use the `logger` instance (available via `self.pipulate.logger`) for debugging and to maintain proper state management through the `pipeline` table.

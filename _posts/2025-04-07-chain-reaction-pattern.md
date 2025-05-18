@@ -273,7 +273,7 @@ async def step_XX(self, request):
     # Revert Phase
     elif step_value and state.get("_revert_target") != step_id:
         return Div(
-            Card(H3(f"{step.show}: {step_value}")),
+            pip.display_revert_header(step_id=step_id, app_name=app_name, message=f'{step.show}: {step_value}', steps=steps),
             Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
             id=step_id
         )
@@ -310,12 +310,8 @@ async def step_XX_submit(self, request):
     # Store the new value
     await pip.update_step_state(pipeline_id, step_id, new_value, steps)
     
-    # Return the Revert Phase view
-    return Div(
-        Card(H3(f"{step.show}: {new_value}")),
-        Div(id=next_step_id, hx_get=f"/{app_name}/{next_step_id}", hx_trigger="load"),
-        id=step_id
-    )
+    # Return the Revert Phase view using chain_reverter
+    return pip.chain_reverter(step_id, step_index, steps, app_name, new_value)
 ```
 
 ## Conclusion

@@ -227,6 +227,29 @@ Important:
 - The chain reaction enables automatic progression
 - This gives that Notebook *Run All Cells* feel
 
+For standard steps, use `display_revert_header` to show the step's outcome and revert button:
+```python
+return Div(
+    pip.display_revert_header(step_id=step_id, app_name=app_name, message=f'{step.show}: Complete', steps=steps),
+    Div(id=next_step_id, hx_get=f'/{app_name}/{next_step_id}', hx_trigger='load'),
+    id=step_id
+)
+```
+
+For steps with visualizations or widgets, use `display_revert_widget`:
+```python
+return Div(
+    pip.display_revert_widget(step_id=step_id, app_name=app_name, message=f'{step.show} Configured', widget=widget, steps=steps),
+    Div(id=next_step_id, hx_get=f'/{app_name}/{next_step_id}', hx_trigger='load'),
+    id=step_id
+)
+```
+
+For simple, standard steps, you can use the convenience method `chain_reverter` which combines displaying the step's outcome and triggering the next step:
+```python
+return pip.chain_reverter(step_id, step_index, steps, app_name, processed_val)
+```
+
 ### 3. State Management Pattern
 
 Pipulate uses two complementary approaches to state management:
