@@ -58,12 +58,12 @@ forthcoming.
 
 ### The Plugin System
 
-#### Copy/Paste CRUD `010_tasks.py`
+#### Copy/Paste CRUD `020_tasks.py`
 
 There's an automatic plugin registration system that uses the `plugins` folder.
 If you want an immediate positive experience without coding or AI assistance, I
-recommend you just copy/paste the `010_tasks.py` and rename it to something like
-`015_competitors.py` and it will just auto-register the new plugin app and you
+recommend you just copy/paste the `020_tasks.py` and rename it to something like
+`025_competitors.py` and it will just auto-register the new plugin app and you
 can keep a list of competitors *per user profile*. This CRUD (Create, Read,
 Update, Delete) todo app is based on DRY principles (Don't Repeat Yourself), and
 so there's not much coding for customizations like this. If you want to know
