@@ -132,7 +132,7 @@ The constructor `__init__(self, app, pipulate, pipeline, db, app_name=APP_NAME)`
 
 These asynchronous methods define the behavior of the workflow.
 
-  * **`async def landing(self)`:**
+  * **`async def landing(self, request)`:**
 
       * Renders the workflow's initial entry page.
       * Displays `self.DISPLAY_NAME` and `self.ENDPOINT_MESSAGE`.

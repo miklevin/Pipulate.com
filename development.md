@@ -174,7 +174,7 @@ class WorkflowName:
         routes  # register routes
 
     # --- Core Workflow Engine Methods ---
-    async def landing(self):  # Builds initial UI that presents key
+    async def landing(self, request):  # Builds initial UI that presents key
     async def init(self, request):  # Handles landing key submit
         # hx_trigger="load" (chain reaction)
     async def finalize(self, request):  # Puts workflow in locked state
