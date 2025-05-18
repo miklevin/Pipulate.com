@@ -146,28 +146,9 @@ Remember to use the `logger` instance (available via `self.pipulate.logger`) for
 
 **Helper Methods for Chain Reaction:**
 
-1. **`display_revert_header`**: Creates the standard UI element showing a step's outcome (e.g., `Step Name: Value`) along with a "Revert" button.
-   ```python
-   header = pip.display_revert_header(
-       step_id=step_id,
-       app_name=app_name,
-       message=f'{step.show}: {value}',
-       steps=steps
-   )
-   ```
-
-2. **`display_revert_widget`**: Used when the step's outcome is a richer visual component (table, diagram, etc.). It renders the same kind of revertible header as `display_revert_header` but also includes a styled container for the passed `widget` content.
-   ```python
-   widget_display = pip.display_revert_widget(
-       step_id=step_id,
-       app_name=app_name,
-       message='Widget Title',
-       widget=my_widget,
-       steps=steps
-   )
-   ```
-
-3. **`chain_reverter`**: A convenience method that combines `display_revert_header` with the next-step trigger `Div`. This is the recommended approach for simple step completions.
+1. **`chain_reverter`**: The primary method for step transitions. Creates a consistent UI pattern that includes:
+   - A revert control showing the current step's value
+   - An HTMX-enabled div that triggers loading the next step
    ```python
    return pip.chain_reverter(
        step_id=step_id,
@@ -178,8 +159,29 @@ Remember to use the `logger` instance (available via `self.pipulate.logger`) for
    )
    ```
 
+2. **`display_revert_widget`**: Used when the step's outcome is a richer visual component (table, diagram, etc.). It renders the same kind of revertible header as `chain_reverter` but also includes a styled container for the passed `widget` content.
+   ```python
+   widget_display = pip.display_revert_widget(
+       step_id=step_id,
+       app_name=app_name,
+       message='Widget Title',
+       widget=my_widget,
+       steps=steps
+   )
+   ```
+
+3. **`display_revert_header`**: A lower-level method that creates just the revert control. This should rarely be used directly - prefer `chain_reverter` instead.
+   ```python
+   header = pip.display_revert_header(
+       step_id=step_id,
+       app_name=app_name,
+       message=f'{step.show}: {value}',
+       steps=steps
+   )
+   ```
+
 **When to Use Which Method:**
 
-- Use `chain_reverter` for simple step completions where the output is a string value
+- Use `chain_reverter` for ALL step transitions - this ensures consistent UI and proper HTMX chain reaction
 - Use `display_revert_widget` when you need to show complex visual components
-- Use `display_revert_header` when you need custom layout around the standard revert header
+- Avoid using `display_revert_header` directly unless you have a very specific reason to customize the UI structure
