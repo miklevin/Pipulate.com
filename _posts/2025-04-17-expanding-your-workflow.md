@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Pipulate's New Helper: Streamlining Workflow Creation with the 'Workflow Genesis' Plugin"
-description: Learn how to use the new Workflow Genesis plugin to create and structure Pipulate workflows through an interactive UI, replacing manual command-line operations.
+title: "Pipulate's New Helper: Streamlining Workflow Creation with the 'Workflow Creation Helper' Plugin"
+description: Learn how to use the new Workflow Creation Helper plugin to create and structure Pipulate workflows through an interactive UI, replacing manual command-line operations.
 group: guide
 ---
 
-The Pipulate project is all about empowering users to create powerful, local-first tools through step-by-step workflows. A key part of our philosophy is "tools making tools" – building utilities that simplify and accelerate the development process itself. Today, we're excited to share progress on a new internal tool designed to do just that: the "Workflow Genesis" plugin.
+The Pipulate project is all about empowering users to create powerful, local-first tools through step-by-step workflows. A key part of our philosophy is "tools making tools" – building utilities that simplify and accelerate the development process itself. Today, we're excited to share progress on a new internal tool designed to do just that: the "Workflow Creation Helper" plugin.
 
 **The Challenge: Simplifying Workflow Scaffolding**
 
@@ -13,17 +13,17 @@ Creating new workflows in Pipulate, while highly flexible, involves some initial
 
 Our goal is to bring this scaffolding process directly into the Pipulate UI, providing a guided, interactive experience. This leads to the "Create, Splice, and (eventually) Swap" pattern for rapid workflow development.
 
-**Introducing the "Workflow Genesis" Plugin (`plugins/300_workflow_genesis.py`)**
+**Introducing the "Workflow Creation Helper" Plugin (`plugins/300_workflow_genesis.py`)**
 
-The "Workflow Genesis" plugin is itself a Pipulate workflow designed to assist developers in creating *other* Pipulate workflows. It acts as an interactive wizard, walking the user through the initial creation and structuring phases.
+The "Workflow Creation Helper" plugin is itself a Pipulate workflow designed to assist developers in creating *other* Pipulate workflows. It acts as an interactive wizard, walking the user through the initial creation and structuring phases.
 
 **Phase 1: Interactive Command Generation (Now Implemented!)**
 
-The first major piece of functionality for the "Workflow Genesis" plugin is now in place. This was developed through a collaborative process, involving iterative refinement with AI coding assistants like Cursor AI and conceptual discussions with Gemini.
+The first major piece of functionality for the "Workflow Creation Helper" plugin is now in place. This was developed through a collaborative process, involving iterative refinement with AI coding assistants like Cursor AI and conceptual discussions with Gemini.
 
 Here's how it works:
 
-1.  **Bootstrapping "Workflow Genesis":**
+1.  **Bootstrapping "Workflow Creation Helper":**
     We first used our own `helpers/create_workflow.py` script to generate the initial file for `plugins/300_workflow_genesis.py`. The command looked like this:
 
     ```bash
@@ -81,4 +81,4 @@ The next exciting phase for this helper workflow will be to implement the "swap"
 
 **Conclusion**
 
-The development of the "Workflow Genesis" plugin, even in its current stage, marks a valuable step forward in enhancing the developer experience within the Pipulate ecosystem. By automating the generation of scaffolding commands, we're making it easier and faster to get new workflow ideas off the ground. We're excited about its potential and look forward to developing its "swap" capabilities to further accelerate the creation of powerful, custom, local-first tools. Stay tuned for more updates as Pipulate continues to evolve! 
+The development of the "Workflow Creation Helper" plugin, even in its current stage, marks a valuable step forward in enhancing the developer experience within the Pipulate ecosystem. By automating the generation of scaffolding commands, we're making it easier and faster to get new workflow ideas off the ground. We're excited about its potential and look forward to developing its "swap" capabilities to further accelerate the creation of powerful, custom, local-first tools. Stay tuned for more updates as Pipulate continues to evolve! 
