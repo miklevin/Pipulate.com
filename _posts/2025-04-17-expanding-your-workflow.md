@@ -26,7 +26,7 @@ Here's how it works:
 1.  **Bootstrapping "Workflow Creation Helper":**
     We first used our own `helpers/create_workflow.py` script to generate the initial file for `plugins/300_workflow_genesis.py`. The command looked like this:
 
-    ```bash
+```bash
     python helpers/create_workflow.py \
     plugins/300_workflow_genesis.py \
     WorkflowGenesis \
