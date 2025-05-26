@@ -46,6 +46,58 @@ Pipulate was designed based on several key architectural decisions and principle
 
 [Explore our architectural philosophy in depth on our blog →](/blog/)
 
+## Critical Implementation Patterns for LLMs
+
+**These patterns are essential for LLMs working with Pipulate and are frequently missed:**
+
+### 1. The Auto-Key Generation Pattern (MOST CRITICAL)
+
+When a user hits Enter on an empty key field, this specific sequence occurs:
+
+1. **Form Submission**: POSTs to `/{APP_NAME}/init` with empty `pipeline_id`
+2. **Server Response**: The `init` method MUST return an `HX-Refresh` response:
+   ```python
+   if not user_input:
+       from starlette.responses import Response
+       response = Response('')
+       response.headers['HX-Refresh'] = 'true'
+       return response
+   ```
+3. **Page Reload**: HTMX triggers a full page reload
+4. **Auto-Key Population**: The `landing()` method calls `pip.generate_pipeline_key(self)` to populate the input field
+5. **User Interaction**: User hits Enter again to start the workflow
+
+**Critical Implementation Details:**
+- The `_onfocus='this.setSelectionRange(this.value.length, this.value.length)'` attribute positions cursor at end
+- This allows users to easily modify the suggested key
+- The pattern ensures predictable, sequential key generation
+
+### 2. APP_NAME vs. Filename Distinction
+
+**Critical for data integrity:**
+
+* **Filename** (e.g., `510_workflow_genesis.py`): Determines public URL endpoint and menu ordering
+* **APP_NAME Constant** (e.g., `APP_NAME = "workflow_genesis_internal"`): Internal identifier that MUST REMAIN STABLE
+
+**Critical Rule**: Never change `APP_NAME` after workflows have been created, or existing workflow data will be orphaned.
+
+### 3. Plugin Discovery System
+
+* Files in `plugins/` directory are auto-discovered
+* Numeric prefixes control menu ordering
+* Classes must have `landing` method and name attributes
+* Automatic dependency injection based on `__init__` signature
+
+```
+# Plugin Discovery Flow
+plugins/
+├── 010_tasks.py          → Registered as "tasks" (position 10)
+├── 020_hello_workflow.py → Registered as "hello_workflow" (position 20)
+├── xx_experimental.py    → Skipped (development prefix)
+├── test (Copy).py        → Skipped (parentheses)
+└── 999_advanced.py       → Registered as "advanced" (position 999)
+```
+
 ## Technology Stack
 
 ### FastHTML
@@ -167,6 +219,19 @@ Nix Flakes guarantee identical development and runtime environments across opera
 - Optional CUDA support for GPU acceleration
 - True "works on my machine" elimination
 
+```
+                   ┌──────────────────┐
+                   │  Linux / macOS   │ - Write code once, run anywhere
+                   │  Windows (WSL)   │ - Consistent dev environment via Nix
+                   └────────┬─────────┘
+                            │ Nix manages dependencies
+                            ▼
+                   ┌──────────────────┐
+                   │   CUDA Support   │ - Auto-detects NVIDIA GPU w/ CUDA
+                   │   (if present)   │ - Uses GPU for LLM acceleration
+                   └──────────────────┘   - Falls back to CPU if no CUDA
+```
+
 ## Workflow System Architecture
 
 Pipulate's primary feature is its step-based workflow system, designed specifically for porting Jupyter Notebook concepts into guided, end-user-friendly interfaces.
@@ -209,24 +274,32 @@ Why? It simulates Notebook *Run All Cells!*
 Creating workflows follows a consistent pattern:
 
 ```python
+from collections import namedtuple
+Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'], defaults=(None,))
+
 class MyWorkflow:
     APP_NAME = "unique_name"        # Unique identifier
     DISPLAY_NAME = "User-Facing Name"  # UI display name
+    ENDPOINT_MESSAGE = "Welcome message"   # Landing page description
+    TRAINING_PROMPT = "workflow_name.md"  # Training context for AI assistance
     
-    def __init__(self, pipulate, db, pipeline, rt):
-        self.pipulate, self.db = pipulate, db
+    def __init__(self, app, pipulate, pipeline, db, app_name=APP_NAME):
+        self.app = app
+        self.pipulate = pipulate
         self.pipeline = pipeline
+        self.db = db
+        self.app_name = app_name
+        self.message_queue = pipulate.get_message_queue()
         
         # Define steps
-        Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'])
         self.steps = [
             Step(id='step_01', done='first_field', show='First Step', refill=True),
             Step(id='step_02', done='second_field', show='Second Step', refill=True),
-            # More steps...
+            Step(id='finalize', done='finalized', show='Finalize', refill=False)
         ]
         
         # Register routes
-        self.register_routes(rt)
+        self.register_routes(app.route)
     
     # Handler methods for each step
     async def step_01(self, request):
@@ -308,6 +381,22 @@ Workflows store their entire state as JSON blobs in the `pipeline` table, enabli
 - Simple debugging and state inspection
 - Conceptually similar to server-side cookies
 
+```
+      ┌───────────────────────────────┐ # Benefits of Local-First Simplicity
+      │          Web Browser          │
+      │                               │ - No mysterious client-side state
+      │    ┌────────────────────┐     │ - No full-stack framework churn
+      │    │   Server Console   │     │ - No complex ORM or SQL layers
+      │    │     & Web Logs     │     │ - No external message queues
+      │    └─────────┬──────────┘     │ - No build step required
+      │              ▼                │ - Direct, observable state changes
+      │    ┌─────────────────────┐    │
+      │    │  Server-Side State  │    │ 
+      │    │  DictLikeDB + JSON  │ ◄─── (Conceptually like server-side cookies)
+      │    └─────────────────────┘    │ - Enables the "Know EVERYTHING!" philosophy
+      └───────────────────────────────┘
+```
+
 ```python
 # Reading workflow state
 pipeline_id = db.get("pipeline_id", "unknown")
@@ -344,6 +433,23 @@ Pipulate uses three primary communication methods:
 2. **WebSockets**: Bidirectional communication for LLM streaming and chat
 3. **Server-Sent Events (SSE)**: Unidirectional server-to-client updates for live reloading and progress notifications
 
+### UI Layout Architecture
+
+The application interface is organized into distinct areas:
+
+```
+    ┌─────────────────────────────┐
+    │        Navigation           │ (Profiles, Apps, Search)
+    ├───────────────┬─────────────┤
+    │               │             │
+    │    Main Area  │    Chat     │ (Workflow/App UI)
+    │   (Pipeline)  │  Interface  │ (LLM Interaction)
+    │               │             │
+    ├───────────────┴─────────────┤
+    │        Poke Button          │ (Quick Action)
+    └─────────────────────────────┘
+```
+
 ## Development Environment
 
 The Pipulate development experience leverages:
@@ -365,6 +471,18 @@ The Pipulate development experience leverages:
  │ (Handles HTTP, WS, SSE)   │     │ Process  │
  └───────────────────────────┘     └──────────┘
 ```
+
+## Common LLM Implementation Mistakes
+
+**LLMs frequently make these errors when working with Pipulate:**
+
+1. **Missing HX-Refresh Response**: Forgetting to return the refresh response for empty keys
+2. **Incorrect Key Generation**: Not using `pip.generate_pipeline_key(self)` properly
+3. **Missing Cursor Positioning**: Forgetting the `_onfocus` attribute for user experience
+4. **Wrong Route Handling**: Not understanding the difference between landing page and init routes
+5. **State Inconsistency**: Not properly handling the key generation and storage flow
+6. **APP_NAME Changes**: Modifying APP_NAME after deployment, orphaning existing data
+7. **Chain Reaction Breaks**: Not properly implementing the HTMX step progression pattern
 
 ## Advanced Patterns
 

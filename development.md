@@ -89,6 +89,9 @@ Coding Assistance helps A LOT.
 When creating new workflows in Pipulate, follow this pattern:
 
 ```python
+from collections import namedtuple
+Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'], defaults=(None,))
+
 class MyWorkflow:
     # --- Core Configuration ---
     APP_NAME = "unique_name"           # Unique identifier, different from filename
@@ -105,9 +108,9 @@ class MyWorkflow:
         self.pipeline = pipeline
         self.db = db
         self.app_name = app_name
+        self.message_queue = pipulate.get_message_queue()
         
         # Define workflow steps
-        Step = namedtuple('Step', ['id', 'done', 'show', 'refill', 'transform'])
         self.steps = [
             Step(id='step_01', done='first_field', show='First Step', refill=True),
             Step(id='step_02', done='second_field', show='Second Step', refill=True),
@@ -115,7 +118,7 @@ class MyWorkflow:
         ]
         
         # Register routes
-        self.register_routes(rt)
+        self.register_routes(app.route)
 ```
 
 Key points:
@@ -336,6 +339,52 @@ Creating new plugins follows a specific workflow:
 3. **Test**: Rename to `xx_my_flow.py` for testing (server auto-reloads but won't register)
 4. **Deploy**: Rename to `XX_my_flow.py` (e.g., `035_my_workflow.py`) to assign menu order and activate
 
+## Workflow Development Helper Scripts
+
+Pipulate includes sophisticated helper scripts for workflow development:
+
+### `create_workflow.py`
+Creates new workflows from templates:
+```bash
+python helpers/create_workflow.py workflow.py MyWorkflow my_workflow \
+  "My Workflow" "Welcome message" "Training prompt" \
+  --template trifecta --force
+```
+
+**Parameters:**
+- `workflow.py`: Output filename
+- `MyWorkflow`: Class name
+- `my_workflow`: APP_NAME (internal identifier)
+- `"My Workflow"`: DISPLAY_NAME (user-facing)
+- `"Welcome message"`: ENDPOINT_MESSAGE
+- `"Training prompt"`: TRAINING_PROMPT filename
+
+**Templates Available:**
+- `blank`: Minimal workflow with one step
+- `trifecta`: Three-step workflow pattern
+
+### `splice_workflow_step.py`
+Adds steps to existing workflows:
+```bash
+python helpers/splice_workflow_step.py workflow.py --position top
+python helpers/splice_workflow_step.py workflow.py --position bottom
+```
+
+**Features:**
+- Automatically finds the `self.steps = [...]` block
+- Handles both direct and indirect assignment patterns
+- Adds proper step numbering and method generation
+- Maintains comma handling to prevent syntax errors
+- Supports top/bottom positioning of new steps
+
+### Template System Features
+
+The template system provides:
+- **Automatic Method Generation**: Creates both GET and POST handlers for each step
+- **Proper Step Insertion Points**: Uses `STEP_METHODS_INSERTION_POINT` markers
+- **Chain Reaction Preservation**: Maintains HTMX progression patterns
+- **State Management**: Includes proper state handling patterns
+
 ## Running and Maintenance
 
 ### Running, Interrupting & Re-running
@@ -388,6 +437,30 @@ The system performs git pulls:
 
 > **Security Note**: The ROT13-encoded SSH key is used as a read-only deploy key with restricted repository access. The security of this system relies on proper repository permissions rather than the encoding itself.
 
+### Magic Cookie System: Installation & Transformation Flow
+
+The following diagram illustrates how the magic cookie system works to bootstrap, transform, and update a Pipulate installation without requiring git at the start:
+
+```
+User runs install.sh (via curl)           Nix Flake Activation & Transformation
+┌──────────────────────────────┐         ┌────────────────────────────────────────────┐
+│ 1. Download install.sh       │         │ 5. User runs 'nix develop'                 │
+│ 2. Download ZIP from GitHub  │         │ 6. Flake detects non-git directory         │
+│ 3. Extract ZIP to ~/AppName  │         │ 7. Flake clones repo to temp dir           │
+│ 4. Download ROT13 SSH key    │         │ 8. Preserves app_name.txt, .ssh, .venv     │
+│    to .ssh/rot               │         │ 9. Moves git repo into place               │
+└─────────────┬────────────────┘         │10. Sets up SSH key for git                 │
+              │                          │11. Transforms into git repo                │
+              ▼                          │12. Enables auto-update via git pull        │
+      ┌─────────────────────────────────────────────────────────────────────────────┐
+      │ Result: Fully functional, auto-updating, git-based Pipulate installation    │
+      └─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Legend:**
+- Steps 1–4: Performed by the install.sh script (no git required)
+- Steps 5–12: Performed by the flake.nix logic on first nix develop
+
 ### White-Labeling Process
 
 To create a white-labeled version of Pipulate:
@@ -436,30 +509,6 @@ curl -L https://pipulate.com/install.sh | sh -s YourBrandName
 - Document customization options
 - Include troubleshooting guides
 
-### Magic Cookie System: Installation & Transformation Flow
-
-The following diagram illustrates how the magic cookie system works to bootstrap, transform, and update a Pipulate installation without requiring git at the start:
-
-```
-User runs install.sh (via curl)           Nix Flake Activation & Transformation
-┌──────────────────────────────┐         ┌────────────────────────────────────────────┐
-│ 1. Download install.sh       │         │ 5. User runs 'nix develop'                 │
-│ 2. Download ZIP from GitHub  │         │ 6. Flake detects non-git directory         │
-│ 3. Extract ZIP to ~/AppName  │         │ 7. Flake clones repo to temp dir           │
-│ 4. Download ROT13 SSH key    │         │ 8. Preserves app_name.txt, .ssh, .venv     │
-│    to .ssh/rot               │         │ 9. Moves git repo into place               │
-└─────────────┬────────────────┘         │10. Sets up SSH key for git                 │
-              │                          │11. Transforms into git repo                │
-              ▼                          │12. Enables auto-update via git pull        │
-      ┌─────────────────────────────────────────────────────────────────────────────┐
-      │ Result: Fully functional, auto-updating, git-based Pipulate installation    │
-      └─────────────────────────────────────────────────────────────────────────────┘
-```
-
-**Legend:**
-- Steps 1–4: Performed by the install.sh script (no git required)
-- Steps 5–12: Performed by the flake.nix logic on first nix develop
-
 ## Development Workflow
 
 When developing white-labeled versions:
@@ -489,6 +538,31 @@ mv xx_my_workflow.py 25_my_workflow.py
 - Use numbered prefixes for menu order
 - Maintain consistent naming
 - Document all customizations
+
+## File Structure & Organization
+
+```plaintext
+    .
+    ├── .cursor               # Guidelines for AI code editing (if using Cursor)
+    ├── .venv/                # Virtual environment (shared by server & Jupyter)
+    ├── data/
+    │   └── data.db           # SQLite database
+    ├── downloads/            # Default location for workflow outputs (e.g., CSVs)
+    ├── helpers/              # Development helper scripts
+    │   ├── create_workflow.py
+    │   └── splice_workflow_step.py
+    ├── logs/
+    │   └── server.log        # Server logs (useful for debugging / AI context)
+    ├── static/               # JS, CSS, images
+    ├── plugins/              # Workflow plugins (e.g., hello_flow.py)
+    ├── training/             # Markdown files for AI context/prompts
+    ├── flake.nix             # Nix flake definition for reproducibility
+    ├── LICENSE
+    ├── README.md             # Main documentation
+    ├── requirements.txt      # Python dependencies (managed by Nix)
+    ├── server.py             # Main application entry point
+    └── start/stop            # Scripts for managing Jupyter (if used)
+```
 
 ## Best Practices
 
