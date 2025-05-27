@@ -97,30 +97,26 @@ echo "✅ All required tools found."
 echo
 
 # --- Target Directory Handling ---
-# We only care if flake.nix exists, not if it's a git repo yet
-echo "📁 Setting up target directory: ${TARGET_DIR}"
+# Check if target directory already exists and gracefully fail
+echo "📁 Checking target directory: ${TARGET_DIR}"
 if [ -d "${TARGET_DIR}" ]; then
-  echo "Directory '${TARGET_DIR}' already exists."
+  echo "❌ Error: Directory '${TARGET_DIR}' already exists."
+  echo "   The installer cannot proceed when the target directory already exists."
+  echo "   This prevents accidental overwrites of existing data."
+  echo
+  echo "   To resolve this, you can:"
+  echo "   1. Choose a different name: curl -sSL https://pipulate.com/install.sh | bash -s your-custom-name"
+  echo "   2. Remove the existing directory: rm -rf ${TARGET_DIR}"
+  echo "   3. Rename the existing directory: mv ${TARGET_DIR} ${TARGET_DIR}.backup"
+  echo
   if [ -f "${TARGET_DIR}/flake.nix" ]; then
-    echo "ℹ️ It appears to be a Pipulate installation. Entering directory..."
-    cd "${TARGET_DIR}"
-    echo "🚀 Starting Pipulate environment..."
-    print_separator
-    echo "  To use Pipulate in the future, simply run:  "
-    echo "  cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}  "
-    print_separator
-    echo
-    # Run nix develop directly (not with exec so our info message is visible)
-    # Use the appropriate command based on OS
-    ${NIX_DEVELOP_CMD}
-    exit 0
-  else
-    echo "❌ Error: Directory '${TARGET_DIR}' exists but doesn't appear to be a Pipulate installation."
-    echo "   Please remove or rename it, then run this script again."
-    echo "   For example: rm -rf ${TARGET_DIR}"
-    exit 1
+    echo "   Note: The existing directory appears to be a Pipulate installation."
+    echo "   You can start it directly with: cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}"
   fi
+  echo
+  exit 1
 else
+  echo "✅ Target directory is available."
   echo "📁 Creating directory '${TARGET_DIR}'"
   mkdir -p "${TARGET_DIR}"
 fi
