@@ -6,6 +6,7 @@
 # - Python environment for additional tools
 # - Neovim for text editing
 # - Git for version control
+# - Automatic Jekyll server startup on environment entry
 #
 # Environment Variables
 # -------------------
@@ -23,6 +24,7 @@
 #    - Ensures all gems are installed
 #    - Handles port configuration
 #    - Provides verbose output and incremental builds
+#    - AUTOMATICALLY CALLED when entering nix develop
 #
 # 2. jes-stop: Stop any running Jekyll servers
 #
@@ -54,14 +56,16 @@
 #
 # Best Practices
 # -------------
-# 1. Always run jes from the Jekyll site root
+# 1. Always run nix develop from the Jekyll site root
 # 2. Use .port file to configure custom ports
 # 3. Keep Gemfile and Gemfile.lock in version control
 # 4. Run reset-ruby-env for major environment issues
 # 5. Use rebuild-gems for specific gem issues
+# 6. Jekyll server starts automatically on environment entry
 #
 # Version History
 # --------------
+# v1.0.6: Added automatic Jekyll server startup on environment entry
 # v1.0.5: Added bundle exec for Jekyll checks
 # v1.0.4: Improved error handling and diagnostics
 # v1.0.3: Fixed environment variable handling
@@ -476,6 +480,13 @@
               echo ""
               echo "Note: Gems will now install into $GEM_HOME"
             fi
+            
+            # Automatically start Jekyll server
+            echo ""
+            echo "🚀 Starting Jekyll server automatically..."
+            echo "Press Ctrl+C to stop the server and exit the environment."
+            echo ""
+            jes
           '';
         };
       });
