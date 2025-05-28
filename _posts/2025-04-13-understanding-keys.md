@@ -18,9 +18,9 @@ A typical key follows this format: `{ProfileName}-{WorkflowAppName}-{RunNumber}`
 
 <article style="padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--pico-muted-border-color, #202632); border-radius: var(--pico-border-radius, 0.25rem); background-color: var(--pico-card-background-color, #181c25);">
   <p style="margin-top:0; margin-bottom: 0.75rem; font-size: 0.9em; color: var(--pico-muted-color, #7b8495);">Example of the key input field:</p>
-  <form onsubmit="event.preventDefault(); return false;" style="margin-bottom: 0;">
+  <form onsubmit="event.preventDefault(); return false;" style="margin-bottom: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
     <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <input type="search" name="pipeline_id_example_in_article" class="contrast" placeholder="Existing or new 🗝 here (Enter for auto)" value="Default_Profile-Hello_Workflow-04" list="pipeline-ids-example-in-article" style="flex-grow: 1; margin-bottom: 0;">
+      <input type="search" name="pipeline_id_example_in_article" class="contrast" placeholder="Existing or new 🗝 here (Enter for auto)" value="Default_Profile-Hello_Workflow-04" list="pipeline-ids-example-in-article" style="flex-grow: 1; margin-bottom: 0; background-color: #000000 !important; color: #ffffff !important; border-color: #333333 !important;">
       <button type="submit" class="secondary" style="display: inline-block; cursor: pointer; width: auto !important; white-space: nowrap; flex-shrink: 0; margin-bottom: 0;">Enter 🔑</button>
     </div>
     <datalist id="pipeline-ids-example-in-article">
