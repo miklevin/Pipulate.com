@@ -203,4 +203,4 @@ Everything you need is included:
 - **[Guide](/guide/)** - In-depth tutorials and workflow creation
 - **[GitHub](https://github.com/miklevin/pipulate)** - Source code and development
 
-*Built by SEOs, for SEOs. Open source and always will be.*
+*Built by the most technical SEOs in the world, for the least technical SEOs in the world. Open source and always will be.*
