@@ -108,7 +108,7 @@ This isn't just about being different; it's a deliberate strategy towards a more
 
 ### Revolutionizing Workflows: The "Chain Reaction" Engine
 
-Pipulate's workflow system is designed to bring the power of complex scripts to non-programmers through a guided, step-by-step interface. Its core mechanic is the "chain reaction" pattern, inspired by the "Run All Cells" experience in computational notebooks like Jupyter.
+Pipulate's workflow system is designed to bring the power of complex scripts to non-programmers through a guided, step-by-step interface. Its core mechanic is the "chain reaction" pattern, powered by the brilliantly named `run_all_cells()` method that creates an immediate mental model by directly mirroring Jupyter's "Run All Cells" command.
 
 ```
   ┌─────────┐        ┌─────────┐        ┌─────────┐   - Fully customizable steps
@@ -120,10 +120,12 @@ Pipulate's workflow system is designed to bring the power of complex scripts to 
 ```
 
 * **How it Works:**
+    * The `run_all_cells()` method initializes workflows just like Jupyter's "Run All Cells" - executing from top to bottom until encountering a step requiring input.
     * Workflows are sequences of steps. When a workflow instance is initiated (by providing a unique key), it automatically progresses through all steps for which data has already been provided.
     * It stops at the first step requiring user input or action.
     * Upon submission, the current step is marked complete, and the "chain reaction" triggers the next step (or the same step if it needs to present new information or a widget).
     * This progression is explicitly managed via `hx_trigger="load"` attributes in the server-rendered HTML, ensuring reliability.
+    * **Pedagogical Brilliance**: The `run_all_cells()` name creates immediate understanding for anyone familiar with Jupyter notebooks, making the system instantly intuitive for both users and AI assistants.
 
 * **User Benefits:**
     * **Resumability & Interrupt-Safety:** Users can stop and resume workflows, as the state of each step is persisted.

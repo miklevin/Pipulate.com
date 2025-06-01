@@ -234,7 +234,7 @@ Nix Flakes guarantee identical development and runtime environments across opera
 
 ## Workflow System Architecture
 
-Pipulate's primary feature is its step-based workflow system, designed specifically for porting Jupyter Notebook concepts into guided, end-user-friendly interfaces.
+Pipulate's primary feature is its step-based workflow system, designed specifically for porting Jupyter Notebook concepts into guided, end-user-friendly interfaces. The system's core innovation is the `run_all_cells()` method, which creates a perfect mental model by directly mirroring Jupyter's "Run All Cells" functionality.
 
 ### Step-Based Pipeline Flow
 
@@ -247,9 +247,9 @@ Pipulate's primary feature is its step-based workflow system, designed specifica
   State Saved        State Saved         Finalized?
 ```
 
-### The Chain Reaction Pattern
+### The Chain Reaction Pattern: Powered by `run_all_cells()`
 
-The heart of Pipulate's workflow system is the "chain reaction" pattern - a critical HTMX mechanism that enables automatic progression between steps. The key elements:
+The heart of Pipulate's workflow system is the "chain reaction" pattern - a critical HTMX mechanism that enables automatic progression between steps. This pattern is brilliantly encapsulated by the `run_all_cells()` method, which creates the same mental model as Jupyter's "Run All Cells" command. The key elements:
 
 ```python
 return Div(
@@ -267,7 +267,7 @@ This pattern:
 
 **Important:** Never remove `hx_trigger="load"` — it's essential for reliable step progression.
 
-Why? It simulates Notebook *Run All Cells!*
+**The `run_all_cells()` Pedagogical Breakthrough**: This method name is pedagogically brilliant because it creates instant understanding. Anyone familiar with Jupyter notebooks immediately grasps the concept - workflows execute from top to bottom, stopping only when they encounter a step requiring input, exactly like running all cells in a notebook. This naming choice makes the entire system more intuitive for both developers and AI assistants.
 
 ### Workflow Implementation Pattern
 
