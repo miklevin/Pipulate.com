@@ -17,9 +17,11 @@ Pipulate is designed as a *simpler alternative* to using Jupyter Notebooks — s
 ***you don't have to be a developer to use.*** Most people know Jupyter
 Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
 notebooks but without the Python code. The main audience is SEO practitioners
-upping their game in the age of AI. So if you're a technical SEO but a
-non-programmer, just install and use Pipulate. For people who want to actually
-participate in *making* those next-gen SEO tools, this page is for you!
+upping their game in the age of AI.
+
+**The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model - each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
+
+So if you're a technical SEO but a non-programmer, just install and use Pipulate. For people who want to actually participate in *making* those next-gen SEO tools, this page is for you!
 
 ## Core Concepts
 
@@ -179,7 +181,7 @@ class WorkflowName:
     # --- Core Workflow Engine Methods ---
     async def landing(self, request):  # Builds initial UI that presents key
     async def init(self, request):  # Handles landing key submit
-        # hx_trigger="load" (chain reaction)
+        return pip.run_all_cells(app_name, steps)  # The "Run All Cells" pattern
     async def finalize(self, request):  # Puts workflow in locked state
     async def unfinalize(self, request):  # Takes workflow out of locked state
     async def get_suggestion(self, step_id, state):  # Pipes data from step to step
@@ -203,15 +205,17 @@ class WorkflowName:
         # hx_trigger="load" (chain reaction)
 ```
 
-### 2. Chain Reaction Pattern
+### 2. Chain Reaction Pattern: The `run_all_cells()` Breakthrough
 
 Pipulate Workflows always chain-react as far as they can when you plug-in a Key!
 This is their secret to non-interruptability. The truth is Pipulate Workflows
 are always interrupted all the time, just going as far as they can until
 encountering a step with no data — therefore providing perfect resumability.
 
+**The `run_all_cells()` naming breakthrough**: This method name creates the perfect mental model. Just like clicking "Run All Cells" in Jupyter, it executes the workflow from top to bottom, stopping only when it encounters a step that needs input. The name itself teaches the pattern.
+
 This chain reaction gives Pipulate its signature feel, constantly reinforcing
-the top-down linear workflow model that mimics Notebooks *Run All Cells.* This
+the top-down linear workflow model that exactly mimics Jupyter's *Run All Cells.* This
 is going to be weird to you until it isn't. Keeping the chain reaction pattern
 in place in each of its standard positions is crucial for workflow progression.
 
