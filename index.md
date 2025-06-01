@@ -100,3 +100,107 @@ The Nix environment includes:
 This approach eliminates the "works on my machine" problem and ensures Pipulate runs reliably everywhere.
 
 [Learn more about our local-first approach in our Guide →](/guide/)
+
+---
+
+## Why Pipulate Changes Everything
+
+### The Perfect Complement to Your Existing SEO Stack
+
+Pipulate runs entirely on your computer, handling the nimble analysis tasks that work best locally while integrating seamlessly with enterprise platforms like Botify and others for the heavy lifting.
+
+```
+Enterprise SaaS (Botify, etc.)     +    Local Pipulate
+├── Million-page crawls            +    Custom workflow automation
+├── Large-scale data processing    +    Rapid prototyping & testing
+├── Team collaboration features    +    Personal analysis pipelines  
+├── Enterprise reporting           +    Ad-hoc data exploration
+└── Robust infrastructure          +    Complete privacy & control
+```
+
+### Turn Complex Scripts Into Guided Workflows
+
+Pipulate transforms powerful Python SEO scripts into step-by-step workflows that anyone can use. No coding required—just follow the guided process from start to finish.
+
+```
+Before: Complex Python Script              After: Guided Workflow
+┌─────────────────────────────────┐       ┌─────────────────────────────────┐
+│ # Fetch Botify data             │       │ Step 1: Enter Project URL       │
+│ auth = get_botify_token()       │  -->  │ [https://example.com_______] ✓  │
+│ project = fetch_project(url)    │       │                                 │
+│ analysis = get_latest_crawl()   │       │ Step 2: Select Analysis Type    │
+│ # 47 more lines of code...      │       │ ○ Full Site  ● Link Analysis    │
+│                                 │       │                                 │
+│ # Generate network graph        │       │ Step 3: Generate Graph          │
+│ nodes = process_links()         │       │ [Generate Visualization] ✓      │
+│ # etc...                        │       │                                 │
+└─────────────────────────────────┘       └─────────────────────────────────┘
+```
+
+### AI Assistant That Actually Understands SEO
+
+Built-in AI (running locally on your machine) provides contextual help throughout your workflows. No API keys, no external services—just intelligent assistance when you need it.
+
+- **Workflow Guidance**: Get help understanding each step
+- **Data Interpretation**: AI explains what your results mean
+- **Content Generation**: Create SEO content without external APIs
+- **Technical Support**: Troubleshoot issues with context-aware assistance
+
+### Real SEO Workflows You Can Use Today
+
+#### Enhanced Botify Analysis
+Transform your Botify crawl exports into interactive network visualizations and custom analysis pipelines that extend your enterprise platform's capabilities.
+
+#### Cross-Platform Data Integration  
+Combine data from multiple sources—Botify APIs, Search Console, custom crawls—into unified analysis workflows that provide insights across your entire SEO stack.
+
+#### Rapid Prototyping & Testing
+Quickly test new SEO hypotheses and analysis approaches locally before implementing them at scale in your enterprise tools.
+
+#### Custom Reporting & Automation
+Build personalized reporting workflows that pull from your existing tools and present data exactly how you need it.
+
+### The Local-First Advantage
+
+**Privacy by Design**: Keep sensitive competitive analysis and proprietary methodologies secure on your local machine.
+
+**Unlimited Local Processing**: Use your full CPU/GPU power for AI analysis, data manipulation, and custom algorithms—perfect for the tasks that work best locally.
+
+**Seamless Integration**: Pull data from any source—Botify APIs, Search Console, CSVs, manual exports—into unified local workflows.
+
+**Development Freedom**: Prototype and test new analysis approaches without affecting your production enterprise tools.
+
+### Perfect for SEO Teams
+
+**Agencies**: Standardize complex processes across team members while protecting client data.
+
+**In-House Teams**: Share SEO methodology without sharing code or technical complexity.
+
+**Freelancers**: Extend your existing tool capabilities with custom local analysis workflows.
+
+**Technical SEOs**: Transform your Python scripts into shareable workflows that complement your enterprise SEO platform.
+
+---
+
+## Ready to Get Started?
+
+Everything you need is included:
+- **Pipulate Workflows**: Guided SEO processes
+- **JupyterLab**: For creating and testing custom analyses  
+- **Local AI**: Ollama integration for intelligent assistance
+- **All Dependencies**: Managed automatically by Nix
+
+**Extends your existing SEO tools. Works with any platform. Completely local.**
+
+[Get started with the installation above ↑](#pipulate-installation-guide)
+
+---
+
+### Learn More
+
+- **[About Pipulate](/about/)** - Detailed overview of features and capabilities
+- **[Philosophy](/philosophy/)** - Why we built Pipulate this way  
+- **[Guide](/guide/)** - In-depth tutorials and workflow creation
+- **[GitHub](https://github.com/miklevin/pipulate)** - Source code and development
+
+*Built by SEOs, for SEOs. Open source and always will be.*
