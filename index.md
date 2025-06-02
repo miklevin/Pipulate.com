@@ -37,6 +37,93 @@ curl -L https://pipulate.com/install.sh | sh -s Botifython
 * The installer downloads and configures everything automatically
 * First-time installation creates a directory at `~/Botifython`
 
+<details>
+<summary>Click to see example installation output</summary>
+
+<pre>
+Last login: Fri May 23 11:18:16 on ttys000
+username@FooMacBook-Pro ~ % curl -L https://pipulate.com/install.sh | sh -s Botifython
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  8733  100  8733    0     0   100k      0 --:--:-- --:--:-- --:--:--  100k
+
+--------------------------------------------------------------
+   🚀 Welcome to Pipulate Installer 🚀   
+   Free and Open Source SEO Software     
+--------------------------------------------------------------
+
+🔍 Checking prerequisites...
+✅ All required tools found.
+
+📁 Checking target directory: /Users/username/Botifython
+✅ Target directory is available.
+📁 Creating directory '/Users/username/Botifython'
+📥 Downloading Pipulate source code...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 1690k    0 1690k    0     0  2954k      0 --:--:-- --:--:-- --:--:-- 2954k
+✅ Download complete.
+
+📦 Extracting source code...
+✅ Extraction complete. Source code installed to '/Users/username/Botifython'.
+
+📍 Now in directory: /Users/username/Botifython
+
+🔑 Setting up deployment key...
+Fetching deployment key from https://pipulate.com/key.rot...
+✅ Deployment key downloaded successfully.
+🔒 Deployment key file saved and secured.
+
+🚀 Starting Pipulate environment...
+--------------------------------------------------------------
+  All set! Pipulate is installed at: /Users/username/Botifython  
+  To use Pipulate in the future, simply run:  
+  cd /Users/username/Botifython && nix develop  
+--------------------------------------------------------------
+
+Setting up app identity as 'Botifython'...
+✅ Application identity set.
+
+Creating startup convenience script...
+Pipulate Installer v1.1.2 - Test checkpoint reached
+Setup complete! To start using Pipulate, run:
+  cd /Users/username/Botifython
+  nix develop
+
+This will activate the Nix development environment and
+complete the 'magic cookie' transformation process.
+username@MichaelMacBook-Pro ~ % curl -L https://pipulate.com/install.sh | sh -s Botifython
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  8733  100  8733    0     0   188k      0 --:--:-- --:--:-- --:--:--  189k
+
+--------------------------------------------------------------
+   🚀 Welcome to Pipulate Installer 🚀   
+   Free and Open Source SEO Software     
+--------------------------------------------------------------
+
+🔍 Checking prerequisites...
+✅ All required tools found.
+
+📁 Checking target directory: /Users/username/Botifython
+❌ Error: Directory '/Users/username/Botifython' already exists.
+   The installer cannot proceed when the target directory already exists.
+   This prevents accidental overwrites of existing data.
+
+   To resolve this, you can:
+   1. Choose a different name: curl -sSL https://pipulate.com/install.sh | bash -s your-custom-name
+   2. Remove the existing directory: rm -rf /Users/username/Botifython
+   3. Rename the existing directory: mv /Users/username/Botifython /Users/username/Botifython.backup
+
+   Note: The existing directory appears to be a Pipulate installation.
+   You can start it directly with: cd /Users/username/Botifython && nix develop
+
+username@FooMacBook-Pro ~ % cd
+</pre>
+
+</details>
+
 ### 3. Starting Pipulate
 
 After initial installation, you can start Pipulate anytime with:
@@ -45,12 +132,29 @@ After initial installation, you can start Pipulate anytime with:
 cd ~/Botifython && nix develop
 ```
 
+Or if you prefer (same thing):
+
+```zsh
+cd ~/Botifython
+nix develop
+```
+
 This command:
 * Updates to the latest version automatically
 * Starts JupyterLab and the Pipulate server
 * Opens web interfaces in your browser
 
 ## Troubleshooting & Management
+
+### Running Pipulate Again
+
+Exit out and restart. But how?  Close the terminal, open a new one, `cd` into
+`~/Botifython` and type `nix develop` 
+
+It's also okay to force-close the terminal. If you're having trouble, you can
+`Ctrl`+`c` until it exits. At that point you can restart the server by typing
+`python server.py` or `nix develop` (depending).  Because it's hard to tell
+which, I suggest just closing out of the terminal all the way, starting a new one.
 
 ### Reinstalling Pipulate
 
