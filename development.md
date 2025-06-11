@@ -334,7 +334,7 @@ all_profiles = profiles()
 
 Creating new plugins follows a specific workflow:
 
-1. **Copy a Template**: Start with a template (e.g., `710_blank_placeholder.py`) → `xx_my_workflow.py`)
+1. **Copy a Template**: Start with a template (e.g., `900_blank_placeholder.py`) → `xx_my_workflow.py`)
    > **Tip**: Use the `create_workflow.py` helper script in the `helpers/` directory to automatically generate a new workflow from the template. This script handles all the boilerplate setup and ensures consistent naming conventions.
 
 2. **Modify**: Develop your workflow (won't auto-register with parentheses in name)

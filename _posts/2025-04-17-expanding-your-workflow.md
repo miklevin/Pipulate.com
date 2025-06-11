@@ -37,7 +37,7 @@ Here's how it works:
     --force
     ```
 
-    This created the basic plugin structure from our `710_blank_placeholder.py` template, complete with the necessary class constants like `APP_NAME`, `DISPLAY_NAME`, `ENDPOINT_MESSAGE`, and `TRAINING_PROMPT` tailored for this new helper workflow.
+    This created the basic plugin structure from our `900_blank_placeholder.py` template, complete with the necessary class constants like `APP_NAME`, `DISPLAY_NAME`, `ENDPOINT_MESSAGE`, and `TRAINING_PROMPT` tailored for this new helper workflow.
 
 2.  **Implementing the First Step – Parameter Collection & Command Display:**
     The core of the recent development effort focused on `step_01` of the `WorkflowGenesis` plugin. With AI assistance, we transformed this initial placeholder step into a functional interface:
