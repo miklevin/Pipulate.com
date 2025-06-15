@@ -13,7 +13,7 @@ group: guide
 
 In the early stages of developing this guide, we explored using AI Coding Assistants to help bootstrap new workflow files by copy-pasting and modifying a template. While AI is invaluable for many coding tasks, precise, template-based file generation with strict replacement rules can sometimes lead to unexpected variations due to the generative nature of AI. For a process as foundational as creating a new, correctly registered workflow plugin, determinism and reliability are paramount.
 
-To address this, we introduce `create_workflow.py`, a dedicated Python script designed to automate the initial bootstrapping of your Pipulate workflows. This script takes the `plugins/900_blank_placeholder.py` file as its genetic material and, based on your command-line arguments, generates a new, correctly configured workflow file, ready for you to start adding specific logic. This approach eliminates the risk of manual errors or AI "creativity" in this critical first step.
+To address this, we introduce `create_workflow.py`, a dedicated Python script designed to automate the initial bootstrapping of your Pipulate workflows. This script takes the `plugins/300_blank_placeholder.py` file as its genetic material and, based on your command-line arguments, generates a new, correctly configured workflow file, ready for you to start adding specific logic. This approach eliminates the risk of manual errors or AI "creativity" in this critical first step.
 
 **2.2 The Golden Rule: Filename vs. `APP_NAME` (Revisited & Enforced)**
 
@@ -33,7 +33,7 @@ Before we dive into the script, it's crucial to reiterate the most important rul
 
 This script is your new best friend for starting Pipulate workflows.
 
-  * **Purpose:** To reliably and deterministically create a new, minimal, and correctly configured workflow plugin file by copying `plugins/900_blank_placeholder.py` and replacing its placeholder values with your specifications.
+  * **Purpose:** To reliably and deterministically create a new, minimal, and correctly configured workflow plugin file by copying `plugins/300_blank_placeholder.py` and replacing its placeholder values with your specifications.
   * **Location:** You should save this script as `pipulate/helpers/create_workflow.py`.
   * **Benefit:** It ensures your new workflow registers correctly with Pipulate's plugin system from the moment it's created, giving you an immediate "win" and a stable foundation.
   * **Plugin Discovery:** The generated file will be automatically discovered by `server.py`'s plugin system, which scans the `plugins/` directory for `.py` files (excluding those starting with `__`, `xx_`, or containing parentheses).
@@ -68,7 +68,7 @@ kungfu \
 
 **2.5 The "Kung Fu Download" Example: Understanding the Generated File**
 
-If the script runs successfully, it will create `plugins/035_kungfu_workflow.py`. The content will be a direct copy of `plugins/900_blank_placeholder.py` but with the following key changes:
+If the script runs successfully, it will create `plugins/035_kungfu_workflow.py`. The content will be a direct copy of `plugins/300_blank_placeholder.py` but with the following key changes:
 
 ```python
 from collections import namedtuple

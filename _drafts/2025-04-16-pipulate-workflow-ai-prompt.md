@@ -13,7 +13,7 @@ group: blog
 
 Before diving into complex logic or multiple steps, the very first goal when creating a new Pipulate workflow is to get it to **exist** within the Pipulate system. This means creating a new plugin file that `server.py` can discover, correctly initializing its core configuration so it appears in the "App" dropdown menu, and ensuring it has its own unique space for routes and data without conflicting with other plugins.
 
-Achieving this "Day 0" registration is a significant early win. It confirms your basic setup is correct and provides immediate positive feedback. The simplest way to do this is by starting with a minimal, functional template. For this, we use `plugins/900_blank_placeholder.py` as our genetic material. It's essentially the `700_widget_shim.py` we dissected in Chapter 1, but explicitly intended as a starting point for *new, multi-step workflows* rather than just single-widget shims.
+Achieving this "Day 0" registration is a significant early win. It confirms your basic setup is correct and provides immediate positive feedback. The simplest way to do this is by starting with a minimal, functional template. For this, we use `plugins/300_blank_placeholder.py` as our genetic material. It's essentially the `700_widget_shim.py` we dissected in Chapter 1, but explicitly intended as a starting point for *new, multi-step workflows* rather than just single-widget shims.
 
 **2.2 The Golden Rule: Filename vs. `APP_NAME`**
 
@@ -73,7 +73,7 @@ Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
 **Specific Tasks for THIS step (and ONLY these tasks):**
 
 1.  **Stage 1: Create Temporary Copy**
-    * Locate the file: `plugins/900_blank_placeholder.py`
+    * Locate the file: `plugins/300_blank_placeholder.py`
     * Create a copy of this file in the `plugins/` directory with the `xx_` prefix: `plugins/xx_‹new_workflow_filename›.py`
 
 2.  **Stage 2: Modify Content**
@@ -95,7 +95,7 @@ Okay, AI Assistant, I need your help to bootstrap a new Pipulate workflow.
 * Add any new steps to the `self.steps` list in `__init__`.
 * Modify the logic of `step_01` or `step_01_submit` yet.
 * Change any other methods (`landing`, `init`, `finalize`, etc.) beyond what's necessary for the class name change.
-* Add any new helper methods or imports not already in `900_blank_placeholder.py` (unless absolutely required by a name change, which is unlikely).
+* Add any new helper methods or imports not already in `300_blank_placeholder.py` (unless absolutely required by a name change, which is unlikely).
 
 Please make these changes and provide the complete content of the new file at each stage. Then STOP.
 ```
@@ -117,7 +117,7 @@ Let's apply this template to create our fun "Kung Fu Download" workflow.
 **Specific Steps:**
 
 1. **Stage 1: Create Working Copy**
-   * Use the `file-copy` tool to copy `plugins/900_blank_placeholder.py` to `plugins/xx_kungfu_workflow.py`
+   * Use the `file-copy` tool to copy `plugins/300_blank_placeholder.py` to `plugins/xx_kungfu_workflow.py`
    * This ensures we have all necessary registration code from the template
 
 2. **Stage 2: Modify Content**
@@ -175,7 +175,7 @@ After the AI Assistant processes this prompt, you should have:
 1. A temporary file `plugins/xx_kungfu_workflow.py` with the modified content
 2. After verification, the final file `plugins/035_kungfu_workflow.py`
 
-The content will be almost identical to `900_blank_placeholder.py` except for:
+The content will be almost identical to `300_blank_placeholder.py` except for:
   * The class name will be `KungfuWorkflow`
   * The static constants `APP_NAME`, `DISPLAY_NAME`, `ENDPOINT_MESSAGE`, and `TRAINING_PROMPT` will have their new "Kung Fu" themed values
 
