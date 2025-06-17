@@ -1,13 +1,35 @@
 title: Pipulate Free and Open Source SEO Software
 author: Mike Levin
 apex: MikeLev.in
-permalink: /:slug/
 gaid: G-45KYH6XTTX
+
+# 1. Global default permalink for all collections
+permalink: /:slug/
 
 # Ensure installation files are accessible
 include:
   - install.sh
   - key.rot
+
+# Define collections (to make Jekyll aware of your "_guides" folder)
+collections:
+  guide:
+    output: true
+
+# 2. Set specific permalinks for each content type using defaults
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      # This explicitly applies the global default to standard posts.
+      permalink: /:slug/
+  - scope:
+      path: "_guide"
+      type: "guide"
+    values:
+      # This OVERRIDES the global default for guides.
+      permalink: /guide/:slug/
 
 # Conversion
 markdown:    kramdown
@@ -19,4 +41,3 @@ kramdown:
   auto_ids: true
   syntax_highlighter: rouge
   toc_levels: 2..3
-

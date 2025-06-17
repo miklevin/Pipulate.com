@@ -16,11 +16,11 @@ AI-assisted development. Follow the sequence of posts to build up the full story
 and jump on the Pipulate Workflow Development bandwagon.
 
 <div class="blog-grid">
-{% for post in site.posts reversed %}
+{% for post in site.guide reversed %}
     <article class="blog-card">
         <header>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <span class="post-number">Post #{{ forloop.index }} of {{ site.posts.size }}</span>
+            <span class="post-number">Post #{{ forloop.index }} of {{ site.guide.size }}</span>
         </header>
         <p>{{ post.description }}</p>
     </article>
@@ -80,4 +80,4 @@ and jump on the Pipulate Workflow Development bandwagon.
         grid-template-columns: 1fr;
     }
 }
-</style> 
+</style>
