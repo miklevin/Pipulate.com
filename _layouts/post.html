@@ -4,17 +4,19 @@ group: guide
 ---
 
 {%- comment -%}
-Create a flat index of all posts in the correct sort order
+Dynamically get the correct collection, sort it, and find the current post's index.
 {%- endcomment -%}
-{%- assign sorted_posts = site.posts | sort: 'date' -%}
-{%- assign total_posts = sorted_posts.size -%}
-{%- assign current_post_index = 0 -%}
-{%- for post in sorted_posts -%}
-  {%- if post.url == page.url -%}
-    {%- assign current_post_index = forloop.index -%}
-    {%- break -%}
-  {%- endif -%}
-{%- endfor -%}
+{%- if page.collection -%}
+  {%- assign collection_posts = site[page.collection] | sort: "date" -%}
+  {%- assign total_posts = collection_posts.size -%}
+  {%- assign current_post_index = 0 -%}
+  {%- for post in collection_posts -%}
+    {%- if post.url == page.url -%}
+      {%- assign current_post_index = forloop.index -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 
 <nav class="post-navigation top-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
   {%- if page.previous -%}
