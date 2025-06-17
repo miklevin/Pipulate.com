@@ -1,31 +1,25 @@
 <header>
   <nav class="center small">
   {% case page.group %}
-    {% when "linux" %}
-      <a {% if page.name == "levinux.md" %}class="current" {% endif %}href="/levinux/">Levinux</a>
-      <a {% if page.name == "lxd.md" %}class="current" {% endif %}href="/lxd/">LXD</a>
-      <a {% if page.name == "wsl.md" %}class="current" {% endif %}href="/wsl/">WSL</a>
-      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">Mac</a>
-    {% when "python" %}
-      <a {% if page.name == "jupyter.md" %}class="current" {% endif %}href="/jupyter/">Jupyter</a>
-      <a {% if page.name == "bar" %}class="current" {% endif %}href="#">Pandas</a>
-      <a {% if page.name == "path.md" %}class="current" {% endif %}href="/path/">Path</a>
-      <a {% if page.name == "gsheet.md" %}class="current" {% endif %}href="/gsheet/">GSheet</a>
-      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">nbdev</a>
-    {% when "vim" %}
-      <a {% if page.name == "foo" %}class="current" {% endif %}href="#">Tutor</a>
-      <a {% if page.name == "egg" %}class="current" {% endif %}href="#">RegEx</a>
-      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">.vimrc</a>
-      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">.?vi.?</a>
-    {% when "git" %}
-      <a {% if page.name == "bar" %}class="current" {% endif %}href="#">Undo</a>
-      <a {% if page.name == "foo" %}class="current" {% endif %}href="#">Github</a>
-      <a {% if page.name == "spm" %}class="current" {% endif %}href="#">.ssh</a>
+    {% when "guide" %}
+      <a {% if page.permalink == "/guide/wet-blueprint/" %}class="current" {% endif %}href="/guide/wet-blueprint/">The WET Blueprint</a>
+      <a {% if page.permalink == "/guide/local-first-revolution/" %}class="current" {% endif %}href="/guide/local-first-revolution/">Local-First Revolution</a>
+      <a {% if page.permalink == "/guide/chain-reaction-pattern/" %}class="current" {% endif %}href="/guide/chain-reaction-pattern/">Chain Reaction Pattern</a>
+      <a {% if page.permalink == "/guide/the-future-is-simple/" %}class="current" {% endif %}href="/guide/the-future-is-simple/">The Future is Simple</a>
+    {% when "home" %}
+      <a {% if page.name == "about.md" %}class="current" {% endif %}href="/about/">About</a>
+      <a {% if page.name == "index.md" %}class="current" {% endif %}href="/">Home</a>
+      <a {% if page.group == "install" %}class="current" {% endif %}href="/install/">Install</a>
+      <a {% if page.name == "guide.md" or page.group == "guide" %}class="current" {% endif %}href="/guide/">Guide</a>
+    {% when "install" %}
+      <a href="/">← Back to Home</a>
+      <a class="current" href="/install/">Install</a>
+      <a href="/guide/">Guide →</a>
     {% else %}
       <a {% if page.name == "about.md" %}class="current" {% endif %}href="/about/">About</a>
-      <a {% if page.name == "seo.md" %}class="current" {% endif %}href="/seo/">SEO</a>
-      <a {% if page.name == "tech.md" %}class="current" {% endif %}href="/tech/">Tech</a>
-      <a {% if page.name == 'blog.md' or page.path contains '_posts' page.url contains '/blog/'%}class="current" {% endif %}href="/blog/">Blog</a>
+      <a {% if page.name == "index.md" %}class="current" {% endif %}href="/">Home</a>
+      <a {% if page.group == "install" %}class="current" {% endif %}href="/install/">Install</a>
+      <a {% if page.name == "guide.md" or page.group == "guide" %}class="current" {% endif %}href="/guide/">Guide</a>
   {% endcase %}
   </nav>
 </header>

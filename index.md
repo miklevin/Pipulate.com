@@ -1,310 +1,163 @@
 ---
 title: Pipulate
-description: Pipulate Free and Open Source SEO Software
+description: The Local-First Revolution in AI-Assisted Development
 permalink: /
 group: home
 ---
 
-# Pipulate Installation Guide
+# The Local-First Revolution in AI-Assisted Development
 
-Pipulate is a *simpler alternative* to using Jupyter Notebooks for SEO automation. It lets you create step-by-step workflows that run locally on your machine, without needing to write Python code. Think of it as Jupyter Notebooks, but designed specifically for SEO practitioners who want to automate their work without becoming developers. It runs like a website on your local machine. Follow instructions to install...
+In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it.
 
-## Process
+> **Your data. Your AI. Your machine. Your control.**  
+> No subscriptions, no vendor lock-in, no cloud costs.
+
+## Why Pipulate? The Philosophy That Changes Everything
+
+Traditional development follows the **DRY** (Don't Repeat Yourself) principle, creating abstract, complex systems that are hard to understand and modify. Pipulate embraces **WET** (Write Everything Twice) - explicit, readable workflows that are:
+
+- **🔍 Observable**: See exactly what's happening at every step
+- **🔧 Customizable**: Modify workflows without breaking abstractions  
+- **🤖 AI-Friendly**: Clear code that AI assistants can easily understand and maintain
+- **🚀 Future-Proof**: Built on durable web standards that won't become obsolete
+
+**[Learn more about the WET Philosophy →](/guide/wet-blueprint/)**
+
+## How It Works: Simplicity Meets Power
+
+Pipulate runs like a desktop app but uses web technologies. Think **Electron**, but better:
+
+- **🏠 Local-First**: Everything runs on your machine - data, AI, and processing
+- **🔄 Auto-Updating**: One command keeps everything current
+- **🌐 Cross-Platform**: Identical experience on macOS, Linux, and Windows (WSL)
+- **🧠 AI-Integrated**: Local LLM integration with full privacy
+
+### The Technical Magic
+```python
+# This is how simple Pipulate code looks
+@rt("/process-data")
+def process_data():
+    return Div(
+        H1("Processing Complete ✅"),
+        P("Your data has been analyzed locally"),
+        hx_get="/next-step",
+        hx_trigger="load"
+    )
+```
+
+No template languages. No build steps. No client-side JavaScript frameworks. Just **Python functions that generate HTML**, powered by **HTMX** for seamless interactivity.
+
+## Perfect For SEO Practitioners & Developers
+
+### 🎯 **For SEO Practitioners**
+Transform your Jupyter Notebook experiments into production-ready workflows:
+- **Step-by-step interfaces** that guide users through complex processes
+- **Local data processing** with no cloud limits or costs
+- **AI-assisted analysis** using your own local models
+- **Export capabilities** for reports and data visualization
+
+### 🛠️ **For Developers**  
+Build applications the way they should be built:
+- **Reproducible environments** with Nix Flakes
+- **Simple architecture** that one person can understand
+- **Future-proof stack** using web standards
+- **Integrated development** with JupyterLab and local AI
+
+---
+
+## Quick Start: Be Running in 5 Minutes
 
 ### 1. Install Nix (One-Time Setup)
-
-First, install the Nix package manager:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-* Follow the on-screen prompts (type "Yes" when asked)
-  * You will be prompted for your (Apple) hardware login.
-  * You will ***not be able to see yourself type*** in the password.
-  * There will be 2 "Yes" to confirm messages.
-* **Important:** After installation completes, close your terminal and open a new one.
+**Close your terminal and open a new one after installation.**
 
 ### 2. Install Pipulate
 
-With Nix installed, run this command to install Pipulate:
+```bash
+# Default installation
+curl -L https://pipulate.com/install.sh | sh
+
+# Or with a custom name
+curl -L https://pipulate.com/install.sh | sh -s MyProject
+```
+
+### 3. Start Building
 
 ```bash
-curl -L https://pipulate.com/install.sh | sh -s Botifython
+cd ~/pipulate && nix develop
 ```
 
-* Replace `Botifython` with your preferred name (or omit for default "pipulate")
-* The installer downloads and configures everything automatically
-* First-time installation creates a directory at `~/Botifython`
+This single command:
+- ✅ Updates to the latest version automatically
+- ✅ Starts JupyterLab and the Pipulate server  
+- ✅ Opens web interfaces in your browser
+- ✅ Provides a complete, reproducible development environment
 
-<details>
-<summary>Click to see example installation output</summary>
+**That's it!** You now have a local-first development environment with AI integration.
 
-<pre>
-Last login: Fri May 23 11:18:16 on ttys000
-username@FooMacBook-Pro ~ % curl -L https://pipulate.com/install.sh | sh -s Botifython
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  8733  100  8733    0     0   100k      0 --:--:-- --:--:-- --:--:--  100k
+---
 
---------------------------------------------------------------
-   🚀 Welcome to Pipulate Installer 🚀   
-   Free and Open Source SEO Software     
---------------------------------------------------------------
+## Why Local-First Wins
 
-🔍 Checking prerequisites...
-✅ All required tools found.
+| **Cloud-First** | **Pipulate Local-First** |
+|---|---|
+| 💸 Monthly subscriptions | 🆓 Free forever |
+| 🔒 Vendor lock-in | 🔓 Full control |
+| 📡 Internet required | 🏠 Works offline |
+| 🐌 API rate limits | ⚡ No limits |
+| 👁️ Data mining | 🔐 Complete privacy |
+| 🔄 Constant updates break things | 🛡️ Stable, reproducible environment |
 
-📁 Checking target directory: /Users/username/Botifython
-✅ Target directory is available.
-📁 Creating directory '/Users/username/Botifython'
-📥 Downloading Pipulate source code...
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100 1690k    0 1690k    0     0  2954k      0 --:--:-- --:--:-- --:--:-- 2954k
-✅ Download complete.
+## What You Can Build
 
-📦 Extracting source code...
-✅ Extraction complete. Source code installed to '/Users/username/Botifython'.
+Pipulate excels at **data processing workflows** and **AI-assisted applications**:
 
-📍 Now in directory: /Users/username/Botifython
+- **SEO Analysis Tools**: Process search console data, analyze competitors, generate reports
+- **Content Generation**: AI-powered writing assistants with local models
+- **Data Dashboards**: Transform spreadsheets into interactive web applications  
+- **Automation Workflows**: Step-by-step processes for repetitive tasks
+- **Research Tools**: Analyze data with local AI without privacy concerns
 
-🔑 Setting up deployment key...
-Fetching deployment key from https://pipulate.com/key.rot...
-✅ Deployment key downloaded successfully.
-🔒 Deployment key file saved and secured.
+---
 
-🚀 Starting Pipulate environment...
---------------------------------------------------------------
-  All set! Pipulate is installed at: /Users/username/Botifython  
-  To use Pipulate in the future, simply run:  
-  cd /Users/username/Botifython && nix develop  
---------------------------------------------------------------
+## The Complete Guided Experience
 
-Setting up app identity as 'Botifython'...
-✅ Application identity set.
+Ready to dive deeper? Our **[Guide](/guide/)** takes you through the complete journey:
 
-Creating startup convenience script...
-Pipulate Installer v1.1.2 - Test checkpoint reached
-Setup complete! To start using Pipulate, run:
-  cd /Users/username/Botifython
-  nix develop
+1. **[The WET Blueprint](/guide/wet-blueprint/)** - The philosophy that changes everything
+2. **[Understanding Pipulate](/guide/local-first-revolution/)** - Architecture and approach
+3. **[Building Your First Workflow](/guide/chain-reaction-pattern/)** - Hands-on development
+4. **[Advanced Patterns](/guide/the-future-is-simple/)** - Expert-level techniques
 
-This will activate the Nix development environment and
-complete the 'magic cookie' transformation process.
-username@MichaelMacBook-Pro ~ % curl -L https://pipulate.com/install.sh | sh -s Botifython
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  8733  100  8733    0     0   188k      0 --:--:-- --:--:-- --:--:--  189k
-
---------------------------------------------------------------
-   🚀 Welcome to Pipulate Installer 🚀   
-   Free and Open Source SEO Software     
---------------------------------------------------------------
-
-🔍 Checking prerequisites...
-✅ All required tools found.
-
-📁 Checking target directory: /Users/username/Botifython
-❌ Error: Directory '/Users/username/Botifython' already exists.
-   The installer cannot proceed when the target directory already exists.
-   This prevents accidental overwrites of existing data.
-
-   To resolve this, you can:
-   1. Choose a different name: curl -sSL https://pipulate.com/install.sh | bash -s your-custom-name
-   2. Remove the existing directory: rm -rf /Users/username/Botifython
-   3. Rename the existing directory: mv /Users/username/Botifython /Users/username/Botifython.backup
-
-   Note: The existing directory appears to be a Pipulate installation.
-   You can start it directly with: cd /Users/username/Botifython && nix develop
-
-username@FooMacBook-Pro ~ % cd
-</pre>
-
-</details>
-
-### 3. Starting Pipulate
-
-After initial installation, you can start Pipulate anytime with:
-
-```bash
-cd ~/Botifython && nix develop
-```
-
-Or if you prefer (same thing):
-
-```zsh
-cd ~/Botifython
-nix develop
-```
-
-This command:
-* Updates to the latest version automatically
-* Starts JupyterLab and the Pipulate server
-* Opens web interfaces in your browser
-
-## Troubleshooting & Management
-
-### Running Pipulate Again
-
-Exit out and restart. But how?  Close the terminal, open a new one, `cd` into
-`~/Botifython` and type `nix develop` 
-
-It's also okay to force-close the terminal. If you're having trouble, you can
-`Ctrl`+`c` until it exits. At that point you can restart the server by typing
-`python server.py` or `nix develop` (depending).  Because it's hard to tell
-which, I suggest just closing out of the terminal all the way, starting a new one.
-
-### Reinstalling Pipulate
-
-If you need to start fresh:
-
-```bash
-# Remove the existing installation
-rm -rf ~/Botifython
-
-# Reinstall
-curl -L https://pipulate.com/install.sh | sh -s Botifython
-```
-
-### Uninstalling the Nix Package Manager
-
-If you need to remove Nix completely:
-
-```bash
-/nix/nix-installer uninstall
-```
-
-This removes the Nix package manager from your system (but preserves any Pipulate installations).
+---
 
 ## System Requirements
 
-* macOS: 10.15 or later
-* Linux: Most modern distributions
-* Windows: WSL2 with Ubuntu 20.04+
-* 8GB RAM recommended
-* 2GB free disk space
-
-## About Nix
-
-Pipulate uses Nix to ensure a consistent, reproducible environment across all operating systems. This means:
-
-- **Identical Environments**: The same Python version, packages, and system libraries on every machine
-- **No Conflicts**: Isolated from your system's Python installation
-- **Easy Updates**: One command to update everything
-- **Cross-Platform**: Works identically on macOS, Linux, and Windows (via WSL)
-
-The Nix environment includes:
-- Python 3.x with all required packages
-- JupyterLab for development and experimentation
-- Local LLM support via Ollama
-- All necessary system libraries
-
-This approach eliminates the "works on my machine" problem and ensures Pipulate runs reliably everywhere.
-
-[Learn more about our local-first approach in our Guide →](/guide/)
+- **macOS**: 10.15 or later
+- **Linux**: Most modern distributions  
+- **Windows**: WSL2 with Ubuntu 20.04+
+- **Memory**: 8GB RAM recommended
+- **Storage**: 2GB free disk space
 
 ---
 
-## Why Pipulate Changes Everything
+## Join the Local-First Revolution
 
-### The Perfect Complement to Your Existing SEO Stack
+The future of software development is looking more like the past, but with AI capabilities that make it even better. It's a future where:
 
-Pipulate runs entirely on your computer, handling the nimble analysis tasks that work best locally while integrating seamlessly with enterprise platforms like Botify and others for the heavy lifting.
+- **One person** can understand and manage the whole stack
+- **Privacy** is the default, not an afterthought
+- **Tools** are simple but powerful  
+- **Users** have complete control
 
-```
-Enterprise SaaS (Botify, etc.)     +    Local Pipulate
-├── Million-page crawls            +    Custom workflow automation
-├── Large-scale data processing    +    Rapid prototyping & testing
-├── Team collaboration features    +    Personal analysis pipelines  
-├── Enterprise reporting           +    Ad-hoc data exploration
-└── Robust infrastructure          +    Complete privacy & control
-```
+**Start your revolution today.**
 
-### Turn Complex Scripts Into Guided Workflows
-
-Pipulate transforms powerful Python SEO scripts into step-by-step workflows that anyone can use. No coding required—just follow the guided process from start to finish.
-
-```
-Before: Complex Python Script              After: Guided Workflow
-┌─────────────────────────────────┐       ┌─────────────────────────────────┐
-│ # Fetch Botify data             │       │ Step 1: Enter Project URL       │
-│ auth = get_botify_token()       │  -->  │ [https://example.com_______] ✓  │
-│ project = fetch_project(url)    │       │                                 │
-│ analysis = get_latest_crawl()   │       │ Step 2: Select Analysis Type    │
-│ # 47 more lines of code...      │       │ ○ Full Site  ● Link Analysis    │
-│                                 │       │                                 │
-│ # Generate network graph        │       │ Step 3: Generate Graph          │
-│ nodes = process_links()         │       │ [Generate Visualization] ✓      │
-│ # etc...                        │       │                                 │
-└─────────────────────────────────┘       └─────────────────────────────────┘
-```
-
-### AI Assistant That Actually Understands SEO
-
-Built-in AI (running locally on your machine) provides contextual help throughout your workflows. No API keys, no external services—just intelligent assistance when you need it.
-
-- **Workflow Guidance**: Get help understanding each step
-- **Data Interpretation**: AI explains what your results mean
-- **Content Generation**: Create SEO content without external APIs
-- **Technical Support**: Troubleshoot issues with context-aware assistance
-
-### Real SEO Workflows You Can Use Today
-
-#### Enhanced Botify Analysis
-Transform your Botify crawl exports into interactive network visualizations and custom analysis pipelines that extend your enterprise platform's capabilities.
-
-#### Cross-Platform Data Integration  
-Combine data from multiple sources—Botify APIs, Search Console, custom crawls—into unified analysis workflows that provide insights across your entire SEO stack.
-
-#### Rapid Prototyping & Testing
-Quickly test new SEO hypotheses and analysis approaches locally before implementing them at scale in your enterprise tools.
-
-#### Custom Reporting & Automation
-Build personalized reporting workflows that pull from your existing tools and present data exactly how you need it.
-
-### The Local-First Advantage
-
-**Privacy by Design**: Keep sensitive competitive analysis and proprietary methodologies secure on your local machine.
-
-**Unlimited Local Processing**: Use your full CPU/GPU power for AI analysis, data manipulation, and custom algorithms—perfect for the tasks that work best locally.
-
-**Seamless Integration**: Pull data from any source—Botify APIs, Search Console, CSVs, manual exports—into unified local workflows.
-
-**Development Freedom**: Prototype and test new analysis approaches without affecting your production enterprise tools.
-
-### Perfect for SEO Teams
-
-**Agencies**: Standardize complex processes across team members while protecting client data.
-
-**In-House Teams**: Share SEO methodology without sharing code or technical complexity.
-
-**Freelancers**: Extend your existing tool capabilities with custom local analysis workflows.
-
-**Technical SEOs**: Transform your Python scripts into shareable workflows that complement your enterprise SEO platform.
+[**Install Pipulate →**](/install) | [**Read the Guide →**](/guide/) | [**View the Code →**](https://github.com/miklevin/pipulate)
 
 ---
 
-## Ready to Get Started?
-
-Everything you need is included:
-- **Pipulate Workflows**: Guided SEO processes
-- **JupyterLab**: For creating and testing custom analyses  
-- **Local AI**: Ollama integration for intelligent assistance
-- **All Dependencies**: Managed automatically by Nix
-
-**Extends your existing SEO tools. Works with any platform. Completely local.**
-
-[Get started with the installation above ↑](#pipulate-installation-guide)
-
----
-
-### Learn More
-
-- **[About Pipulate](/about/)** - Detailed overview of features and capabilities
-- **[Philosophy](/philosophy/)** - Why we built Pipulate this way  
-- **[Guide](/guide/)** - In-depth tutorials and workflow creation
-- **[GitHub](https://github.com/miklevin/pipulate)** - Source code and development
-
-*Built by the most technical SEOs in the world, for the least technical SEOs in the world. Open source and always will be.*
+*Pipulate is free and open source software created by [Mike Levin](https://mikelev.in/). Join the movement toward local-first, AI-assisted development.*
