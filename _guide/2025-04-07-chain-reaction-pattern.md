@@ -105,8 +105,8 @@ That `hx_trigger="load"` is Pipulate's pipe operator. Just as removing a `|` bre
 - Every step's output must include a Div for the next step with `hx_trigger="load"` (except when waiting for user input)
 - The input form phase must include a placeholder Div for the next step (without `hx_trigger`)
 - All error paths must preserve the chain (include the next step Div)
-- The chain reaction must be explicit in every step's GET and POST handler ([05_chain_reaction_pattern.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/05_chain_reaction_pattern.mdc))
-- Test normal, error, and edge-case flows ([14_testing_and_debugging.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/14_testing_and_debugging.mdc))
+- The chain reaction must be explicit in every step's GET and POST handler
+- Test normal, error, and edge-case flows
 
 ## Why It Works: The Pedagogical Power of `run_all_cells()`
 
@@ -122,7 +122,7 @@ The pattern succeeds because it:
 
 ## The WET Principle: Why Not DRY?
 
-Pipulate intentionally follows the WET (Write Everything Twice) principle rather than DRY (Don't Repeat Yourself). Why? Because workflows often need subtle variations that DRY abstractions would make harder to implement. This explicitness makes each step observable, testable, and easy to debug ([04_workflow_core.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/03_workflow_core.mdc)).
+Pipulate intentionally follows the WET (Write Everything Twice) principle rather than DRY (Don't Repeat Yourself). Why? Because workflows often need subtle variations that DRY abstractions would make harder to implement. This explicitness makes each step observable, testable, and easy to debug.
 
 This is similar to how Unix commands have overlapping functionality (`cat` vs `less`, `find` vs `locate`). The overlap gives users flexibility without sacrificing reliability.
 
@@ -230,9 +230,9 @@ return Div(
 
 ## The Chain Reaction Pattern in the Plugin System
 
-Pipulate's plugin system ([12_plugin_development_guidelines.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/12_plugin_development_guidelines.mdc)) and state management rules ([06_state_management.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/06_state_management.mdc)) are designed to support the chain reaction pattern:
+Pipulate's plugin system and state management rules are designed to support the chain reaction pattern:
 - Each plugin defines explicit step handlers
-- State is managed in SQLite and keyed by workflow keys ([07_key_system.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/07_key_system.mdc))
+- State is managed in SQLite and keyed by workflow keys
 - The UI and state are always in sync, making workflows robust and observable
 
 ## Testing Your Chain Reaction
@@ -247,7 +247,7 @@ To ensure your workflow is robust, always test:
 6. Revert functionality
 7. Edge cases specific to your workflow
 
-See [14_testing_and_debugging.mdc](https://github.com/miklevin/pipulate/blob/main/.cursor/rules/14_testing_and_debugging.mdc) for more on best practices for testing Pipulate workflows.
+This pattern makes testing and debugging straightforward by providing clear entry and exit points for each workflow step.
 
 ## Real-World Example
 

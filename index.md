@@ -77,27 +77,53 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 ### 2. Install Pipulate
 
+With a custom name
 ```bash
-# Default installation
-curl -L https://pipulate.com/install.sh | sh
+curl -L https://pipulate.com/install.sh | sh -s Botifython
+```
 
-# Or with a custom name
-curl -L https://pipulate.com/install.sh | sh -s MyProject
+Or default installation
+```bash
+curl -L https://pipulate.com/install.sh | sh
 ```
 
 ### 3. Start Building
 
 ```bash
-cd ~/pipulate && nix develop
+cd ~/Botifython
+nix develop
 ```
 
-This single command:
+These few commands:
 - ✅ Updates to the latest version automatically
 - ✅ Starts JupyterLab and the Pipulate server  
 - ✅ Opens web interfaces in your browser
 - ✅ Provides a complete, reproducible development environment
 
 **That's it!** You now have a local-first development environment with AI integration.
+
+### 4. Run It Again!
+
+1. You can just forcibly exit out of that Terminal it's running from.
+2. Open a new Terminal, and once again:
+
+```bash
+cd ~/Botifython
+nix develop
+```
+
+### 5. The Big Reset (If Necessary)
+
+Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
+
+```bash
+rm -rf ~/Botifython
+curl -L https://pipulate.com/install.sh | sh -s Botifython
+cd ~/Botifython
+nix develop
+```
+
+Wait for ***BOTH TABS*** to auto-open in your browser.
 
 ---
 
