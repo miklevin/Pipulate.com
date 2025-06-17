@@ -16,11 +16,12 @@ AI-assisted development. Follow the sequence of posts to build up the full story
 and jump on the Pipulate Workflow Development bandwagon.
 
 <div class="blog-grid">
-{% for post in site.guide reversed %}
+{% assign guides_by_date = site.guide | where_exp:"post", "post.name != 'template.md'" | sort: "date" %}
+{% for post in guides_by_date %}
     <article class="blog-card">
         <header>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <span class="post-number">Post #{{ forloop.index }} of {{ site.guide.size }}</span>
+            <span class="post-number">Post #{{ forloop.index }} of {{ guides_by_date.size }}</span>
         </header>
         <p>{{ post.description }}</p>
     </article>
