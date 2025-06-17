@@ -3,6 +3,7 @@ layout: post
 title: Pipulate Workflow Abstraction
 description: "Chapter 0 of the Pipulate dev guide: Learn core workflow concepts, plugin system, step anatomy, & the HTMX chain reaction pattern for local-first apps."
 group: guide
+layout: post
 ---
 
 ## Pipulate Workflow Development Guide

@@ -3,6 +3,7 @@ layout: post
 title: Kickstaring a New Pipualate Workflow
 description: Learn to kickstart your Pipulate workflows efficiently using `create_workflow.py`. This guide details how to automate the bootstrapping process, ensuring correct plugin registration and avoiding manual errors.
 group: guide
+layout: post
 ---
 
 ## Pipulate Workflow Development Guide

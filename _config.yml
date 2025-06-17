@@ -30,6 +30,7 @@ defaults:
     values:
       # This OVERRIDES the global default for guides.
       permalink: /guide/:slug/
+      layout: post
 
 # Conversion
 markdown:    kramdown

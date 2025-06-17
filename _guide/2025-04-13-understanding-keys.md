@@ -3,6 +3,7 @@ title: "Understanding Pipulate Keys: Your Workflow Passport"
 description: "Master Pipulate's clever key system - the invisible thread that ties your workflows together, making them interruptible, resumable, and always ready to pick up exactly where you left off."
 author: Mike Levin
 group: guide
+layout: post
 ---
 
 Every Pipulate workflow starts with a key. It's that text field at the top of every workflow, and while it might seem like just another form field to fill out, it's actually one of Pipulate's most clever features. Let's demystify it.

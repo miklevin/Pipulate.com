@@ -3,6 +3,7 @@ layout: post
 title: "The Chain Reaction Pattern: Pipulate's Secret Sauce"
 description: "Deep dive into how Pipulate's run_all_cells() pattern creates robust, maintainable workflows that mirror Jupyter notebooks"
 group: guide
+layout: post
 ---
 
 When building workflow systems, one of the trickiest challenges is managing state and progression between steps. Many systems use complex state machines, event buses, or reactive frameworks. Pipulate takes a different approach: the Chain Reaction Pattern powered by the brilliantly named `run_all_cells()` method.

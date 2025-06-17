@@ -3,6 +3,7 @@ layout: post
 title: "Pipulate's New Helper: Streamlining Workflow Creation with the 'Workflow Creation Helper' Plugin"
 description: Learn how to use the new Workflow Creation Helper plugin to create and structure Pipulate workflows through an interactive UI, replacing manual command-line operations.
 group: guide
+layout: post
 ---
 
 The Pipulate project is all about empowering users to create powerful, local-first tools through step-by-step workflows. A key part of our philosophy is "tools making tools" – building utilities that simplify and accelerate the development process itself. Today, we're excited to share progress on a new internal tool designed to do just that: the "Workflow Creation Helper" plugin.

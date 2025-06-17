@@ -3,6 +3,7 @@ layout: post
 title: Putting The Polish On Workflows
 description: Workflows are experiences. Design them like performance art with a local LLM collaborator. Delight the human user/audience!
 group: guide
+layout: post
 ---
 
 # WET Workflow Conventions: Emoji, Messaging, and User Experience Patterns

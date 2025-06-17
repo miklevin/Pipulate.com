@@ -3,6 +3,7 @@ title: "The Future is Simple: Why Modern Web Development is Returning to its Roo
 description: "Discover how the pendulum is swinging back to simpler, more maintainable web development practices, and why this matters for the future of software."
 author: Mike Levin
 group: guide
+layout: post
 ---
 
 In the ever-evolving landscape of web development, a surprising trend is emerging: a return to simplicity. After decades of increasing complexity, developers are rediscovering the power of straightforward, maintainable code. This isn't a step backward—it's a leap forward into a more sustainable future.

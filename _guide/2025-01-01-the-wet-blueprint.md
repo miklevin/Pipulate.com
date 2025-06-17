@@ -6,6 +6,7 @@ group: guide
 permalink: /guide/wet-blueprint/
 meta_description: A revolutionary blueprint challenging DRY principles, arguing for WET (Write Everything Twice) workflows with Pipulate's local-first, AI-assisted development approach.
 meta_keywords: WET vs DRY, Pipulate, FastHTML, HTMX, coding philosophy, AI-assisted development, local-first, Nix, code convection, Literate Programming, software architecture, developer productivity, Python web framework
+layout: post
 ---
 
 ## The Local-First Revolution Meets AI-Assisted Development

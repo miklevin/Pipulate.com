@@ -3,6 +3,7 @@ title: "Beyond Colab: The Local-First Revolution in SEO Tools"
 description: "Discover how local-first development is transforming SEO workflows, from leveraging your browser's saved passwords to creating seamless data pipelines that put you back in control."
 author: Mike Levin
 group: guide
+layout: post
 ---
 
 ## Reclaiming Your SEO Automation with Local-First Power
