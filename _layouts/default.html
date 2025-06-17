@@ -27,18 +27,21 @@
             <nav>
                 <a class="nav-link {% if page.group == 'home' or page.url == "/" %}current{% endif %}" href="/">Home</a>
                 <a class="nav-link {% if page.group == 'about' or page.category == 'about' %}current{% endif %}" href="/about/">About</a>
-                <a class="nav-link {% if page.group == 'documentation' or page.category == 'documentation' %}current{% endif %}" href="/documentation/">Docs</a>
+                <a class="nav-link {% if page.group == 'install' or page.category == 'install' %}current{% endif %}" href="/install/">Install</a>
                 <a class="nav-link {% if page.group == 'guide' or page.category == 'guide' %}current{% endif %}" href="/guide/">Guide</a>
-                <a class="nav-link {% if page.group == 'testimonials' or page.category == 'testimonials' %}current{% endif %}" href="/testimonials/">Testimonials</a>
+                <a class="nav-link {% if page.group == 'development' or page.category == 'development' %}current{% endif %}" href="/development/">Development</a>
             </nav>
         </div>
         <div class="logo-top">
             <a href="/">
-                <img src="/pipulate.svg" alt="Pipulate Free & Open Source SEO with & for LLMs" height="60">
+                <img src="/pipulate.svg" alt="Pipulate - Local-First AI Development" height="60">
             </a>
         </div>
     </div>
 </header>
+
+{% include subnav.html %}
+
 <main class="container">
 {{ content }}
 </main>
