@@ -5,7 +5,33 @@ permalink: /about/
 group: about
 ---
 
-# What Is Pipulate?
+# What Audience Are You?
+
+There are 2 audiences:
+
+1. The Sous Chef / Chef's they work with (Artists, Developers)
+2. The Restaurateurs / Customers at the restaurant (Users)
+
+1. Am I having a Sous Chef conversation? Yes/No
+   - We can make a pasta you've never had before
+   - Add consistency to your own pasta recipe
+2. Am I talking to patron or restaurateur instead?
+   - Do you want to have the most amazing bowl of pasta you've ever had in your life?
+   - The dish you like perfect every time
+   - And some choices
+
+These are different conversations.
+
+## The Answer to Agentic Mode
+
+You are are a Chef or a Customer and want the dish to be prepared to perfection
+every time. Ask an AI to do something in *Agentic Mode* and it's going to go off
+half-cocked and willy nilly doing whatever it thinks is right until done.
+
+1. Put AIs on Rails with Pipulate.
+2. Keep your secret recipes secret.
+
+## What Is Pipulate?
 
 Pipulate is a free, open-source SEO desktop application that runs entirely on your computer. It gives you the power of complex SEO scripts and Jupyter notebooks, but with a friendly, guided interface where AI helps you every step of the way.
 
