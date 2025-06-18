@@ -67,7 +67,7 @@ Build applications the way they should be built:
 ---
 -->
 
-## Quick Start: Be Running in 5 Minutes
+# Quick Start: Be Running in 5 Minutes
 
 ### 1. Install Nix (One-Time Setup)
 
