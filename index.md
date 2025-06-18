@@ -5,6 +5,7 @@ permalink: /
 group: home
 ---
 
+<!--
 # The Local-First Revolution in AI-Assisted Development
 
 In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it.
@@ -64,6 +65,7 @@ Build applications the way they should be built:
 - **Integrated development** with JupyterLab and local AI
 
 ---
+-->
 
 ## Quick Start: Be Running in 5 Minutes
 
