@@ -7,20 +7,53 @@ group: about
 
 # What Audience Are You?
 
-There are 2 audiences:
+> A chef talks about knife techniques and flavor profiles. A diner just wants to know if the pasta is amazing.  
 
-1. The Sous Chef / Chef's they work with (Artists, Developers)
-2. The Restaurateurs / Customers at the restaurant (Users)
+## Chef or Customer?
 
-1. Am I having a Sous Chef conversation? Yes/No
-   - We can make a pasta you've never had before
-   - Add consistency to your own pasta recipe
-2. Am I talking to patron or restaurateur instead?
-   - Do you want to have the most amazing bowl of pasta you've ever had in your life?
-   - The dish you like perfect every time
-   - And some choices
+```
+    ┌──────────────────────────────────────────────────────────┐
+    │                      The Restaurant                      │
+    │  ┌──────────────────┐              ┌──────────────────┐  │
+    │  │   Kitchen (Dev)  │              │  Dining Room     │  │
+    │  │                  │              │  (End Users)     │  │
+    │  │                  │              │                  │  │
+    │  │  👨‍🍳 Sous Chef    │───recipes───►│  🍽️ Customers    │  │
+    │  │  👩‍🍳 Head Chef    │              │  🏢 Restaurateur │  │
+    │  │                  │              │                  │  │
+    │  │ "How do we make  │              │ "I want the best │  │
+    │  │  pasta you've    │              │  pasta I've ever │  │
+    │  │  never had?"     │              │  had in my life" │  │
+    │  └──────────────────┘              └──────────────────┘  │
+    └──────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ROLES
+
+1. **Chefs *Make Workflows:*** Much to learn!
+2. **Customers *USE Workflows:*** Just install, pick workflow and cick:
+   - Next ▸
+   - Next ▸
+   - Next ▸
+
+Okay, sometimes you have to fill in some fields.
+
+---
+
+### Am I having a Sous Chef conversation? Yes/No
+   1. We can make a pasta you've never had before
+   2. Add consistency to your own pasta recipe
+
+### Am I talking to patron or restaurateur instead?
+   1. Do you want to have the most amazing bowl of pasta you've ever had in your life?
+   2. The dish you like perfect every time
+   3. And some choices
 
 These are different conversations.
+
+---
 
 ## The Answer to Agentic Mode
 
@@ -30,6 +63,8 @@ half-cocked and willy nilly doing whatever it thinks is right until done.
 
 1. Put AIs on Rails with Pipulate.
 2. Keep your secret recipes secret.
+
+---
 
 ## What Is Pipulate?
 
