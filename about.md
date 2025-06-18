@@ -121,8 +121,8 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
   │ Step 01 │─piped─►│ Step 02 │─piped─►│ Step 03 │   - Interruption-safe & resumable
   └─────────┘        └─────────┘        └─────────┘   - Easily ported from Notebooks
        │                  │                  │        - One DB record per workflow run
-       ▼                  ▼                  ▼
-    State Saved        State Saved        Finalized?
+       ▼                  ▼                  ▼        - Everything stays on your machine
+  State Saved        State Saved         Finalized?   - Magnitudes simpler than celery
 ```
 
 ### Integrated AI Capabilities
@@ -136,12 +136,14 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
                    │   Local Ollama   │ - No API keys needed
                    │      Server      │ - Completely private processing
                    └────────┬─────────┘
+                            │
                             │ Streaming via WebSocket
                             ▼
                    ┌──────────────────┐
-                   │   Pipulate App   │ - Monitors WS for JSON/commands
+                   │   Pipulate App   │ - Monitors WS for MCP tool-call commands
                    │(WebSocket Client)│ - Parses responses in real-time
                    └────────┬─────────┘
+                            │
                             │ In-memory or DB backed
                             ▼
                    ┌──────────────────┐
