@@ -7,7 +7,7 @@ group: about
 
 # About Pipulate
 
-> Pipulate is a local-first, AI-assisted development framework that transforms how you build SEO applications by embracing explicit, readable workflows.
+> Pipulate is a local-first, AI-assisted development framework that transforms how you run SEO workflows by embracing Notebooks without any code.
 
 1. 🖥️ **Runs locally** like a desktop app using modern web technologies
 2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity  
