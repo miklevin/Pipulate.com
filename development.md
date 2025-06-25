@@ -74,6 +74,13 @@ To get started:
 
 > **Note on Nix**: If you're new to Nix, check out [Nix Pills](https://nixos.org/guides/nix-pills/) for a gentle introduction. For now, just know that `nix develop` sets up your development environment automatically.
 
+Pipulate is a real-time edit, check running code, edit, check running code
+(no-build) environment, making it a pleasure to develop and debug. What's more,
+the server console shows all application state for radically full transparency
+for both you the human and your AI coding assistants who can grep your
+`pipulate/logs/server.log` for the same view you get in the web server console
+output in the terminal. KNOW EVERYTHING!
+
 <!-- START_ASCII_ART: core-concepts-internal-components -->
 ```
         ┌─────────────┐         ┌──────────────┐
