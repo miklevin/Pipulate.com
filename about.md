@@ -83,7 +83,7 @@ half-cocked and willy nilly doing whatever it thinks is right until done.
 
 Pipulate is a free, open-source SEO desktop application that runs entirely on your computer. It gives you the power of complex SEO scripts and Jupyter notebooks, but with a friendly, guided interface where AI helps you every step of the way.
 
-# --- START_ASCII_ART: architecture-overview-diagram ---
+<!-- START_ASCII_ART: architecture-overview-diagram -->
 ```
                  ┌─────────────┐ Like Electron, but full Linux subsystem 
                  │   Browser   │ in a folder for macOS and Windows (WSL)
@@ -102,7 +102,7 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
     │    └───────────┘     └────────────┘   │
     └───────────────────────────────────────┘
 ```
-# --- END_ASCII_ART: architecture-overview-diagram ---
+<!-- END_ASCII_ART: architecture-overview-diagram -->
 
 ## Core Features
 
@@ -160,7 +160,7 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
 - **Consistent Environment**: Works identically across macOS, Linux, and Windows (WSL)
 - **Open Architecture**: Every component is transparent and modifiable
 
-# --- START_ASCII_ART: integrated-data-science-environment ---
+<!-- START_ASCII_ART: integrated-data-science-environment -->
 ```
       ┌──────────────────┐    ┌──────────────────┐
       │   Jupyter Lab    │    │    FastHTML      │
@@ -176,7 +176,7 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
       │  localhost:8888  │    │  localhost:5001  │
       └──────────────────┘    └──────────────────┘
 ```
-# --- END_ASCII_ART: integrated-data-science-environment ---
+<!-- END_ASCII_ART: integrated-data-science-environment -->
 
 ## Who Pipulate Is For
 
