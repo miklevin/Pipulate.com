@@ -92,6 +92,44 @@ Pipulate is built on familiar web development foundations but takes a unique app
 4. **Local Execution**: All workflows run on your local machine, not in the cloud
 5. **Easy Setup**: The installer handles all configuration automatically
 
+#### The Framework Evolution: Flask → FastAPI → FastHTML
+
+Understanding how we got here helps explain why FastHTML + HTMX is revolutionary:
+
+<!-- START_ASCII_ART: the-evolution-flask-fastapi-fasthtml -->
+```
+    🍶 FLASK ERA                 🚀 FASTAPI ERA              🌐 FASTHTML ERA
+    ═══════════════              ═══════════════             ══════════════════
+    
+    ┌─────────────┐              ┌─────────────┐             ┌─────────────┐
+    │   Python    │              │   Python    │             │   Python    │
+    │  Functions  │              │  Functions  │             │  Functions  │
+    └──────┬──────┘              └──────┬──────┘             └──────┬──────┘
+           │                            │                           │
+           ▼                            ▼                           ▼
+    ┌─────────────┐              ┌─────────────┐             ┌─────────────┐
+    │   Jinja2    │              │  Pydantic   │             │    HTMX     │◄── Over-the-wire
+    │  Templates  │              │   Models    │             │  Fragments  │   HTML targeting
+    └──────┬──────┘              └──────┬──────┘             └──────┬──────┘   DOM elements
+           │                            │                           │
+           ▼                            ▼                           ▼
+    ┌─────────────┐              ┌─────────────┐             ┌─────────────┐
+    │    HTML     │              │    JSON     │             │    HTML     │
+    │   Response  │              │   Response  │             │  Elements   │
+    └─────────────┘              └─────────────┘             └─────────────┘
+           │                            │                           │
+           ▼                            ▼                           ▼
+    🌐 Full Page Reload          📱 Frontend Framework      🎯 DOM Element Updates
+                                    (React/Vue/Angular)        def Div() = <div>
+                                                              def Button() = <button>
+                                                              
+    Template files needed        JSON ↔ HTML conversion      Python functions ARE
+    Separate languages          Client-side complexity       the template language!
+```
+<!-- END_ASCII_ART: the-evolution-flask-fastapi-fasthtml -->
+
+**The FastHTML Breakthrough:** Python function names directly become HTML elements, eliminating templates and making the server the single source of truth for UI state.
+
 To get started:
 1. Open Terminal
 2. Navigate to your Pipulate installation directory using `cd`
