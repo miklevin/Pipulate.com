@@ -21,7 +21,33 @@ Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
 notebooks but without the Python code. The main audience is SEO practitioners
 upping their game in the age of AI.
 
+### Run All Cells
+
 **The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model - each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
+
+<!-- START_ASCII_ART: run-all-cells-pattern -->
+```
+    📓 JUPYTER NOTEBOOK               🌐 PIPULATE WORKFLOW
+    ═══════════════════               ══════════════════════
+    
+    [ ] Cell 1: Import data          ┌─────────────────────┐
+        │                            │  Step 1: Data Input │ 
+        ▼                            └──────────┬──────────┘
+    [▶] Cell 2: Process data                    │ hx_trigger="load"
+        │                                       ▼
+        ▼                            ┌─────────────────────┐
+    [ ] Cell 3: Generate report      │ Step 2: Processing  │
+        │                            └──────────┬──────────┘
+        ▼                                       │ hx_trigger="load"  
+    [ ] Cell 4: Export results                  ▼
+                                     ┌─────────────────────┐
+    🎯 "Run All Cells" Button   ═══► │ Step 3: Export      │
+       Executes top-to-bottom        └─────────────────────┘
+       
+       Same mental model, same execution flow!
+       But with persistent state and web UI.
+```
+<!-- END_ASCII_ART: run-all-cells-pattern -->
 
 So if you're a technical SEO but a non-programmer, just install and use Pipulate. For people who want to actually participate in *making* those next-gen SEO tools, this page is for you!
 
