@@ -18,6 +18,17 @@ cat data.txt | grep "pattern" | sort | uniq -c
 
 Each command does one thing well, and data flows naturally through the pipeline. Pipulate's Chain Reaction Pattern brings this same elegance to web workflows, with the `run_all_cells()` method serving as the "pipe operator" that connects workflow steps just like Unix pipes connect commands.
 
+<!-- START_ASCII_ART: pipeline-workflows -->
+```
+  ┌─────────┐        ┌─────────┐        ┌─────────┐   - Fully customizable steps
+  │ Step 01 │─piped─►│ Step 02 │─piped─►│ Step 03 │   - Interruption-safe & resumable
+  └─────────┘        └─────────┘        └─────────┘   - Easily ported from Notebooks
+       │                  │                  │        - One DB record per workflow run
+       ▼                  ▼                  ▼        - Everything stays on your machine
+  State Saved        State Saved         Finalized?   - Magnitudes simpler than celery
+```
+<!-- END_ASCII_ART: pipeline-workflows -->
+
 ## The Three Phases of a Step
 
 Every step in a Pipulate workflow has three distinct phases, each with its own role in the chain reaction:

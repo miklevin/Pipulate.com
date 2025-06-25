@@ -54,6 +54,24 @@ experimenting around setting up profiles, playing with the tasks app, and trying
 the workflows that don't require Botify. More general SEO workflows will be
 forthcoming. 
 
+<!-- START_ASCII_ART: integrated-data-science-environment -->
+```
+      ┌──────────────────┐    ┌──────────────────┐
+      │   Jupyter Lab    │    │    FastHTML      │
+      │   Notebooks      │    │     Server       │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 1   │     │    │  │ Step 1   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 2   │     │    │  │ Step 2   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │  localhost:8888  │    │  localhost:5001  │
+      └──────────────────┘    └──────────────────┘
+```
+<!-- END_ASCII_ART: integrated-data-science-environment -->
+
 > **Porting from JupyterLab**: While porting is currently manual, the workflow structure closely mirrors notebook cells, making the transition intuitive. Future versions may include automated porting tools.
 
 ## Development Patterns

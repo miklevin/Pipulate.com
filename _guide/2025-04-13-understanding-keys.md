@@ -110,6 +110,24 @@ While the keys look like structured identifiers (and they are, by convention: `p
 - It's easy to extend for special cases if needed.
 - It's well-suited for the primary goal: workflow state management.
 
+<!-- START_ASCII_ART: local-first-single-tenant-details -->
+```
+      ┌───────────────────────────────┐ # Benefits of Local-First Simplicity
+      │          Web Browser          │
+      │                               │ - No mysterious client-side state
+      │    ┌────────────────────┐     │ - No full-stack framework churn
+      │    │   Server Console   │     │ - No complex ORM or SQL layers
+      │    │     & Web Logs     │     │ - No external message queues
+      │    └─────────┬──────────┘     │ - No build step required
+      │              ▼                │ - Direct, observable state changes
+      │    ┌─────────────────────┐    │
+      │    │  Server-Side State  │    │ 
+      │    │  DictLikeDB + JSON  │ ◄───── Conceptually like local-server-side cookies
+      │    └─────────────────────┘    │ - Enables the "Know EVERYTHING!" philosophy
+      └───────────────────────────────┘
+```
+<!-- END_ASCII_ART: local-first-single-tenant-details -->
+
 ## Special Cases
 While most workflows will use the auto-generated `profile-workflow-number` key format, some special-purpose workflows *could* be designed to use other meaningful strings as keys, such as:
 - API connection workflows might use an API key or part of it.

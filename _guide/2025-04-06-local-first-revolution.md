@@ -60,6 +60,27 @@ This stack isn't just simpler - it's more powerful. It gives you:
 - Server-side state management (with SQLite)
 - Future-proofed database skills
 
+<!-- START_ASCII_ART: architecture-overview-diagram -->
+```
+                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 │   Browser   │ in a folder for macOS and Windows (WSL)
+                 └─────┬───────┘
+                       │ HTTP/WS
+                       ▼
+    ┌───────────────────────────────────────┐
+    │           Nix Flake Shell             │ - In-app LLM (where it belongs)
+    │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
+    │  │   FastHTML    │  │    Ollama    │  │ - 100% local
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  └───────┬───────┘  └──────────────┘  │
+    │          │                            │
+    │    ┌─────▼─────┐     ┌────────────┐   │
+    │    │MiniDataAPI│◄───►│ SQLite DB  │   │
+    │    └───────────┘     └────────────┘   │
+    └───────────────────────────────────────┘
+```
+<!-- END_ASCII_ART: architecture-overview-diagram -->
+
 ## The Local-First Advantage
 
 In a world where "cloud-first" has become the default, Pipulate takes a different path:

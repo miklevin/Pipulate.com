@@ -70,6 +70,20 @@ This approach gives us:
 - Better accessibility
 - Progressive enhancement
 
+<!-- START_ASCII_ART: server-rendered-ui-htmx -->
+```
+                        HTMX+Python enables a world-class
+                  Python front-end Web Development environment.
+                             ┌─────────────────────┐
+                             │    Navigation Bar   │  - No template language (like Jinja2)
+                             ├─────────┬───────────┤  - HTML elements are Python functions
+  Simple Python back-end     │  Main   │   Chat    │  - Minimal custom JavaScript / CSS
+  HTMX "paints" HTML into    │  Area   │ Interface │  - No React/Vue/Angular overhead
+  the DOM on demand ───────► │         │           │  - No "build" process like Svelte
+                             └─────────┴───────────┘  - No virtual DOM, JSX, Redux, etc.
+```
+<!-- END_ASCII_ART: server-rendered-ui-htmx -->
+
 ## The Local-First Advantage
 
 When you combine Python, HTMX, and local-first development, you get something powerful:
