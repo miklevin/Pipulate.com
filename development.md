@@ -11,9 +11,7 @@ Welcome to Pipulate development! This guide will help you understand the archite
 
 ## Getting Started
 
-> **Note**: This is a condensed reference guide. For detailed, step-by-step tutorials and in-depth explanations, see the [Pipulate Guide](/guide/).
-
-> **Before You Begin**: Make sure you've completed the [installation process](/install/). This guide assumes you have Pipulate running locally with `nix develop`.
+> **Before You Begin**: Make sure you've completed the [installation process](/install/). This guide assumes you have Pipulate running locally with `nix develop`. For detailed, step-by-step tutorials and in-depth explanations, see the [Pipulate Guide](/guide/).
 
 ## Introduction
 
