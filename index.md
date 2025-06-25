@@ -48,6 +48,27 @@ def process_data():
 
 No template languages. No build steps. No client-side JavaScript frameworks. Just **Python functions that generate HTML**, powered by **HTMX** for seamless interactivity.
 
+<!-- START_ASCII_ART: architecture-overview-diagram -->
+```
+                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 │   Browser   │ in a folder for macOS and Windows (WSL)
+                 └─────┬───────┘
+                       │ HTTP/WS
+                       ▼
+    ┌───────────────────────────────────────┐
+    │           Nix Flake Shell             │ - In-app LLM (where it belongs)
+    │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
+    │  │   FastHTML    │  │    Ollama    │  │ - 100% local
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  └───────┬───────┘  └──────────────┘  │
+    │          │                            │
+    │    ┌─────▼─────┐     ┌────────────┐   │
+    │    │MiniDataAPI│◄───►│ SQLite DB  │   │
+    │    └───────────┘     └────────────┘   │
+    └───────────────────────────────────────┘
+```
+<!-- END_ASCII_ART: architecture-overview-diagram -->
+
 ## Perfect For SEO Practitioners & Developers
 
 ### 🎯 **For SEO Practitioners**

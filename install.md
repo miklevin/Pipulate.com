@@ -45,6 +45,13 @@ This command:
 
 **That's it!** You now have a local-first development environment with AI integration.
 
+<!-- START_ASCII_ART: 2-install-pipulate -->
+```
+
+Or default installation
+```
+<!-- END_ASCII_ART: 2-install-pipulate -->
+
 ---
 
 ## System Requirements

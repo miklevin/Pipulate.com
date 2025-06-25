@@ -1,6 +1,6 @@
 ---
 title: Documentation
-permalink: /documentation/
+permalink: /guide/
 description: Start here for Pipulate documentation, guides, and resources
 group: documentation
 ---

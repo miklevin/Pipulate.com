@@ -95,6 +95,24 @@ A local-first approach directly counters these Colab limitations, putting you fi
     * **The Benefit:** You own and control your tools. They are built on open standards (Python, HTML, SQLite) and run on your hardware.
     * **Pipulate Example:** Relies on durable technologies, ensuring longevity and adaptability.
 
+<!-- START_ASCII_ART: integrated-data-science-environment -->
+```
+      ┌──────────────────┐    ┌──────────────────┐
+      │   Jupyter Lab    │    │    FastHTML      │
+      │   Notebooks      │    │     Server       │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 1   │     │    │  │ Step 1   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 2   │     │    │  │ Step 2   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │  localhost:8888  │    │  localhost:5001  │
+      └──────────────────┘    └──────────────────┘
+```
+<!-- END_ASCII_ART: integrated-data-science-environment -->
+
 ### The Power of Explicit, Observable Local Workflows (The "WET" Advantage)
 
 Local-first development encourages a "Write Everything Twice/Explicit" (WET) approach for workflows, diverging from the "Don't Repeat Yourself" (DRY) dogma where it makes sense.
