@@ -9,6 +9,26 @@ group: guide
 
 Welcome to Pipulate development! This guide will help you understand the architecture, contribute to the project, and build powerful local-first workflows.
 
+## Getting Started
+
+> **Note**: This is a condensed reference guide. For detailed, step-by-step tutorials and in-depth explanations, see the [Pipulate Guide](/guide/).
+
+> **Before You Begin**: Make sure you've completed the [installation process](/install/). This guide assumes you have Pipulate running locally with `nix develop`.
+
+## Introduction
+
+Pipulate is designed as a *simpler alternative* to using Jupyter Notebooks — so
+***you don't have to be a developer to use.*** Most people know Jupyter
+Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
+notebooks but without the Python code. The main audience is SEO practitioners
+upping their game in the age of AI.
+
+**The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model - each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
+
+So if you're a technical SEO but a non-programmer, just install and use Pipulate. For people who want to actually participate in *making* those next-gen SEO tools, this page is for you!
+
+---
+
 ## Who Are You Building For?
 
 Understanding your audience is crucial for effective development. Pipulate serves two distinct user types:
@@ -35,24 +55,6 @@ Understanding your audience is crucial for effective development. Pipulate serve
 **Developers (Chefs)** create the workflows, **End Users (Customers)** consume the experience. Keep this separation in mind as you build.
 
 ---
-
-## Getting Started
-
-> **Note**: This is a condensed reference guide. For detailed, step-by-step tutorials and in-depth explanations, see the [Pipulate Guide](/guide/).
-
-> **Before You Begin**: Make sure you've completed the [installation process](/install/). This guide assumes you have Pipulate running locally with `nix develop`.
-
-## Introduction
-
-Pipulate is designed as a *simpler alternative* to using Jupyter Notebooks — so
-***you don't have to be a developer to use.*** Most people know Jupyter
-Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
-notebooks but without the Python code. The main audience is SEO practitioners
-upping their game in the age of AI.
-
-**The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model - each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
-
-So if you're a technical SEO but a non-programmer, just install and use Pipulate. For people who want to actually participate in *making* those next-gen SEO tools, this page is for you!
 
 ## Core Concepts
 
