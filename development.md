@@ -2,7 +2,7 @@
 title: Development Guide
 description: Development patterns and workflows for Pipulate
 permalink: /development/
-group: documentation
+group: guide
 ---
 
 # Development Guide
