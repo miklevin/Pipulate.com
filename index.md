@@ -77,7 +77,7 @@ Wait for ***BOTH TABS*** to auto-open in your browser.
 ## The Local-First Revolution in AI-Assisted Development
 
 ### 🎯 **For SEO Practitioners**
-Transform your Jupyter Notebook experiments into production-ready workflows:
+Use apps that produce SEO "deliverables" with AI assistance.
 - **Step-by-step interfaces** that guide users through complex processes
 - **Local data processing** with no cloud limits or costs
 - **AI-assisted analysis** using your own local models
@@ -102,7 +102,7 @@ Transform your Jupyter Notebook experiments into production-ready workflows:
 <!-- END_ASCII_ART: integrated-data-science-environment -->
 
 ### 🛠️ **For Developers**  
-Build applications the way they should be built:
+Transform your Jupyter Notebook experiments into production-ready workflows:
 - **Reproducible environments** with Nix Flakes
 - **Simple architecture** that one person can understand
 - **Future-proof stack** using web standards
