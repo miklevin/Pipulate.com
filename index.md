@@ -1,94 +1,18 @@
 ---
-title: Pipulate
+title: "Pipulate - AI SEO Software to Future-proof You"
 description: The Local-First Revolution in AI-Assisted Development
 permalink: /
 group: home
 ---
 
-<!--
-# The Local-First Revolution in AI-Assisted Development
+# AI SEO Software to Future-proof You
 
-In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it.
+In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it. Think: Notebooks without Python.
 
 > **Your data. Your AI. Your machine. Your control.**  
 > No subscriptions, no vendor lock-in, no cloud costs.
 
-## Why Pipulate? The Philosophy That Changes Everything
-
-Traditional development follows the **DRY** (Don't Repeat Yourself) principle, creating abstract, complex systems that are hard to understand and modify. Pipulate embraces **WET** (Write Everything Twice) - explicit, readable workflows that are:
-
-- **🔍 Observable**: See exactly what's happening at every step
-- **🔧 Customizable**: Modify workflows without breaking abstractions  
-- **🤖 AI-Friendly**: Clear code that AI assistants can easily understand and maintain
-- **🚀 Future-Proof**: Built on durable web standards that won't become obsolete
-
-**[Learn more about the WET Philosophy →](/guide/wet-blueprint/)**
-
-## How It Works: Simplicity Meets Power
-
-Pipulate runs like a desktop app but uses web technologies. Think **Electron**, but better:
-
-- **🏠 Local-First**: Everything runs on your machine - data, AI, and processing
-- **🔄 Auto-Updating**: One command keeps everything current
-- **🌐 Cross-Platform**: Identical experience on macOS, Linux, and Windows (WSL)
-- **🧠 AI-Integrated**: Local LLM integration with full privacy
-
-### The Technical Magic
-```python
-# This is how simple Pipulate code looks
-@rt("/process-data")
-def process_data():
-    return Div(
-        H1("Processing Complete ✅"),
-        P("Your data has been analyzed locally"),
-        hx_get="/next-step",
-        hx_trigger="load"
-    )
-```
-
-No template languages. No build steps. No client-side JavaScript frameworks. Just **Python functions that generate HTML**, powered by **HTMX** for seamless interactivity.
-
-<!-- START_ASCII_ART: architecture-overview-diagram -->
-```
-                 ┌─────────────┐ Like Electron, but full Linux subsystem 
-                 │   Browser   │ in a folder for macOS and Windows (WSL)
-                 └─────┬───────┘
-                       │ HTTP/WS
-                       ▼
-    ┌───────────────────────────────────────┐
-    │           Nix Flake Shell             │ - In-app LLM (where it belongs)
-    │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
-    │  │   FastHTML    │  │    Ollama    │  │ - 100% local
-    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
-    │  └───────┬───────┘  └──────────────┘  │
-    │          │                            │
-    │    ┌─────▼─────┐     ┌────────────┐   │
-    │    │MiniDataAPI│◄───►│ SQLite DB  │   │
-    │    └───────────┘     └────────────┘   │
-    └───────────────────────────────────────┘
-```
-<!-- END_ASCII_ART: architecture-overview-diagram -->
-
-## Perfect For SEO Practitioners & Developers
-
-### 🎯 **For SEO Practitioners**
-Transform your Jupyter Notebook experiments into production-ready workflows:
-- **Step-by-step interfaces** that guide users through complex processes
-- **Local data processing** with no cloud limits or costs
-- **AI-assisted analysis** using your own local models
-- **Export capabilities** for reports and data visualization
-
-### 🛠️ **For Developers**  
-Build applications the way they should be built:
-- **Reproducible environments** with Nix Flakes
-- **Simple architecture** that one person can understand
-- **Future-proof stack** using web standards
-- **Integrated development** with JupyterLab and local AI
-
----
--->
-
-# Quick Start: Be Running in 5 Minutes
+## Quick Start: Be Running in 5 Minutes
 
 ### 1. Install Nix (One-Time Setup)
 
@@ -150,6 +74,61 @@ Wait for ***BOTH TABS*** to auto-open in your browser.
 
 ---
 
+## The Local-First Revolution in AI-Assisted Development
+
+### 🎯 **For SEO Practitioners**
+Transform your Jupyter Notebook experiments into production-ready workflows:
+- **Step-by-step interfaces** that guide users through complex processes
+- **Local data processing** with no cloud limits or costs
+- **AI-assisted analysis** using your own local models
+- **Export capabilities** for reports and data visualization
+
+<!-- START_ASCII_ART: integrated-data-science-environment -->
+```
+      ┌──────────────────┐    ┌──────────────────┐
+      │   Jupyter Lab    │    │    FastHTML      │
+      │   Notebooks      │    │     Server       │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 1   │     │    │  │ Step 1   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │ ┌──────────┐     │    │  ┌──────────┐    │
+      │ │ Cell 2   │     │    │  │ Step 2   │    │
+      │ │          │     │--->│  │          │    │
+      │ └──────────┘     │    │  └──────────┘    │
+      │  localhost:8888  │    │  localhost:5001  │
+      └──────────────────┘    └──────────────────┘
+```
+<!-- END_ASCII_ART: integrated-data-science-environment -->
+
+### 🛠️ **For Developers**  
+Build applications the way they should be built:
+- **Reproducible environments** with Nix Flakes
+- **Simple architecture** that one person can understand
+- **Future-proof stack** using web standards
+- **Integrated development** with JupyterLab and local AI
+
+### What You Can Build
+
+Pipulate excels at **data processing workflows** and **AI-assisted applications**:
+
+- **SEO Analysis Tools**: Process search console data, analyze competitors, generate reports
+- **Content Generation**: AI-powered writing assistants with local models
+- **Data Dashboards**: Transform spreadsheets into interactive web applications  
+- **Automation Workflows**: Step-by-step processes for repetitive tasks
+- **Research Tools**: Analyze data with local AI without privacy concerns
+
+---
+
+## How It Works: Simplicity Meets Power
+
+Pipulate runs like a desktop app but uses web technologies. Think **Electron**, but better:
+
+- **🏠 Local-First**: Everything runs on your machine - data, AI, and processing
+- **🔄 Auto-Updating**: One command keeps everything current
+- **🌐 Cross-Platform**: Identical experience on macOS, Linux, and Windows (WSL)
+- **🧠 AI-Integrated**: Local LLM integration with full privacy
+
 ## Why Local-First Wins
 
 | **Cloud-First** | **Pipulate Local-First** |
@@ -161,17 +140,58 @@ Wait for ***BOTH TABS*** to auto-open in your browser.
 | 👁️ Data mining | 🔐 Complete privacy |
 | 🔄 Constant updates break things | 🛡️ Stable, reproducible environment |
 
-## What You Can Build
+---
 
-Pipulate excels at **data processing workflows** and **AI-assisted applications**:
+## Why Pipulate? The Philosophy That Changes Everything
 
-- **SEO Analysis Tools**: Process search console data, analyze competitors, generate reports
-- **Content Generation**: AI-powered writing assistants with local models
-- **Data Dashboards**: Transform spreadsheets into interactive web applications  
-- **Automation Workflows**: Step-by-step processes for repetitive tasks
-- **Research Tools**: Analyze data with local AI without privacy concerns
+Traditional development follows the **DRY** (Don't Repeat Yourself) principle, creating abstract, complex systems that are hard to understand and modify. Pipulate embraces **WET** (Write Everything Twice) - explicit, readable workflows that are:
+
+- **🔍 Observable**: See exactly what's happening at every step
+- **🔧 Customizable**: Modify workflows without breaking abstractions  
+- **🤖 AI-Friendly**: Clear code that AI assistants can easily understand and maintain
+- **🚀 Future-Proof**: Built on durable web standards that won't become obsolete
+
+**[Learn more about the WET Philosophy →](/guide/wet-blueprint/)**
 
 ---
+
+### The Technical Magic
+
+```python
+# This is how simple Pipulate code looks
+@rt("/process-data")
+def process_data():
+    return Div(
+        H1("Processing Complete ✅"),
+        P("Your data has been analyzed locally"),
+        hx_get="/next-step",
+        hx_trigger="load"
+    )
+```
+
+No template languages. No build steps. No client-side JavaScript frameworks. Just **Python functions that generate HTML**, powered by **HTMX** for seamless interactivity.
+
+<!-- START_ASCII_ART: architecture-overview-diagram -->
+```
+                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 │   Browser   │ in a folder for macOS and Windows (WSL)
+                 └─────┬───────┘
+                       │ HTTP/WS
+                       ▼
+    ┌───────────────────────────────────────┐
+    │           Nix Flake Shell             │ - In-app LLM (where it belongs)
+    │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
+    │  │   FastHTML    │  │    Ollama    │  │ - 100% local
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  └───────┬───────┘  └──────────────┘  │
+    │          │                            │
+    │    ┌─────▼─────┐     ┌────────────┐   │
+    │    │MiniDataAPI│◄───►│ SQLite DB  │   │
+    │    └───────────┘     └────────────┘   │
+    └───────────────────────────────────────┘
+```
+<!-- END_ASCII_ART: architecture-overview-diagram -->
+
 
 ## The Complete Guided Experience
 
