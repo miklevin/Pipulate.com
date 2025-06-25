@@ -40,6 +40,27 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 
 The Architecture section provides a deep dive into how Pipulate is built and how it works:
 
+<!-- START_ASCII_ART: architecture-overview-diagram -->
+```
+                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 │   Browser   │ in a folder for macOS and Windows (WSL)
+                 └─────┬───────┘
+                       │ HTTP/WS
+                       ▼
+    ┌───────────────────────────────────────┐
+    │           Nix Flake Shell             │ - In-app LLM (where it belongs)
+    │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
+    │  │   FastHTML    │  │    Ollama    │  │ - 100% local
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  └───────┬───────┘  └──────────────┘  │
+    │          │                            │
+    │    ┌─────▼─────┐     ┌────────────┐   │
+    │    │MiniDataAPI│◄───►│ SQLite DB  │   │
+    │    └───────────┘     └────────────┘   │
+    └───────────────────────────────────────┘
+```
+<!-- END_ASCII_ART: architecture-overview-diagram -->
+
 - **Core Components**
   - Workflow Engine
   - Local-First Architecture

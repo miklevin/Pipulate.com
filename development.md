@@ -43,6 +43,21 @@ To get started:
 
 > **Note on Nix**: If you're new to Nix, check out [Nix Pills](https://nixos.org/guides/nix-pills/) for a gentle introduction. For now, just know that `nix develop` sets up your development environment automatically.
 
+<!-- START_ASCII_ART: core-concepts-internal-components -->
+```
+        ┌─────────────┐         ┌──────────────┐
+        │ File System │ Changes │  AST Syntax  │ Checks Code
+        │  Watchdog   │ Detects │   Checker    │ Validity
+        └──────┬──────┘         └───────┬──────┘
+               │ Valid Change           │
+               ▼                        ▼
+ ┌───────────────────────────┐     ┌──────────┐
+ │    Uvicorn Server         │◄─── │  Reload  │ Triggers Restart
+ │ (Handles HTTP, WS, SSE)   │     │ Process  │
+ └───────────────────────────┘     └──────────┘
+```
+<!-- END_ASCII_ART: core-concepts-internal-components -->
+
 ### JupyterLab Included
 
 Pipulate doesn't replace notebooks, but rather packages up those notebooks into
@@ -237,6 +252,20 @@ the top-down linear workflow model that exactly mimics Jupyter's *Run All Cells.
 is going to be weird to you until it isn't. Keeping the chain reaction pattern
 in place in each of its standard positions is crucial for workflow progression.
 
+<!-- START_ASCII_ART: server-rendered-ui-htmx -->
+```
+                        HTMX+Python enables a world-class
+                  Python front-end Web Development environment.
+                             ┌─────────────────────┐
+                             │    Navigation Bar   │  - No template language (like Jinja2)
+                             ├─────────┬───────────┤  - HTML elements are Python functions
+  Simple Python back-end     │  Main   │   Chat    │  - Minimal custom JavaScript / CSS
+  HTMX "paints" HTML into    │  Area   │ Interface │  - No React/Vue/Angular overhead
+  the DOM on demand ───────► │         │           │  - No "build" process like Svelte
+                             └─────────┴───────────┘  - No virtual DOM, JSX, Redux, etc.
+```
+<!-- END_ASCII_ART: server-rendered-ui-htmx -->
+
 The core purpose of any `step_XX_submit` handler, or the "Revert Phase" of a `step_XX` GET handler, is to:
 1. Display the outcome/summary of the current step in a way that allows the user to revert it
 2. Trigger the loading of the next step to continue the chain reaction
@@ -422,6 +451,32 @@ not, which determines which command you use to get it re-started:
 
 ...and it's based on whether you see: `(nix)` in the prompt or not. If you do
 see it there, then use `python server.py`. If you don't, then use `nix develop`.
+
+## User Interface & Layout
+
+Pipulate's interface is organized into distinct functional areas that provide a clean, intuitive development experience:
+
+<!-- START_ASCII_ART: ui-layout -->
+```
+               ┌─────────────────────────────┐
+               │         Navigation         ◄── Search, Profiles,
+               ├───────────────┬─────────────┤    Apps, Settings
+               │               │             │
+    Workflow, ──►   Main Area  │    Chat     │
+    App UI     │   (Pipeline)  │  Interface ◄── LLM Interaction 
+               │               │             │
+               └─────────────────────────────┘
+```
+<!-- END_ASCII_ART: ui-layout -->
+
+### Interface Components
+
+- **Navigation Bar**: Profile selection, workflow discovery, and system settings
+- **Main Area**: Primary workspace for workflow execution and development
+- **Chat Interface**: Real-time AI assistance and system feedback
+- **Pipeline View**: Step-by-step workflow progression with state management
+
+This layout ensures that all essential tools are easily accessible while maintaining a clean, focused development environment.
 
 ## Magic Cookie System
 

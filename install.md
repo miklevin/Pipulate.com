@@ -132,6 +132,22 @@ Pipulate uses Nix to ensure a **consistent, reproducible environment** across al
 
 This eliminates the "works on my machine" problem and ensures Pipulate runs reliably everywhere.
 
+<!-- START_ASCII_ART: multi-os-cuda-support-nix -->
+```
+               ┌──────────────────┐
+               │  Linux / macOS   │ - Write code once, run anywhere
+               │  Windows (WSL)   │ - Consistent dev environment via Nix
+               └────────┬─────────┘   - Like cross-OS Homebrew brew install
+                        │
+                        │ Nix manages dependencies
+                        ▼
+               ┌──────────────────┐
+               │   CUDA Support   │ - Auto-detects NVIDIA GPU w/ CUDA
+               │   (if present)   │ - Uses GPU for LLM acceleration
+               └──────────────────┘   - Falls back to CPU if no CUDA
+```
+<!-- END_ASCII_ART: multi-os-cuda-support-nix -->
+
 ---
 
 ## Next Steps
