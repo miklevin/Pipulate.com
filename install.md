@@ -11,7 +11,7 @@ Get started with the local-first revolution. Two commands and you're running.
 
 ---
 
-## Quick Install
+## Quick Start Guide
 
 ### 1. Install Nix (One-Time Setup)
 
@@ -19,66 +19,61 @@ Get started with the local-first revolution. Two commands and you're running.
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-**Important:** Close your terminal completely and open a new one after installation.
+**Close your terminal and open a new one after installation.**
 
 ### 2. Install Pipulate
 
+With a custom name
 ```bash
-# Default installation  
+curl -L https://pipulate.com/install.sh | sh -s Botifython
+```
+
+Or default installation
+```bash
 curl -L https://pipulate.com/install.sh | sh
-
-# Or with a custom name
-curl -L https://pipulate.com/install.sh | sh -s MyProject
 ```
 
-### 3. Start Building
+### 3. Run It
 
 ```bash
-cd ~/pipulate && nix develop
+cd ~/Botifython
+nix develop
 ```
 
-This command:
+These few commands:
 - ✅ Updates to the latest version automatically
-- ✅ Starts JupyterLab and the Pipulate server
-- ✅ Opens web interfaces in your browser  
+- ✅ Starts JupyterLab and the Pipulate server  
+- ✅ Opens web interfaces in your browser
 - ✅ Provides a complete, reproducible development environment
 
 **That's it!** You now have a local-first development environment with AI integration.
 
-<!-- START_ASCII_ART: 2-install-pipulate -->
-```
+### 4. Run It Again!
 
-Or default installation
-```
-<!-- END_ASCII_ART: 2-install-pipulate -->
-
----
-
-## System Requirements
-
-- **macOS**: 10.15 or later
-- **Linux**: Most modern distributions
-- **Windows**: WSL2 with Ubuntu 20.04+
-- **Memory**: 8GB RAM recommended
-- **Storage**: 2GB free disk space
-
----
-
-## Troubleshooting
-
-### Running Pipulate Again
-
-After installation, start Pipulate anytime with:
+1. You can just forcibly exit out of that Terminal it's running from.
+2. Open a new Terminal, and once again:
 
 ```bash
-cd ~/pipulate && nix develop
+cd ~/Botifython
+nix develop
 ```
 
-### If Something Goes Wrong
+### 5. The Big Reset (If Necessary)
 
-1. **Close the terminal completely** and open a new one
-2. Navigate to your Pipulate directory: `cd ~/pipulate`
-3. Try again: `nix develop`
+Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
+
+```bash
+rm -rf ~/Botifython
+curl -L https://pipulate.com/install.sh | sh -s Botifython
+cd ~/Botifython
+nix develop
+```
+
+Wait for ***BOTH TABS*** to auto-open in your browser.
+
+<!-- START_ASCII_ART: 2-install-pipulate -->
+
+<!-- END_ASCII_ART: 2-install-pipulate -->
 
 ### Force Restart
 
@@ -89,18 +84,6 @@ If you need to force-close everything:
 3. Open a new terminal
 4. `cd ~/pipulate && nix develop`
 
-### Reinstalling Pipulate
-
-To start fresh:
-
-```bash
-# Remove the existing installation
-rm -rf ~/pipulate
-
-# Reinstall
-curl -L https://pipulate.com/install.sh | sh
-```
-
 ### Uninstalling Nix
 
 To remove Nix completely from your system:
@@ -108,6 +91,16 @@ To remove Nix completely from your system:
 ```bash
 /nix/nix-installer uninstall
 ```
+
+---
+
+## System Requirements
+
+- **macOS**: 10.15 or later
+- **Linux**: Most modern distributions
+- **Windows**: WSL2 with Ubuntu 20.04+
+- **Memory**: 8GB RAM recommended
+- **Storage**: 2GB free disk space
 
 ---
 

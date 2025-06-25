@@ -9,6 +9,31 @@ group: about
 
 > Pipulate is a local-first, AI-assisted development framework that transforms how you run SEO workflows by embracing Notebooks without any code.
 
+## AI On Rails: The Answer to Agentic Mode
+
+Ask an AI to do something in *Agentic Mode* and it's going to go off half-cocked and willy nilly doing whatever it thinks is right until done. Put AIs on Rails with Pipulate using rigid linear workflows prepared by domain experts. Leverage local AI without training the frontier models and keep your secret recipes secret.
+
+<!-- START_ASCII_ART: about-pipulate -->
+```
+      🤖 AGENTIC MODE (Chaos)           🚂 AI ON RAILS (Pipulate)
+      ═══════════════════════           ══════════════════════════
+      
+          💥 GOES OFF                      📊 LINEAR WORKFLOWS
+          HALF-COCKED!                      BY DOMAIN EXPERTS
+               │                                   │
+               ▼                                   ▼
+      ╔════════════════════╗            ┌─────────────────────┐
+      ║  🌪️  WILLY NILLY   ║            │  Step 1: Analyze    │
+      ║                    ║     VS     │  Step 2: Process    │
+      ║   Unpredictable    ║            │  Step 3: Report     │
+      ║      Results       ║            │  Step 4: Export     │
+      ╚════════════════════╝            └─────────────────────┘
+               │                                   │
+               ▼                                   ▼
+    ☁️ Trains Frontier Models     🏠 Keeps Domain Expertise Local
+```
+<!-- END_ASCII_ART: about-pipulate -->
+
 1. 🖥️ **Runs locally** like a desktop app using modern web technologies
 2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity  
 3. 📓 **Transforms Jupyter Notebooks** into production-ready, step-by-step workflows
@@ -18,9 +43,11 @@ group: about
 
 ---
 
-# What Audience Are You?
+## What Audience Are You?
 
-> A chef talks about knife techniques and flavor profiles. A diner just wants to know if the pasta is amazing.  
+Pipulate can be very technical or dirt simple. It all depends if you're going to develop for it or just use it. The analogy we use here is wither you are the chef at a restaurant or just someone enjoying a meal.
+
+> A chef talks about chopping techniques and flavor profiles. A diner just wants to know if the pasta is amazing.  
 
 ## Chef or Customer?
 
@@ -49,9 +76,9 @@ group: about
 
 1. **Chefs *Make Workflows:*** Much to learn!
 2. **Customers *USE Workflows:*** Just install, pick workflow and cick:
-   - Next ▸
-   - Next ▸
-   - Next ▸
+   - Step #1: Next ▸
+   - Step #2: Next ▸
+   - Step #3: Next ▸
 
 Okay, sometimes you have to fill in some fields.
 
@@ -67,17 +94,6 @@ Okay, sometimes you have to fill in some fields.
    3. And some choices
 
 These are different conversations.
-
----
-
-## The Answer to Agentic Mode
-
-You are are a Chef or a Customer and want the dish to be prepared to perfection
-every time. Ask an AI to do something in *Agentic Mode* and it's going to go off
-half-cocked and willy nilly doing whatever it thinks is right until done.
-
-1. Put AIs on Rails with Pipulate.
-2. Keep your secret recipes secret.
 
 ---
 
@@ -326,4 +342,4 @@ Pipulate represents a new approach to SEO tooling:
 
 Join us in building a more open, accessible approach to SEO tools — where your data stays yours, and technology serves your needs instead of locking you in.
 
-Ready to try Pipulate? Check out our [installation guide](/) to get started in just a few minutes.
+Ready to try Pipulate? Check out our [installation guide](/install/) to get started in just a few minutes.
