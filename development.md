@@ -98,33 +98,33 @@ Understanding how we got here helps explain why FastHTML + HTMX is revolutionary
 
 <!-- START_ASCII_ART: the-evolution-flask-fastapi-fasthtml -->
 ```
-    🍶 FLASK ERA                 🚀 FASTAPI ERA              🌐 FASTHTML ERA
-    ═══════════════              ═══════════════             ══════════════════
+    🍶 FLASK ERA              🚀 FASTAPI ERA            🌐 FASTHTML ERA
+    ═══════════════           ═══════════════           ══════════════════
     
-    ┌─────────────┐              ┌─────────────┐             ┌─────────────┐
-    │   Python    │              │   Python    │             │   Python    │
-    │  Functions  │              │  Functions  │             │  Functions  │
-    └──────┬──────┘              └──────┬──────┘             └──────┬──────┘
-           │                            │                           │
-           ▼                            ▼                           ▼
-    ┌─────────────┐              ┌─────────────┐             ┌─────────────┐
-    │   Jinja2    │              │  Pydantic   │             │    HTMX     │◄── Over-the-wire
-    │  Templates  │              │   Models    │             │  Fragments  │   HTML targeting
-    └──────┬──────┘              └──────┬──────┘             └──────┬──────┘   DOM elements
-           │                            │                           │
-           ▼                            ▼                           ▼
-    ┌─────────────┐              ┌─────────────┐             ┌─────────────┐
-    │    HTML     │              │    JSON     │             │    HTML     │
-    │   Response  │              │   Response  │             │  Elements   │
-    └─────────────┘              └─────────────┘             └─────────────┘
-           │                            │                           │
-           ▼                            ▼                           ▼
-    🌐 Full Page Reload          📱 Frontend Framework      🎯 DOM Element Updates
-                                    (React/Vue/Angular)        def Div() = <div>
-                                                              def Button() = <button>
-                                                              
-    Template files needed        JSON ↔ HTML conversion      Python functions ARE
-    Separate languages          Client-side complexity       the template language!
+    ┌─────────────┐           ┌─────────────┐           ┌─────────────┐
+    │   Python    │           │   Python    │           │   Python    │
+    │  Functions  │           │  Functions  │           │  Functions  │
+    └──────┬──────┘           └──────┬──────┘           └──────┬──────┘
+           │                         │                         │
+           ▼                         ▼                         ▼
+    ┌─────────────┐           ┌─────────────┐           ┌─────────────┐
+    │   Jinja2    │           │  Pydantic   │           │    HTMX     │◄─ Over-the-wire
+    │  Templates  │           │   Models    │           │  Fragments  │   HTML targeting
+    └──────┬──────┘           └──────┬──────┘           └──────┬──────┘   DOM elements
+           │                         │                         │
+           ▼                         ▼                         ▼
+    ┌─────────────┐           ┌─────────────┐           ┌─────────────┐
+    │    HTML     │           │    JSON     │           │    HTML     │
+    │   Response  │           │   Response  │           │  Elements   │
+    └─────────────┘           └─────────────┘           └─────────────┘
+           │                         │                         │
+           ▼                         ▼                         ▼
+    🌐 Full Page Reload     📱 Frontend Framework      🎯 DOM Element Updates
+                               (React/Vue/Angular)        def Div() = <div>
+                                                          def Button() = <button>
+                                                         
+    Template files needed    JSON ↔ HTML conversion     Python functions ARE
+    Separate languages       Client-side complexity     the template language!
 ```
 <!-- END_ASCII_ART: the-evolution-flask-fastapi-fasthtml -->
 
