@@ -344,7 +344,7 @@ One of Pipulate's key strengths is its ability to provide identical development 
     | | | |/ _` | '__\ \ /\ / / | '_ \| \ \/ /   / #      \    |:_/ |    |     |     |
     | |_| | (_| | |   \ V  V /| | | | | |>  <   |          |  //   \ \   |_____|_____|
     |____/ \__,_|_|    \_/\_/ |_|_| |_|_/_/\_\   \        /  (|     | )  |     |     |
-                                                 `._,._,'  /'\_   _/`\  |     |     |
+                                                  `._,._,'  /'\_   _/`\  |     |     |
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->

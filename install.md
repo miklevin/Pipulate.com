@@ -130,9 +130,9 @@ This eliminates the "works on my machine" problem and ensures Pipulate runs reli
      ____                      _       _                        .--.      ___________
     |  _ \  __ _ _ ____      _(_)_ __ (_)_  __    ,--./,-.     |o_o |    |     |     |
     | | | |/ _` | '__\ \ /\ / / | '_ \| \ \/ /   / #      \    |:_/ |    |     |     |
-    | |_| | (_| | | | \ V  V /| | | | | |>  <   |          |  //   \ \   |_____|_____|
+    | |_| | (_| | |   \ V  V /| | | | | |>  <   |          |  //   \ \   |_____|_____|
     |____/ \__,_|_|    \_/\_/ |_|_| |_|_/_/\_\   \        /  (|     | )  |     |     |
-                                                 `._,._,'  /'\_   _/`\  |     |     |
+                                                  `._,._,'  /'\_   _/`\  |     |     |
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->

@@ -30,7 +30,7 @@ Ask an AI to do something in *Agentic Mode* and it's going to go off half-cocked
       ╚════════════════════╝            └─────────────────────┘
                │                                   │
                ▼                                   ▼
-    ☁️ Trains Frontier Models     🏠 Keeps Domain Expertise Local
+    ☁️ Trains Frontier Models       🏠 Keeps Domain Expertise Local
 ```
 <!-- END_ASCII_ART: about-pipulate -->
 
