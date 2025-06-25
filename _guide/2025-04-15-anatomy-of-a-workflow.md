@@ -333,3 +333,27 @@ The **explicit inclusion of the next step's loading `Div` with `hx_trigger="load
 
 This concludes the first "chapter." I've tried to be detailed and reference the existing codebase conventions. Please let me know if this is the right level of detail and if you'd like to proceed to the next part, which would likely cover adding actual input fields to the shim and displaying their values, forming the basis of a very simple custom widget. We can then iterate towards more complex examples like the Markdown widget, incorporating its specific helper methods and client-side JS triggering.
 
+## Cross-Platform Development Made Simple
+
+One of Pipulate's key strengths is its ability to provide identical development environments across all platforms. This is achieved through Nix Flakes, which solve the "works on my machine" problem once and for all:
+
+<!-- START_ASCII_ART: not-on-my-machine-problem-fixed -->
+```
+     ____                      _       _                        .--.      ___________
+    |  _ \  __ _ _ ____      _(_)_ __ (_)_  __    ,--./,-.     |o_o |    |     |     |
+    | | | |/ _` | '__\ \ /\ / / | '_ \| \ \/ /   / #      \    |:_/ |    |     |     |
+    | |_| | (_| | |   \ V  V /| | | | | |>  <   |          |  //   \ \   |_____|_____|
+    |____/ \__,_|_|    \_/\_/ |_|_| |_|_/_/\_\   \        /  (|     | )  |     |     |
+                                                 `._,._,'  /'\_   _/`\  |     |     |
+    Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
+```
+<!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
+
+Whether you're developing on macOS, Linux, or Windows (via WSL), your workflows will run identically with the same Python version, packages, and system libraries.
+
+---
+
+## Anatomy of a Workflow
+
+// ... existing code ...
+

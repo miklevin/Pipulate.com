@@ -7,6 +7,37 @@ group: documentation
 
 # Development Guide
 
+Welcome to Pipulate development! This guide will help you understand the architecture, contribute to the project, and build powerful local-first workflows.
+
+## Who Are You Building For?
+
+Understanding your audience is crucial for effective development. Pipulate serves two distinct user types:
+
+<!-- START_ASCII_ART: target-audience -->
+```
+    ┌──────────────────────────────────────────────────────────┐
+    │                      The Restaurant                      │
+    │  ┌──────────────────┐              ┌──────────────────┐  │
+    │  │   Kitchen (Dev)  │              │  Dining Room     │  │
+    │  │                  │              │  (End Users)     │  │
+    │  │                  │              │                  │  │
+    │  │  👨‍🍳 Sous Chef    │───recipes───►│  🍽️ Customers    │  │
+    │  │  👩‍🍳 Head Chef    │              │  🏢 Restaurateur │  │
+    │  │                  │              │                  │  │
+    │  │ "How do we make  │              │ "I want the best │  │
+    │  │  pasta you've    │              │  pasta I've ever │  │
+    │  │  never had?"     │              │  had in my life" │  │
+    │  └──────────────────┘              └──────────────────┘  │
+    └──────────────────────────────────────────────────────────┘
+```
+<!-- END_ASCII_ART: target-audience -->
+
+**Developers (Chefs)** create the workflows, **End Users (Customers)** consume the experience. Keep this separation in mind as you build.
+
+---
+
+## Getting Started
+
 > **Note**: This is a condensed reference guide. For detailed, step-by-step tutorials and in-depth explanations, see the [Pipulate Guide](/guide/).
 
 > **Before You Begin**: Make sure you've completed the [installation process](/install/). This guide assumes you have Pipulate running locally with `nix develop`.

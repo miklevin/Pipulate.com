@@ -132,6 +132,18 @@ Pipulate uses Nix to ensure a **consistent, reproducible environment** across al
 
 This eliminates the "works on my machine" problem and ensures Pipulate runs reliably everywhere.
 
+<!-- START_ASCII_ART: not-on-my-machine-problem-fixed -->
+```
+     ____                      _       _                        .--.      ___________
+    |  _ \  __ _ _ ____      _(_)_ __ (_)_  __    ,--./,-.     |o_o |    |     |     |
+    | | | |/ _` | '__\ \ /\ / / | '_ \| \ \/ /   / #      \    |:_/ |    |     |     |
+    | |_| | (_| | | | \ V  V /| | | | | |>  <   |          |  //   \ \   |_____|_____|
+    |____/ \__,_|_|    \_/\_/ |_|_| |_|_/_/\_\   \        /  (|     | )  |     |     |
+                                                 `._,._,'  /'\_   _/`\  |     |     |
+    Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
+```
+<!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
+
 <!-- START_ASCII_ART: multi-os-cuda-support-nix -->
 ```
                ┌──────────────────┐
@@ -167,4 +179,5 @@ Once installed, explore:
 - **[GitHub Issues](https://github.com/miklevin/pipulate/issues)** - Bug reports and questions
 - **[Development Notes](/development/)** - Technical details
 
-**Welcome to the local-first revolution!** 
+**Welcome to the local-first revolution!**
+```
