@@ -71,6 +71,13 @@ This approach gives us:
 - Progressive enhancement
 
 <!-- START_ASCII_ART: server-rendered-ui-htmx -->
+### Server-Rendered UI (HTMX)  <!-- key: server-rendered-ui-htmx -->
+
+The UI is constructed primarily with server-rendered HTML fragments delivered via HTMX. This minimizes client-side JavaScript complexity.
+* FastHTML generates HTML components directly from Python.
+* HTMX handles partial page updates based on user interactions, requesting new HTML snippets from the server.
+* WebSockets and Server-Sent Events (SSE) provide real-time updates (e.g., for chat, live development reloading).
+
 ```
                         HTMX+Python enables a world-class
                   Python front-end Web Development environment.

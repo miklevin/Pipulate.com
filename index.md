@@ -84,6 +84,10 @@ Use apps that produce SEO "deliverables" with AI assistance.
 - **Export capabilities** for reports and data visualization
 
 <!-- START_ASCII_ART: integrated-data-science-environment -->
+### Integrated Data Science Environment  <!-- key: integrated-data-science-environment -->
+
+Jupyter Notebooks run alongside the FastHTML server, allowing developers to prototype workflows in a familiar environment before porting them to Pipulate's step-based interface for end-users. The same Python virtual environment (`.venv`) is shared, and ad-hoc package installation is supported. If you're using Cursor, VSCode or Windsurf, set your `Ctrl`+`Shift`+`P` "Python: Set Interpreter" to "Enter Interpreter Path" `./pipulate/.venv/bin/python`. You might have to adjust based on the folder you use as your workspace. But then you'll have a Python environment unified between Cursor, JupyterLab and Pipulate.
+
 ```
       ┌──────────────────┐    ┌──────────────────┐
       │   Jupyter Lab    │    │    FastHTML      │
@@ -172,6 +176,10 @@ def process_data():
 No template languages. No build steps. No client-side JavaScript frameworks. Just **Python functions that generate HTML**, powered by **HTMX** for seamless interactivity.
 
 <!-- START_ASCII_ART: architecture-overview-diagram -->
+### Architecture Overview Diagram  <!-- key: architecture-overview-diagram -->
+
+This diagram illustrates the high-level components and their interactions
+
 ```
                  ┌─────────────┐ Like Electron, but full Linux subsystem 
                  │   Browser   │ in a folder for macOS and Windows (WSL)
@@ -190,6 +198,8 @@ No template languages. No build steps. No client-side JavaScript frameworks. Jus
     │    └───────────┘     └────────────┘   │
     └───────────────────────────────────────┘
 ```
+
+This complete, self-contained environment runs identically on any operating system, providing the foundation for all Pipulate workflows and AI interactions.
 <!-- END_ASCII_ART: architecture-overview-diagram -->
 
 

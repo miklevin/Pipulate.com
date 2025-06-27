@@ -96,6 +96,10 @@ A local-first approach directly counters these Colab limitations, putting you fi
     * **Pipulate Example:** Relies on durable technologies, ensuring longevity and adaptability.
 
 <!-- START_ASCII_ART: integrated-data-science-environment -->
+### Integrated Data Science Environment  <!-- key: integrated-data-science-environment -->
+
+Jupyter Notebooks run alongside the FastHTML server, allowing developers to prototype workflows in a familiar environment before porting them to Pipulate's step-based interface for end-users. The same Python virtual environment (`.venv`) is shared, and ad-hoc package installation is supported. If you're using Cursor, VSCode or Windsurf, set your `Ctrl`+`Shift`+`P` "Python: Set Interpreter" to "Enter Interpreter Path" `./pipulate/.venv/bin/python`. You might have to adjust based on the folder you use as your workspace. But then you'll have a Python environment unified between Cursor, JupyterLab and Pipulate.
+
 ```
       ┌──────────────────┐    ┌──────────────────┐
       │   Jupyter Lab    │    │    FastHTML      │

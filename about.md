@@ -14,6 +14,16 @@ group: about
 Ask an AI to do something in *Agentic Mode* and it's going to go off half-cocked and willy nilly doing whatever it thinks is right until done. Put AIs on Rails with Pipulate using rigid linear workflows prepared by domain experts. Leverage local AI without training the frontier models and keep your secret recipes secret.
 
 <!-- START_ASCII_ART: about-pipulate -->
+## AI On Rails: The Answer to Agentic Mode  <!-- key: about-pipulate -->
+
+**The Problem with Agentic AI:** Unpredictable, cloud-dependent, and trains frontier models with your data.
+
+**The Pipulate Solution:** Local AI guided by domain expert workflows, keeping your intelligence sovereign.
+
+Agentic Mode is like a box of chocolates — you never know what you're gonna get. Ask an AI to do something in *Agentic Mode* and it's going to go off and do whatever it thinks is right until done. But what if there were a domain expert in the picture who sets everything up ahead of time ensuring proper AI coralling and wrangling? 
+
+**Put AIs on Rails with Pipulate:** Rigid linear workflows prepared by domain experts, leveraging local AI without training frontier models. Your secret recipes stay secret, your data stays yours, and your AI grows with you on your own hardware.
+
 ```
       🤖 AGENTIC MODE (Chaos)           🚂 AI ON RAILS (Pipulate)
       ═══════════════════════           ══════════════════════════
@@ -23,15 +33,22 @@ Ask an AI to do something in *Agentic Mode* and it's going to go off half-cocked
                │                                   │
                ▼                                   ▼
       ╔════════════════════╗            ┌─────────────────────┐
-      ║  🌪️  WILLY NILLY   ║            │  Step 1: Analyze    │
-      ║                    ║     VS     │  Step 2: Process    │
-      ║   Unpredictable    ║            │  Step 3: Report     │
-      ║      Results       ║            │  Step 4: Export     │
+      ║  🌪️ WILLY NILLY 🎲 ║            │  Step 1: Analyze▸   │
+      ║                    ║     VS     │  Step 2: Process▸   │
+      ║   Unpredictable    ║            │  Step 3: Report▸    │
+      ║      Results       ║            │  Step 4: Export▸    │
       ╚════════════════════╝            └─────────────────────┘
                │                                   │
                ▼                                   ▼
-    ☁️ Trains Frontier Models       🏠 Keeps Domain Expertise Local
+    ☁️ Trains Frontier Models        🏠 Keeps Domain Expertise Local
 ```
+
+1. 🖥️ **Runs locally** like a desktop app using modern web technologies
+2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity  
+3. 📓 **Transforms Jupyter Notebooks** into production-ready, step-by-step workflows
+4. 🤖 **Integrated AI assistance** using your own local models with complete privacy
+5. 🔧 **Reproducible environments** with Nix that work identically across all platforms
+6. 🎯 **Perfect for SEO practitioners** who want to turn technical expertise into guided, reusable workflows
 <!-- END_ASCII_ART: about-pipulate -->
 
 1. 🖥️ **Runs locally** like a desktop app using modern web technologies
@@ -52,6 +69,10 @@ Pipulate can be very technical or dirt simple. It all depends if you're going to
 ## Chef or Customer?
 
 <!-- START_ASCII_ART: target-audience -->
+## Chef or Customer?  <!-- key: target-audience -->
+
+Are you a Developer or an End User? Chef or Customer? Understanding your audience is crucial for effective development. Pipulate serves two distinct but complementary audiences, much like a restaurant serves both chefs and customers
+
 ```
     ┌──────────────────────────────────────────────────────────┐
     │                      The Restaurant                      │
@@ -102,6 +123,10 @@ These are different conversations.
 Pipulate is a free, open-source SEO desktop application that runs entirely on your computer. It gives you the power of complex SEO scripts and Jupyter notebooks, but with a friendly, guided interface where AI helps you every step of the way.
 
 <!-- START_ASCII_ART: architecture-overview-diagram -->
+### Architecture Overview Diagram  <!-- key: architecture-overview-diagram -->
+
+This diagram illustrates the high-level components and their interactions
+
 ```
                  ┌─────────────┐ Like Electron, but full Linux subsystem 
                  │   Browser   │ in a folder for macOS and Windows (WSL)
@@ -120,6 +145,8 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
     │    └───────────┘     └────────────┘   │
     └───────────────────────────────────────┘
 ```
+
+This complete, self-contained environment runs identically on any operating system, providing the foundation for all Pipulate workflows and AI interactions.
 <!-- END_ASCII_ART: architecture-overview-diagram -->
 
 ## Core Features
@@ -179,6 +206,10 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
 - **Open Architecture**: Every component is transparent and modifiable
 
 <!-- START_ASCII_ART: integrated-data-science-environment -->
+### Integrated Data Science Environment  <!-- key: integrated-data-science-environment -->
+
+Jupyter Notebooks run alongside the FastHTML server, allowing developers to prototype workflows in a familiar environment before porting them to Pipulate's step-based interface for end-users. The same Python virtual environment (`.venv`) is shared, and ad-hoc package installation is supported. If you're using Cursor, VSCode or Windsurf, set your `Ctrl`+`Shift`+`P` "Python: Set Interpreter" to "Enter Interpreter Path" `./pipulate/.venv/bin/python`. You might have to adjust based on the folder you use as your workspace. But then you'll have a Python environment unified between Cursor, JupyterLab and Pipulate.
+
 ```
       ┌──────────────────┐    ┌──────────────────┐
       │   Jupyter Lab    │    │    FastHTML      │

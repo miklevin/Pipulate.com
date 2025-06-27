@@ -61,6 +61,10 @@ This stack isn't just simpler - it's more powerful. It gives you:
 - Future-proofed database skills
 
 <!-- START_ASCII_ART: architecture-overview-diagram -->
+### Architecture Overview Diagram  <!-- key: architecture-overview-diagram -->
+
+This diagram illustrates the high-level components and their interactions
+
 ```
                  ┌─────────────┐ Like Electron, but full Linux subsystem 
                  │   Browser   │ in a folder for macOS and Windows (WSL)
@@ -79,6 +83,8 @@ This stack isn't just simpler - it's more powerful. It gives you:
     │    └───────────┘     └────────────┘   │
     └───────────────────────────────────────┘
 ```
+
+This complete, self-contained environment runs identically on any operating system, providing the foundation for all Pipulate workflows and AI interactions.
 <!-- END_ASCII_ART: architecture-overview-diagram -->
 
 ## The Local-First Advantage

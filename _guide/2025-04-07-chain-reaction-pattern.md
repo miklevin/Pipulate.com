@@ -19,6 +19,14 @@ cat data.txt | grep "pattern" | sort | uniq -c
 Each command does one thing well, and data flows naturally through the pipeline. Pipulate's Chain Reaction Pattern brings this same elegance to web workflows, with the `run_all_cells()` method serving as the "pipe operator" that connects workflow steps just like Unix pipes connect commands.
 
 <!-- START_ASCII_ART: pipeline-workflows -->
+### Pipeline Workflows  <!-- key: pipeline-workflows -->
+
+Designed for porting notebook-style processes, workflows are sequences of steps where the state is managed explicitly at each stage and stored persistently (typically as a JSON blob in the `pipeline` table).
+* **Resumable & Interrupt-Safe:** Because each step's completion is recorded, workflows can be stopped and resumed.
+* **Explicit State Flow:** Data typically passes from one step's output (`done` field) to the next via the `transform` function, simplifying debugging. Patterned on Unix pipes.
+* **Good Training Data:** The structured input/output of each step creates valuable data for potentially fine-tuning models.
+* **Proprietary Friendly:** Excellent for proprietary domain-experts and fields (competing academic, finances) who *resist* letting their data flow onto the Web for general AI training.
+
 ```
   ┌─────────┐        ┌─────────┐        ┌─────────┐   - Fully customizable steps
   │ Step 01 │─piped─►│ Step 02 │─piped─►│ Step 03 │   - Interruption-safe & resumable

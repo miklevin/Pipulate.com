@@ -338,6 +338,12 @@ This concludes the first "chapter." I've tried to be detailed and reference the 
 One of Pipulate's key strengths is its ability to provide identical development environments across all platforms. This is achieved through Nix Flakes, which solve the "works on my machine" problem once and for all:
 
 <!-- START_ASCII_ART: not-on-my-machine-problem-fixed -->
+## *Not On My Machine* Problem Fixed  <!-- key: not-on-my-machine-problem-fixed -->
+
+> The Cloud's popularity has been driven in part by developers not wanting to maintain multiple codebases or installers per OS. Thanks to Nix, that's all fixed.
+
+* **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. E.g. Is this a Linux-thing you're reading about here? A Windows thing? A Mac thing? The answer is: YES!!! All of the above — and if you've got cool acceleration hardware, it will even take advantage and utilize that too. Best of all worlds.
+
 ```
      ____                      _       _                        .--.      ___________
     |  _ \  __ _ _ ____      _(_)_ __ (_)_  __    ,--./,-.     |o_o |    |     |     |
@@ -347,6 +353,8 @@ One of Pipulate's key strengths is its ability to provide identical development 
                                                   `._,._,'  /'\_   _/`\  |     |     |
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
+
+**Nix serves as the "Noah's Ark"** - preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
 
 Whether you're developing on macOS, Linux, or Windows (via WSL), your workflows will run identically with the same Python version, packages, and system libraries.

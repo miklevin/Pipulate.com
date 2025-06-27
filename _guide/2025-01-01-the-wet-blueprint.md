@@ -46,26 +46,41 @@ This is exactly what WET code does - it prioritizes **immediate clarity** over a
 Traditional development has been trapped in cloud-first thinking, but the future is local-first with AI assistance. Here's why WET workflows work now:
 
 <!-- START_ASCII_ART: why-wet-works-now -->
+### Why WET Works Now  <!-- key: why-wet-works-now -->
+
+Traditional development follows DRY principles, creating abstract, complex systems that are hard to understand and modify. But the world has changed:
+
+1. **🔬 Jupyter Notebooks** promote explicit, literate programming
+2. **🤖 AI assistants** excel at managing repetitive code  
+3. **🏠 Local-first architectures** prioritize clarity over enterprise complexity
+4. **🎯 Right Granularity**: WET provides the perfect abstraction level for human AND AI comprehension
+
 ```
                                ________________________________
    - Like Notebooks           /                                \
    - Linear Workflows        |  It runs proprietary private AI  |
    - Local & Cloud-free      |  Workflows from your Local PC?!  |
    - Chip O'Theseus included  \________________________________/
-                                                               ()
-        HARDWARE PLATFORM                BROWSER                 O    ,
-     _______________________       __________ _______              o  \\  . 
-    |                       |     / Pipulate \Jupyter\__              |\\/|
-    | Windows, Mac or Linux |    |  __________________  |             / " '\
-    |     _____ ___         |    | | App        Menu  | |    See!    . .   .
-    |   _/ Nix \____\_____  |    | |------------------| |<- - - - - /    ) |
-    |  |                  | |    | | Workflow | Local | |          '  _.'  |
-    |  |     Pipulate    <----------> -Step 1 | Chat  | |          '-'/    \
-    |__|  localhost:5001  |_|    | |  -Step 2 | Help  | |       What, no Docker?
-       |  (AI on Rails!)  |      | |__________|_______| |       What, no React?
-       |__________________|      |______________________|       What, no Cloud?
-
+                                                              ()   
+        HARDWARE PLATFORM             LOCAL BROWSER             O   , Chip O'Theseus
+     _______________________       __________ _______             o \\  . 
+    |                       |     / Pipulate \Jupyter\__            |\\/|
+    | Windows, Mac or Linux |    |  __________________  |   See!    / " '\ - Radical transparency
+    |     _____ ___         |    | | App Name   Menu⚙️| |<- - - - -. .   . - MCP tool-call control
+    |   _/ Nix \____\_____  |    | |------------------| |         /    ) | - Browser as bot's body
+    |  |                  | |    | | Workflow | Local | |        '  _.'  |
+    |  |     Pipulate    <---------> -Step #1 | AI🤖  | |        '-'/    \
+    |__|  localhost:5001  |_|    | | -Step #2 | Chat  | |      What, no Docker?
+       |  (AI on Rails🚂) |      | | -Step #3 | Help▸ | |      What, no React?
+       |__________________|      | |__________|_______| |      What, no Cloud?
+                                 |______________________| 
 ```
+
+**WET workflows are:**
+- **🔍 Observable**: See exactly what's happening at every step
+- **🔧 Customizable**: Modify workflows without breaking abstractions
+- **🤖 AI-Friendly**: Clear code that AI assistants can easily understand and maintain
+- **🚀 Future-Proof**: Built on durable web standards that won't become obsolete
 <!-- END_ASCII_ART: why-wet-works-now -->
 
 **WET workflows are:**

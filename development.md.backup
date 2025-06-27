@@ -21,10 +21,6 @@ Notebooks as just ***notebooks*** because Google Colab. Pipulate is like
 notebooks but without the Python code. The main audience is SEO practitioners
 upping their game in the age of AI.
 
-### Run All Cells
-
-**The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model - each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
-
 <!-- START_ASCII_ART: run-all-cells-pattern -->
 ### Run All Cells Pattern  <!-- key: run-all-cells-pattern -->
 
@@ -64,7 +60,7 @@ Understanding your audience is crucial for effective development. Pipulate serve
 <!-- START_ASCII_ART: target-audience -->
 ## Chef or Customer?  <!-- key: target-audience -->
 
-Are you a Developer or an End User? Chef or Customer? Understanding your audience is crucial for effective development. Pipulate serves two distinct but complementary audiences, much like a restaurant serves both chefs and customers
+Pipulate serves two distinct but complementary audiences, much like a restaurant serves both chefs and customers
 
 ```
     ┌──────────────────────────────────────────────────────────┐
@@ -170,7 +166,7 @@ for both you the human and your AI coding assistants who can grep your
 output in the terminal. KNOW EVERYTHING!
 
 <!-- START_ASCII_ART: core-concepts-internal-components -->
-## Internal Components  <!-- key: core-concepts-internal-components -->
+## Core Concepts & Internal Components  <!-- key: core-concepts-internal-components -->
 
 * **Monitoring:** A file system watchdog monitors code changes. Valid changes trigger an automatic, monitored server restart via Uvicorn, facilitating live development.
 
@@ -209,20 +205,25 @@ Your terminal becomes home to a rich cast of personalities:
 The console doesn't just print text - it **paints experiences**:
 
 <!-- START_ASCII_ART: pipulate-welcome-banner -->
-### Meet Chip O'Theseus  <!-- key: pipulate-welcome-banner -->
+### Welcome to Pipulate  <!-- key: pipulate-welcome-banner -->
 
 ```
-╔═════════════════════════════════════════════════════════════════════════╗  Chip O'What?
-║  🎭 PIPULATE: LOCAL-FIRST AI SEO SOFTWARE & DIGITAL WORKSHOP            ║     ,       O  
-║  ────────────────────────────────────────────────────────────────────── ║     \\  .  O
-║                                                                         ║     |\\/| o
-║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"  ║     / " '\ 
-║                                                                         ║    . .   . 
-║  🌟 Where Python functions become HTML elements...                      ║   /    ) | 
-║  🌟 Where workflows preserve your creative process...                   ║  '  _.'  |   
-║  🌟 Where AI assists without cloud dependencies...                      ║  '-'/    \  
-╚═════════════════════════════════════════════════════════════════════════╝  
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  🎭 PIPULATE: LOCAL-FIRST DIGITAL WORKSHOP                                   ║  
+║  ─────────────────────────────────────────────────────────────────────────── ║
+║                                                                              ║
+║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"       ║
+║                                                                              ║
+║  🌟 Where Python functions become HTML elements...                           ║
+║  🌟 Where workflows preserve your creative process...                        ║  
+║  🌟 Where AI assists without cloud dependencies...                           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 ```
+<!-- END_ASCII_ART: pipulate-welcome-banner -->
+<!-- END_ASCII_ART: pipulate-welcome-banner -->
+<!-- END_ASCII_ART: pipulate-welcome-banner -->
+<!-- END_ASCII_ART: pipulate-welcome-banner -->
+<!-- END_ASCII_ART: pipulate-welcome-banner -->
 <!-- END_ASCII_ART: pipulate-welcome-banner -->
 
 #### 🎓 Educational Narratives in Real-Time
@@ -238,6 +239,11 @@ Instead of cryptic error messages, you get **contextual stories**:
 
 Every operation becomes a **visual story**:
 
+<!-- START_ASCII_ART: pipeline-state-inspector -->
+### Pipeline State Inspector & MCP Tools  <!-- key: pipeline-state-inspector -->
+
+The system provides comprehensive debugging and state inspection capabilities through MCP tools and real-time monitoring
+
 ```
 📊 PIPELINE STATE INSPECTOR
 ├─── 🔍 Discovering active workflows...
@@ -251,6 +257,12 @@ Every operation becomes a **visual story**:
 ├─── 📊 Fetching schema (4,449 fields discovered!)
 └─── 💾 Caching results for lightning-fast access
 ```
+<!-- END_ASCII_ART: pipeline-state-inspector -->
+<!-- END_ASCII_ART: pipeline-state-inspector -->
+<!-- END_ASCII_ART: pipeline-state-inspector -->
+<!-- END_ASCII_ART: pipeline-state-inspector -->
+<!-- END_ASCII_ART: pipeline-state-inspector -->
+<!-- END_ASCII_ART: pipeline-state-inspector -->
 
 #### 🚀 Why This Matters for Developers
 
@@ -290,7 +302,7 @@ forthcoming.
 <!-- START_ASCII_ART: integrated-data-science-environment -->
 ### Integrated Data Science Environment  <!-- key: integrated-data-science-environment -->
 
-Jupyter Notebooks run alongside the FastHTML server, allowing developers to prototype workflows in a familiar environment before porting them to Pipulate's step-based interface for end-users. The same Python virtual environment (`.venv`) is shared, and ad-hoc package installation is supported. If you're using Cursor, VSCode or Windsurf, set your `Ctrl`+`Shift`+`P` "Python: Set Interpreter" to "Enter Interpreter Path" `./pipulate/.venv/bin/python`. You might have to adjust based on the folder you use as your workspace. But then you'll have a Python environment unified between Cursor, JupyterLab and Pipulate.
+Jupyter Notebooks run alongside the FastHTML server, allowing developers to prototype workflows in a familiar environment before porting them to Pipulate's step-based interface for end-users. The same Python virtual environment (`.venv`) is shared, and ad-hoc package installation is supported.
 
 ```
       ┌──────────────────┐    ┌──────────────────┐
@@ -700,6 +712,25 @@ The application interface is organized into distinct areas
                │               │             │
                └─────────────────────────────┘
 ```
+
+UI Component Hierarchy (Click to Expand)
+
+```
+home (Root Component)
+    |
+    +-- create_outer_container
+        |
+        +-- create_nav_group
+        |   |
+        |   +-- create_nav_menu
+        |       |
+        |       +-- create_profile_menu
+        |       +-- create_app_menu
+        |
+        +-- create_grid_left
+            |
+        +-- create_notebook_interface (Displays steps/cells)
+```
 <!-- END_ASCII_ART: ui-layout -->
 
 ### Interface Components
@@ -751,6 +782,11 @@ The system performs git pulls:
 
 The following diagram illustrates how the magic cookie system works to bootstrap, transform, and update a Pipulate installation without requiring git at the start:
 
+<!-- START_ASCII_ART: installation-process-diagram -->
+### Installation Process Deep Dive  <!-- key: installation-process-diagram -->
+
+Here's what happens behind the scenes during the "magic cookie" installation
+
 ```
 User runs install.sh (via curl)           Nix Flake Activation & Transformation
 ┌──────────────────────────────┐         ┌────────────────────────────────────────────┐
@@ -766,6 +802,31 @@ User runs install.sh (via curl)           Nix Flake Activation & Transformation
       │ Result: Fully functional, auto-updating, git-based Pipulate installation    │
       └─────────────────────────────────────────────────────────────────────────────┘
 ```
+<!-- END_ASCII_ART: installation-process-diagram -->
+
+**4. Run It Again!**
+
+1. You can just forcibly exit out of that Terminal it's running from.
+2. Open a new Terminal, and once again:
+
+```bash
+cd ~/Botifython
+nix develop
+```
+
+**5. The Big Reset (If Necessary)**
+
+Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
+
+```bash
+rm -rf ~/Botifython
+curl -L https://pipulate.com/install.sh | sh -s Botifython
+cd ~/Botifython
+nix develop
+```
+
+Wait for ***BOTH TABS*** to auto-open in your browser.
+<!-- END_ASCII_ART: installation-process-diagram -->
 
 **Legend:**
 - Steps 1–4: Performed by the install.sh script (no git required)

@@ -41,6 +41,10 @@ Pipulate is a local-first, step-based workflow system for SEO and data automatio
 The Architecture section provides a deep dive into how Pipulate is built and how it works:
 
 <!-- START_ASCII_ART: architecture-overview-diagram -->
+### Architecture Overview Diagram  <!-- key: architecture-overview-diagram -->
+
+This diagram illustrates the high-level components and their interactions
+
 ```
                  ┌─────────────┐ Like Electron, but full Linux subsystem 
                  │   Browser   │ in a folder for macOS and Windows (WSL)
@@ -59,6 +63,8 @@ The Architecture section provides a deep dive into how Pipulate is built and how
     │    └───────────┘     └────────────┘   │
     └───────────────────────────────────────┘
 ```
+
+This complete, self-contained environment runs identically on any operating system, providing the foundation for all Pipulate workflows and AI interactions.
 <!-- END_ASCII_ART: architecture-overview-diagram -->
 
 - **Core Components**
