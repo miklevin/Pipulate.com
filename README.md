@@ -65,11 +65,6 @@ Pipulate is a **local-first, single-tenant desktop app framework** featuring AI-
 
 ### Desktop App Architecture: Electron vs Pipulate  <!-- key: desktop-app-architecture-comparison -->
 
-<!-- START_ASCII_ART: desktop-app-architecture-comparison -->
-### Desktop App Architecture: Electron vs Pipulate  <!-- key: desktop-app-architecture-comparison -->
-
-<!-- START_ASCII_ART: desktop-app-architecture-comparison -->
-
 ```
         🖥️ ELECTRON PATTERN                 🌐 PIPULATE PATTERN
       ═══════════════════════             ═══════════════════════
@@ -113,9 +108,6 @@ Pipulate is a **local-first, single-tenant desktop app framework** featuring AI-
                                         ✅ Complete reproducibility
 ```
 
-<!-- END_ASCII_ART: desktop-app-architecture-comparison -->
-<!-- END_ASCII_ART: desktop-app-architecture-comparison -->
-
 ### The Magnum Opus: Computing Sovereignty  <!-- key: magnum-opus-computing-sovereignty -->
 
 This isn't just another framework — it's a **deliberate culmination** of decades of tech evolution insights. Pipulate represents the "third act" approach to development (3rd time's the charm): choosing the **most durable and lovable** parts of the modern tech stack while rejecting the exhausting hamster wheel of framework churn.
@@ -125,11 +117,6 @@ If you are not an Empire builder and prefer craftsmanship over the rat race and 
 ### Core Philosophy: Local-First, WET, and AI-Augmented
 
 #### Breaking Free: From Framework Churn to Computing Sovereignty  <!-- key: breaking-free-framework-churn -->
-
-<!-- START_ASCII_ART: breaking-free-framework-churn -->
-#### Breaking Free: From Framework Churn to Computing Sovereignty  <!-- key: breaking-free-framework-churn -->
-
-<!-- START_ASCII_ART: breaking-free-framework-churn -->
 
 ```
 🎡 THE HAMSTER WHEEL OF FRAMEWORK CHURN        🏰 COMPUTING SOVEREIGNTY
@@ -157,17 +144,6 @@ If you are not an Empire builder and prefer craftsmanship over the rat race and 
          │  Sovereign  │                       🔧 Full Control
          └─────────────┘                       ♾️ Built to Last
 ```
-
-<!-- END_ASCII_ART: breaking-free-framework-churn -->
-
-- **Local-First & Single-Tenant:** Your data, code, and AI run on your hardware. This guarantees privacy, eliminates cloud costs, and gives you full control.
-- **WET Workflows, DRY Framework:** Workflows are intentionally "WET" (explicit & step-by-step) for maximum clarity and customizability—perfectly mirroring Jupyter Notebooks. The underlying framework is "DRY" for efficiency.
-
-- **The AI Advantage:** AI makes WET practical. Tedious code maintenance and refactoring, once a weakness of WET, is now an area where AI excels, turning repetition into a strength for rapid, context-aware development.
-- **Simplicity & Observability ("Know EVERYTHING!"):** We reject opaque enterprise patterns. State is managed in transparent SQLite tables and JSON blobs, making the entire system intuitive and debuggable.
-- **Reproducibility with Nix:** Nix Flakes provide a perfect, reproducible Linux environment on macOS, Linux, and Windows (WSL), solving the "works on my machine" problem.
-- **Future-Proof Stack:** We rely on durable standards: Python, SQLite, HTML, and HTMX. This is a framework built to last.
-<!-- END_ASCII_ART: breaking-free-framework-churn -->
 
 - **Local-First & Single-Tenant:** Your data, code, and AI run on your hardware. This guarantees privacy, eliminates cloud costs, and gives you full control.
 - **WET Workflows, DRY Framework:** Workflows are intentionally "WET" (explicit & step-by-step) for maximum clarity and customizability—perfectly mirroring Jupyter Notebooks. The underlying framework is "DRY" for efficiency.
@@ -214,11 +190,6 @@ Pipulate integrates a carefully selected set of tools aligned with its philosoph
 
 ### The New LAMP Stack: Evolution in Simplicity  <!-- key: new-lamp-stack-comparison -->
 
-<!-- START_ASCII_ART: new-lamp-stack-comparison -->
-### The New LAMP Stack: Evolution in Simplicity  <!-- key: new-lamp-stack-comparison -->
-
-<!-- START_ASCII_ART: new-lamp-stack-comparison -->
-
 ```
 🏛️ ORIGINAL LAMP STACK (2000s)              🚀 NEW LAMP STACK (2025)
 ═══════════════════════════════              ═══════════════════════════
@@ -252,20 +223,6 @@ Pipulate integrates a carefully selected set of tools aligned with its philosoph
     🎯 One person understands                  🎯 One person controls
        part of the system                         the entire system
 ```
-
-<!-- END_ASCII_ART: new-lamp-stack-comparison -->
-
-The original LAMP stack was beautiful in its simplicity - one person could understand and manage the whole stack. But it got bloated with enterprise patterns, microservices, and distributed complexity.
-
-Pipulate brings back that **"one person, full stack"** philosophy with modern tools:
-
-- **L**inux + **N**ix: Reproducible environments across all platforms
-- **A**SGI: Modern async server interface, future-proofed for performance  
-- **M**iniDataAPI: Universal SQL simplifier close to Python's core data structures
-- **P**ython + FastHTML + HTMX: The new web development paradigm
-
-This isn't just simpler - it's more powerful, giving you complete environment reproducibility, local AI integration, server-side state management, and future-proofed skills.
-<!-- END_ASCII_ART: new-lamp-stack-comparison -->
 
 The original LAMP stack was beautiful in its simplicity - one person could understand and manage the whole stack. But it got bloated with enterprise patterns, microservices, and distributed complexity.
 
@@ -868,11 +825,6 @@ home (Root Component)
 
 ### 1. The Auto-Key Generation Pattern (MOST CRITICAL)  <!-- key: auto-key-generation-pattern -->
 
-<!-- START_ASCII_ART: auto-key-generation-pattern -->
-### 1. The Auto-Key Generation Pattern (MOST CRITICAL)  <!-- key: auto-key-generation-pattern -->
-
-<!-- START_ASCII_ART: auto-key-generation-pattern -->
-
 ```
 📝 AUTO-KEY GENERATION FLOW
 ┌─────────────┐    POST     ┌─────────────┐    HX-Refresh   ┌─────────────┐
@@ -886,24 +838,6 @@ home (Root Component)
 │ Enter Again │    Ready!    │ Populated   │    Generates   │   Method    │
 └─────────────┘              └─────────────┘                └─────────────┘
 ```
-
-<!-- END_ASCII_ART: auto-key-generation-pattern -->
-
-When a user hits Enter on an empty key field, this specific sequence occurs:
-
-1. **Form Submission**: POSTs to `/{APP_NAME}/init` with empty `pipeline_id`
-2. **Server Response**: The `init` method MUST return an `HX-Refresh` response:
-   ```python
-   if not user_input:
-       from starlette.responses import Response
-       response = Response('')
-       response.headers['HX-Refresh'] = 'true'
-       return response
-   ```
-3. **Page Reload**: HTMX triggers a full page reload
-4. **Auto-Key Population**: The `landing()` method calls `pip.generate_pipeline_key(self)` to populate the input field
-5. **User Interaction**: User hits Enter again to start the workflow
-<!-- END_ASCII_ART: auto-key-generation-pattern -->
 
 When a user hits Enter on an empty key field, this specific sequence occurs:
 
@@ -953,11 +887,6 @@ The `run_all_cells()` method encapsulates the workflow initialization pattern an
 
 ### 3. APP_NAME vs. Filename Distinction  <!-- key: app-name-vs-filename -->
 
-<!-- START_ASCII_ART: app-name-vs-filename -->
-### 3. APP_NAME vs. Filename Distinction  <!-- key: app-name-vs-filename -->
-
-<!-- START_ASCII_ART: app-name-vs-filename -->
-
 ```
 📂 FILENAME vs APP_NAME DISTINCTION
 ┌─────────────────────────────────────────────────────────────┐
@@ -977,14 +906,6 @@ The `run_all_cells()` method encapsulates the workflow initialization pattern an
 └─────────────────────────────────────────────────────────────┘
 ```
 
-<!-- END_ASCII_ART: app-name-vs-filename -->
-
-**Critical for data integrity:**
-
-* **Filename** (e.g., `200_workflow_genesis.py`): Determines public URL endpoint and menu ordering
-* **APP_NAME Constant** (e.g., `APP_NAME = "workflow_genesis_internal"`): Internal identifier that MUST REMAIN STABLE
-<!-- END_ASCII_ART: app-name-vs-filename -->
-
 **Critical for data integrity:**
 
 * **Filename** (e.g., `200_workflow_genesis.py`): Determines public URL endpoint and menu ordering
@@ -997,11 +918,6 @@ The `run_all_cells()` method encapsulates the workflow initialization pattern an
 * All state changes are transparent and observable
 
 ### 5. Plugin Discovery System  <!-- key: plugin-discovery-system -->
-
-<!-- START_ASCII_ART: plugin-discovery-system -->
-### 5. Plugin Discovery System  <!-- key: plugin-discovery-system -->
-
-<!-- START_ASCII_ART: plugin-discovery-system -->
 
 ```
 📁 PLUGIN DISCOVERY SYSTEM
@@ -1019,14 +935,6 @@ plugins/
     🔧 Must have: landing() method + name attributes
     💉 Auto dependency injection via __init__ signature
 ```
-
-<!-- END_ASCII_ART: plugin-discovery-system -->
-
-* Files in `plugins/` directory are auto-discovered
-* Numeric prefixes control menu ordering
-* Classes must have `landing` method and name attributes
-* Automatic dependency injection based on `__init__` signature
-<!-- END_ASCII_ART: plugin-discovery-system -->
 
 * Files in `plugins/` directory are auto-discovered
 * Numeric prefixes control menu ordering
@@ -1053,11 +961,6 @@ python splice_workflow_step.py workflow.py --position bottom
 ```
 
 ### Template System  <!-- key: workflow-template-system -->
-
-<!-- START_ASCII_ART: workflow-template-system -->
-### Template System  <!-- key: workflow-template-system -->
-
-<!-- START_ASCII_ART: workflow-template-system -->
 
 ```
 🏗️ WORKFLOW TEMPLATE SYSTEM
@@ -1089,23 +992,11 @@ create_workflow.py               │ └──────┬──────�
                                  --template trifecta
 ```
 
-<!-- END_ASCII_ART: workflow-template-system -->
-
-* `blank`: Minimal workflow with one step
-* `trifecta`: Three-step workflow pattern
-* Automatic method generation and insertion
-<!-- END_ASCII_ART: workflow-template-system -->
-
 * `blank`: Minimal workflow with one step
 * `trifecta`: Three-step workflow pattern
 * Automatic method generation and insertion
 
 ## Common LLM Implementation Mistakes  <!-- key: llm-implementation-mistakes -->
-
-<!-- START_ASCII_ART: llm-implementation-mistakes -->
-## Common LLM Implementation Mistakes  <!-- key: llm-implementation-mistakes -->
-
-<!-- START_ASCII_ART: llm-implementation-mistakes -->
 
 ```
 🚨 LLM IMPLEMENTATION MISTAKE PREVENTION
@@ -1126,19 +1017,6 @@ create_workflow.py               │ └──────┬──────�
 │    (Data Orphaning)        │     deployment                │
 └────────────────────────────────────────────────────────────┘
 ```
-
-<!-- END_ASCII_ART: llm-implementation-mistakes -->
-
-**LLMs frequently make these errors:**
-
-1. **Missing HX-Refresh Response**: Forgetting to return the refresh response for empty keys
-2. **Incorrect Key Generation**: Not using `pip.generate_pipeline_key(self)` properly
-3. **Missing Cursor Positioning**: Forgetting the `_onfocus` attribute for user experience
-4. **Wrong Route Handling**: Not understanding the difference between landing page and init routes
-5. **State Inconsistency**: Not properly handling the key generation and storage flow
-6. **APP_NAME Changes**: Modifying APP_NAME after deployment, orphaning existing data
-7. **Chain Reaction Breaks**: Not properly implementing the HTMX step progression pattern
-<!-- END_ASCII_ART: llm-implementation-mistakes -->
 
 **LLMs frequently make these errors:**
 
