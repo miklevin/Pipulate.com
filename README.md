@@ -1,6 +1,6 @@
 # Pipulate: Local First AI SEO Software
 
-![Pipulate Free & Open Source SEO with & for LLMs](/static/ai-seo-software.svg)
+![Pipulate Free & Open Source SEO with & for LLMs](https://github.com/miklevin/pipulate/raw/main/static/ai-seo-software.svg)
 
 <!-- Don't forget to sync_ascii_art.py -->
 > **Your data. Your AI. Your machine. Your control.**  
@@ -134,15 +134,15 @@ If you are not an Empire builder and prefer craftsmanship over the rat race and 
     📈 Growing Complexity                       • HTML/HTTP (timeless)
     ⏰ Always Catching Up                       • Nix (reproducible)
                                                 • Local AI (private)
-         VS.
+              VS.
                                                🎯 Third Act Philosophy:
     🏃‍♂️ JUMP OFF THE WHEEL                       "Choose tools that will
-                ↓                               outlast the frameworks"
-         ┌─────────────┐                       
-         │  PIPULATE   │                       💤 Sleep Well
-         │ Local-First │                       🧘 Own Schedule  
-         │  Sovereign  │                       🔧 Full Control
-         └─────────────┘                       ♾️ Built to Last
+               ↓                                 outlast the frameworks"
+        ┌─────────────┐                         
+        │  PIPULATE   │                         💤 Sleep Well
+        │ Local-First │                         🧘 Own Schedule  
+        │  Sovereign  │                         🔧 Full Control
+        └─────────────┘                         ♾️ Built to Last
 ```
 
 - **Local-First & Single-Tenant:** Your data, code, and AI run on your hardware. This guarantees privacy, eliminates cloud costs, and gives you full control.
@@ -1141,9 +1141,45 @@ git mv workflows/xx_my_flow.py workflows/##_my_flow.py
 git commit -m "Feat: Promote workflow xx_my_flow.py to ##_my_flow.py"
 ```
 
------
+--------------------------------------------------------------------------------
 
-## Roadmap
+## About This README: Single Source of Truth Documentation  <!-- key: about-this-readme -->
+
+This README serves as the **upstream source of truth** for all Pipulate documentation across GitHub, Pipulate.com, and the built-in app documentation. Changes made here automatically cascade to all other documentation surfaces.
+
+### The ASCII Art Synchronization System
+
+```
+🌊 THE UPSTREAM TRUTH CASCADE
+═══════════════════════════════════════════════════════════════
+     
+     📜 Source Code Reality (The Ultimate Truth)
+                         │
+                         ▼
+     📄 README.md (Single Source of Truth)
+                 ├─ ASCII Art Blocks (Visual Truth)
+                 ├─ HTML Comment Keys (Metadata)
+                 └─ 80-Hyphen Pagination (Structure)
+                         │
+          ┌──────────────┼──────────────────┐
+          ▼              ▼                  ▼
+   🌐 GitHub Page  📚 Pipulate.com  🔧 Built-in Docs
+   (Auto-display)  (Jekyll Build)   (Live Integration)
+          │              │                  │
+          ▼              ▼                  ▼
+   📊 Screenshots     🎬 Demos           🧪 Tests
+     (Future)         (Future)           (Future)
+```
+
+**How it works:**
+- **ASCII Art Blocks**: Visual diagrams are automatically extracted and distributed to other documentation files
+- **HTML Comment Keys**: Headlines marked with `<!-- key: identifier -->` serve as reference anchors  
+- **80-Hyphen Pagination**: Section dividers enable automatic document structuring
+- **Automatic Synchronization**: Running `python helpers/docs_sync/sync_ascii_art.py` updates all documentation
+
+This creates **"ASCII art peer pressure"** - when visual diagrams change, they compel surrounding text to be updated for consistency, ensuring documentation accuracy across the entire ecosystem.
+
+### Roadmap
 
 **Core & Workflow Enhancements:**
 
@@ -1205,7 +1241,7 @@ Contributions are welcome\! Please adhere to the project's core philosophy:
   * Preserve the Workflow Pipeline Pattern (Keep steps linear, state explicit).
   * Honor Integrated Features (Don't disrupt core LLM/Jupyter integration unless enhancing local goals).
 
------
+---
 
 ## License
 
