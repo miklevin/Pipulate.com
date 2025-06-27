@@ -20,14 +20,14 @@ Ask an AI to do something in *Agentic Mode* and it's going to go off half-cocked
 
 **The Pipulate Solution:** Local AI guided by domain expert workflows, keeping your intelligence sovereign.
 
-Agentic Mode is like a box of chocolates — you never know what you're gonna get. Ask an AI to do something in *Agentic Mode* and it's going to go off and do whatever it thinks is right until done. But what if there were a domain expert in the picture who sets everything up ahead of time ensuring proper AI coralling and wrangling? 
+Agentic Mode is like a box of chocolates — you never know what you're gonna get. Ask an AI to do something in *Agentic Mode* and it's going to go off and do whatever it thinks is right until done. But what if there were a domain expert in the picture who sets everything up ahead of time ensuring proper AI coralling and wrangling?
 
 **Put AIs on Rails with Pipulate:** Rigid linear workflows prepared by domain experts, leveraging local AI without training frontier models. Your secret recipes stay secret, your data stays yours, and your AI grows with you on your own hardware.
 
 ```
       🤖 AGENTIC MODE (Chaos)           🚂 AI ON RAILS (Pipulate)
       ═══════════════════════           ══════════════════════════
-      
+
           💥 GOES OFF                      📊 LINEAR WORKFLOWS
           HALF-COCKED!                      BY DOMAIN EXPERTS
                │                                   │
@@ -44,7 +44,7 @@ Agentic Mode is like a box of chocolates — you never know what you're gonna ge
 ```
 
 1. 🖥️ **Runs locally** like a desktop app using modern web technologies
-2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity  
+2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity
 3. 📓 **Transforms Jupyter Notebooks** into production-ready, step-by-step workflows
 4. 🤖 **Integrated AI assistance** using your own local models with complete privacy
 5. 🔧 **Reproducible environments** with Nix that work identically across all platforms
@@ -128,7 +128,7 @@ Pipulate is a free, open-source SEO desktop application that runs entirely on yo
 This diagram illustrates the high-level components and their interactions
 
 ```
-                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 ┌─────────────┐ Like Electron, but full Linux subsystem
                  │   Browser   │ in a folder for macOS and Windows (WSL)
                  └─────┬───────┘
                        │ HTTP/WS
@@ -137,7 +137,7 @@ This diagram illustrates the high-level components and their interactions
     │           Nix Flake Shell             │ - In-app LLM (where it belongs)
     │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
     │  │   FastHTML    │  │    Ollama    │  │ - 100% local
-    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS
     │  └───────┬───────┘  └──────────────┘  │
     │          │                            │
     │    ┌─────▼─────┐     ┌────────────┐   │

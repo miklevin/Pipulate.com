@@ -51,7 +51,7 @@ Traditional development has been trapped in cloud-first thinking, but the future
 Traditional development follows DRY principles, creating abstract, complex systems that are hard to understand and modify. But the world has changed:
 
 1. **🔬 Jupyter Notebooks** promote explicit, literate programming
-2. **🤖 AI assistants** excel at managing repetitive code  
+2. **🤖 AI assistants** excel at managing repetitive code
 3. **🏠 Local-first architectures** prioritize clarity over enterprise complexity
 4. **🎯 Right Granularity**: WET provides the perfect abstraction level for human AND AI comprehension
 
@@ -61,9 +61,9 @@ Traditional development follows DRY principles, creating abstract, complex syste
    - Linear Workflows        |  It runs proprietary private AI  |
    - Local & Cloud-free      |  Workflows from your Local PC?!  |
    - Chip O'Theseus included  \________________________________/
-                                                              ()   
+                                                              ()
         HARDWARE PLATFORM             LOCAL BROWSER             O   , Chip O'Theseus
-     _______________________       __________ _______             o \\  . 
+     _______________________       __________ _______             o \\  .
     |                       |     / Pipulate \Jupyter\__            |\\/|
     | Windows, Mac or Linux |    |  __________________  |   See!    / " '\ - Radical transparency
     |     _____ ___         |    | | App Name   Menu⚙️| |<- - - - -. .   . - MCP tool-call control
@@ -73,7 +73,7 @@ Traditional development follows DRY principles, creating abstract, complex syste
     |__|  localhost:5001  |_|    | | -Step #2 | Chat  | |      What, no Docker?
        |  (AI on Rails🚂) |      | | -Step #3 | Help▸ | |      What, no React?
        |__________________|      | |__________|_______| |      What, no Cloud?
-                                 |______________________| 
+                                 |______________________|
 ```
 
 **WET workflows are:**

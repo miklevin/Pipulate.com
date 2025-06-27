@@ -46,7 +46,7 @@ The Architecture section provides a deep dive into how Pipulate is built and how
 This diagram illustrates the high-level components and their interactions
 
 ```
-                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 ┌─────────────┐ Like Electron, but full Linux subsystem
                  │   Browser   │ in a folder for macOS and Windows (WSL)
                  └─────┬───────┘
                        │ HTTP/WS
@@ -55,7 +55,7 @@ This diagram illustrates the high-level components and their interactions
     │           Nix Flake Shell             │ - In-app LLM (where it belongs)
     │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
     │  │   FastHTML    │  │    Ollama    │  │ - 100% local
-    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS
     │  └───────┬───────┘  └──────────────┘  │
     │          │                            │
     │    ┌─────▼─────┐     ┌────────────┐   │

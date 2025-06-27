@@ -33,21 +33,21 @@ upping their game in the age of AI.
 ```
     📓 JUPYTER NOTEBOOK               🌐 PIPULATE WORKFLOW
     ═══════════════════               ══════════════════════
-    
+
     [ ] Cell 1: Import data          ┌─────────────────────┐
-        │                            │  Step 1: Data Input │ 
+        │                            │  Step 1: Data Input │
         ▼                            └──────────┬──────────┘
     [▶] Cell 2: Process data                    │ hx_trigger="load"
         │                                       ▼
         ▼                            ┌─────────────────────┐
     [ ] Cell 3: Generate report      │ Step 2: Processing  │
         │                            └──────────┬──────────┘
-        ▼                                       │ hx_trigger="load"  
+        ▼                                       │ hx_trigger="load"
     [ ] Cell 4: Export results                  ▼
                                      ┌─────────────────────┐
     🎯 "Run All Cells" Button   ═══► │ Step 3: Export      │
        Executes top-to-bottom        └─────────────────────┘
-       
+
        Same mental model, same execution flow!
        But with persistent state and web UI.
 ```
@@ -112,7 +112,7 @@ The revolution isn't just another framework - it's eliminating the template laye
 ```
     🍶 FLASK ERA              🚀 FASTAPI ERA            🌐 FASTHTML ERA
     ═══════════════           ═══════════════           ══════════════════
-    
+
     ┌─────────────┐           ┌─────────────┐           ┌─────────────┐
     │   Python    │           │   Python    │           │   Python    │
     │  Functions  │           │  Functions  │           │  Functions  │
@@ -134,7 +134,7 @@ The revolution isn't just another framework - it's eliminating the template laye
     🌐 Full Page Reload     📱 Frontend Framework      🎯 DOM Element Updates
                                (React/Vue/Angular)        def Div() = <div>
                                                           def Button() = <button>
-                                                         
+
     Template files needed    JSON ↔ HTML conversion     Python functions ARE
     Separate languages       Client-side complexity     the template language!
 ```
@@ -213,15 +213,15 @@ The console doesn't just print text - it **paints experiences**:
 
 ```
 ╔═════════════════════════════════════════════════════════════════════════╗  Chip O'What?
-║  🎭 PIPULATE: LOCAL-FIRST AI SEO SOFTWARE & DIGITAL WORKSHOP            ║     ,       O  
+║  🎭 PIPULATE: LOCAL-FIRST AI SEO SOFTWARE & DIGITAL WORKSHOP            ║     ,       O
 ║  ────────────────────────────────────────────────────────────────────── ║     \\  .  O
 ║                                                                         ║     |\\/| o
-║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"  ║     / " '\ 
-║                                                                         ║    . .   . 
-║  🌟 Where Python functions become HTML elements...                      ║   /    ) | 
-║  🌟 Where workflows preserve your creative process...                   ║  '  _.'  |   
-║  🌟 Where AI assists without cloud dependencies...                      ║  '-'/    \  
-╚═════════════════════════════════════════════════════════════════════════╝  
+║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"  ║     / " '\
+║                                                                         ║    . .   .
+║  🌟 Where Python functions become HTML elements...                      ║   /    ) |
+║  🌟 Where workflows preserve your creative process...                   ║  '  _.'  |
+║  🌟 Where AI assists without cloud dependencies...                      ║  '-'/    \
+╚═════════════════════════════════════════════════════════════════════════╝
 ```
 <!-- END_ASCII_ART: pipulate-welcome-banner -->
 
@@ -696,7 +696,7 @@ The application interface is organized into distinct areas
                ├───────────────┬─────────────┤    Apps, Settings
                │               │             │
     Workflow, ──►   Main Area  │    Chat     │
-    App UI     │   (Pipeline)  │  Interface ◄── LLM Interaction 
+    App UI     │   (Pipeline)  │  Interface ◄── LLM Interaction
                │               │             │
                └─────────────────────────────┘
 ```

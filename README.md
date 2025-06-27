@@ -1,24 +1,24 @@
 # Pipulate: Local First AI SEO Software
 
-![Pipulate Free & Open Source SEO with & for LLMs](https://github.com/miklevin/pipulate/raw/main/static/ai-seo-software.svg)
+![Pipulate Free & Open Source SEO with & for LLMs](https://github.com/miklevin/pipulate/raw/main/static/ai-seo-software.png)
 
 <!-- Don't forget to sync_ascii_art.py -->
 > **Your data. Your AI. Your machine. Your control.**  
-> No subscriptions, no vendor lock-in, no cloud costs.
+> No subscriptions, no vendor lock-in, no cloud costs.  
 
 ### Meet Chip O'Theseus  <!-- key: pipulate-welcome-banner -->
 
 ```
 ╔═════════════════════════════════════════════════════════════════════════╗  Chip O'What?
-║  🎭 PIPULATE: LOCAL-FIRST AI SEO SOFTWARE & DIGITAL WORKSHOP            ║     ,       O  
+║  🎭 PIPULATE: LOCAL-FIRST AI SEO SOFTWARE & DIGITAL WORKSHOP            ║     ,       O
 ║  ────────────────────────────────────────────────────────────────────── ║     \\  .  O
 ║                                                                         ║     |\\/| o
-║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"  ║     / " '\ 
-║                                                                         ║    . .   . 
-║  🌟 Where Python functions become HTML elements...                      ║   /    ) | 
-║  🌟 Where workflows preserve your creative process...                   ║  '  _.'  |   
-║  🌟 Where AI assists without cloud dependencies...                      ║  '-'/    \  
-╚═════════════════════════════════════════════════════════════════════════╝  
+║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"  ║     / " '\
+║                                                                         ║    . .   .
+║  🌟 Where Python functions become HTML elements...                      ║   /    ) |
+║  🌟 Where workflows preserve your creative process...                   ║  '  _.'  |
+║  🌟 Where AI assists without cloud dependencies...                      ║  '-'/    \
+╚═════════════════════════════════════════════════════════════════════════╝
 ```
 
 ## AI On Rails: The Answer to Agentic Mode  <!-- key: about-pipulate -->
@@ -27,14 +27,14 @@
 
 **The Pipulate Solution:** Local AI guided by domain expert workflows, keeping your intelligence sovereign.
 
-Agentic Mode is like a box of chocolates — you never know what you're gonna get. Ask an AI to do something in *Agentic Mode* and it's going to go off and do whatever it thinks is right until done. But what if there were a domain expert in the picture who sets everything up ahead of time ensuring proper AI coralling and wrangling? 
+Agentic Mode is like a box of chocolates — you never know what you're gonna get. Ask an AI to do something in *Agentic Mode* and it's going to go off and do whatever it thinks is right until done. But what if there were a domain expert in the picture who sets everything up ahead of time ensuring proper AI coralling and wrangling?
 
 **Put AIs on Rails with Pipulate:** Rigid linear workflows prepared by domain experts, leveraging local AI without training frontier models. Your secret recipes stay secret, your data stays yours, and your AI grows with you on your own hardware.
 
 ```
       🤖 AGENTIC MODE (Chaos)           🚂 AI ON RAILS (Pipulate)
       ═══════════════════════           ══════════════════════════
-      
+
           💥 GOES OFF                      📊 LINEAR WORKFLOWS
           HALF-COCKED!                      BY DOMAIN EXPERTS
                │                                   │
@@ -51,7 +51,7 @@ Agentic Mode is like a box of chocolates — you never know what you're gonna ge
 ```
 
 1. 🖥️ **Runs locally** like a desktop app using modern web technologies
-2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity  
+2. 🐍 **Simple linear workflow** approach powered by HTMX for seamless interactivity
 3. 📓 **Transforms Jupyter Notebooks** into production-ready, step-by-step workflows
 4. 🤖 **Integrated AI assistance** using your own local models with complete privacy
 5. 🔧 **Reproducible environments** with Nix that work identically across all platforms
@@ -68,7 +68,7 @@ Pipulate is a **local-first, single-tenant desktop app framework** featuring AI-
 ```
         🖥️ ELECTRON PATTERN                 🌐 PIPULATE PATTERN
       ═══════════════════════             ═══════════════════════
-    
+
     ┌─────────────────────────┐        ┌─────────────────────────┐
     │      ELECTRON APP       │        │     PIPULATE SETUP      │
     ├─────────────────────────┤        ├─────────────────────────┤
@@ -83,11 +83,11 @@ Pipulate is a **local-first, single-tenant desktop app framework** featuring AI-
     │   📱 Native Window      │        │ 🖥️ Terminal Console     │    ,       O
     │  ┌─────────────────┐    │        │ ┌─────────────────────┐ │    \\  .  O
     │  │  Web Browser    │    │        │ │ nix develop         │ │    |\\/| o
-    │  │  (Bundled)      │    │        │ │ Starting servers... │ │    / " '\ 
-    │  │  ┌───────────┐  │    │        │ │ ✓ JupyterLab ready  │ │   . .   . 
-    │  │  │           │  │    │        │ │ ✓ Pipulate ready    │ │  /    ) | 
-    │  │  │   HTML    │  │    │        │ └─────────────────────┘ │ '  _.'  |   
-    │  │  │   CSS     │  │    │   +    └─────────────────────────┘ '-'/    \  
+    │  │  (Bundled)      │    │        │ │ Starting servers... │ │    / " '\
+    │  │  ┌───────────┐  │    │        │ │ ✓ JupyterLab ready  │ │   . .   .
+    │  │  │           │  │    │        │ │ ✓ Pipulate ready    │ │  /    ) |
+    │  │  │   HTML    │  │    │        │ └─────────────────────┘ │ '  _.'  |
+    │  │  │   CSS     │  │    │   +    └─────────────────────────┘ '-'/    \
     │  │  │   JS      │  │    │                    │
     │  │  │           │  │    │                    ▼
     │  │  └───────────┘  │    │        ┌─────────────────────────┐
@@ -101,7 +101,7 @@ Pipulate is a **local-first, single-tenant desktop app framework** featuring AI-
     └─────────────────────────┘        │ │ └─────────────────┘ │ │
                                        │ └─────────────────────┘ │
 ✅ Feels like native app               └─────────────────────────┘
-❌ Multiple installers needed           
+❌ Multiple installers needed
 ❌ Platform-specific builds             ✅ Universal installer
 ❌ Update distribution complexity       ✅ Auto-updates via git
                                         ✅ Same experience all OSes
@@ -123,11 +123,11 @@ If you are not an Empire builder and prefer craftsmanship over the rat race and 
 ═══════════════════════════════════════        ═══════════════════════════
 
     React → Vue → Angular → Svelte             🗽 Your Hardware
-         ↑                    ↓                🗽 Your Data  
+         ↑                    ↓                🗽 Your Data
     Webpack ← Next.js ← Vite ← Remix           🗽 Your AI
          ↑                    ↓                🗽 Your Code
     Docker → K8s → Cloud → Serverless          🗽 Your Schedule
-                                               
+
     😵‍💫 Endless Learning                        ✨ Durable Tools:
     💸 Cloud Dependencies                       • Python (30+ years)
     🔒 Platform Lock-in                         • SQLite (built-in)
@@ -138,9 +138,9 @@ If you are not an Empire builder and prefer craftsmanship over the rat race and 
                                                🎯 Third Act Philosophy:
     🏃‍♂️ JUMP OFF THE WHEEL                       "Choose tools that will
                ↓                                 outlast the frameworks"
-        ┌─────────────┐                         
+        ┌─────────────┐
         │  PIPULATE   │                         💤 Sleep Well
-        │ Local-First │                         🧘 Own Schedule  
+        │ Local-First │                         🧘 Own Schedule
         │  Sovereign  │                         🔧 Full Control
         └─────────────┘                         ♾️ Built to Last
 ```
@@ -219,7 +219,7 @@ Pipulate integrates a carefully selected set of tools aligned with its philosoph
     │ • DevOps overhead   │                    │ • Nix reproducibility   │
     │ • Cloud dependencies│                    │ • Complete ownership    │
     └─────────────────────┘                    └─────────────────────────┘
-    
+
     🎯 One person understands                  🎯 One person controls
        part of the system                         the entire system
 ```
@@ -229,7 +229,7 @@ The original LAMP stack was beautiful in its simplicity - one person could under
 Pipulate brings back that **"one person, full stack"** philosophy with modern tools:
 
 - **L**inux + **N**ix: Reproducible environments across all platforms
-- **A**SGI: Modern async server interface, future-proofed for performance  
+- **A**SGI: Modern async server interface, future-proofed for performance
 - **M**iniDataAPI: Universal SQL simplifier close to Python's core data structures
 - **P**ython + FastHTML + HTMX: The new web development paradigm
 
@@ -240,21 +240,21 @@ This isn't just simpler - it's more powerful, giving you complete environment re
 Pipulate's technology choices form **aligned lenses** that focus ideas from abstraction to actualization. Each lens must be **ground and polished** without misaligning the focus:
 
 ```
-        Universal Translator of                        AI translates
-        Spoken Language to Code     ,=\.-----""""^==--
-                                   ;;'( ,___, ,/~\;
-                                   '  )/>/   \|-,   
-    prompts ,--.  from more abstract  | `\ to | " concrete implementation
-     ---> ,'    `.         ,--.       "   "   "                             
-     --> /        \----->,'    `.       ,--.        ,-.    
-  o  -> /  Linux   \--->/  http  \--->,'_hx `.--->,'   `.    ,-.
- /|\   (  HARDWARE  )->( PROTOCOL )->( LINGUA )->( UI/UX )->(APP)->(git)
- / \ -> \   Nix    /--->\  html  /--->`..py ,'--->`.   ,'    `-'  
-     --> \        /----->`.    ,'       `--'        `-'   
-     ---> `.    ,'         `--'  
-            `--'                          through fewest possible lesnses.
+     Universal Translator of       Abstractions clarify into implementations
+     Spoken Language to Code       by each lens being simple and transparent.
 
-  Idea --> Lens#1   -->   Lens#2  -->  Lens#3  -> Lens#4 > Lens#5 > Lens#6
+  Idea --> Lens 1   -->   Lens 2  -->  Lens 3  -> Lens 4 -> Lens 5 -> Lens 6
+
+     -----> ,--.
+     ---> ,'    `.---------> ,--.
+     --> /        \------> ,'    `.-------> ,--.        ,-.
+  o  -> /  Linux   \----> /  http  \----> ,'_hx `.--->,'   `.    ,-.
+ /|\   (  HARDWARE  )--> ( PROTOCOL )--> ( LINGUA )->( UI/UX )->(APP)->(git)
+ / \ -> \   Nix    /----> \  html  /----> `..py ,'--->`.   ,'    `-'
+     --> \        /------> `.    ,'-------> `--'        `-'    And so on
+     ---> `.    ,'---------> `--'         AI Help
+     -----> `--'           AI Help
+          AI Help
 ```
 
 We keep lenses minimal, their material either thoroughly pre-trained into the model (Python 3.x, HTMX, etc.) or able to be included in the prompt and easily held in the context window. We've trimmed the cruft — the lens flashes and burrs, and all unnecessary extra lenses (Angular, React, Vue, etc.)
@@ -264,7 +264,7 @@ We keep lenses minimal, their material either thoroughly pre-trained into the mo
 In lens manufacturing, "flashes" are excess material that squeeze out of molds - unwanted projections that must be ground off. Steve Jobs famously did this twice: adopting Gorilla Glass (grinding off plastic flashes) and rejecting Flash Player (grinding off software bloat).
 
 **Pipulate continues this tradition:**
-- **FastHTML**: Grinds off Jinja2 template complexity  
+- **FastHTML**: Grinds off Jinja2 template complexity
 - **HTMX**: Grinds off virtual DOM overhead
 - **Local AI**: Grinds off cloud dependencies
 - **SQLite**: Grinds off enterprise database complexity
@@ -284,7 +284,7 @@ The revolution isn't just another framework - it's eliminating the template laye
 ```
     🍶 FLASK ERA              🚀 FASTAPI ERA            🌐 FASTHTML ERA
     ═══════════════           ═══════════════           ══════════════════
-    
+
     ┌─────────────┐           ┌─────────────┐           ┌─────────────┐
     │   Python    │           │   Python    │           │   Python    │
     │  Functions  │           │  Functions  │           │  Functions  │
@@ -306,7 +306,7 @@ The revolution isn't just another framework - it's eliminating the template laye
     🌐 Full Page Reload     📱 Frontend Framework      🎯 DOM Element Updates
                                (React/Vue/Angular)        def Div() = <div>
                                                           def Button() = <button>
-                                                         
+
     Template files needed    JSON ↔ HTML conversion     Python functions ARE
     Separate languages       Client-side complexity     the template language!
 ```
@@ -325,15 +325,51 @@ The revolution isn't just another framework - it's eliminating the template laye
 
 ## How to Install Pipulate
 
-### Quick Start: Be Running in 5 Minutes  <!-- key: quick-start-be-running-in-5-minutes -->
+### Installation Strategy: Universal First, PyPI Alternative  <!-- key: installation-strategy-overview -->
 
-This guide shows you how to install Pipulate using two main commands in your terminal. This works on macOS or on Windows using WSL (Windows Subsystem for Linux) with an Ubuntu (or similar Linux) terminal.
+We offer two installation paths that lead to the exact same robust, Nix-managed environment. Choose the path that best fits your experience level and preferences.
+
+```
+                            ┌────────────────────────────┐
+                            │      New User on macOS     │
+                            └─────────────┬──────────────┘
+                                          │
+                  ┌───────────────────────┴───────────────────────┐
+                  │                                               │
+                  ▼                                               ▼
+  ┌──────────────────────────────────┐   ┌───────────────────────────────────────────┐
+  │ PATH 1: Recommended for Everyone │   │ PATH 2: Alternative for Python Developers │
+  └──────────────────────────────────┘   └───────────────────────────────────────────┘
+                  │                                               │
+  "I want the simplest, most               "I prefer managing my command-line
+   direct way to get this running."        tools with standard Python utilities."
+                  │                                               │
+                  ▼                                               ▼
+  1. `curl ... [nix]`                      1. `brew install pipx` (If needed)
+  2. `curl ... [pipulate]`                 2. `pipx install pipulate`
+                                           3. `pipulate install`
+                  │                                               │
+                  └───────────────┐               ┌───────────────┘
+                                  │               │
+                                  ▼               ▼
+                            ┌────────────────────────────┐
+                            │    Nix-Managed Pipulate    │
+                            │        Environment         │
+                            └────────────────────────────┘
+                                         ||
+                                    (Identical
+                                      Result)
+```
+
+### PATH 1: Quick Start - Universal Installation (Recommended)  <!-- key: quick-start-universal-installation -->
+
+This is the fastest and most universal way to install Pipulate. It has the fewest dependencies and works on any modern Mac, Linux system, or Windows with WSL.
 
 ```
 
     📦 Your Machine            🔧 Add Foundation       🚀 Complete Environment
          Today                       with Nix                 Ready to Go!
-                                                          
+
     ┌─────────────┐             ┌─────────────┐             ┌─────────────┐
     │ Sad Computer│    Step 1   │   🏗️ Nix    │    Step 2   │ 🎯 Pipulate │
     │   Without   │ ──────────► │ Foundation  │ ──────────► │   + AI +    │
@@ -347,47 +383,48 @@ This guide shows you how to install Pipulate using two main commands in your ter
                                                              │    Opens    │
                                                              │Automatically│
                                                              └─────────────┘
-    
+
     Simple as 1-2-3! No Docker, no build steps, no cloud dependencies.
     Everything runs locally with complete privacy and control.
 ```
 
-**1. Install Nix (One-Time Setup)**
+**Step 1: Install Nix (One-Time Setup)**
+
+If you don't have it already, install the Nix package manager. It's the system that makes Pipulate's reproducible environment possible.
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-**Close your terminal and open a new one after installation.**
+> **Important:** After the Nix installation finishes, you **must close and reopen** your Terminal window.
 
-**2. Install Pipulate**
+**Step 2: Run the Pipulate Installer**
 
-With a custom name
+Now, run the universal install script. You can give your project a custom name, too.
+
 ```bash
+# To install with a custom name like "Botifython"
 curl -L https://pipulate.com/install.sh | sh -s Botifython
-```
 
-Or default installation
-```bash
+# Or, to install with the default name "pipulate"
 curl -L https://pipulate.com/install.sh | sh
 ```
 
-**3. Run It**
+**Step 3: Launch Pipulate**
+
+Navigate into your new project directory and launch the environment with `nix develop`.
 
 ```bash
+# cd into the directory you just created
 cd ~/Botifython
+
+# Launch Pipulate
 nix develop
 ```
 
-These few commands:
-- ✅ Updates to the latest version automatically
-- ✅ Starts JupyterLab and the Pipulate server  
-- ✅ Opens web interfaces in your browser
-- ✅ Provides a complete, reproducible development environment
+That's it! The server and JupyterLab will start, and the application will open in your browser.
 
-**That's it!** You now have a local-first development environment with AI integration.
-
-**4. Run It Again!**
+**Running It Again:**
 
 1. You can just forcibly exit out of that Terminal it's running from.
 2. Open a new Terminal, and once again:
@@ -397,7 +434,7 @@ cd ~/Botifython
 nix develop
 ```
 
-**5. The Big Reset (If Necessary)**
+**The Big Reset (If Necessary):**
 
 Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
 
@@ -409,6 +446,46 @@ nix develop
 ```
 
 Wait for ***BOTH TABS*** to auto-open in your browser.
+
+---
+
+### PATH 2: Alternative Installation via PyPI (For Python Developers)  <!-- key: alternative-installation-pypi -->
+
+If you are a developer comfortable with tools like Homebrew and `pipx`, you can use our PyPI package as a gateway to the same robust installation.
+
+**Step 1: Install `pipx`**
+
+`pipx` is a tool for safely installing Python command-line applications. If you don't have it, you can install it with Homebrew.
+
+```bash
+brew install pipx
+```
+
+**Step 2: Install the Pipulate CLI**
+
+Use `pipx` to install the `pipulate` command-line tool. This will not cause conflicts with your system Python.
+
+```bash
+pipx install pipulate
+```
+
+**Step 3: Run the Installer**
+
+Use the command you just installed to set up the full Pipulate application.
+
+```bash
+pipulate install
+```
+
+This will trigger the same universal installation process, resulting in the exact same robust, Nix-managed environment. To run it in the future, just type `pipulate run`.
+
+These few commands:
+- ✅ Updates to the latest version automatically
+- ✅ Starts JupyterLab and the Pipulate server
+- ✅ Opens web interfaces in your browser
+- ✅ Provides a complete, reproducible development environment
+
+**That's it!** You now have a local-first development environment with AI integration, installed via your preferred Python toolchain.
 
 ### Installation Process Deep Dive  <!-- key: installation-process-diagram -->
 
@@ -498,7 +575,7 @@ The tech industry suffers from "hamster wheel syndrome" - constantly breaking AP
 
 **Pipulate chooses durable foundations:**
 - **Linux Kernel**: Version 6 in 30 years
-- **Python**: Version 3 in 30 years  
+- **Python**: Version 3 in 30 years
 - **HTML**: Version 5 and stable
 - **HTTP**: Version 3 and backward compatible
 
@@ -509,7 +586,7 @@ These are the "laws of physics" for software - stable APIs that enable compound 
 Traditional development follows DRY principles, creating abstract, complex systems that are hard to understand and modify. But the world has changed:
 
 1. **🔬 Jupyter Notebooks** promote explicit, literate programming
-2. **🤖 AI assistants** excel at managing repetitive code  
+2. **🤖 AI assistants** excel at managing repetitive code
 3. **🏠 Local-first architectures** prioritize clarity over enterprise complexity
 4. **🎯 Right Granularity**: WET provides the perfect abstraction level for human AND AI comprehension
 
@@ -519,9 +596,9 @@ Traditional development follows DRY principles, creating abstract, complex syste
    - Linear Workflows        |  It runs proprietary private AI  |
    - Local & Cloud-free      |  Workflows from your Local PC?!  |
    - Chip O'Theseus included  \________________________________/
-                                                              ()   
+                                                              ()
         HARDWARE PLATFORM             LOCAL BROWSER             O   , Chip O'Theseus
-     _______________________       __________ _______             o \\  . 
+     _______________________       __________ _______             o \\  .
     |                       |     / Pipulate \Jupyter\__            |\\/|
     | Windows, Mac or Linux |    |  __________________  |   See!    / " '\ - Radical transparency
     |     _____ ___         |    | | App Name   Menu⚙️| |<- - - - -. .   . - MCP tool-call control
@@ -531,7 +608,7 @@ Traditional development follows DRY principles, creating abstract, complex syste
     |__|  localhost:5001  |_|    | | -Step #2 | Chat  | |      What, no Docker?
        |  (AI on Rails🚂) |      | | -Step #3 | Help▸ | |      What, no React?
        |__________________|      | |__________|_______| |      What, no Cloud?
-                                 |______________________| 
+                                 |______________________|
 ```
 
 **WET workflows are:**
@@ -570,7 +647,7 @@ Pipulate features a distinct architecture designed for its local-first, simple, 
 This diagram illustrates the high-level components and their interactions:
 
 ```
-                 ┌─────────────┐ Like Electron, but full Linux subsystem 
+                 ┌─────────────┐ Like Electron, but full Linux subsystem
                  │   Browser   │ in a folder for macOS and Windows (WSL)
                  └─────┬───────┘
                        │ HTTP/WS
@@ -579,7 +656,7 @@ This diagram illustrates the high-level components and their interactions:
     │           Nix Flake Shell             │ - In-app LLM (where it belongs)
     │  ┌───────────────┐  ┌──────────────┐  │ - 100% reproducible
     │  │   FastHTML    │  │    Ollama    │  │ - 100% local
-    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS    
+    │  │   HTMX App    │  │  Local LLM   │  │ - 100% multi-OS
     │  └───────┬───────┘  └──────────────┘  │
     │          │                            │
     │    ┌─────▼─────┐     ┌────────────┐   │
@@ -634,7 +711,7 @@ This detailed view shows how Pipulate's local-first architecture eliminates comm
       │    └─────────┬──────────┘     │ - No build step required
       │              ▼                │ - Direct, observable state changes
       │    ┌─────────────────────┐    │
-      │    │  Server-Side State  │    │ 
+      │    │  Server-Side State  │    │
       │    │  DictLikeDB + JSON  │ ◄───── Conceptually like local-server-side cookies
       │    └─────────────────────┘    │ - Enables the "Know EVERYTHING!" philosophy
       └───────────────────────────────┘
@@ -687,21 +764,21 @@ Designed for porting notebook-style processes, workflows are sequences of steps 
 ```
     📓 JUPYTER NOTEBOOK               🌐 PIPULATE WORKFLOW
     ═══════════════════               ══════════════════════
-    
+
     [ ] Cell 1: Import data          ┌─────────────────────┐
-        │                            │  Step 1: Data Input │ 
+        │                            │  Step 1: Data Input │
         ▼                            └──────────┬──────────┘
     [▶] Cell 2: Process data                    │ hx_trigger="load"
         │                                       ▼
         ▼                            ┌─────────────────────┐
     [ ] Cell 3: Generate report      │ Step 2: Processing  │
         │                            └──────────┬──────────┘
-        ▼                                       │ hx_trigger="load"  
+        ▼                                       │ hx_trigger="load"
     [ ] Cell 4: Export results                  ▼
                                      ┌─────────────────────┐
     🎯 "Run All Cells" Button   ═══► │ Step 3: Export      │
        Executes top-to-bottom        └─────────────────────┘
-       
+
        Same mental model, same execution flow!
        But with persistent state and web UI.
 ```
@@ -764,7 +841,7 @@ The application interface is organized into distinct areas:
                ├───────────────┬─────────────┤    Apps, Settings
                │               │             │
     Workflow, ──►   Main Area  │    Chat     │
-    App UI     │   (Pipeline)  │  Interface ◄── LLM Interaction 
+    App UI     │   (Pipeline)  │  Interface ◄── LLM Interaction
                │               │             │
                └─────────────────────────────┘
 ```
@@ -798,7 +875,7 @@ home (Root Component)
     │   └── data.db               # SQLite database
     ├── downloads/                # Default location for workflow outputs (e.g., CSVs)
     ├── helpers/
-    │   ├── botify  
+    │   ├── botify
     │   │   └── botify_api.ipynb  # Git managed massive example notebook, produces docs
     │   ├── cleanup               # Temporary scripts to help clean up the system
     │   │   └── organize_css.py   # Example of what might be found there
@@ -897,7 +974,7 @@ The `run_all_cells()` method encapsulates the workflow initialization pattern an
 │      ├── 🌐 Determines public URL: /workflow_genesis        │
 │      └── 📊 Controls menu order: 200                        │
 │                                                             │
-│  🏷️  APP_NAME: "workflow_genesis_internal"                  │ 
+│  🏷️  APP_NAME: "workflow_genesis_internal"                  │
 │      ├── 💾 Database table identifier                       │
 │      ├── 🔒 MUST REMAIN STABLE (data integrity)             │
 │      └── 🚫 NEVER change after deployment                   │
@@ -923,7 +1000,7 @@ The `run_all_cells()` method encapsulates the workflow initialization pattern an
 📁 PLUGIN DISCOVERY SYSTEM
 plugins/
 ├── 010_introduction.py        ✅ Registered as "introduction" (menu order: 1)
-├── 020_profiles.py           ✅ Registered as "profiles" (menu order: 2) 
+├── 020_profiles.py           ✅ Registered as "profiles" (menu order: 2)
 ├── hello_flow (Copy).py      ❌ SKIPPED - Contains "()"
 ├── xx_experimental.py        ❌ SKIPPED - "xx_" prefix
 └── 200_workflow_genesis.py   ✅ Registered as "workflow_genesis" (menu order: 20)
@@ -987,7 +1064,7 @@ create_workflow.py               │ └──────┬──────�
                                  │ Full Pattern    │
                                  │ Complete Flow   │
                                  └─────────────────┘
-                                 
+
                                  create_workflow.py
                                  --template trifecta
 ```
@@ -1152,7 +1229,7 @@ This README serves as the **upstream source of truth** for all Pipulate document
 ```
 🌊 THE UPSTREAM TRUTH CASCADE
 ═══════════════════════════════════════════════════════════════
-     
+
      📜 Source Code Reality (The Ultimate Truth)
                          │
                          ▼
@@ -1173,7 +1250,7 @@ This README serves as the **upstream source of truth** for all Pipulate document
 
 **How it works:**
 - **ASCII Art Blocks**: Visual diagrams are automatically extracted and distributed to other documentation files
-- **HTML Comment Keys**: Headlines marked with `<!-- key: identifier -->` serve as reference anchors  
+- **HTML Comment Keys**: Headlines marked with `<!-- key: identifier -->` serve as reference anchors
 - **80-Hyphen Pagination**: Section dividers enable automatic document structuring
 - **Automatic Synchronization**: Running `python helpers/docs_sync/sync_ascii_art.py` updates all documentation
 
@@ -1245,5 +1322,7 @@ Contributions are welcome\! Please adhere to the project's core philosophy:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/miklevin/pipulate/blob/main/LICENSE) file for details.
+
+Copyright 2025 <a href="https://mikelev.in/">Mike Levin, AI SEO in NYC</a>
 
