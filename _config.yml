@@ -16,6 +16,10 @@ collections:
   guide:
     output: true
 
+# Add this section to specify which files should be copied without processing
+include:
+  - README.md
+
 # 2. Set specific permalinks for each content type using defaults
 defaults:
   - scope:
