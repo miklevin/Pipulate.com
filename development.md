@@ -627,7 +627,7 @@ Pipulate includes sophisticated helper scripts for workflow development:
 ### `create_workflow.py`
 Creates new workflows from templates:
 ```bash
-python helpers/create_workflow.py workflow.py MyWorkflow my_workflow \
+python helpers/workflow/create_workflow.py workflow.py MyWorkflow my_workflow \
   "My Workflow" "Welcome message" "Training prompt" \
   --template trifecta --force
 ```
@@ -647,8 +647,8 @@ python helpers/create_workflow.py workflow.py MyWorkflow my_workflow \
 ### `splice_workflow_step.py`
 Adds steps to existing workflows:
 ```bash
-python helpers/splice_workflow_step.py workflow.py --position top
-python helpers/splice_workflow_step.py workflow.py --position bottom
+python helpers/workflow/splice_workflow_step.py workflow.py --position top
+python helpers/workflow/splice_workflow_step.py workflow.py --position bottom
 ```
 
 **Features:**

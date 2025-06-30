@@ -10,7 +10,7 @@ The Pipulate project is all about empowering users to create powerful, local-fir
 
 **The Challenge: Simplifying Workflow Scaffolding**
 
-Creating new workflows in Pipulate, while highly flexible, involves some initial boilerplate: setting up the plugin file, defining the class, and structuring the initial steps. While we have powerful command-line helper scripts like `helpers/create_workflow.py` (to generate a new workflow file from a template) and `helpers/splice_workflow_step.py` (to add new placeholder steps to an existing workflow), invoking them manually requires remembering parameters and context.
+Creating new workflows in Pipulate, while highly flexible, involves some initial boilerplate: setting up the plugin file, defining the class, and structuring the initial steps. While we have powerful command-line helper scripts like `helpers/workflow/create_workflow.py` (to generate a new workflow file from a template) and `helpers/workflow/splice_workflow_step.py` (to add new placeholder steps to an existing workflow), invoking them manually requires remembering parameters and context.
 
 Our goal is to bring this scaffolding process directly into the Pipulate UI, providing a guided, interactive experience. This leads to the "Create, Splice, and (eventually) Swap" pattern for rapid workflow development.
 
@@ -25,10 +25,10 @@ The first major piece of functionality for the "Workflow Creation Helper" plugin
 Here's how it works:
 
 1.  **Bootstrapping "Workflow Creation Helper":**
-    We first used our own `helpers/create_workflow.py` script to generate the initial file for `plugins/300_workflow_genesis.py`. The command looked like this:
+    We first used our own `helpers/workflow/create_workflow.py` script to generate the initial file for `plugins/300_workflow_genesis.py`. The command looked like this:
 
 ```bash
-    python helpers/create_workflow.py \
+    python helpers/workflow/create_workflow.py \
     plugins/300_workflow_genesis.py \
     WorkflowGenesis \
     workflow_genesis \
@@ -47,8 +47,8 @@ Here's how it works:
       * **Command Generation (POST Request & Subsequent GETs):** Upon submitting the form, `step_01_submit` processes the inputs. It then:
           * Stores these parameters in its own workflow state.
           * Dynamically constructs the precise shell commands the user needs to run:
-            1.  The `python helpers/create_workflow.py [collected_params...]` command to generate the new target workflow file.
-            2.  The `python helpers/splice_workflow_step.py plugins/[target_filename]` command to add an initial placeholder step to that newly created workflow.
+            1.  The `python helpers/workflow/create_workflow.py [collected_params...]` command to generate the new target workflow file.
+            2.  The `python helpers/workflow/splice_workflow_step.py plugins/[target_filename]` command to add an initial placeholder step to that newly created workflow.
           * These commands are then displayed clearly to the user within the Pipulate UI, using a custom `create_prism_widget` method that utilizes Prism.js for syntax highlighting, making them easy to copy and paste into a terminal.
 
 **The "Tools Making Tools" Philosophy in Action**
@@ -59,7 +59,7 @@ For example, after a developer uses `WorkflowGenesis` to define their "Kung Fu D
 
 ```bash
 # Command to create the main workflow file
-python helpers/create_workflow.py \
+python helpers/workflow/create_workflow.py \
 plugins/035_kungfu_workflow.py \
 KungfuWorkflow \
 kungfu \
@@ -69,7 +69,7 @@ kungfu \
 --force
 
 # Command to add the first placeholder step
-python helpers/splice_workflow_step.py plugins/035_kungfu_workflow.py
+python helpers/workflow/splice_workflow_step.py plugins/035_kungfu_workflow.py
 ```
 
 The developer then simply copies these commands and runs them in their project terminal.
