@@ -142,7 +142,7 @@ This eliminates the "works on my machine" problem and ensures Pipulate runs reli
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
 
-**Nix serves as the "Noah's Ark"** - preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
+**Nix serves as the "Noah's Ark"** — preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
 
 <!-- START_ASCII_ART: multi-os-cuda-support-nix -->
@@ -154,14 +154,14 @@ Nix Flakes ensure a consistent environment across Linux, macOS, and Windows (via
                ┌──────────────────┐
                │  Linux / macOS   │ - Write code once, run anywhere
                │  Windows (WSL)   │ - Consistent dev environment via Nix
-               └────────┬─────────┘   - Like cross-OS Homebrew brew install
+               └────────┬─────────┘ - As if Homebrew but across all OSes
                         │
                         │ Nix manages dependencies
                         ▼
                ┌──────────────────┐
                │   CUDA Support   │ - Auto-detects NVIDIA GPU w/ CUDA
                │   (if present)   │ - Uses GPU for LLM acceleration
-               └──────────────────┘   - Falls back to CPU if no CUDA
+               └──────────────────┘ - Falls back to CPU if no CUDA
 ```
 <!-- END_ASCII_ART: multi-os-cuda-support-nix -->
 

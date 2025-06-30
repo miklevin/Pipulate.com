@@ -14,15 +14,15 @@ group: about
 Ask an AI to do something in *Agentic Mode* and it's going to go off half-cocked and willy nilly doing whatever it thinks is right until done. Put AIs on Rails with Pipulate using rigid linear workflows prepared by domain experts. Leverage local AI without training the frontier models and keep your secret recipes secret.
 
 <!-- START_ASCII_ART: about-pipulate -->
-## AI On Rails: The Answer to Agentic Mode  <!-- key: about-pipulate -->
+## AI On Rails: Structured Workflows for Any AI  <!-- key: about-pipulate -->
 
-**The Problem with Agentic AI:** Unpredictable, cloud-dependent, and trains frontier models with your data.
+**The Challenge with Agentic AI:** Powerful but unpredictable—you never know what you're gonna get.
 
-**The Pipulate Solution:** Local AI guided by domain expert workflows, keeping your intelligence sovereign.
+**The Pipulate Approach:** Structured workflows that can leverage **any AI**—local, cloud, or hybrid—while maintaining complete visibility and control.
 
-Agentic Mode is like a box of chocolates — you never know what you're gonna get. Ask an AI to do something in *Agentic Mode* and it's going to go off and do whatever it thinks is right until done. But what if there were a domain expert in the picture who sets everything up ahead of time ensuring proper AI coralling and wrangling?
+Think of it as putting guardrails on AI assistance. Instead of asking an AI to "figure it out," domain experts create step-by-step workflows that guide AI through proven processes. The AI gets structure, you get predictable results.
 
-**Put AIs on Rails with Pipulate:** Rigid linear workflows prepared by domain experts, leveraging local AI without training frontier models. Your secret recipes stay secret, your data stays yours, and your AI grows with you on your own hardware.
+**Pipulate: Your AI Swiss Army Knife:** Whether you prefer local privacy, cloud power, or hybrid approaches, Pipulate provides the framework. Use local models for sensitive work, cloud APIs for heavy lifting, or both in the same workflow—your choice, your control.
 
 ```
       🤖 AGENTIC MODE (Chaos)           🚂 AI ON RAILS (Pipulate)

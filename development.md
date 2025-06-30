@@ -28,7 +28,7 @@ upping their game in the age of AI.
 <!-- START_ASCII_ART: run-all-cells-pattern -->
 ### Run All Cells Pattern  <!-- key: run-all-cells-pattern -->
 
-**The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model - each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
+**The key insight**: Pipulate workflows use a `run_all_cells()` pattern that directly mirrors Jupyter's "Run All Cells" command. This creates an immediate mental model — each workflow step is like a notebook cell, and the system automatically progresses through them top-to-bottom, just like running all cells in a notebook.
 
 ```
     📓 JUPYTER NOTEBOOK               🌐 PIPULATE WORKFLOW
@@ -49,7 +49,8 @@ upping their game in the age of AI.
        Executes top-to-bottom        └─────────────────────┘
 
        Same mental model, same execution flow!
-       But with persistent state and web UI.
+       But with persistent state, a web UI and
+       not having to look at the Python code 🚫🐍.
 ```
 <!-- END_ASCII_ART: run-all-cells-pattern -->
 
@@ -107,7 +108,7 @@ Understanding how we got here helps explain why FastHTML + HTMX is revolutionary
 <!-- START_ASCII_ART: the-evolution-flask-fastapi-fasthtml -->
 ### The Evolution: Flask → FastAPI → FastHTML  <!-- key: the-evolution-flask-fastapi-fasthtml -->
 
-The revolution isn't just another framework - it's eliminating the template layer entirely
+The revolution isn't just another framework — it's eliminating the template layer entirely
 
 ```
     🍶 FLASK ERA              🚀 FASTAPI ERA            🌐 FASTHTML ERA
@@ -146,8 +147,6 @@ The revolution isn't just another framework - it's eliminating the template laye
 * **MiniDataAPI:** A lightweight layer for interacting with SQLite and other databases. Uses Python dictionaries for schema definition, promoting type safety without the complexity of traditional ORMs — effectively future-proofing your SQL. You lose fancy *join* capabilities but in exchange get the *Python dict interface* as your main persistent database API forever-forward, enabiling instant swapability between SQLite and PostgreSQL (for example).
 
 * **Ollama:** Facilitates running LLMs locally, enabling in-app chat, workflow guidance, and future automation capabilities while ensuring privacy and avoiding API costs. Your local AI (Chip O'Theseus) learns & grows with you, hopping from hardware to hardware as you upgrade — like a genie in a hermitcrab shell. And if that weren't kooky enough — it knows how to make MCP-calls!!! That's right, your friendly localhost AI Chip O'Theseus is also an *MCP client!* Your linear workflows ain't so linear anymore when a single-step can be: "Go out and do whatever."
-
-* **SQLite & Jupyter Notebooks:** Foundational tools for data persistence and the workflow development process (porting from notebooks to Pipulate workflows). SQLite is built into Python and really all things — the *get-out-of-tech-liability free card* you didn't know you had. And a full JupyterLab instance is installed side-by-side with Pipulate sharing the same Python `.venv` virtual environment (on Nix!!!), so... well... uhm, there are no words. If you know you know.
 <!-- END_ASCII_ART: the-evolution-flask-fastapi-fasthtml -->
 
 **The FastHTML Breakthrough:** Python function names directly become HTML elements, eliminating templates and making the server the single source of truth for UI state.
@@ -220,7 +219,7 @@ The console doesn't just print text - it **paints experiences**:
 ║                                                                         ║    . .   .
 ║  🌟 Where Python functions become HTML elements...                      ║   /    ) |
 ║  🌟 Where workflows preserve your creative process...                   ║  '  _.'  |
-║  🌟 Where AI assists without cloud dependencies...                      ║  '-'/    \
+║  🌟 Where AI integrates locally and globally...                         ║  '-'/    \
 ╚═════════════════════════════════════════════════════════════════════════╝
 ```
 <!-- END_ASCII_ART: pipulate-welcome-banner -->
@@ -493,6 +492,8 @@ The UI is constructed primarily with server-rendered HTML fragments delivered vi
   the DOM on demand ───────► │         │           │  - No "build" process like Svelte
                              └─────────┴───────────┘  - No virtual DOM, JSX, Redux, etc.
 ```
+
+With such *minimal surface area* the AI code assistant *knows everything.* LLMs are either pre-trained on the stable, infrequently revved libraries used (Python 3.12, HTMX, or it's all small enough to fit in a 1-shot prompt — yes, the whole core code-base fits in one Gemini Web UI form submit.
 <!-- END_ASCII_ART: server-rendered-ui-htmx -->
 
 The core purpose of any `step_XX_submit` handler, or the "Revert Phase" of a `step_XX` GET handler, is to:

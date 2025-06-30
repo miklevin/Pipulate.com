@@ -89,6 +89,8 @@ The UI is constructed primarily with server-rendered HTML fragments delivered vi
   the DOM on demand ───────► │         │           │  - No "build" process like Svelte
                              └─────────┴───────────┘  - No virtual DOM, JSX, Redux, etc.
 ```
+
+With such *minimal surface area* the AI code assistant *knows everything.* LLMs are either pre-trained on the stable, infrequently revved libraries used (Python 3.12, HTMX, or it's all small enough to fit in a 1-shot prompt — yes, the whole core code-base fits in one Gemini Web UI form submit.
 <!-- END_ASCII_ART: server-rendered-ui-htmx -->
 
 ## The Local-First Advantage

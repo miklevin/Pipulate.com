@@ -354,7 +354,7 @@ One of Pipulate's key strengths is its ability to provide identical development 
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
 
-**Nix serves as the "Noah's Ark"** - preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
+**Nix serves as the "Noah's Ark"** — preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
 
 Whether you're developing on macOS, Linux, or Windows (via WSL), your workflows will run identically with the same Python version, packages, and system libraries.
