@@ -21,6 +21,7 @@
   /* New slider width CSS variable */
   --slider-width: 850px;
   --mobile-padding: 4vw;
+  --pipulate-logo-height: 140px;
 }
 
 /* Reset box-sizing */
@@ -132,9 +133,14 @@ body > * {
   margin: 0 0;
 }
 
-.logo-top img {
-  height: 140px; /* Increased from 60px (2.5x) */
-  width: auto;
+.logo-top img,
+.header-nav-logo-pipulate,
+.header-nav-logo {
+  height: var(--pipulate-logo-height) !important;
+  max-height: none !important;
+  width: auto !important;
+  max-width: none !important;
+  display: block !important;
 }
 
 /* Navigation container */
@@ -650,8 +656,16 @@ mark {
 img,
 video {
   max-width: 100%;
-  height: auto;
   border-radius: 5px;
+}
+
+.logo-top img,
+.header-nav-logo-pipulate {
+  height: var(--pipulate-logo-height) !important;
+  max-height: none !important;
+  width: auto !important;
+  max-width: none !important;
+  display: block !important;
 }
 
 figure {
@@ -1288,7 +1302,7 @@ article time {
 }
 
 .header-nav-logo {
-  height: 80px;
+  height: 120px;
   width: auto;
   display: block;
   background: none;
@@ -1304,11 +1318,11 @@ article time {
 }
 
 .header-nav-logo-pipulate {
-  height: 80px;
-  width: auto;
-  display: block;
-  background: none;
-  margin-right: 0.25rem;
+  height: var(--pipulate-logo-height) !important;
+  max-height: none !important;
+  width: auto !important;
+  max-width: none !important;
+  display: block !important;
 }
 
 .header-nav-logo-pypi {
@@ -1330,4 +1344,82 @@ article time {
   margin-bottom: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.01em;
+}
+
+@media (max-width: 480px) {
+  .header-logos {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin-left: 0 !important;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .header-nav-logo-github {
+    height: 32px;
+  }
+  .header-nav-logo-pipulate {
+    height: 48px;
+  }
+  .header-nav-logo-pypi,
+  .header-logos span.header-nav-logo-pypi {
+    font-size: 1.2rem !important;
+  }
+  .nav-container {
+    align-items: center !important;
+  }
+  .nav-buttons {
+    justify-content: center !important;
+    width: 100%;
+    margin-bottom: 0.2rem;
+  }
+  .nav-link, .nav-link:visited {
+    font-size: 0.95rem;
+    margin: 0.15rem 0.3rem;
+    padding: 0.1rem 0.7rem;
+  }
+  .nav-tagline {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 0.7rem;
+    margin-top: 0.2rem;
+  }
+}
+
+.on-platforms-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: nowrap !important;
+  margin-bottom: 0.5rem;
+}
+
+.on-platforms-text {
+  font-size: 1.2rem !important;
+  color: #fff;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.header-nav-logo-github {
+  height: 1.2em;
+  width: auto;
+  margin: 0 0.1em;
+  vertical-align: middle;
+}
+
+@media (max-width: 480px) {
+  .on-platforms-row {
+    gap: 0.2rem;
+  }
+  .on-platforms-text {
+    font-size: 1rem !important;
+  }
+  .header-nav-logo-github {
+    height: 1em;
+  }
 }
