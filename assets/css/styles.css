@@ -1200,7 +1200,7 @@ p {
   }
   
   .logo-top {
-    text-align: center;
+    text-align: -webkit-center;
     margin-bottom: 1rem;
   }
   
