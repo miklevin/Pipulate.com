@@ -1282,9 +1282,52 @@ article h1 {
   margin-bottom: 1rem;
 }
 
-
-
 article time {
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.header-nav-logo {
+  height: 80px;
+  width: auto;
+  display: block;
+  background: none;
+  margin-right: 0.25rem;
+}
+
+.header-nav-logo-github {
+  height: 40px;
+  width: auto;
+  display: block;
+  background: none;
+  margin-right: 0.25rem;
+}
+
+.header-nav-logo-pipulate {
+  height: 80px;
+  width: auto;
+  display: block;
+  background: none;
+  margin-right: 0.25rem;
+}
+
+.header-nav-logo-pypi {
+  height: 40px;
+  width: auto;
+  display: block;
+  background: none;
+  margin-right: 0.25rem;
+}
+
+.header-logos a {
+  text-decoration: none !important;
+}
+
+.nav-tagline {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
