@@ -7,9 +7,7 @@ group: home
 
 # AI SEO Software to Future-proof You
 
-In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it. Think: Notebooks — without Python 🚫🐍.
-
-> **Your data. Your AI. Your machine. Your control.**  
+In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it. Think: Notebooks without having to look at the Python code.
 
 ## Quick Start: Be Running in 5 Minutes
 
