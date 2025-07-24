@@ -1,6 +1,6 @@
 # Pipulate: Local First AI SEO Software
 
-![Pipulate Free & Open Source SEO with & for LLMs](https://github.com/miklevin/pipulate/raw/main/static/ai-seo-software.png)
+![Pipulate Free & Open Source SEO with & for LLMs](https://github.com/miklevin/pipulate/raw/main/assets/images/ai-seo-software.png)
 
 <!-- Don't forget to sync_ascii_art.py -->
 > **Your data. Your AI. Your machine. Your control.**  
@@ -15,7 +15,7 @@
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 # 2. Close and reopen your terminal, then:
-curl -L https://pipulate.com/install.sh | sh
+curl -L https://pipulate.com/install.sh | bash
 
 # 3. Launch it
 cd ~/pipulate && nix develop
@@ -306,13 +306,12 @@ HARDWARE:
 PROTOCOL:
   http: Uvicorn fast Asynchronous Server Gateway Interface (ASGI) web server
   html: Uvicorn talks to Python Starlette using anyio & httpx libraries
-  websocket: static/ws.js provides client bi-directional asynchronous communication
 LINGUA:
-  htmx: static/htmx.js JavaScript library to eliminate most need for JavaScript
+  htmx: /assets/htmx.js JavaScript library to eliminate most need for JavaScript
   Python: .venv/bin/python3.12 latest version AIs are well trained on
 UI/UX:
   browser: Obviously, but I guess it needs to be said. Like a looser Electron.
-  fasthtml: static/fasthtml.js for FT Components, Python functions as templating
+  fasthtml: /assets/fasthtml.js for FT Components, Python functions as templating
 APP:
   app: Flask-style Uvicorn factory instance instantiated by FastHTML fast_app
   db: Dict-like DB providing transparent server-side state (server cookies)
@@ -475,10 +474,10 @@ Now, run the universal install script. You can give your project a custom name, 
 
 ```bash
 # To install with a custom name like "Botifython"
-curl -L https://pipulate.com/install.sh | sh -s Botifython
+curl -L https://pipulate.com/install.sh | bash -s Botifython
 
 # Or, to install with the default name "pipulate"
-curl -L https://pipulate.com/install.sh | sh
+curl -L https://pipulate.com/install.sh | bash
 ```
 
 **Step 3: Launch Pipulate**
@@ -511,7 +510,7 @@ Things sometimes go wrong. This is how you do a full Pipulate reset. This will a
 
 ```bash
 rm -rf ~/Botifython
-curl -L https://pipulate.com/install.sh | sh -s Botifython
+curl -L https://pipulate.com/install.sh | bash -s Botifython
 cd ~/Botifython
 nix develop
 ```
@@ -1071,7 +1070,7 @@ This structure enables AI assistants to programmatically interact with all UI co
     ├── logs/
     │   ├── server-1.log           # N-rotations of server log per run per config
     │   └── server.log             # The server log of most recent run, contains app state
-    ├── static/                    # JS, CSS, images, icons
+    ├── /assets/                    # JS, CSS, images, icons
     ├── plugins/                   # Workflow plugins (010_introduction.py, 400_trifecta.py, etc.)
     ├── pyproject.toml             # Python packaging configuration and metadata
     ├── training/                  # Markdown files for AI context/prompts
@@ -1080,7 +1079,7 @@ This structure enables AI assistants to programmatically interact with all UI co
     ├── LICENSE                    # It's MIT
     ├── install.sh                 # "Magic cookie" installation script (curl | sh)
     ├── mcp_tools.py               # MCP protocol tools - the AI assistant interface
-    ├── notebook_introduction_local.ipynb  # Editable (non-auto-updating) copy of botify_api.ipynb
+    ├── notebook_introduction_local.ipynb  # Editable (non-auto-updating) copy of hello.ipynb
     ├── README.md                  # This file
     ├── requirements.txt           # Python dependencies (managed by Nix)
     └── server.py                  # Main application entry point
