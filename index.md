@@ -21,12 +21,12 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 ### 2. Install Pipulate
 
-With a custom name
+With a custom name (*"white-labeled"* as Botifython)
 ```bash
 curl -L https://pipulate.com/install.sh | sh -s Botifython
 ```
 
-Or default installation
+Or default (non-white-labeled) installation
 ```bash
 curl -L https://pipulate.com/install.sh | sh
 ```

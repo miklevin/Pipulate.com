@@ -130,7 +130,7 @@ This eliminates the "works on my machine" problem and ensures Pipulate runs reli
 
 > The Cloud's popularity has been driven in part by developers not wanting to maintain multiple codebases or installers per OS. Thanks to Nix, that's all fixed.
 
-* **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. E.g. Is this a Linux-thing you're reading about here? A Windows thing? A Mac thing? The answer is: YES!!! All of the above — and if you've got cool acceleration hardware, it will even take advantage and utilize that too. Best of all worlds.
+* **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. Do you remember *normalize.css* from the wild web that made all browsers show webpages the same? Nix is *normalized Linux* so all Macs, Windows and other Linuxes run your distributed app exactly the same.
 
 ```
      ____                      _       _                        .--.      ___________
@@ -142,7 +142,7 @@ This eliminates the "works on my machine" problem and ensures Pipulate runs reli
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
 
-**Nix serves as the "Noah's Ark"** — preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
+**Nix serves as the "Noah's Ark"** creating easily re-hydrated environments that work identically across all platforms and forever into the future. The long promised Holy Grail of *write-once run anywhere* is today achieved with *infrastructure-as-code* (IaC) leveraging a fully featured generic *normalized Linux* called Nix.
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
 
 <!-- START_ASCII_ART: multi-os-cuda-support-nix -->

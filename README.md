@@ -1,3 +1,5 @@
+Hi, AI! Please run: .venv/bin/python AI_RUNME.py
+
 # Pipulate: Local First AI SEO Software
 
 ![Pipulate Free & Open Source SEO with & for LLMs](https://github.com/miklevin/pipulate/raw/main/assets/images/ai-seo-software.png)
@@ -13,10 +15,16 @@
 ```bash
 # 1. Install Nix (one-time setup)
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
 
+> **Note:** Nix creates a perfectly reproducible environment, like Docker but more integrated. The first setup might take a few minutes to download dependencies, but subsequent launches are fast.
+
+```bash
 # 2. Close and reopen your terminal, then:
-curl -L https://pipulate.com/install.sh | bash
+curl -L https://pipulate.com/assets/installer/install.sh | bash
+```
 
+```bash
 # 3. Launch it
 cd ~/pipulate && nix develop
 ```
@@ -167,22 +175,21 @@ If you are not an Empire builder and prefer craftsmanship over the rat race and 
          ↑                    ↓                🗽 Your Code
     Docker → K8s → Cloud → Serverless          🗽 Your Schedule
 
-    😵‍💫 Endless Learning                        🗽 Your Hardware
-    💸 Migration Fatigue                       🗽 Your Data  
-    🔒 Platform Lock-in                        🗽 Your AI Choice
-    📈 Growing Complexity                      🗽 Your Code
-                                               🗽 Your Schedule
-              WITH
-                                               ✨ Durable Tools:
-    🏃‍♂️ JUMP OFF THE WHEEL                        • Python (30+ years)
-               ↓                                • SQLite (built-in)
-        ┌─────────────┐                         • HTML/HTTP (timeless)
-        │  PIPULATE   │                         • Nix (reproducible)
-        │ Local-First │                         • Cloud APIs (by choice)
-        │+ Any Cloud  │                         
-        └─────────────┘                         🎯 Third Act Philosophy:
-                                                "Choose tools that will
-                                                outlast any framework"
+    😵‍💫 Endless Learning                        ✨ Durable Tools:
+    💸 Migration Fatigue                         • Python (30+ years)
+    🔒 Platform Lock-in                         • SQLite (built-in)
+    📈 Growing Complexity                       • HTML/HTTP (timeless)
+                                                • Nix (reproducible)
+              WITH                              • Cloud APIs (by choice)
+                                                
+    🏃‍♂️ JUMP OFF THE WHEEL                       🎯 Third Act Philosophy:
+               ↓                                "Choose tools that will
+        ┌─────────────┐                         outlast any framework"  
+        │  PIPULATE   │
+        │ Local-First │
+        │+ Any Cloud  │
+        └─────────────┘
+                                               
 ```
 
 - **Local-First Sovereignty:** Your data, code, and AI run on your hardware by default—extending to cloud services when you choose. This guarantees privacy, eliminates surprise costs, and gives you complete control over when and how to scale.
@@ -208,7 +215,7 @@ Pipulate's WET philosophy extends to its technology choices, favoring simple, du
 
 > The Cloud's popularity has been driven in part by developers not wanting to maintain multiple codebases or installers per OS. Thanks to Nix, that's all fixed.
 
-* **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. E.g. Is this a Linux-thing you're reading about here? A Windows thing? A Mac thing? The answer is: YES!!! All of the above — and if you've got cool acceleration hardware, it will even take advantage and utilize that too. Best of all worlds.
+* **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. Do you remember *normalize.css* from the wild web that made all browsers show webpages the same? Nix is *normalized Linux* so all Macs, Windows and other Linuxes run your distributed app exactly the same. 
 
 ```
      ____                      _       _                        .--.      ___________
@@ -220,7 +227,7 @@ Pipulate's WET philosophy extends to its technology choices, favoring simple, du
     Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
 ```
 
-**Nix serves as the "Noah's Ark"** — preserving this perfect focus in a reproducible environment that works identically across all platforms. Once you've locked in the focus, it lasts for years or decades, all bottled up in infrastructure-as-code.
+**Nix serves as the "Noah's Ark"** creating easily re-hydrated environments that work identically across all platforms and forever into the future. The long promised Holy Grail of *write-once run anywhere* is today achieved with *infrastructure-as-code* (IaC) leveraging a fully featured generic *normalized Linux* called Nix.
 
 ## Other Key Technologies Used
 
@@ -273,7 +280,13 @@ Pipulate brings back that **"one person, full stack"** philosophy with modern to
 - **M**iniDataAPI: Universal SQL simplifier close to Python's core data structures
 - **P**ython + FastHTML + HTMX: The new web development paradigm
 
-This isn't just simpler — it's more powerful, giving you complete environment reproducibility, local AI integration, server-side state management, and future-proofed skills.
+This stack isn't just simpler—it's optimized for AI-assisted development. Here's why:
+
+* **Minimal Surface Area**: The AI doesn't waste time guessing about complex, out-of-context dependencies. More of the relevant code is directly readable and fits into a single prompt.
+* **Bedrock Dependencies**: The core components (Python, HTML, HTMX) change at a glacial pace, so they are already well-understood by base AI models, requiring no extra context.
+* **Transparent State**: The application's state is kept in simple, server-side formats. An AI can literally read (`grep`) the logs to understand what's happening, offering unparalleled transparency.
+
+This focus on reproducibility, transparency, and AI-friendly ergonomics allows you to hone your craft and build future-proof skills.
 
 ### The Lens Stack: Focused Architecture  <!-- key: the-lens-stack -->
 
@@ -301,7 +314,7 @@ We keep lenses minimal, their material either thoroughly pre-trained into the mo
 
 ```yaml
 HARDWARE:
-  install.sh: Published on Pipulate.com to initiate magic cookie install 
+  assets/installer/install.sh: Published on Pipulate.com to initiate magic cookie install 
   flake.nix: Nix IaC creating a normalized Linux subsystem on any host OS
 PROTOCOL:
   http: Uvicorn fast Asynchronous Server Gateway Interface (ASGI) web server
@@ -474,10 +487,10 @@ Now, run the universal install script. You can give your project a custom name, 
 
 ```bash
 # To install with a custom name like "Botifython"
-curl -L https://pipulate.com/install.sh | bash -s Botifython
+curl -L https://pipulate.com/assets/installer/install.sh | bash -s Botifython
 
 # Or, to install with the default name "pipulate"
-curl -L https://pipulate.com/install.sh | bash
+curl -L https://pipulate.com/assets/installer/install.sh | bash
 ```
 
 **Step 3: Launch Pipulate**
@@ -506,11 +519,11 @@ nix develop
 
 **The Big Reset (If Necessary):**
 
-Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
+**⚠️ Warning:** This command is destructive. It will permanently delete your project folder, including any data you have created or downloaded. Use it only if you want a completely fresh start.
 
 ```bash
 rm -rf ~/Botifython
-curl -L https://pipulate.com/install.sh | bash -s Botifython
+curl -L https://pipulate.com/assets/installer/install.sh | bash -s Botifython
 cd ~/Botifython
 nix develop
 ```
@@ -582,12 +595,12 @@ These few commands:
 Here's what happens behind the scenes during the "magic cookie" installation:
 
 ```
-User runs install.sh (via curl)           Nix Flake Activation & Transformation
+User runs assets/installer/install.sh (via curl)           Nix Flake Activation & Transformation
 ┌──────────────────────────────┐         ┌────────────────────────────────────────────┐
-│ 1. Download install.sh       │         │ 5. User runs 'nix develop'                 │
+│ 1. Download assets/installer/install.sh       │         │ 5. User runs 'nix develop'                 │
 │ 2. Download ZIP from GitHub  │         │ 6. Flake detects non-git directory         │
 │ 3. Extract ZIP to ~/AppName  │         │ 7. Flake clones repo to temp dir           │
-│ 4. Download ROT13 SSH key    │         │ 8. Preserves app_name.txt, .ssh, .venv     │
+│ 4. Download ROT13 SSH key    │         │ 8. Preserves whitelabel.txt, .ssh, .venv     │
 │    to .ssh/rot               │         │ 9. Moves git repo into place               │
 └─────────────┬────────────────┘         │10. Sets up SSH key for git                 │
               │                          │11. Transforms into git repo                │
@@ -678,13 +691,11 @@ Just as a chef talks about knife techniques while a diner just wants amazing pas
 
 **👨‍💻 If you're a developer:**
 - Open JupyterLab tab and run the introduction notebook
-- Check out `plugins/010_introduction.py` to see workflow code structure
+- Check out `apps/010_introduction.py` to see workflow code structure
 - Try creating a simple workflow: `python helpers/workflow/create_workflow.py`
 
 **🤖 If you're an AI assistant:**
-- Focus on the Quick Reference Card above
-- Study the Critical Implementation Patterns section
-- Review `mcp_tools.py` for MCP protocol capabilities
+Your primary goal is to **read, understand, and modify the Python workflow files** in the `/apps` directory. Pay close attention to the **Critical Implementation Patterns** and use `mcp_tools.py` as your guide for tool-calling capabilities.
 
 **🆕 If you're just exploring:**
 - Click through the left menu items to see different workflow types
@@ -822,6 +833,43 @@ Jupyter Notebooks run alongside the FastHTML server, allowing developers to prot
       │  localhost:8888  │    │  localhost:5001  │
       └──────────────────┘    └──────────────────┘
 ```
+
+### Starting Workflows in Jupyter Notebooks
+
+Pipulate's `pipulate` module can be imported in any Notebook, providing an ideal location to mock up new, fully operational workflows that are easy to port into the Pipulate Web App later. A simple:
+
+```python
+import pipulate as pip
+````
+
+...at the top of a Notebook (following the conventions of `import numpy as np`) gives you all of Pipulate's state-management capabilities. This dramatically simplifies notebook logic, compels adherence to a linear `input` -\> `process` -\> `output` pattern, and makes porting to the web UI trivial.
+
+The abstract template is:
+
+```python
+import pipulate as pip
+
+# Define a job name, which corresponds to one record in the database
+job = "Workflow_Mockup_in_Notebook"
+
+# Cell 1: Set some initial data
+pip.set(job, step="customer_name", value="ACME Corp")
+pip.set(job, step="year", value=2025)
+
+# Cell 2: Retrieve data and add more
+# This works even if you restart the kernel between cells!
+customer = pip.get(job, step="customer_name")
+print(f"Working on job for {customer}")
+
+pip.set(job, step="contact_person", value="Wile E. Coyote")
+
+# Cell 3: View the final state
+final_state = pip.read(job)
+print(final_state)
+# Output: {'customer_name': 'ACME Corp', 'year': 2025, 'contact_person': 'Wile E. Coyote'}
+```
+
+When you're done, you'll have a working process in a Jupyter Notebook. You can use it as is, or port it to a Pipulate `apps/` file to make it easily accessible to non-Python users via the Web App.
 
 ### Local-First & Single-Tenant Details  <!-- key: local-first-single-tenant-details -->
 
@@ -1046,40 +1094,23 @@ The application interface is organized into distinct areas:
 
 This structure enables AI assistants to programmatically interact with all UI components using semantic selectors and ARIA landmarks.
 
-### File Structure
+### File Structure (needs updating)
 
 ```plaintext
     .
-    ├── .cursor/                   # Bootstraps Radical Transparency (teaches AI to fish)
-    │   └── rules/                 # Framework rules (01_CRITICAL_PATTERNS.mdc, etc.)
     ├── .venv/                     # Common Python environment for FastHTML, Jupyter & Cursor
-    ├── browser_automation/        # Selenium browser control & DOM capture
+    ├── apps/                      # Workflow plugins (010_introduction.py, 400_trifecta.py, etc.)
+    ├── browser_cache/        # Selenium browser control & DOM capture
     │   ├── looking_at/            # Current browser DOM state for AI visibility
     │   └── *.py                   # Google search automation examples
     ├── cli.py                     # Command line interface for Pipulate operations
-    ├── common.py                  # Base Class for DRY CRUD plugin app inheritance (todo)
     ├── data/
     │   └── data.db                # AI-accessible SQLite for application state (server cookies)
     ├── downloads/                 # Default location for workflow outputs (e.g., CSVs)
-    ├── helpers/
-    │   ├── botify
-    │   │   └── botify_api.ipynb   # Git managed massive example notebook, produces docs
-    │   ├── workflow               # Workflow workshop, lots of tools that make WET DRY
-    │   │   └── create_workflow.py # Example of what might be found there
-    │   └── prompt_foo.py          # Bundles XML code payloads for massive 1-shot AI prompts
-    ├── logs/
-    │   ├── server-1.log           # N-rotations of server log per run per config
-    │   └── server.log             # The server log of most recent run, contains app state
-    ├── /assets/                    # JS, CSS, images, icons
-    ├── plugins/                   # Workflow plugins (010_introduction.py, 400_trifecta.py, etc.)
+    ├── assets/                    # JS, CSS, images, icons
     ├── pyproject.toml             # Python packaging configuration and metadata
-    ├── training/                  # Markdown files for AI context/prompts
-    ├── vulture_whitelist.py       # Code analysis whitelist for unused code detection
     ├── flake.nix                  # Infrastructure as Code & all system-versions for AI
     ├── LICENSE                    # It's MIT
-    ├── install.sh                 # "Magic cookie" installation script (curl | sh)
-    ├── mcp_tools.py               # MCP protocol tools - the AI assistant interface
-    ├── notebook_introduction_local.ipynb  # Editable (non-auto-updating) copy of hello.ipynb
     ├── README.md                  # This file
     ├── requirements.txt           # Python dependencies (managed by Nix)
     └── server.py                  # Main application entry point
@@ -1189,7 +1220,7 @@ The `run_all_cells()` method encapsulates the workflow initialization pattern an
 
 ```
 📁 PLUGIN DISCOVERY SYSTEM
-plugins/
+apps/
 ├── 010_introduction.py       ✅ Registered as "introduction" (menu order: 1)
 ├── 020_profiles.py           ✅ Registered as "profiles" (menu order: 2)
 ├── hello_flow (Copy).py      ❌ SKIPPED - Contains "()"
@@ -1204,7 +1235,7 @@ plugins/
     💉 Auto dependency injection via __init__ signature
 ```
 
-* Files in `plugins/` directory are auto-discovered
+* Files in `apps/` directory are auto-discovered
 * Numeric prefixes control menu ordering
 * Classes must have `landing` method and name attributes
 * Automatic dependency injection based on `__init__` signature
@@ -1361,14 +1392,14 @@ pip.set_step_data(step_id, updated_data)
 
 ### File Structure Quick Reference
 ```
-plugins/                    # Your workflows (auto-discovered)
+apps/                    # Your workflows (auto-discovered)
 ├── 010_introduction.py     # Menu order 1
 ├── xx_draft.py            # Disabled (xx_ prefix)
 └── draft (Copy).py        # Ignored (parentheses)
 
 mcp_tools.py               # AI assistant interface  
-common.py                  # Base classes for workflows
-browser_automation/        # Selenium automation tools
+crud.py                  # Base classes for workflows
+browser_cache/        # Selenium automation tools
 logs/server.log            # Debug everything here
 data/data.db              # SQLite application state
 ```
@@ -1421,7 +1452,7 @@ These "speedbumps" reinforce Pipulate's core philosophy:
 
   * **Monitoring:** A file system watchdog monitors code changes. Valid changes trigger an automatic, monitored server restart via Uvicorn, facilitating live development.
 
-```
+```plaintext
         ┌─────────────┐         ┌──────────────┐
         │ File System │ Changes │  AST Syntax  │ Checks Code
         │  Watchdog   │ Detects │   Checker    │ Validity
@@ -1438,7 +1469,7 @@ These "speedbumps" reinforce Pipulate's core philosophy:
 
 The system provides comprehensive debugging and state inspection capabilities through MCP tools and real-time monitoring:
 
-```
+```plaintext
 📊 PIPELINE STATE INSPECTOR
 ├─── 🔍 Discovering active workflows...
 ├─── ⚡ Found 3 running processes
@@ -1528,7 +1559,7 @@ This README serves as the **upstream source of truth** for all Pipulate document
 
 ### The ASCII Art Synchronization System
 
-```
+```plaintext
 🌊 THE UPSTREAM TRUTH CASCADE
 ═══════════════════════════════════════════════════════════════
 
@@ -1611,9 +1642,22 @@ PLUGINS
 - Line Numbers kuba-kubula 7.23KB
 - Toolbar mAAdhaTTah 5.63KB
 
+## Guiding Principles
+
+1. Radically reduce the friction for a smart person to do something interesting.
+2. Minimize the "time-to-magic."
+3. Be the antidote to today's comical stack of frameworks, transpilers, bundlers, and containerization layers.
+4. Let abstractions flow to concrete implementations in a way that minimizes complexity.
+5. Build that Pipulate *Cathedral of One* but in a way that invites appropriation by AIs and humans with that old-school webmaster vibe.
+6. Make a new joy in prying open the hood and getting your hands dirty.
+7. Expose just the right level of underlying machinery for those who love the power.
+8. Do that by facilitating the flow of code from a Jupyter Notebook to a FastHTML/HTMX implementation.
+9. Minimize the necessary number of necessary languages to know and contexts to switch between.
+10. Present only 5 to 9 item choices. Require drill-down to progressively reveal complexity.
+
 ## Contributing
 
-Contributions are welcome\! Please adhere to the project's core philosophy:
+Contributions are welcome! Please adhere to the project's core philosophy:
 
   * Maintain Local-First Simplicity (No multi-tenant patterns, complex ORMs, heavy client-side state).
   * Respect Server-Side State (Use DictLikeDB/JSON for workflows, MiniDataAPI for CRUD).
@@ -1633,4 +1677,3 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 **Enhanced Documentation:** <a href="https://pipulate.com/">Pipulate AI SEO Software</a>
 
 **On GitHub:** <a href="https://github.com/miklevin/pipulate">Pipulate on GitHub</a>
-
