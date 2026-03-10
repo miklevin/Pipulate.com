@@ -11,34 +11,23 @@ Get started with the local-first revolution. Two commands and you're running.
 
 ---
 
-## Quick Start Guide
-
-### 1. Install Nix (One-Time Setup)
+## Main Installation Plan
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+# 1. Install Pipulate (one-time setup)
+curl -L https://pipulate.com/install.sh | bash -s TestProject
 ```
 
-**Close your terminal and open a new one after installation.**
-
-### 2. Install Pipulate
-
-With a custom name
-```bash
-curl -L https://pipulate.com/install.sh | sh -s Botifython
-```
-
-Or default installation
-```bash
-curl -L https://pipulate.com/install.sh | sh
-```
-
-### 3. Run It
+> **Note:** Nix creates a perfectly reproducible environment, like Docker but more integrated. The first setup might take a few minutes to download dependencies, but subsequent launches are fast.
 
 ```bash
-cd ~/Botifython
-./run
+# 2. Launch it
+cd ~/TestProject && ./run
 ```
+
+**What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
+
+**Success looks like:** Two browser tabs auto-open showing the Pipulate interface and JupyterLab.
 
 These few commands:
 - ✅ Updates to the latest version automatically
@@ -54,7 +43,7 @@ These few commands:
 2. Open a new Terminal, and once again:
 
 ```bash
-cd ~/Botifython
+cd ~/TestProject
 ./run
 ```
 
@@ -63,17 +52,77 @@ cd ~/Botifython
 Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
 
 ```bash
-rm -rf ~/Botifython
-curl -L https://pipulate.com/install.sh | sh -s Botifython
-cd ~/Botifython
+rm -rf ~/TestProject
+curl -L https://pipulate.com/install.sh | sh -s TestProject
+cd ~/TestProject
 ./run
 ```
 
 Wait for ***BOTH TABS*** to auto-open in your browser.
 
-<!-- START_ASCII_ART: 2-install-pipulate -->
-[Installation process diagram will be inserted here]
-<!-- END_ASCII_ART: 2-install-pipulate -->
+
+### Installation Strategy: Universal First, PyPI Alternative
+
+We offer two installation paths that lead to the exact same robust, Nix-managed environment. Choose the path that best fits your experience level and preferences.
+
+```text
+                            ┌────────────────────────────┐
+                            │      New User on macOS     │
+                            └─────────────┬──────────────┘
+                                          │
+                  ┌───────────────────────┴───────────────────────┐
+                  │                                               │
+                  ▼                                               ▼
+  ┌──────────────────────────────────┐   ┌───────────────────────────────────────────┐
+  │ PATH 1: Recommended for Everyone │   │ PATH 2: Alternative for Python Developers │
+  └──────────────────────────────────┘   └───────────────────────────────────────────┘
+                  │                                               │
+  "I want the simplest, most               "I prefer managing my command-line
+   direct way to get this running."        tools with standard Python utilities."
+                  │                                               │
+                  ▼                                               ▼
+  1. `curl ... [nix]`                      1. `brew install pipx` (If needed)
+  2. `curl ... [pipulate]`                 2. `pipx install pipulate`
+                                           3. `pipulate install`
+                  │                                               │
+                  └───────────────┐               ┌───────────────┘
+                                  │               │
+                                  ▼               ▼
+                            ┌────────────────────────────┐
+                            │    Nix-Managed Pipulate    │
+                            │        Environment         │
+                            └────────────────────────────┘
+                                         ||
+                                    (Identical
+                                      Result)
+```
+
+### PATH 1: Quick Start — Universal Installation (Recommended)
+
+This is the fastest and most universal way to install Pipulate. It has the fewest dependencies and works on any modern Mac, Linux system, or Windows with WSL.
+
+```text
+
+    📦 Your Machine            🔧 Add Foundation       🚀 Complete Environment
+         Today                       with Nix                 Ready to Go!
+
+    ┌─────────────┐             ┌─────────────┐             ┌─────────────┐
+    │ Sad Computer│    Step 1   │   🏗️ Nix    │    Step 2   │ 🎯 Pipulate │
+    │   Without   │ ──────────► │ Foundation  │ ──────────► │   + AI +    │
+    │    Nix😢    │             │  Installed  │             │   Jupyter   │
+    └─────────────┘             └─────────────┘             └─────────────┘
+                                                                    │
+                                                             Step 3 │
+                                                                    ▼
+                                                             ┌─────────────┐
+                                                             │ 🌐 Browser  │
+                                                             │    Opens    │
+                                                             │Automatically│
+                                                             └─────────────┘
+
+    Simple as 1-2-3! No Docker, no build steps, works with or without cloud services.
+Everything runs locally with complete flexibility and control.
+```
 
 ### Force Restart
 
@@ -82,7 +131,7 @@ If you need to force-close everything:
 1. Press `Ctrl+C` repeatedly until the terminal exits
 2. Close the terminal window
 3. Open a new terminal
-4. `cd ~/pipulate && ./run`
+4. `cd ~/TestProject && ./run`
 
 ### Uninstalling Nix
 
@@ -133,13 +182,14 @@ This eliminates the "works on my machine" problem and ensures Pipulate runs reli
 * **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. Do you remember *normalize.css* from the wild web that made all browsers show webpages the same? Nix is *normalized Linux* so all Macs, Windows and other Linuxes run your distributed app exactly the same.
 
 ```
-     ____                      _       _                        .--.      ___________
-    |  _ \  __ _ _ ____      _(_)_ __ (_)_  __    ,--./,-.     |o_o |    |     |     |
-    | | | |/ _` | '__\ \ /\ / / | '_ \| \ \/ /   / #      \    |:_/ |    |     |     |
-    | |_| | (_| | |   \ V  V /| | | | | |>  <   |          |  //   \ \   |_____|_____|
-    |____/ \__,_|_|    \_/\_/ |_|_| |_|_/_/\_\   \        /  (|     | )  |     |     |
-                                                  `._,._,'  /'\_   _/`\  |     |     |
-    Solving the "Not on my machine" problem well.           \___)=(___/  |_____|_____|
+                                                      .--.      ___________
+      _      http://levinix.com         ,--./,-.     |o_o |    |     |     |
+     | |    _____   _(_)_ __ (_)_  __  / #      \    |:_/ |    |     |     |
+     | |   / _ \ \ / / | '_ \| \ \/ / |          |  //   \ \   |_____|_____|
+     | |__|  __/\ V /| | | | | |>  <   \        /  (|     | )  |     |     |
+     |_____\___| \_/ |_|_| |_|_/_/\_\   `._,._,'  /'\_   _/`\  |     |     |
+                                                  \___)=(___/  |_____|_____|
+
 ```
 
 **Nix serves as the "Noah's Ark"** creating easily re-hydrated environments that work identically across all platforms and forever into the future. The long promised Holy Grail of *write-once run anywhere* is today achieved with *infrastructure-as-code* (IaC) leveraging a fully featured generic *normalized Linux* called Nix.
