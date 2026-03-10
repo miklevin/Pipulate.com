@@ -26,7 +26,7 @@ curl -L https://pipulate.com/assets/installer/install.sh | bash
 
 ```bash
 # 3. Launch it
-cd ~/pipulate && nix develop
+cd ~/pipulate && ./run
 ```
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
@@ -214,6 +214,19 @@ Pipulate's WET philosophy extends to its technology choices, favoring simple, du
 ## *Not On My Machine* Problem Fixed  <!-- key: not-on-my-machine-problem-fixed -->
 
 > The Cloud's popularity has been driven in part by developers not wanting to maintain multiple codebases or installers per OS. Thanks to Nix, that's all fixed.
+
+### The Bedrock Architecture: Why We Don't Use Docker
+
+> **The Prediction (2025)**: The "Container Era" is a transition, not a destination. We are currently shipping entire user-space operating systems (Docker images) just to run a single binary. It is inefficient, opaque, and fundamentally insecure.
+
+**Pipulate bets on the "Derivation Era."**
+
+In this future, we don't ship containers; we ship **formulas**. We ship the mathematical derivation that *results* in the software.
+
+* **The Old Way (Docker):** "Here is a 500MB blob of binary data. Trust me, it works."
+* **The Bedrock Way (Nix):** "Here is a 2KB text file (`flake.nix`). If you evaluate it, you will get the exact same bit-for-bit result I have."
+
+**Why this matters for AI:** AI agents cannot "troubleshoot" why `libc` is missing in a random Ubuntu container. AI needs determinism. It needs a world where `Input + Code = Output`, every single time, without exception. Nix is the only OS that speaks the language of AI: **Pure Functional Logic.**
 
 * **Nix Flakes:** Manages dependencies and creates reproducible environments, ensuring consistency across developers and operating systems, with optional CUDA support. Do you remember *normalize.css* from the wild web that made all browsers show webpages the same? Nix is *normalized Linux* so all Macs, Windows and other Linuxes run your distributed app exactly the same. 
 
@@ -502,7 +515,7 @@ Navigate into your new project directory and launch the environment with `nix de
 cd ~/Botifython
 
 # Launch Pipulate
-nix develop
+./run
 ```
 
 That's it! The server and JupyterLab will start, and the application will open in your browser.
@@ -514,7 +527,7 @@ That's it! The server and JupyterLab will start, and the application will open i
 
 ```bash
 cd ~/Botifython
-nix develop
+./run
 ```
 
 **The Big Reset (If Necessary):**
@@ -525,7 +538,7 @@ nix develop
 rm -rf ~/Botifython
 curl -L https://pipulate.com/assets/installer/install.sh | bash -s Botifython
 cd ~/Botifython
-nix develop
+./run
 ```
 
 Wait for ***BOTH TABS*** to auto-open in your browser.
@@ -609,6 +622,19 @@ User runs assets/installer/install.sh (via curl)           Nix Flake Activation 
       │ Result: Fully functional, auto-updating, git-based Pipulate installation    │
       └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+### The "Magic Cookie" Pattern: Bridging the Chasm
+
+This installation method is a deliberate architectural pattern designed to lower the **Activation Energy** of adopting immutable infrastructure.
+
+Standard Nix adoption fails because it demands users learn a new language and mental model *before* they can run "Hello World." We inverted the dependency graph:
+
+1.  **Universal Entry:** We use `curl|bash` (the lowest common denominator).
+2.  **The Trojan Horse:** We download a Zip (bypassing the need for Git configuration).
+3.  **Self-Bootstrapping:** The Flake activates itself, installing the tools needed to manage itself.
+4.  **The Metamorphosis:** Only *after* the environment is stable do we transform the directory into a Git repository.
+
+You aren't just running a script; you are instantiating a self-healing, mathematically reproducible development environment that creates its own "Bedrock" on your machine.
 
 --------------------------------------------------------------------------------
 
@@ -1353,10 +1379,10 @@ create_workflow.py               │ └──────┬──────�
 ### Essential Commands
 ```bash
 # Development workflow
-cd ~/pipulate && nix develop          # Start Pipulate
+cd ~/pipulate && ./run          # Start Pipulate
 nix develop .#quiet                   # Start without auto-services
 python server.py                     # Manual server start
-git pull && nix develop              # Update to latest
+git pull && ./run              # Update to latest
 
 # Create new workflows  
 python helpers/workflow/create_workflow.py my_workflow.py MyClass my_internal_name
@@ -1488,6 +1514,16 @@ The system provides comprehensive debugging and state inspection capabilities th
 ## The Deeper Philosophy: Why This Matters  <!-- key: deeper-philosophy -->
 
 Pipulate represents more than technology choices — it's a statement about **computing sovereignty** and the future of human-AI collaboration.
+
+### The Inevitable Retcon
+
+In a few years, the industry will pivot away from mutable containers and claim they invented "AI-Native Infrastructure"—declarative, reproducible environments that allow AI agents to write code without breaking dependencies. They will package it in slick UIs and hide the math.
+
+When that happens, remember that **Pipulate was here first.**
+
+We built the bridge so you could cross the chasm from "Hacking it until it works" to "Declaring it until it builds" without falling in. We chose **Friction** (strict reproducibility) because friction is the only enemy of **Entropy** (system rot).
+
+While others fight to keep their containers from drifting, you will be standing on the Bedrock.
 
 ### The Bootstrap Paradox Solved  <!-- key: bootstrap-paradox-solved -->
 

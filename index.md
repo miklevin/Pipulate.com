@@ -35,7 +35,7 @@ curl -L https://pipulate.com/install.sh | sh
 
 ```bash
 cd ~/Botifython
-nix develop
+./run
 ```
 
 These few commands:
@@ -53,7 +53,7 @@ These few commands:
 
 ```bash
 cd ~/Botifython
-nix develop
+./run
 ```
 
 ### 5. The Big Reset (If Necessary)
@@ -64,7 +64,7 @@ Things sometimes go wrong. This is how you do a full Pipulate reset. This will a
 rm -rf ~/Botifython
 curl -L https://pipulate.com/install.sh | sh -s Botifython
 cd ~/Botifython
-nix develop
+./run
 ```
 
 Wait for ***BOTH TABS*** to auto-open in your browser.
