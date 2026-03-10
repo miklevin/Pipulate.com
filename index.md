@@ -11,32 +11,23 @@ In an era dominated by cloud subscriptions and complex frameworks, **Pipulate ch
 
 ## Quick Start: Be Running in 5 Minutes
 
-### 1. Install Nix (One-Time Setup)
+**Want to skip the philosophy and just see what this does?**
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+# 1. Install Pipulate (one-time setup)
+curl -L https://pipulate.com/install.sh | bash -s TestProject
 ```
 
-**Close your terminal and open a new one after installation.**
-
-### 2. Install Pipulate
-
-With a custom name (*"white-labeled"* as Botifython)
-```bash
-curl -L https://pipulate.com/install.sh | sh -s Botifython
-```
-
-Or default (non-white-labeled) installation
-```bash
-curl -L https://pipulate.com/install.sh | sh
-```
-
-### 3. Run It
+> **Note:** Nix creates a perfectly reproducible environment, like Docker but more integrated. The first setup might take a few minutes to download dependencies, but subsequent launches are fast.
 
 ```bash
-cd ~/Botifython
-./run
+# 2. Launch it
+cd ~/pipulate && ./run
 ```
+
+**What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
+
+**Success looks like:** Two browser tabs auto-open showing the Pipulate interface and JupyterLab.
 
 These few commands:
 - ✅ Updates to the latest version automatically
@@ -52,7 +43,7 @@ These few commands:
 2. Open a new Terminal, and once again:
 
 ```bash
-cd ~/Botifython
+cd ~/TestProject
 ./run
 ```
 
@@ -61,9 +52,9 @@ cd ~/Botifython
 Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
 
 ```bash
-rm -rf ~/Botifython
-curl -L https://pipulate.com/install.sh | sh -s Botifython
-cd ~/Botifython
+rm -rf ~/TestProject
+curl -L https://pipulate.com/install.sh | sh -s TestProject
+cd ~/TestProject
 ./run
 ```
 
