@@ -22,7 +22,7 @@ curl -L https://pipulate.com/install.sh | bash -s TestProject
 
 ```bash
 # 2. Launch it
-cd ~/pipulate && ./run
+cd ~/TestProject && ./run
 ```
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
