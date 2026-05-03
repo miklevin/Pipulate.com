@@ -52,8 +52,7 @@ Things sometimes go wrong. This is how you do a full Pipulate reset. This will a
 
 ```bash
 rm -rf ~/pipulate
-curl -fsSL https://pipulate.com/install.sh | sh -s TestProject
-nix develop
+curl -fsSL https://pipulate.com/install.sh | bash
 ```
 
 Wait for ***BOTH TABS*** to auto-open in your browser.
