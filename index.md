@@ -15,14 +15,14 @@ In an era dominated by cloud subscriptions and complex frameworks, **Pipulate ch
 
 ```bash
 # 1. Install Pipulate (one-time setup)
-curl -L https://pipulate.com/install.sh | bash -s TestProject
+curl -fsSL https://pipulate.com/install.sh | bash
 ```
 
 > **Note:** Nix creates a perfectly reproducible environment, like Docker but more integrated. The first setup might take a few minutes to download dependencies, but subsequent launches are fast.
 
 ```bash
 # 2. Launch it
-cd ~/TestProject && ./run
+nix develop
 ```
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
@@ -43,8 +43,8 @@ These few commands:
 2. Open a new Terminal, and once again:
 
 ```bash
-cd ~/TestProject
-./run
+cd ~/pipulate
+nix develop
 ```
 
 ### 5. The Big Reset (If Necessary)
@@ -52,10 +52,9 @@ cd ~/TestProject
 Things sometimes go wrong. This is how you do a full Pipulate reset. This will also delete anything you downloaded with Pipulate. Adjust custom install name to what you used.
 
 ```bash
-rm -rf ~/TestProject
-curl -L https://pipulate.com/install.sh | sh -s TestProject
-cd ~/TestProject
-./run
+rm -rf ~/pipulate
+curl -fsSL https://pipulate.com/install.sh | sh -s TestProject
+nix develop
 ```
 
 Wait for ***BOTH TABS*** to auto-open in your browser.
