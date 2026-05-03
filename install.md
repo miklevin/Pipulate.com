@@ -196,7 +196,7 @@ This eliminates the "works on my machine" problem and ensures Pipulate runs reli
 <!-- END_ASCII_ART: not-on-my-machine-problem-fixed -->
 
 <!-- START_ASCII_ART: multi-os-cuda-support-nix -->
-### Multi-OS & CUDA Support (Nix)  <!-- key: multi-os-cuda-support-nix -->
+### Multi-OS & CUDA Support (Nix)
 
 Nix Flakes ensure a consistent environment across Linux, macOS, and Windows (via WSL), optionally leveraging CUDA GPUs if detected.
 

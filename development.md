@@ -687,7 +687,7 @@ see it there, then use `python server.py`. If you don't, then use `nix develop`.
 Pipulate's interface is organized into distinct functional areas that provide a clean, intuitive development experience:
 
 <!-- START_ASCII_ART: ui-layout -->
-### UI Layout  <!-- key: ui-layout -->
+### UI Layout
 
 The application interface is organized into distinct areas
 
