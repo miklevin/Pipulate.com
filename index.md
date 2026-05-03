@@ -9,12 +9,12 @@ group: home
 
 In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it. Think: Notebooks without having to look at the Python code.
 
+# --- UPDATE THE QUICK START SECTION ---
 ## Quick Start: Be Running in 5 Minutes
 
-**Want to skip the philosophy and just see what this does?**
+**Want to skip the philosophy and just see what this does? Paste this into your terminal:**
 
 ```bash
-# 1. Install Pipulate (one-time setup)
 curl -fsSL https://pipulate.com/install.sh | bash
 ```
 
