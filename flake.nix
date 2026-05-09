@@ -163,6 +163,11 @@
           # Alias vim to nvim
           alias vim=nvim
 
+          # Clean up the prompt to remove Nix's redundant prefixes and Mac's long hostname
+          export PS1="\[\033[1;32m\](nix)\[\033[0m\] \[\033[1;34m\]\W\[\033[0m\] $ "
+
+          alias isnix="echo '✓ In Nix shell'"
+
           # Jekyll serve function with automatic environment checks
           jes() {
             echo "Jekyll Environment Script v1.0.6"
