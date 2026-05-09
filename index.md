@@ -26,7 +26,7 @@ nix develop
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
 
-**Success looks like:** Two browser tabs auto-open showing the Pipulate interface and JupyterLab.
+**Success looks like:** A JupyterLab Notebook tab opens in your default browser and Onboards you to the FastHTML web app.
 
 These few commands:
 - ✅ Updates to the latest version automatically
