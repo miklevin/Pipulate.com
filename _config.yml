@@ -6,19 +6,17 @@ gaid: G-45KYH6XTTX
 # 1. Global default permalink for all collections
 permalink: /:slug/
 
-# Ensure installation files are accessible
+# Ensure installation files and root docs are accessible
 include:
   - install.sh
   - key.rot
+  - README.md
+  - AUDIT.md
 
 # Define collections (to make Jekyll aware of your "_guides" folder)
 collections:
   guide:
     output: true
-
-# Add this section to specify which files should be copied without processing
-include:
-  - README.md
 
 # 2. Set specific permalinks for each content type using defaults
 defaults:
