@@ -22,12 +22,12 @@ curl -L https://pipulate.com/install.sh | bash -s TestProject
 
 ```bash
 # 2. Launch it
-cd ~/TestProject && ./run
+cd ~/TestProject && nix develop
 ```
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
 
-**Success looks like:** Two browser tabs auto-open showing the Pipulate interface and JupyterLab.
+**Success looks like:** The JupyterLab tab auto-opens in your browser. Run the Onboarding notebook top-to-bottom to unlock the Pipulate app (it opens automatically on future launches).
 
 These few commands:
 - ✅ Updates to the latest version automatically
@@ -44,7 +44,7 @@ These few commands:
 
 ```bash
 cd ~/TestProject
-./run
+nix develop
 ```
 
 ### 5. The Big Reset (If Necessary)
@@ -53,12 +53,12 @@ Things sometimes go wrong. This is how you do a full Pipulate reset. This will a
 
 ```bash
 rm -rf ~/TestProject
-curl -L https://pipulate.com/install.sh | sh -s TestProject
+curl -L https://pipulate.com/install.sh | bash -s TestProject
 cd ~/TestProject
-./run
+nix develop
 ```
 
-Wait for ***BOTH TABS*** to auto-open in your browser.
+Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to unlock the Pipulate app.
 
 
 ### Installation Strategy: Universal First, PyPI Alternative
@@ -131,7 +131,7 @@ If you need to force-close everything:
 1. Press `Ctrl+C` repeatedly until the terminal exits
 2. Close the terminal window
 3. Open a new terminal
-4. `cd ~/TestProject && ./run`
+4. `cd ~/TestProject && nix develop`
 
 ### Uninstalling Nix
 
