@@ -27,10 +27,8 @@
             <div class="nav-buttons" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center;">
                 <nav>
                     <a class="nav-link {% if page.group == 'home' or page.url == "/" %}current{% endif %}" href="/">Home</a>
-                    <a class="nav-link {% if page.group == 'about' or page.category == 'about' %}current{% endif %}" href="/about/">About</a>
                     <a class="nav-link {% if page.group == 'install' or page.category == 'install' %}current{% endif %}" href="/install/">Install</a>
-                    <a class="nav-link {% if page.group == 'guide' or page.category == 'guide' %}current{% endif %}" href="/guide/">Guide</a>
-                    <a class="nav-link {% if page.group == 'development' or page.category == 'development' %}current{% endif %}" href="/development/">Development</a>
+                    <a class="nav-link" href="https://github.com/miklevin/pipulate">GitHub</a>
                 </nav>
             </div>
             <div class="nav-tagline">Local-First AI SEO. Yours to Control, Forever.</div>
@@ -49,10 +47,11 @@
 
 <footer class="container">
     <p style="text-align: center; margin: 2rem 0;">
-        <a href="/README.md">README.md</a> | 
-        <a href="https://mikelev.in/">MikeLev.in</a> | 
-        <a href="https://github.com/miklevin/pipulate">GitHub Repo</a>
-        <!-- Add your footer links here -->
+        <a href="/">Home</a> | 
+        <a href="/install/">Install</a> | 
+        <a href="https://github.com/miklevin/pipulate">GitHub Repo</a> | 
+        <a href="https://mikelev.in/">MikeLev.in</a>
+        <!-- Public docs live in the GitHub repository; local mirrored docs stay unlinked. -->
     </p>
     <hr>
 </footer>

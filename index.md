@@ -140,7 +140,7 @@ Traditional development follows the **DRY** (Don't Repeat Yourself) principle, c
 - **🤖 AI-Friendly**: Clear code that AI assistants can easily understand and maintain
 - **🚀 Future-Proof**: Built on durable web standards that won't become obsolete
 
-**[Learn more about the WET Philosophy →](/guide/wet-blueprint/)**
+**Deep-dive docs live in the [repository README](https://github.com/miklevin/pipulate/blob/main/README.md)** so this site can stay small and truthful.
 
 ---
 
@@ -188,14 +188,12 @@ This complete, self-contained environment runs identically on any operating syst
 <!-- END_ASCII_ART: architecture-overview-diagram -->
 
 
-## The Complete Guided Experience
+## The Repository Is the Documentation
 
-Ready to dive deeper? Our **[Guide](/guide/)** takes you through the complete journey:
+This public site is now the launchpad: install, orient, and then hand off to the source of truth. The detailed philosophy, workflow patterns, and developer notes live in the repository where the code changes with them.
 
-1. **[The WET Blueprint](/guide/wet-blueprint/)** - The philosophy that changes everything
-2. **[Understanding Pipulate](/guide/local-first-revolution/)** - Architecture and approach
-3. **[Building Your First Workflow](/guide/chain-reaction-pattern/)** - Hands-on development
-4. **[Advanced Patterns](/guide/the-future-is-simple/)** - Expert-level techniques
+1. **[Repository README](https://github.com/miklevin/pipulate/blob/main/README.md)** - Complete overview, philosophy, and usage notes
+2. **[GitHub Repository](https://github.com/miklevin/pipulate)** - Source code, issues, and project history
 
 ---
 
@@ -220,7 +218,7 @@ The future of software development is looking more like the past, but with AI ca
 
 **Start your revolution today.**
 
-[**Install Pipulate →**](/install) | [**Read the Guide →**](/guide/) | [**View the Code →**](https://github.com/miklevin/pipulate)
+[**Install Pipulate →**](/install) | [**Read the README →**](https://github.com/miklevin/pipulate/blob/main/README.md) | [**View the Code →**](https://github.com/miklevin/pipulate)
 
 ---
 

@@ -219,20 +219,18 @@ Nix Flakes ensure a consistent environment across Linux, macOS, and Windows (via
 
 ## Next Steps
 
-Once installed, explore:
+Once installed, use the repository as the source of truth:
 
-1. **[The WET Blueprint](/guide/wet-blueprint/)** - Understanding the philosophy
-2. **[Local-First Revolution](/guide/local-first-revolution/)** - Why it matters
-3. **[Building Workflows](/guide/chain-reaction-pattern/)** - Hands-on development
-4. **[GitHub Repository](https://github.com/miklevin/pipulate)** - Source code and community
+1. **[Repository README](https://github.com/miklevin/pipulate/blob/main/README.md)** - Complete overview, philosophy, usage notes, and developer guidance
+2. **[GitHub Repository](https://github.com/miklevin/pipulate)** - Source code and project history
+3. **[GitHub Issues](https://github.com/miklevin/pipulate/issues)** - Bug reports and questions
 
 ---
 
 ## Need Help?
 
-- **[Complete Guide](/guide/)** - Step-by-step tutorials
+- **[Repository README](https://github.com/miklevin/pipulate/blob/main/README.md)** - Canonical documentation
 - **[GitHub Issues](https://github.com/miklevin/pipulate/issues)** - Bug reports and questions
-- **[Development Notes](/development/)** - Technical details
 
 **Welcome to the local-first revolution!**
 ```

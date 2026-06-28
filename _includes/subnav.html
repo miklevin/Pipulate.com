@@ -1,25 +1,7 @@
 <header class="container">
   <nav class="center small">
-  {% case page.group %}
-    {% when "guide" %}
-      <a {% if page.permalink == "/guide/wet-blueprint/" %}class="current" {% endif %}href="/guide/wet-blueprint/">The WET Blueprint</a>
-      <a {% if page.permalink == "/guide/local-first-revolution/" %}class="current" {% endif %}href="/guide/local-first-revolution/">Local-First Revolution</a>
-      <a {% if page.permalink == "/guide/chain-reaction-pattern/" %}class="current" {% endif %}href="/guide/chain-reaction-pattern/">Chain Reaction Pattern</a>
-      <a {% if page.permalink == "/guide/the-future-is-simple/" %}class="current" {% endif %}href="/guide/the-future-is-simple/">The Future is Simple</a>
-    {% when "home" %}
-      <a {% if page.name == "about.md" %}class="current" {% endif %}href="/about/">About</a>
-      <a {% if page.name == "index.md" %}class="current" {% endif %}href="/">Home</a>
-      <a {% if page.group == "install" %}class="current" {% endif %}href="/install/">Install</a>
-      <a {% if page.name == "guide.md" or page.group == "guide" %}class="current" {% endif %}href="/guide/">Guide</a>
-    {% when "install" %}
-      <a href="/">← Back to Home</a>
-      <a class="current" href="/install/">Install</a>
-      <a href="/guide/">Guide →</a>
-    {% else %}
-      <a {% if page.name == "about.md" %}class="current" {% endif %}href="/about/">About</a>
-      <a {% if page.name == "index.md" %}class="current" {% endif %}href="/">Home</a>
-      <a {% if page.group == "install" %}class="current" {% endif %}href="/install/">Install</a>
-      <a {% if page.name == "guide.md" or page.group == "guide" %}class="current" {% endif %}href="/guide/">Guide</a>
-  {% endcase %}
+    <a {% if page.name == "index.md" or page.group == "home" %}class="current" {% endif %}href="/">Home</a>
+    <a {% if page.group == "install" %}class="current" {% endif %}href="/install/">Install</a>
+    <a href="https://github.com/miklevin/pipulate">GitHub Repo</a>
   </nav>
 </header>
