@@ -55,7 +55,7 @@ rm -rf ~/pipulate
 curl -fsSL https://pipulate.com/install.sh | bash
 ```
 
-Wait for ***BOTH TABS*** to auto-open in your browser.
+Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to unlock the Pipulate app.
 
 ---
 
