@@ -1,0 +1,56 @@
+# Public-site routes intentionally unlinked during the first prune pass.
+# Keep these files in git until a later delete pass confirms redirects, build output,
+# and release-managed artifact policy.
+
+unlinked_in_first_pass:
+  date: 2026-06-28
+  reason: "Keep Pipulate.com as the launchpad; use the repository as the source of truth."
+  changed_files:
+    - _layouts/default.html
+    - _includes/subnav.html
+    - index.md
+    - install.md
+
+orphaned_routes:
+  - path: about.md
+    route: /about/
+    reason: "Removed from primary navigation; content belongs in the repo README if still canonical."
+  - path: guide.md
+    route: /guide/
+    reason: "Removed from homepage/install links; guide collection kept buildable until delete pass."
+  - path: development.md
+    route: /development/
+    reason: "Removed from primary navigation and install help links; repo README is canonical."
+  - path: documentation.md
+    route: /guide/
+    reason: "Overlaps guide route and documentation hub; verify before deleting."
+  - path: _guide/
+    route: /guide/*
+    reason: "Guide collection is no longer linked from the launchpad pages."
+
+release_managed_keep_until_policy_decision:
+  - install.sh
+  - key.rot
+  - README.md
+  - AUDIT.md
+  - AI_CONTEXT.md
+
+delete_candidates_after_build_and_reference_probe:
+  - development.md.backup
+  - Gemfile.backup
+  - Gemfile.lock.backup
+  - crawler.md
+  - foo.md
+  - foss.md
+  - keywords.md
+  - MLGL.md
+  - nix-mac.md
+  - nix-win.md
+  - python.md
+  - seo.md
+  - software.md
+  - testimonials.md
+  - _drafts/
+  - _includes/posts-main.html
+  - _includes/articles.html
+  - _includes/mlgl.html
