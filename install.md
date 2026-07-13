@@ -15,7 +15,7 @@ Get started with the local-first revolution. Two commands and you're running.
 
 ```bash
 # 1. Install Pipulate (one-time setup)
-curl -L https://pipulate.com/install.sh | bash -s TestProject
+curl -fsSL https://pipulate.com/install.sh | bash -s TestProject
 ```
 
 > **Note:** Nix creates a perfectly reproducible environment, like Docker but more integrated. The first setup might take a few minutes to download dependencies, but subsequent launches are fast.
@@ -53,7 +53,7 @@ Things sometimes go wrong. This is how you do a full Pipulate reset. This will a
 
 ```bash
 rm -rf ~/TestProject
-curl -L https://pipulate.com/install.sh | bash -s TestProject
+curl -fsSL https://pipulate.com/install.sh | bash -s TestProject
 cd ~/TestProject
 nix develop
 ```
