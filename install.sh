@@ -249,7 +249,7 @@ chmod +x "${TARGET_DIR}/run"
 # VERSION NOTE: This version is synced from pipulate/__init__.py.__version__
 # To update: Edit __version__ in __init__.py, then run: python version_sync.py
 # This ensures consistent versioning across all installation components
-VERSION="1.0.2"
+VERSION="2.00"
 
 # The nix flake will take over from here, handling the git repository setup
 # This is the final step of the "magic cookie" approach - letting the controlled
