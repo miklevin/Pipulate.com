@@ -41,10 +41,10 @@ if [ -z "${BASH_VERSION:-}" ]; then
     echo "   On Windows WSL and some Linux systems, 'sh' points to dash instead of bash."
     echo ""
     echo "   Please run the installer with bash explicitly:"
-    echo "   curl -L https://pipulate.com/assets/installer/install.sh | bash -s ${1:-pipulate}"
+    echo "   curl -fsSL https://pipulate.com/install.sh | bash -s ${1:-pipulate}"
     echo ""
     echo "   Or if you have bash installed:"
-    echo "   curl -L https://pipulate.com/assets/installer/install.sh | bash -s ${1:-pipulate}"
+    echo "   curl -fsSL https://pipulate.com/install.sh | bash -s ${1:-pipulate}"
     echo ""
     exit 1
 fi
@@ -133,7 +133,7 @@ if [ -d "${TARGET_DIR}" ]; then
   echo "   This prevents accidental overwrites of existing data."
   echo
   echo "   To resolve this, you can:"
-  echo "   1. Choose a different name: curl -sSL https://pipulate.com/assets/installer/install.sh | bash -s your-custom-name"
+  echo "   1. Choose a different name: curl -fsSL https://pipulate.com/install.sh | bash -s your-custom-name"
   echo "   2. Remove the existing directory: rm -rf ${TARGET_DIR}"
   echo "   3. Rename the existing directory: mv ${TARGET_DIR} ${TARGET_DIR}.backup"
   echo
