@@ -1,13 +1,13 @@
 ---
 title: About Pipulate
-description: What is Pipulate Free and Open Source SEO Software?
+description: What is Pipulate? Free and open source AI-readiness software for the agentic web (formerly SEO software).
 permalink: /about/
 group: about
 ---
 
 # About Pipulate
 
-> Pipulate is a local-first, AI-assisted development framework that transforms how you run SEO workflows by embracing Notebooks without any code.
+> Pipulate is a local-first, AI-assisted development framework that transforms how you ready sites for the agentic web — the craft that grew out of SEO — by embracing Notebooks without any code.
 
 ## AI On Rails: The Answer to Agentic Mode
 
@@ -56,7 +56,7 @@ Think of it as putting guardrails on AI assistance. Instead of asking an AI to "
 3. 📓 **Transforms Jupyter Notebooks** into production-ready, step-by-step workflows
 4. 🤖 **Integrated AI assistance** using your own local models with complete privacy
 5. 🔧 **Reproducible environments** with Nix that work identically across all platforms
-6. 🎯 **Perfect for SEO practitioners** who want to turn technical expertise into guided, reusable workflows
+6. 🎯 **Perfect for practitioners readying clients for the agentic web** who want to turn technical expertise into guided, reusable workflows
 
 ---
 
@@ -120,7 +120,7 @@ These are different conversations.
 
 ## What Is Pipulate?
 
-Pipulate is a free, open-source SEO desktop application that runs entirely on your computer. It gives you the power of complex SEO scripts and Jupyter notebooks, but with a friendly, guided interface where AI helps you every step of the way.
+Pipulate is a free, open-source AI-readiness desktop application that runs entirely on your computer. It gives you the power of complex automation scripts and Jupyter notebooks — the toolkit that grew out of SEO — with a friendly, guided interface where AI helps you every step of the way.
 
 <!-- START_ASCII_ART: architecture-overview-diagram -->
 ### Architecture Overview Diagram  <!-- key: architecture-overview-diagram -->
@@ -161,7 +161,7 @@ This complete, self-contained environment runs identically on any operating syst
 - **Guided Progression**: Clear path from start to finish
 - **Persistent State**: Each step's results are saved
 - **Interruptible**: Stop and resume complex processes anytime
-- **Easy to Follow**: Perfect for documenting and sharing SEO processes
+- **Easy to Follow**: Perfect for documenting and sharing readiness processes
 
 ```
   ┌─────────┐        ┌─────────┐        ┌─────────┐   - Fully customizable steps
@@ -175,8 +175,8 @@ This complete, self-contained environment runs identically on any operating syst
 ### Integrated AI Capabilities
 - **Local LLM Integration**: Uses Ollama to run AI models on your computer
 - **Contextual Help**: AI assistance that understands your workflow
-- **Content Generation**: Create SEO content without external APIs
-- **Data Analysis**: AI-assisted interpretation of your SEO data
+- **Content Generation**: Create machine-legible content without external APIs
+- **Data Analysis**: AI-assisted interpretation of how agents consume your site
 
 ```
                    ┌──────────────────┐
@@ -229,14 +229,14 @@ Jupyter Notebooks run alongside the FastHTML server, allowing developers to prot
 
 ## Who Pipulate Is For
 
-### SEO Professionals
+### Practitioners Readying Sites for the Agentic Web
 If you're tired of:
 - Subscription costs for SEO tools
 - Limited API access or usage caps
 - Privacy concerns with cloud-based platforms
 - Fragmented workflows across multiple tools
 
-Pipulate gives you a consistent, integrated SEO workbench completely under your control.
+Pipulate gives you a consistent, integrated readiness workbench completely under your control.
 
 ### Technical SEOs & Developers
 If you already use Python for SEO but want:
@@ -245,7 +245,7 @@ If you already use Python for SEO but want:
 - An easy way to turn notebooks into reusable applications
 - Freedom from cloud deployment and maintenance headaches
 
-Pipulate provides the infrastructure so you can focus on SEO logic.
+Pipulate provides the infrastructure so you can focus on the readiness logic itself.
 
 ### Agencies & In-House Teams
 If your organization needs:
@@ -360,17 +360,17 @@ At its core, Pipulate embraces simplicity — not by sacrificing power, but by c
 - No complicated deployment or cloud infrastructure
 - No fragile state management across multiple services
 
-Instead, Pipulate focuses on making SEO workflows explicit, observable, and understandable. Everything is designed to be transparent and straightforward, following our belief that the best tools get out of your way and let you focus on what matters: doing great SEO work.
+Instead, Pipulate focuses on making agentic-web workflows explicit, observable, and understandable. Everything is designed to be transparent and straightforward, following our belief that the best tools get out of your way and let you focus on what matters: doing work the machines can actually read.
 
-## The Future of SEO Tools
+## The Future of the Craft Formerly Known as SEO
 
-Pipulate represents a new approach to SEO tooling:
+Pipulate represents a new approach to the tooling:
 
 **From SaaS to Self-Hosted**: Own your tools and data completely
 **From Scripts to Workflows**: Make technical expertise accessible to everyone
 **From Cloud to Local**: Leverage your hardware without ongoing costs
 **From Proprietary to Open**: Understand and modify every aspect of your tools
 
-Join us in building a more open, accessible approach to SEO tools — where your data stays yours, and technology serves your needs instead of locking you in.
+Join us in building a more open, accessible approach to AI-readiness tooling — where your data stays yours, and technology serves your needs instead of locking you in.
 
 Ready to try Pipulate? Check out our [installation guide](/install/) to get started in just a few minutes.
