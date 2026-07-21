@@ -1,11 +1,11 @@
 ---
-title: "Pipulate - AI SEO Software to Future-proof You"
-description: The Local-First Revolution in AI-Assisted Development
+title: "Pipulate - AI-Readiness for the Agentic Web (formerly AI SEO Software)"
+description: "AI-readiness for the agentic web — the local-first successor to AI SEO software. Free, open source, runs on your machine, measured at the wire."
 permalink: /
 group: home
 ---
 
-# AI SEO Software to Future-proof You
+# AI-Readiness Software to Future-proof You
 
 In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it. Think: Notebooks without having to look at the Python code.
 
@@ -61,8 +61,20 @@ Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to un
 
 ## The Local-First Revolution in AI-Assisted Development
 
-### 🎯 **For SEO Practitioners**
-Use apps that produce SEO "deliverables" with AI assistance.
+### 🔭 **Why "AI-Readiness"? Because the Honeybot Watches.**
+
+The name changed because the visitors changed. This project grew out of SEO — that lineage is worn openly — but the agents arriving at your site today aren't search crawlers building an index for humans to browse. They're AI agents reading *for themselves*, on behalf of whoever sent them.
+
+We don't guess at this. A retired laptop in a closet — we call it **the Honeybot** — serves a real site bare on the open internet, no CDN between it and the world, and records every visitor at the wire like fish in a lit tank. What the tank shows:
+
+- **Content negotiation is real, and almost nobody does it.** Roughly one visiting agent in five hundred politely asks for `text/markdown` — and receives the article's original master, free. Everyone else burns compute hydrating a page and converting HTML *back into* the markdown it was born as.
+- **DOM hydration leaves fingerprints.** A JavaScript trapdoor reveals which agents execute scripts and which read raw source — so "can AI actually see your page?" gets answered with telemetry, not vibes.
+- **`llms.txt` gets fetched by name.** The machine-facing manifests are already being read, today.
+
+That is what "AI-readiness" means here: **legible, verifiable, and negotiable to machine visitors** — witnessed, not asserted. (This very site practices it: request any article with `Accept: text/markdown` and the master appears.)
+
+### 🎯 **For Practitioners Readying Clients for the Agentic Web**
+Use apps that produce client-ready "deliverables" with AI assistance — the craft that grew out of SEO, pointed at the agents that now do the reading.
 - **Step-by-step interfaces** that guide users through complex processes
 - **Local data processing** with no cloud limits or costs
 - **AI-assisted analysis** using your own local models
@@ -101,7 +113,7 @@ Transform your Jupyter Notebook experiments into production-ready workflows:
 
 Pipulate excels at **data processing workflows** and **AI-assisted applications**:
 
-- **SEO Analysis Tools**: Process search console data, analyze competitors, generate reports
+- **AI-Readiness Audits**: Process search console data, analyze how agents consume your site, generate reports
 - **Content Generation**: AI-powered writing assistants with local models
 - **Data Dashboards**: Transform spreadsheets into interactive web applications  
 - **Automation Workflows**: Step-by-step processes for repetitive tasks
