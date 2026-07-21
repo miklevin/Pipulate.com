@@ -48,7 +48,7 @@ Think of it as putting guardrails on AI assistance. Instead of asking an AI to "
 3. 📓 **Transforms Jupyter Notebooks** into production-ready, step-by-step workflows
 4. 🤖 **Integrated AI assistance** using your own local models with complete privacy
 5. 🔧 **Reproducible environments** with Nix that work identically across all platforms
-6. 🎯 **Perfect for SEO practitioners** who want to turn technical expertise into guided, reusable workflows
+6. 🎯 **Perfect for practitioners readying clients for the agentic web** who want to turn technical expertise into guided, reusable workflows
 <!-- END_ASCII_ART: about-pipulate -->
 
 1. 🖥️ **Runs locally** like a desktop app using modern web technologies
