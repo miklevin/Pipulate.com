@@ -54,7 +54,7 @@ upping their game in the age of AI.
 ```
 <!-- END_ASCII_ART: run-all-cells-pattern -->
 
-So if you're a technical SEO but a non-programmer, just install and use Pipulate. For people who want to actually participate in *making* those next-gen SEO tools, this page is for you!
+So if you're a technical SEO (or their successor) but a non-programmer, just install and use Pipulate. For people who want to actually participate in *making* those next-gen readiness tools, this page is for you!
 
 ---
 
@@ -212,7 +212,7 @@ The console doesn't just print text - it **paints experiences**:
 
 ```
 ╔═════════════════════════════════════════════════════════════════════════╗  Chip O'What?
-║  🎭 PIPULATE: LOCAL-FIRST AI SEO SOFTWARE & DIGITAL WORKSHOP            ║     ,       O
+║  🎭 PIPULATE: LOCAL-FIRST AI-READINESS & DIGITAL WORKSHOP               ║     ,       O
 ║  ────────────────────────────────────────────────────────────────────── ║     \\  .  O
 ║                                                                         ║     |\\/| o
 ║  💬 Chip O'Theseus: "Welcome to your sovereign computing environment!"  ║     / " '\

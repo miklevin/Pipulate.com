@@ -7,11 +7,11 @@ group: documentation
 
 # Pipulate Documentation
 
-Welcome to the official documentation hub for Pipulate, the free and open source SEO workflow platform. This page is your starting point for understanding, installing, and building with Pipulate.
+Welcome to the official documentation hub for Pipulate, the free and open source AI-readiness workflow platform for the agentic web. This page is your starting point for understanding, installing, and building with Pipulate.
 
 ## What is Pipulate?
 
-Pipulate is a local-first, step-based workflow system for SEO and data automation. It lets you turn Python scripts and Jupyter notebooks into user-friendly, web-based workflows—no cloud, no vendor lock-in, and no complex setup.
+Pipulate is a local-first, step-based workflow system for agentic-web readiness and data automation — the craft that grew out of SEO. It lets you turn Python scripts and Jupyter notebooks into user-friendly, web-based workflows—no cloud, no vendor lock-in, and no complex setup.
 
 ## Quick Links
 

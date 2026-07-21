@@ -11,7 +11,8 @@ group: guide
 > **Quick Reference**: For a condensed overview of development patterns and workflows, see the [Development Guide](/development/). This guide provides the detailed, step-by-step version of that content.
 
 Welcome to the Pipulate guide, where we introduce you to local-first software
-development, Python, HTMX, FastHTML, modern SEO tools, and the future of
+development, Python, HTMX, FastHTML, AI-readiness tooling for the agentic
+web (the craft that grew out of SEO), and the future of
 AI-assisted development. Follow the sequence of posts to build up the full story
 and jump on the Pipulate Workflow Development bandwagon.
 
