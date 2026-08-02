@@ -246,10 +246,14 @@ fi
 EOL
 chmod +x "${TARGET_DIR}/run"
 
-# VERSION NOTE: This version is synced from pipulate/__init__.py.__version__
-# To update: Edit __version__ in __init__.py, then run: python version_sync.py
-# This ensures consistent versioning across all installation components
-VERSION="1.0.2"
+# VERSION LINE REMOVED 2026-08-01, receipt-convicted: this variable was
+# assigned here and dereferenced by nothing in this script, while version_sync
+# stamped the DOWNSTREAM Pipulate.com copy and release.py's sync then copied
+# this file over that copy on the same run -- so the number served to strangers
+# stayed frozen at 1.0.2 through a 2.02 release. A label no behavior consumes
+# cannot go usefully stale; it can only be wrong. The cure is deletion, not a
+# second stamping target: __init__.py holds the single version, and flake.nix
+# reads it at eval time. Do not re-add a duplicate here.
 
 # The nix flake will take over from here, handling the git repository setup
 # This is the final step of the "magic cookie" approach - letting the controlled
@@ -290,7 +294,17 @@ if [ "${PIPULATE_INSTALL_ONLY:-0}" = "1" ]; then
   if [ "$(uname -s)" = "Darwin" ]; then
     IMPURE_FLAG="--impure"
   fi
-  ( cd "${TARGET_DIR}" && ${NIX_DEVELOP_CMD} ${IMPURE_FLAG} .#quiet --command bash -c 'uv pip install -r requirements.txt --quiet && uv pip install -e . --no-deps --quiet' )
+  # LD_LIBRARY_PATH="" IS LOAD-BEARING, and its absence is INVISIBLE to the
+  # audience this script ships to. The Pipulate dev shell front-loads its own
+  # python, openssl and glibc into LD_LIBRARY_PATH, and the interactive nix
+  # wrapper that neutralizes it is a shell FUNCTION -- functions do not export,
+  # so no child process inherits the protection while every child inherits the
+  # pollution. Convicted 2026-08-01: this branch printed three "version not
+  # found" lines from the nix binary and exited 1, inside a workshop, while the
+  # identical branch would have succeeded for a stranger on a clean shell.
+  # Clearing the variable is a no-op on a clean shell, so the defensive
+  # spelling costs nothing and the undefended spelling costs an entire lane.
+  ( cd "${TARGET_DIR}" && LD_LIBRARY_PATH="" ${NIX_DEVELOP_CMD} ${IMPURE_FLAG} .#quiet --command bash -c 'uv pip install -r requirements.txt --quiet && uv pip install -e . --no-deps --quiet' )
   echo "Environment hydrated at ${TARGET_DIR}."
   echo "Note: this folder becomes a git repo (and starts auto-updating) the"
   echo "      first time you run: cd ${TARGET_DIR} && ${NIX_DEVELOP_CMD}"
