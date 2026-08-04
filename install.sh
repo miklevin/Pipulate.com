@@ -89,10 +89,20 @@ get_nix_develop_cmd() {
 NIX_DEVELOP_CMD=$(get_nix_develop_cmd)
 
 # --- Display Banner ---
+# WHITELABEL-AWARE AND ANCESTOR-DISCIPLINED (2026-08-04). Two defects in two
+# echo lines, both in the highest-traffic first-contact position there is.
+# (1) The name was hardcoded, so a whitelabeled install greeted a stranger with
+#     a product name that is NOT the folder they are about to own. Whitelabel
+#     is a first-class path, and the very first line printed said it was not.
+#     CUSTOM_NAME is already resolved above; use it.
+# (2) "SEO Software" is the RETIRED identity. The ancestor is named as lineage,
+#     never as identity, and this line was still leading with it to every
+#     newcomer who has ever run the installer.
+BANNER_NAME=$(printf '%s' "${CUSTOM_NAME}" | awk '{print toupper(substr($0,1,1)) substr($0,2)}')
 echo
 print_separator
-echo "   🚀 Welcome to Pipulate Installer 🚀   "
-echo "   Free and Open Source SEO Software     "
+echo "   🚀 Welcome to the ${BANNER_NAME} Installer 🚀"
+echo "   Local-first, Nix-reproducible, and yours to delete."
 print_separator
 echo
 
@@ -258,11 +268,23 @@ chmod +x "${TARGET_DIR}/run"
 # The nix flake will take over from here, handling the git repository setup
 # This is the final step of the "magic cookie" approach - letting the controlled
 # nix environment handle the git operations
-echo
-echo "This will activate the Nix development environment and"
-echo "complete the 'magic cookie' transformation process."
-echo "🚀 Booting the Forever Machine..."
-echo "Please wait while the Nix environment hydrates (this may take a minute)..."
+# THE STICK BUG LANE STAYS QUIET, AND HONEST (2026-08-04). These four lines
+# fired on BOTH lanes, and on the PIPULATE_INSTALL_ONLY lane the middle one was
+# FALSE: that branch enters .#quiet, which carries neither runScript nor
+# gitUpdateLogic, so no magic-cookie transformation happens there. A verb naming
+# an act no code performed, printed at first contact, on the one lane whose
+# whole design goal is to be barely there. The default lane keeps its output
+# byte-for-byte; the walk lane gets exactly one true line, because a silent
+# minute-long hydration is its own kind of lie.
+if [ "${PIPULATE_INSTALL_ONLY:-0}" = "1" ]; then
+  echo "Hydrating the Nix environment (this may take a minute)..."
+else
+  echo
+  echo "This will activate the Nix development environment and"
+  echo "complete the 'magic cookie' transformation process."
+  echo "🚀 Booting the Forever Machine..."
+  echo "Please wait while the Nix environment hydrates (this may take a minute)..."
+fi
 
 # The Terminal Hand-off:
 # We spawn a fresh shell attached directly to the physical terminal. 
