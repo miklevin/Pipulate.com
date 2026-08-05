@@ -57,6 +57,11 @@ curl -fsSL https://pipulate.com/install.sh | bash
 
 Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to unlock the Pipulate app.
 
+### Where your work lives
+
+<!-- START_ASCII_ART: workspace-tree -->
+<!-- END_ASCII_ART: workspace-tree -->
+
 ---
 
 ## The Local-First Revolution in AI-Assisted Development
