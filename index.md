@@ -60,6 +60,22 @@ Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to un
 ### Where your work lives
 
 <!-- START_ASCII_ART: workspace-tree -->
+```text
+   Notebooks/  — the JupyterLab root (NOT Pipulate's own root)
+   │            FLAT siblings. Nothing nests. Nothing to get wrong.
+   │
+   ├── Advanced_Notebooks/     canon · flake-delivered, copy-if-absent
+   ├── Educational_Notebooks/  canon · your edits survive, updates do not arrive
+   ├── imports/                canon · the code-behind "sauce" modules
+   │
+   ├── Playground/             personal · gitignored · your own git repo goes here
+   ├── Client_Work/            personal · gitignored · never leaves this machine
+   ├── Deliverables/           personal · gitignored
+   │
+   └── Shared/                 the ONE folder for handing work to a teammate
+       ├── alice/              one folder per person; you write ONLY your own
+       └── bob/                single-writer partitions = zero merge conflicts
+```
 <!-- END_ASCII_ART: workspace-tree -->
 
 ---
