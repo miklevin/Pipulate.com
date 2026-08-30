@@ -27,7 +27,7 @@ cd ~/TestProject && nix develop
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
 
-**Success looks like:** The JupyterLab tab auto-opens in your browser. Run the Onboarding notebook top-to-bottom to unlock the Pipulate app (it opens automatically on future launches).
+**Success looks like:** A one-line environment reading, then a two-door menu. Press `1` to start JupyterLab and the app server (`2` gives you a bare shell with nothing running). The JupyterLab tab opens in your browser; run the Onboarding notebook top-to-bottom to unlock the Pipulate app (it opens automatically on future launches).
 
 These few commands:
 - ✅ Updates to the latest version automatically
@@ -58,7 +58,7 @@ cd ~/TestProject
 nix develop
 ```
 
-Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to unlock the Pipulate app.
+Press `1` at the two-door menu, wait for the JupyterLab tab to open, then run the Onboarding notebook to unlock the Pipulate app.
 
 
 ### Installation Strategy: Universal First, PyPI Alternative
