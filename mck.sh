@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
-# Pipulate MCK Bootstrap v0.3.0 -- the Mother Cat Kata launcher
+# Pipulate MCK Bootstrap v0.4.0 -- the Mother Cat Kata launcher
 # =============================================================
+#
+# WHAT CHANGED IN v0.4.0 -- A TRAIL MAY CARRY ITS OWN URLS
+#   walk.py now accepts a literal `url` on a stop as an alternative to
+#   `url_env`. This launcher was not merely a URL SUPPLIER, it was a url_env
+#   CONSUMER: it read s["url_env"] from every stop and treated an empty result
+#   as "could not read the trail". A direct-URL trail makes that expression
+#   raise KeyError, the stderr is discarded, and the launcher exits 2 with a
+#   message describing a parse failure that never happened -- so the public
+#   curl|bash walk would have stopped working the day the exemplar flipped.
+#   The reader now prints a leading OK token, so "read the file" and "found
+#   zero variables" no longer produce the identical output.
 #
 # WHAT CHANGED IN v0.3.0 -- TRAILS RESOLVE FROM A SEARCH PATH
 #   v0.2.0 hardcoded assets/trails/, so every walk had to be committed to
@@ -57,7 +68,11 @@
 #            probe that makes marker discovery witnessable without needing a
 #            fresh machine.
 #   --yolo   skip the spoken rehearsal AND both confirmations. It does NOT
-#            skip the CAPTURE fence at any stop, and no flag ever will.
+#            skip the CAPTURE fence at any stop, nor the DECANT gate at the
+#            end, and no flag ever will. --yolo is typed BEFORE the ride, so
+#            it cannot consent to the disposition of material that did not
+#            exist when it was typed; and it was never unattended anyway,
+#            because the CAPTURE fences already block.
 #            CEREMONY IS SKIPPABLE; BARRIERS ARE NOT: a confirmation
 #            authorizes a SEQUENCE, a fence authorizes each WRITE, and the
 #            unfenced capture lane already exists under other names.
@@ -376,23 +391,19 @@ fi
 # Which lane won is a receipt, not chatter: a Playground trail silently
 # shadowing a tracked one is exactly the surprise this line prevents.
 echo "Trail resolved: $TRAIL_PATH"
-# --- Built-in URLs for the public softball ONLY. ':=' respects anything
-# already exported, so an operator override always wins.
-if [ "$TRAIL_NAME" = "public_walk" ]; then
-  : "${PIPULATE_TRAIL_WALK_ONE_URL:=https://example.com/}"
-  : "${PIPULATE_TRAIL_WALK_TWO_URL:=https://mikelev.in/}"
-  : "${PIPULATE_TRAIL_WALK_THREE_URL:=https://pipulate.com/}"
-  export PIPULATE_TRAIL_WALK_ONE_URL
-  export PIPULATE_TRAIL_WALK_TWO_URL
-  export PIPULATE_TRAIL_WALK_THREE_URL
-fi
 # The trail declares its own url_env names; read them from the trail. Trails
 # are the JSON subset of YAML 1.2, so json.load is correct here.
-URL_ENVS="$("$PY" -c 'import json,sys; print("\n".join(s["url_env"] for s in json.load(open(sys.argv[1]))["stops"]))' "$TRAIL_PATH" 2>/dev/null || true)"
-if [ -z "$URL_ENVS" ]; then
-  echo "Error: could not read stop url_env names from $TRAIL_PATH" >&2
+# ZERO VARIABLES IS A VALID ANSWER NOW. A stop may carry a literal url instead
+# of a url_env, so a whole trail can legitimately name nothing. The leading OK
+# token is what separates "the file parsed and there were none" from "the file
+# did not parse at all" -- two worlds that used to print one empty string and
+# get one wrong error message.
+TRAIL_READ="$("$PY" -c 'import json,sys; d=json.load(open(sys.argv[1])); print("OK"); [print(s["url_env"]) for s in d["stops"] if s.get("url_env")]' "$TRAIL_PATH" 2>/dev/null || true)"
+if [ -z "$TRAIL_READ" ]; then
+  echo "Error: could not read $TRAIL_PATH" >&2
   exit 2
 fi
+URL_ENVS="$(printf '%s\n' "$TRAIL_READ" | tail -n +2)"
 MISSING=""
 for VAR in $URL_ENVS; do
   printenv "$VAR" >/dev/null 2>&1 || MISSING="$MISSING $VAR"
@@ -438,6 +449,8 @@ if [ "$YOLO" -eq 1 ]; then
   echo "--yolo: skipping the spoken rehearsal and the RIDE confirmation."
   echo "        NOT skipped, and not skippable by any flag: the CAPTURE fence"
   echo "        at every stop. Nothing is written until you type the word."
+  echo "        Also NOT skipped: the DECANT gate at the end. Nothing leaves"
+  echo "        this machine until you type that word too."
 fi
 if [ "$YOLO" -eq 0 ]; then
 cat <<CARD
@@ -483,11 +496,18 @@ run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" </dev/tty || RIDE_RC=$?
 if [ "$RIDE_RC" -eq 0 ]; then
   cat <<'CARD'
 --------------------------------------------------------------
-   RIDE COMPLETE -- the bundle is on your clipboard
+   RIDE COMPLETE
 --------------------------------------------------------------
- 1. Open any AI web chat (Claude, ChatGPT, Gemini).
- 2. Paste (Cmd+V / Ctrl+V) and send.
- 3. It will walk you through everything from here.
+ Every stop produced a capture receipt.
+
+ Whether the bundle LEFT this machine depends on the DECANT
+ gate you just answered. This script cannot see your clipboard,
+ so it does not claim to. Read the rider's own last line:
+
+   AUTHORIZED  it is on your clipboard. Open any AI web chat
+               (Claude, ChatGPT, Gemini), paste and send.
+   DECLINED    nothing was copied, and the rider printed the
+   REFUSED     exact directories your artifacts are sitting in.
  The raw artifacts stayed on your machine, under
  browser_cache/. Nothing was uploaded by this script.
 --------------------------------------------------------------
