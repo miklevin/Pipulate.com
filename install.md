@@ -233,4 +233,3 @@ Once installed, use the repository as the source of truth:
 - **[GitHub Issues](https://github.com/miklevin/pipulate/issues)** - Bug reports and questions
 
 **Welcome to the local-first revolution!**
-```
