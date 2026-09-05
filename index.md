@@ -1,13 +1,13 @@
 ---
-title: "Pipulate - AI-Readiness for the Agentic Web (formerly AI SEO Software)"
-description: "AI-readiness for the agentic web — the local-first successor to AI SEO software. Free, open source, runs on your machine, measured at the wire."
+title: "Pipulate - The Context Compiler That Helps You Prompt Well (formerly AI SEO Software)"
+description: "A local-first context compiler. Every file the AI reads and the output of every command run for it, in one file you can paste into any model and replay yourself. If you can't reproduce it, it didn't happen."
 permalink: /
 group: home
 ---
 
-# AI-Readiness Software to Future-proof You
+# If you can't reproduce it, it didn't happen.
 
-In an era dominated by cloud subscriptions and complex frameworks, **Pipulate champions a local-first revolution**. It's a free, open-source framework that transforms how you build AI-assisted applications by embracing a radical philosophy: **explicit code is better than abstract code** when you have AI to help manage it. Think: Notebooks without having to look at the Python code.
+You're about to put your name on something an AI made, and you can't say what it did to make it. **Pipulate** is a free, open-source **context compiler**: every file the AI reads and the output of every command run on its behalf, stacked into one file you can paste into any model, keep, and replay with plain text commands. What it can't see, a vendor's server-side tool calls, it leaves out on purpose, because a step you can't rerun is a step nobody checked. Local-first, Nix-reproducible, and yours to delete. **Prompt well.**
 
 ## Quick Start: Be Running in 5 Minutes
 
@@ -26,7 +26,7 @@ cd ~/pipulate && nix develop
 
 **What you get:** A local web app at `http://localhost:5001` with step-by-step workflows, integrated AI chat, and a JupyterLab instance at `http://localhost:8888`. No cloud required.
 
-**Success looks like:** A JupyterLab Notebook tab opens in your default browser and Onboards you to the FastHTML web app.
+**Success looks like:** A one-line environment reading, then a three-door menu. Press `1` to start JupyterLab and the app server (`2` gives you a bare shell with nothing running; `3` starts both but opens the Pipulate app tab instead). The JupyterLab tab opens in your browser; run the Onboarding notebook top-to-bottom to unlock the Pipulate app (it opens automatically on future launches).
 
 These few commands:
 - ✅ Updates to the latest version automatically
@@ -55,7 +55,7 @@ rm -rf ~/pipulate
 curl -fsSL https://pipulate.com/install.sh | bash
 ```
 
-Wait for the JupyterLab tab to auto-open, then run the Onboarding notebook to unlock the Pipulate app.
+Press `1` at the three-door menu, wait for the JupyterLab tab to open, then run the Onboarding notebook to unlock the Pipulate app.
 
 ### Where your work lives
 
