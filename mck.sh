@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
-# Pipulate MCK Bootstrap v0.4.0 -- the Mother Cat Kata launcher
+# Pipulate MCK Bootstrap v0.5.0 -- the Mother Cat Kata launcher
 # =============================================================
+#
+# WHAT CHANGED IN v0.5.0 -- THE EXPORTS FILE IS FOUND, NOT TYPED
+#   bookmark_import.py has written <name>.exports.sh beside every surface
+#   since 2026-08-08, and nothing read it: the human sourced it by hand or
+#   the ring refused. The launcher now resolves it the way the rider does --
+#   --exports=PATH, else the sibling beside the trail -- reads NAMES from it
+#   so the ring can pass, and hands the path to the rider, which loads the
+#   VALUES with environment-over-file precedence. This file still never
+#   evals a line of a file that holds addresses.
 #
 # WHAT CHANGED IN v0.4.0 -- A TRAIL MAY CARRY ITS OWN URLS
 #   walk.py now accepts a literal `url` on a stop as an alternative to
@@ -52,7 +61,8 @@
 #      is executed. No stranger's pipe is chained into another.
 #
 # WHAT THIS STILL NEVER DOES: chain one curl-pipe into another, read a
-# credential, write outside the checkout's browser_cache/, or skip a fence.
+# credential, or skip a fence. The rider writes browser_cache/ plus private
+# per-run captures.md archives under data/captures/ in the same checkout.
 #
 # ENV OVERRIDES:
 #   PIPULATE_ROOT             checkout location (else discovered)
@@ -63,6 +73,10 @@
 #                             and therefore never override you
 #
 # FLAGS:
+#   --exports=PATH  the exports file for this ride when it is NOT the
+#            <trail>.exports.sh sibling bookmark_import.py writes. This
+#            launcher reads NAMES from it and nothing else; the rider loads
+#            the values. A relative PATH resolves from the workshop root.
 #   --where  print the discovered workshop and exit. READ-ONLY: no install
 #            offer, no browser, no voice, no writes, no network. This is the
 #            probe that makes marker discovery witnessable without needing a
@@ -96,11 +110,13 @@ _ph_label='__MCK_''WHITELABEL__'
 YOLO=0
 WHERE_ONLY=0
 MCK_POSITIONAL=""
+EXPORTS_OVERRIDE=""
 for MCK_ARG in "$@"; do
   case "$MCK_ARG" in
     --yolo) YOLO=1 ;;
     --where) WHERE_ONLY=1 ;;
-    -*) echo "Error: unknown option '$MCK_ARG' (only --yolo and --where are understood)" >&2; exit 1 ;;
+    --exports=*) EXPORTS_OVERRIDE="${MCK_ARG#--exports=}" ;;
+    -*) echo "Error: unknown option '$MCK_ARG' (only --yolo, --where and --exports=PATH are understood)" >&2; exit 1 ;;
     *) [ -n "$MCK_POSITIONAL" ] || MCK_POSITIONAL="$MCK_ARG" ;;
   esac
 done
@@ -391,6 +407,33 @@ fi
 # Which lane won is a receipt, not chatter: a Playground trail silently
 # shadowing a tracked one is exactly the surprise this line prevents.
 echo "Trail resolved: $TRAIL_PATH"
+# --- EXPORTS FILE (2026-09-05): the same derivation the rider runs ---------
+# bookmark_import.py writes <name>.exports.sh beside <name>.walk.md and
+# walk_compile.py puts <name>.yaml beside both, so the file a trail needs is
+# a function of the trail's own path. Explicit --exports=PATH wins and a miss
+# is an ERROR, because the human named it; the sibling is next and a miss is
+# silence, because nothing promised it. A relative path resolves from the
+# workshop root (we cd'd there above), never from where you stood.
+# THIS SHELL LOADS NOTHING. It reads NAMES with grep -- never an eval of a
+# file that holds addresses -- so the ring below can treat a declared name as
+# satisfied. The rider loads the VALUES, environment over file, and is the
+# verdict; this ring stays a SUBSET of it, names and never verdicts, exactly
+# as the url_env ring already is. The line prints only when a file resolved.
+EXPORTS_PATH="$EXPORTS_OVERRIDE"
+if [ -z "$EXPORTS_PATH" ] && [ -f "${TRAIL_PATH%.yaml}.exports.sh" ]; then
+  EXPORTS_PATH="${TRAIL_PATH%.yaml}.exports.sh"
+fi
+EXPORTS_DECLARED=""
+if [ -n "$EXPORTS_PATH" ]; then
+  if [ ! -f "$EXPORTS_PATH" ]; then
+    echo "Error: --exports names a file that is not there: $EXPORTS_PATH" >&2
+    echo "   Relative paths resolve from the workshop root: $ROOT" >&2
+    exit 2
+  fi
+  EXPORTS_DECLARED="$(grep -oE '^[[:space:]]*(export[[:space:]]+)?[A-Z][A-Z0-9_]*=' "$EXPORTS_PATH" | sed -E 's/^[[:space:]]*(export[[:space:]]+)?//; s/=$//' || true)"
+  EXPORTS_COUNT="$(printf '%s\n' "$EXPORTS_DECLARED" | grep -c . || true)"
+  echo "Exports resolved: $EXPORTS_PATH ($EXPORTS_COUNT name(s) declared; the rider loads them, environment wins)"
+fi
 # The trail declares its own url_env names; read them from the trail. Trails
 # are the JSON subset of YAML 1.2, so json.load is correct here.
 # ZERO VARIABLES IS A VALID ANSWER NOW. A stop may carry a literal url instead
@@ -410,7 +453,9 @@ fi
 URL_ENVS="$(printf '%s\n' "$TRAIL_READ" | tail -n +2)"
 MISSING=""
 for VAR in $URL_ENVS; do
-  printenv "$VAR" >/dev/null 2>&1 || MISSING="$MISSING $VAR"
+  printenv "$VAR" >/dev/null 2>&1 && continue
+  printf '%s\n' "$EXPORTS_DECLARED" | grep -qx "$VAR" && continue
+  MISSING="$MISSING $VAR"
 done
 if [ -n "$MISSING" ]; then
   echo "This trail needs URL(s) you have not set:" >&2
@@ -418,6 +463,7 @@ if [ -n "$MISSING" ]; then
     echo "     export $VAR=\"https://...\"" >&2
   done
   echo "   Set them and re-run. The trail names them; this script does not guess." >&2
+  echo "   Or put them in ${TRAIL_PATH%.yaml}.exports.sh (the shape bookmark_import.py writes), or name a file with --exports=PATH." >&2
   exit 2
 fi
 # --- The ride needs the pinned chromium and the shell's LD_LIBRARY_PATH.
@@ -449,6 +495,16 @@ run_wrapped() {
     "$@"
   fi
 }
+# ONE SPELLING FOR BOTH RIDER CALLS, so the rehearsal and the ride can never
+# read different exports files. The flag rides only when a file resolved; the
+# empty case expands no array (bash 3.2 + set -u, the trap NIXWRAP dodges).
+run_rider() {
+  if [ -n "$EXPORTS_PATH" ]; then
+    run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" --exports "$EXPORTS_PATH" "$@"
+  else
+    run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" "$@"
+  fi
+}
 if [ "$YOLO" -eq 1 ]; then
   echo "--yolo: skipping the spoken rehearsal and the RIDE confirmation."
   echo "        NOT skipped, and not skippable by any flag: the CAPTURE fence"
@@ -471,7 +527,7 @@ cat <<CARD
  Listen to the whole thing, then decide.
 --------------------------------------------------------------
 CARD
-run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" --dry-narrate
+run_rider --dry-narrate
 fi
 if [ "$YOLO" -eq 1 ] || [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
   echo "Confirmation skipped. Every CAPTURE fence still stands."
@@ -496,7 +552,7 @@ fi
 # Handing the ride a real terminal on fd 0 satisfies both, and stays correct
 # even after the gate is taught the same trick.
 RIDE_RC=0
-run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" </dev/tty || RIDE_RC=$?
+run_rider </dev/tty || RIDE_RC=$?
 if [ "$RIDE_RC" -eq 0 ]; then
   cat <<'CARD'
 --------------------------------------------------------------
@@ -510,12 +566,14 @@ if [ "$RIDE_RC" -eq 0 ]; then
  gate you just answered. This script cannot see your clipboard,
  so it does not claim to. Read the rider's own last line:
 
-   AUTHORIZED  it is on your clipboard. Open any AI web chat
-               (Claude, ChatGPT, Gemini), paste and send.
-   DECLINED    nothing was copied, and the rider printed the
-   REFUSED     exact directories your artifacts are sitting in.
- The raw artifacts stayed on your machine, under
- browser_cache/. Nothing was uploaded by this script.
+   AUTHORIZED  you permitted a checked preview handoff; this alone
+               does not prove a clipboard write. Read its receipt.
+   BLOCKED     the preview failed disclosure checks; nothing copied.
+   DECLINED    nothing was copied.
+   REFUSED     no terminal was available to ask; nothing copied.
+  Original cache files remain under browser_cache/. Banked bytes
+  are in data/captures/; the rider prints the exact captures.md path.
+  That local archive is UNSANITIZED. Nothing was uploaded by this script.
 --------------------------------------------------------------
 CARD
   if [ "$DID_INSTALL" -eq 1 ]; then
@@ -527,7 +585,7 @@ CARD
   fi
 else
   echo "The ride stopped early (exit $RIDE_RC)."
-  echo "   Any stop that already captured left its artifacts under"
-  echo "   browser_cache/; the rider names them above. Re-run to ride again."
+  echo "   Cache files are under browser_cache/. Successfully banked bytes"
+  echo "   are in data/captures/; the rider names the partial archive above."
 fi
 exit "$RIDE_RC"
