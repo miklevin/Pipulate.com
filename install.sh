@@ -35,6 +35,10 @@
 # The more robust approach is to let nix ensure git is available before attempting any
 # git operations in the controlled nix environment.
 
+# Wait for the complete function body before starting installation.
+# A stream cut inside this body cannot execute a partial install.
+# Leave the body indentation unchanged, including the embedded ./run heredoc.
+main() {
 # Detect shell compatibility - pipefail is bash-specific
 if [ -z "${BASH_VERSION:-}" ]; then
     echo "❌ Error: This script requires bash but is being run with a different shell."
@@ -342,3 +346,12 @@ else
     # Fallback for highly restricted environments
     cd "${TARGET_DIR}" && ${NIX_DEVELOP_CMD}
 fi
+}
+
+# THE CALL LINE IS INSIDE A FENCE TOO (2026-09-13). A stream that ends on
+# exactly the word main, its arguments cut off, would run a complete install
+# under the DEFAULT name. A brace group turns any cut before the closing
+# brace into a syntax error, the same guard nvm's installer wraps around its
+# whole file. main is still called unconditionally, so -e is preserved
+# inside it, and exit carries main's status out of the group unchanged.
+{ main "$@"; exit; }
