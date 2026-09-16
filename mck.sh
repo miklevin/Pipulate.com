@@ -68,10 +68,11 @@
 #   PIPULATE_ROOT             checkout location (else discovered)
 #   PIPULATE_WHITELABEL       install folder name and namespace (default: pipulate)
 #   PIPULATE_INSTALL_URL      where install.sh is fetched from
-#   PIPULATE_MCK_ASSUME_YES   =1 skips the INSTALL and RIDE confirmations
+#   PIPULATE_MCK_ASSUME_YES   =1 skips INSTALL and the menu; rehearses then rides
 #   PIPULATE_TRAIL_*_URL      pre-set any stop URL; built-in defaults use :=
 #                             and therefore never override you
 #
+# Plain invocation offers Practice walk, Walk the walk, or Exit before narration.
 # FLAGS:
 #   --exports=PATH  the exports file for this ride when it is NOT the
 #            <trail>.exports.sh sibling bookmark_import.py writes. This
@@ -81,17 +82,14 @@
 #            offer, no browser, no voice, no writes, no network. This is the
 #            probe that makes marker discovery witnessable without needing a
 #            fresh machine.
-#   --yolo   skip the spoken rehearsal AND both confirmations. It does NOT
-#            skip the CAPTURE fence at any stop, nor the DECANT gate at the
-#            end, and no flag ever will. --yolo is typed BEFORE the ride, so
-#            it cannot consent to the disposition of material that did not
-#            exist when it was typed; and it was never unattended anyway,
-#            because the CAPTURE fences already block.
-#            CEREMONY IS SKIPPABLE; BARRIERS ARE NOT: a confirmation
-#            authorizes a SEQUENCE, a fence authorizes each WRITE, and the
-#            unfenced capture lane already exists under other names.
+#   --yolo   skip INSTALL confirmation and the menu; keep every CAPTURE.
+#            For the bundled introduction it accepts the printed summary
+#            and clipboard terms, as does choosing 2. Other trails retain
+#            DECANT. ASSUME_YES rehearses first under the same policy.
+#            The rider's read-only --intro-contract determines eligibility;
+#            a same-named private trail does not inherit this policy.
 #
-# EXIT CODES: 0 rode or stopped cleanly | 1 usage / no workshop | 2 trail refusal
+# EXIT CODES: 0 rode or explicit stop; nonzero usage, refusal, input or rider failure.
 if [ -z "${BASH_VERSION:-}" ]; then
   echo "Error: this script requires bash. Re-run with:"
   echo "   curl -fsSL https://pipulate.com/mck.sh | bash"
@@ -498,52 +496,73 @@ run_wrapped() {
 # ONE SPELLING FOR BOTH RIDER CALLS, so the rehearsal and the ride can never
 # read different exports files. The flag rides only when a file resolved; the
 # empty case expands no array (bash 3.2 + set -u, the trap NIXWRAP dodges).
+INTRO_CONTRACT="$("$PY" scripts/mother_cat.py "$TRAIL_PATH" --intro-contract)"
 run_rider() {
+  if [ -n "$INTRO_CONTRACT" ]; then
+    set -- --intro "$@"
+  fi
   if [ -n "$EXPORTS_PATH" ]; then
     run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" --exports "$EXPORTS_PATH" "$@"
   else
     run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" "$@"
   fi
 }
-if [ "$YOLO" -eq 1 ]; then
-  echo "--yolo: skipping the spoken rehearsal and the RIDE confirmation."
-  echo "        NOT skipped, and not skippable by any flag: the CAPTURE fence"
-  echo "        at every stop. Nothing is written until you type the word."
-  echo "        Also NOT skipped: the DECANT gate at the end. Nothing leaves"
-  echo "        this machine until you type that word too."
-fi
-if [ "$YOLO" -eq 0 ]; then
-cat <<CARD
---------------------------------------------------------------
-   MOTHER CAT KATA -- rehearsal first, nothing moves
---------------------------------------------------------------
- workshop : $ROOT
- trail    : $TRAIL_NAME
- file     : $ROOT/$TRAIL_PATH
- The next pass READS the walk aloud. During it:
-   - no browser opens
-   - no file is written
-   - no credential is read
- Listen to the whole thing, then decide.
---------------------------------------------------------------
-CARD
-run_rider --dry-narrate
-fi
-if [ "$YOLO" -eq 1 ] || [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
-  echo "Confirmation skipped. Every CAPTURE fence still stands."
+# PRACTICE HAS NO INPUT CHECKPOINT (2026-09-15, deed 1417): the installed
+# player left inherited stdin nonblocking. Both rehearsals get /dev/null,
+# not the menu or caller input; fd 3 is closed in the child as well. This
+# does not change shared voice callers or the real ride's /dev/tty input.
+if [ -n "$INTRO_CONTRACT" ]; then
+  printf '\n%s\n' "$INTRO_CONTRACT"
 else
-  printf '\nType RIDE and press Enter to do it for real (anything else stops here).\nRIDE> '
-  ANSWER=""
-  if ! IFS= read -r ANSWER </dev/tty; then
-    echo "" >&2
-    echo "No controlling terminal to confirm on (/dev/tty unavailable)." >&2
-    echo "   Ride it by hand instead:  mothercat $TRAIL_PATH" >&2
+  printf '\nCAPTURE saves each page. DECANT asks before saving a summary or copying it.\n'
+fi
+if [ "$YOLO" -eq 1 ]; then
+  echo "Starting the real walk. CAPTURE is still required at each page."
+elif [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
+  echo "Practice first, then the real walk. CAPTURE is still required at each page."
+  run_rider --dry-narrate </dev/null 3<&-
+else
+  if ! { exec 3</dev/tty; } 2>/dev/null; then
+    echo "No controlling terminal; run walk from a terminal." >&2
     exit 1
   fi
-  if [ "$ANSWER" != "RIDE" ]; then
-    echo "Stopped by human. Nothing opened, nothing written."
-    exit 0
-  fi
+  while :; do
+    printf '\nChoose a walk:\n'
+    printf '  1  Practice - hear the steps; no pages open.\n'
+    printf '  2  Start the walk - open the pages.\n'
+    printf '  q  Exit (Enter also exits).\nChoice: '
+    ANSWER=""
+    # Preserve failure instead of converting it into a successful stop.
+    # Bash read does not expose errno here: EOF and read errors both stop
+    # nonzero; only a successfully read q/Q or blank line is a clean exit.
+    READ_RC=0
+    IFS= read -r ANSWER <&3 || READ_RC=$?
+    if [ "$READ_RC" -ne 0 ]; then
+      printf '\nMenu input ended or failed (read exit %s). No real walk started.\n' "$READ_RC" >&2
+      exec 3<&-
+      exit "$READ_RC"
+    fi
+    case "$ANSWER" in
+      1)
+        echo "Practice walk: no browser or page capture."
+        PRACTICE_RC=0
+        run_rider --dry-narrate </dev/null 3<&- || PRACTICE_RC=$?
+        if [ "$PRACTICE_RC" -ne 0 ]; then
+          echo "Practice stopped (exit $PRACTICE_RC). No real walk started." >&2
+          exec 3<&-
+          exit "$PRACTICE_RC"
+        fi
+        ;;
+      2|RIDE) break ;;
+      q|Q|"")
+        echo "Stopped. No real walk started."
+        exec 3<&-
+        exit 0
+        ;;
+      *) echo "Choose 1, 2 or q; Enter exits." ;;
+    esac
+  done
+  exec 3<&-
 fi
 # THE STDIN REDIRECT IS LOAD-BEARING, NOT DECORATION. Under curl|bash this
 # script's stdin is the PIPE, and guided_browser_capture's PRE-LAUNCH gate
@@ -556,24 +575,11 @@ run_rider </dev/tty || RIDE_RC=$?
 if [ "$RIDE_RC" -eq 0 ]; then
   cat <<'CARD'
 --------------------------------------------------------------
-   RIDE COMPLETE
+   CAPTURE RUN FINISHED
 --------------------------------------------------------------
- Every stop that OPENED produced a capture receipt. An optional
- stop whose URL you had not exported was skipped; the rider
- said which, above, and the bundle lists it as skipped.
-
- Whether the bundle LEFT this machine depends on the DECANT
- gate you just answered. This script cannot see your clipboard,
- so it does not claim to. Read the rider's own last line:
-
-   AUTHORIZED  you permitted a checked preview handoff; this alone
-               does not prove a clipboard write. Read its receipt.
-   BLOCKED     the preview failed disclosure checks; nothing copied.
-   DECLINED    nothing was copied.
-   REFUSED     no terminal was available to ask; nothing copied.
-  Original cache files remain under browser_cache/. Banked bytes
-  are in data/captures/; the rider prints the exact captures.md path.
-  That local archive is UNSANITIZED. Nothing was uploaded by this script.
+ Read the save and copy messages above. Either step can fail.
+ Review the summary before sharing it.
+ Nothing was sent to a chatbot.
 --------------------------------------------------------------
 CARD
   if [ "$DID_INSTALL" -eq 1 ]; then
