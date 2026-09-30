@@ -61,7 +61,7 @@ Press `1` at the three-door menu, wait for the JupyterLab tab to open, then run 
 
 <!-- START_ASCII_ART: workspace-tree -->
 ```text
-   Workshop/   — the JupyterLab root (NOT Pipulate's own root)
+   Workshop/   -- the JupyterLab root (NOT Pipulate's own root)
    │            FLAT siblings. Nothing nests. Nothing to get wrong.
    │
    ├── corporate/              the org's canon · gitignored · its own private repo
