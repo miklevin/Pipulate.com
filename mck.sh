@@ -285,8 +285,8 @@ offer_install() {
 CARD
   if ! command -v nix >/dev/null 2>&1; then
     echo " Note: Nix is not installed yet. The installer bootstraps it, and"
-    echo "       Nix requires a NEW terminal afterward. If that happens, just"
-    echo "       re-run this same command in the new terminal."
+    echo "       Nix requires a NEW window afterward. If that happens, just"
+    echo "       re-run this same command in the new window."
     echo ""
   fi
   if [ -e "$TARGET" ]; then
@@ -317,7 +317,7 @@ CARD
     echo " sha256    : $INSTALLER_SUM"
   fi
   echo ""
-  echo " To read it first, open another terminal and run:"
+  echo " To read it first, open another window and run:"
   echo "   less $TMP_INSTALLER"
   echo ""
   if [ "$YOLO" -eq 1 ] || [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
@@ -327,7 +327,7 @@ CARD
     ANSWER=""
     if ! IFS= read -r ANSWER </dev/tty; then
       echo "" >&2
-      echo "No controlling terminal to confirm on (/dev/tty unavailable)." >&2
+      echo "No keyboard to confirm on (/dev/tty is unavailable)." >&2
       echo "   Nothing was installed. Run the installer yourself:" >&2
       echo "     bash $TMP_INSTALLER $WHITELABEL" >&2
       return 1
@@ -368,8 +368,8 @@ if [ -z "$ROOT" ]; then
    INSTALL FINISHED, BUT NO WORKSHOP IS VISIBLE YET
 --------------------------------------------------------------
  The most common reason is that Nix was just bootstrapped and
- needs a fresh terminal before it is on your PATH.
- Close this terminal, open a NEW one, and run the same command
+ needs a fresh window before it is on your PATH.
+ Close this window, open a NEW one, and run the same command
  again. Nothing needs to be undone first.
 --------------------------------------------------------------
 CARD
@@ -543,10 +543,10 @@ if [ -z "${IN_NIX_SHELL:-}" ]; then
     else
       NIXWRAP=(nix develop .#quiet --command)
     fi
-    echo "Not inside a Pipulate shell; entering nix develop .#quiet for the ride."
+    echo "Not inside the workshop yet; entering nix develop .#quiet for the ride."
     echo "   (First entry can take several seconds.)"
   else
-    echo "Not inside a Pipulate shell and 'nix' is not on PATH." >&2
+    echo "Not inside the workshop, and 'nix' is not on PATH." >&2
     echo "   Enter the workshop first:" >&2
     echo "     cd $ROOT && nix develop .#quiet" >&2
     exit 1
@@ -591,13 +591,14 @@ elif [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
   run_rider --dry-narrate </dev/null 3<&-
 else
   if ! { exec 3</dev/tty; } 2>/dev/null; then
-    echo "No controlling terminal; run walk from a terminal." >&2
+    echo "No keyboard to read here; type walk at the command line." >&2
     exit 1
   fi
   while :; do
     printf '\nChoose a walk:\n'
     printf '  1  Practice - read the steps; no pages open.\n'
-    printf '  2  Start the walk - open the pages.\n'
+    printf '  2  Sample walk - pops pages open.\n'
+    printf '  3  Select a walk.\n'
     printf '  q  Exit (Enter also exits).\nChoice: '
     ANSWER=""
     # Preserve failure instead of converting it into a successful stop.
@@ -621,13 +622,62 @@ else
           exit "$PRACTICE_RC"
         fi
         ;;
+      3)
+        WALK_NAMES=()
+        WALK_PATHS=()
+        for WALK_DIR in $WALK_SEARCH_DIRS; do
+          [ -d "$WALK_DIR" ] || continue
+          for WALK_FILE in "$WALK_DIR"/*; do
+            [ -f "$WALK_FILE" ] && [ -x "$WALK_FILE" ] || continue
+            WALK_NAME="$(basename "$WALK_FILE")"
+            WALK_SEEN=0
+            WALK_I=0
+            while [ "$WALK_I" -lt "${#WALK_NAMES[@]}" ]; do
+              [ "${WALK_NAMES[$WALK_I]}" = "$WALK_NAME" ] && WALK_SEEN=1
+              WALK_I=$((WALK_I + 1))
+            done
+            [ "$WALK_SEEN" -eq 0 ] || continue
+            WALK_NAMES+=("$WALK_NAME")
+            WALK_PATHS+=("$WALK_FILE")
+          done
+        done
+        printf '\nInstalled walks:\n'
+        printf '  1  Sample walk - pops pages open.\n'
+        WALK_I=0
+        while [ "$WALK_I" -lt "${#WALK_NAMES[@]}" ]; do
+          printf '  %s  %s\n' "$((WALK_I + 2))" "${WALK_NAMES[$WALK_I]}"
+          WALK_I=$((WALK_I + 1))
+        done
+        printf '  q  Back (Enter also goes back).\nChoice: '
+        PICK=""
+        READ_RC=0
+        IFS= read -r PICK <&3 || READ_RC=$?
+        if [ "$READ_RC" -ne 0 ]; then
+          printf '\nMenu input ended or failed (read exit %s). No walk started.\n' "$READ_RC" >&2
+          exec 3<&-
+          exit "$READ_RC"
+        fi
+        case "$PICK" in
+          1) break ;;
+          ""|q|Q) ;;
+          *[!0-9]*) echo "Choose a number, q or Enter." ;;
+          *)
+            WALK_I=$((10#$PICK - 2))
+            if [ "$WALK_I" -ge 0 ] && [ "$WALK_I" -lt "${#WALK_NAMES[@]}" ]; then
+              exec 3<&-
+              echo "Walk resolved: ${WALK_PATHS[$WALK_I]}" >&2
+              exec "${WALK_PATHS[$WALK_I]}"
+            fi
+            echo "Choose a number from the list, q or Enter." ;;
+        esac
+        ;;
       2|RIDE) break ;;
       q|Q|"")
         echo "Stopped. No real walk started."
         exec 3<&-
         exit 0
         ;;
-      *) echo "Choose 1, 2 or q; Enter exits." ;;
+      *) echo "Choose 1, 2, 3 or q; Enter exits." ;;
     esac
   done
   exec 3<&-
