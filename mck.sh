@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
-# Pipulate MCK Bootstrap v0.6.0 -- the Mother Cat Kata launcher
+# Pipulate MCK Bootstrap v0.7.0 -- the Mother Cat Kata launcher
 # =============================================================
 #
+# WHAT CHANGED IN v0.7.0 -- A TRAIL IS YAML, AND MAY CARRY AN INTRODUCTION
+#   (2026-10-04) The trail is read by walk.load_trail, the rider's own loader,
+#   so a YAML trail and a JSON one read alike and a bad trail says why; .yaml
+#   is looked up before .json. `walk NAME intro` asks the rider to play the
+#   trail's introduction before its stops; a plain `walk NAME` skips it.
+#
 # WHAT CHANGED IN v0.6.0 -- A WORD ROUTES (2026-09-29)
-#   walk svb SVB-133: the first word is looked up as an executable under a
+#   walk <name> args: the first word is looked up as an executable under a
 #   private tier's walks/ folder (personal, then corporate) and run with
 #   everything after the word, untouched; no tier holds it, the word is a
 #   trail, as before. Options before the word are the launcher's; options
@@ -87,6 +93,7 @@
 #                             and therefore never override you
 #
 # Plain invocation offers Practice, Sample walk, Select a walk, or Exit before narration.
+# A walk named on the command line (walk <name>) rides without that menu.
 # FLAGS:
 #   --exports=PATH  the exports file for this ride when it is NOT the
 #            <trail>.exports.sh sibling bookmark_import.py writes. This
@@ -116,6 +123,7 @@ _tpl_label='__MCK_WHITELABEL__'
 _ph_label='__MCK_''WHITELABEL__'
 YOLO=0
 WHERE_ONLY=0
+WITH_INTRO=0
 MCK_POSITIONAL=""
 EXPORTS_OVERRIDE=""
 # THE ROUTE IS THE FIRST WORD (v0.6.0). Everything after the first positional is
@@ -132,6 +140,10 @@ mck_option() {
     --where) WHERE_ONLY=1 ;;
     --exports=*) EXPORTS_OVERRIDE="${1#--exports=}" ;;
     -*) echo "Error: unknown option '$1' (only --yolo, --where and --exports=PATH are understood)" >&2; exit 1 ;;
+    intro)
+      # The second word of `walk NAME intro` (v0.7.0). A routed walk never
+      # gets here with its words: they are held and handed to it untouched.
+      if [ -n "$MCK_POSITIONAL" ]; then WITH_INTRO=1; else MCK_POSITIONAL="$1"; fi ;;
     *) [ -n "$MCK_POSITIONAL" ] || MCK_POSITIONAL="$1" ;;
   esac
 }
@@ -371,7 +383,7 @@ if [ ! -x "$PY" ]; then
   exit 1
 fi
 # --- THE WALK ROUTER (v0.6.0): a word routes; a flag does not ---------------
-# `walk svb SVB-133`: the first word is looked up as an executable under the
+# `walk <name> args`: the first word is looked up as an executable under the
 # private tiers' walks/ folders, local overriding canon the way the trail lanes
 # below do, and when one is found it runs with everything held back after the
 # word; a walk writes context.txt itself, the way the rider does, and its exit
@@ -415,12 +427,12 @@ if [ "$TRAIL_NAME" = "plan" ]; then
 fi
 for TRAIL_DIR in $TRAIL_SEARCH_DIRS; do
   [ -z "$TRAIL_PATH" ] || break
-  if [ -f "$TRAIL_DIR/${TRAIL_NAME}.json" ]; then
-    TRAIL_PATH="$TRAIL_DIR/${TRAIL_NAME}.json"
-    break
-  fi
   if [ -f "$TRAIL_DIR/${TRAIL_NAME}.yaml" ]; then
     TRAIL_PATH="$TRAIL_DIR/${TRAIL_NAME}.yaml"
+    break
+  fi
+  if [ -f "$TRAIL_DIR/${TRAIL_NAME}.json" ]; then
+    TRAIL_PATH="$TRAIL_DIR/${TRAIL_NAME}.json"
     break
   fi
 done
@@ -459,7 +471,14 @@ fi
 # nothing (2026-10-02, the operator's ruling: the ordinary case is silent).
 case "$TRAIL_PATH" in
   assets/trails/*) ;;
-  *) echo "Trail resolved: $TRAIL_PATH" ;;
+  *)
+    for SHADOWED in "assets/trails/${TRAIL_NAME}.json" "assets/trails/${TRAIL_NAME}.yaml"; do
+      if [ -f "$SHADOWED" ]; then
+        echo "Trail resolved: $TRAIL_PATH, in place of $SHADOWED"
+        break
+      fi
+    done
+    ;;
 esac
 # --- EXPORTS FILE (2026-09-05): the same derivation the rider runs ---------
 # bookmark_import.py writes <name>.exports.sh beside <name>.walk.md and
@@ -487,8 +506,8 @@ if [ -n "$EXPORTS_PATH" ]; then
   fi
   EXPORTS_DECLARED="$(grep -oE '^[[:space:]]*(export[[:space:]]+)?[A-Z][A-Z0-9_]*=' "$EXPORTS_PATH" | sed -E 's/^[[:space:]]*(export[[:space:]]+)?//; s/=$//' || true)"
 fi
-# The trail declares its own url_env names; read them from the trail. Trails
-# are JSON, so json.load is the exact parser for the authoring format.
+# The trail declares its own url_env names; walk.load_trail reads them, the
+# loader the rider uses, so YAML and JSON read alike and a refusal says why.
 # ZERO VARIABLES IS A VALID ANSWER NOW. A stop may carry a literal url instead
 # of a url_env, so a whole trail can legitimately name nothing. The leading OK
 # token is what separates "the file parsed and there were none" from "the file
@@ -498,11 +517,25 @@ fi
 # `optional: true` is skipped by the rider when its variable is unset, so this
 # shell ring must not refuse on it: the shell check may only ever be a SUBSET
 # of the rider's, names and never verdicts, and the rider prints the skips.
-TRAIL_READ="$("$PY" -c 'import json,sys; d=json.load(open(sys.argv[1])); print("OK"); [print(s["url_env"]) for s in d["stops"] if s.get("url_env") and not s.get("optional")]' "$TRAIL_PATH" 2>/dev/null || true)"
-if [ -z "$TRAIL_READ" ]; then
-  echo "Error: could not read $TRAIL_PATH" >&2
-  exit 2
-fi
+TRAIL_READ="$("$PY" -c '
+import sys
+sys.path.insert(0, "scripts")
+import walk
+try:
+    trail = walk.load_trail(walk.Path(sys.argv[1]))
+except walk.TrailError as exc:
+    print("ERR", exc)
+    raise SystemExit(0)
+print("OK")
+for stop in trail["stops"]:
+    if stop.get("url_env") and not stop.get("optional"):
+        print(stop["url_env"])
+' "$TRAIL_PATH" 2>/dev/null || true)"
+case "$TRAIL_READ" in
+  OK*) ;;
+  "ERR "*) echo "This walk cannot run: ${TRAIL_READ#ERR }" >&2; exit 2 ;;
+  *) echo "Error: could not read $TRAIL_PATH" >&2; exit 2 ;;
+esac
 URL_ENVS="$(printf '%s\n' "$TRAIL_READ" | tail -n +2)"
 MISSING=""
 for VAR in $URL_ENVS; do
@@ -554,6 +587,10 @@ run_wrapped() {
 # read different exports files. The flag rides only when a file resolved; the
 # empty case expands no array (bash 3.2 + set -u, the trap NIXWRAP dodges).
 run_rider() {
+  # `walk NAME intro` (v0.7.0) asks for the introduction, practice included.
+  if [ "$WITH_INTRO" -eq 1 ]; then
+    set -- --with-intro "$@"
+  fi
   if [ -n "$EXPORTS_PATH" ]; then
     run_wrapped "$PY" scripts/mother_cat.py "$TRAIL_PATH" --exports "$EXPORTS_PATH" "$@"
   else
@@ -569,6 +606,12 @@ if [ "$YOLO" -eq 1 ]; then
 elif [ "${PIPULATE_MCK_ASSUME_YES:-0}" = "1" ]; then
   echo "Practice first, then the walk. Each page still waits for Enter."
   run_rider --dry-narrate </dev/null 3<&-
+elif [ -n "$MCK_POSITIONAL" ] && [ "$TRAIL_NAME" != "public_walk" ]; then
+  # A NAMED WALK RIDES (2026-10-02, the operator's ruling): walk <name> has
+  # already made the choice the menu would ask for. The sample keeps its menu
+  # however it is named, and so do MCK_TRAIL and a door's stamped trail. Each
+  # page still waits for Enter.
+  :
 else
   if ! { exec 3</dev/tty; } 2>/dev/null; then
     echo "No keyboard to read here; type walk at the command line." >&2
