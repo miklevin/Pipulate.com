@@ -2,9 +2,43 @@
 # The installer behind pipulate.com, npvg.org and qamy.ai
 # =======================================================
 #
-# You are reading this because you piped it to cat or less instead of
-# bash. That is the first QA step: a Unix pipe can be read before it is
-# run, and nothing here runs until you swap cat for bash.
+# # You are reading this because you piped it to less instead of bash.
+# That is the first QA step: verifying the contract before execution.
+#
+# Standard cloud vendor culture trains engineers to run:
+#      curl -fsSL https://vendor.com/install.sh | sudo bash
+# That pattern delegates root authority to an uninspected remote script, trusting
+# that network transit, dependency chains, and upstream repos are uncompromised.
+# Ken Thompson warned us in 1984: you cannot trust code you did not inspect.
+#
+# Piping to less is the airlock. You are inspecting the unexecuted source.
+# Nothing has run. No processes have forked. Zero bytes have touched disk.
+# You are inside standard Unix less:
+#      j = scroll down one line
+#      k = scroll up one line
+#      / = search for a pattern
+#      q = quit cleanly, leaving your machine untouched.
+#
+# WHAT THIS REPOSITORY IS:
+# An open reference harness for RFC 9110 Section 12 (HTTP Content Negotiation)
+# and Bimodal CDN-Native architecture. It demonstrates how origin servers and
+# CDNs serve clean, machine-ready Markdown to AI agents (Accept: text/markdown)
+# while serving visual HTML to human browsers at the same URL (Vary: Accept)—
+# eliminating fragile headless Chromium pre-rendering clusters and cache drift.
+#
+# ARCHITECTURAL SCOPE:
+# 1. Localhost: runs completely unprivileged in an isolated user directory.
+# 2. Satellites & Edge: projects declarative Nix environments to lab hardware,
+#    DMZ relays, or edge workers without polluting the host environment.
+# 3. Verification: captures raw wire truth, generates cryptographic deeds of
+#    payloads, and audits agent-readiness without third-party dependencies.
+#
+# RETAINED ADVISORY & CONTACT:
+# Advising infrastructure and search leadership on RFC 9110 edge deployment.
+# Briefing inquiries: miklevin@gmail.com
+# (Requirement: run a baseline wire audit of your edge before requesting a briefing).
+#
+# Here is the explicit contract of what happens if you choose to run it:
 #
 # What it does, in order:
 #   1. downloads a zip of the repository from github.com;
